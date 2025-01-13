@@ -1844,9 +1844,6 @@
   "item.simpletms.tr_zingzap": "TR-716: Zing Zap",
   "item.simpletms.tr_zippyzap": "TR-729: Zippy Zap",
 
-
-
-
-  "itemgGroup.simpletms.tm_items": "TM's",
-  "itemGroup.simpletmms.tr_items": "TR's"
+  "itemGroup.simpletms.tm_items": "TM's",
+  "itemGroup.simpletms.tr_items": "TR's"
 }
