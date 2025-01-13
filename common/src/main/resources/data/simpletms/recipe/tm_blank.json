@@ -1,5 +1,5 @@
 {
-    "type": "crafting_shaped",
+    "type": "minecraft:crafting_shaped",
     "category": "misc",
     "pattern": [
       "RTR",
@@ -14,11 +14,11 @@
         "item": "minecraft:iron_ingot"
       },
       "X": {
-        "tag": "minecraft:nether_star"
+        "item": "minecraft:nether_star"
       }
     },
     "result": {
-      "item": "simpletms:tm_blank",
+      "id": "simpletms:tm_blank",
       "count": 1
     }
 }

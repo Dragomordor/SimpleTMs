@@ -1,5 +1,5 @@
 {
-    "type": "crafting_shaped",
+    "type": "minecraft:crafting_shaped",
     "category": "misc",
     "pattern": [
       "RTR",
@@ -18,7 +18,7 @@
       }
     },
     "result": {
-      "item": "simpletms:tr_blank",
+      "id": "simpletms:tr_blank",
       "count": 1
     }
 }
