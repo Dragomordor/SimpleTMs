@@ -1,0 +1,23 @@
+{
+    "type": "crafting_shaped",
+    "pattern": [
+      "RTR",
+      "TXT",
+      "RTR"
+    ],
+    "key": {
+      "R": {
+        "item": "minecraft:quartz"
+      },
+      "T": {
+        "item": "minecraft:iron_ingot"
+      },
+      "X": {
+        "tag": "minecraft:nether_star"
+      }
+    },
+    "result": {
+      "item": "simpletms:tm_blank",
+      "count": 1
+    }
+}
