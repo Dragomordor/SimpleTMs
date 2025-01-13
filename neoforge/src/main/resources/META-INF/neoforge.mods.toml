@@ -1,0 +1,41 @@
+modLoader = "kotlinforforge"
+loaderVersion = "[${forge_kotlin_version},)"
+issueTrackerURL = ""
+license = "MIT"
+
+[[mods]]
+modId = "simpletms"
+version = "${version}"
+displayName = "SimpleTMs"
+authors = [
+    "Dragomordor"
+]
+description = '''
+Brings TM's and HM's to Cobblemon
+'''
+logoFile = "assets/simpletms/icon.png"
+
+[[dependencies.simpletms]]
+modId = "neoforge"
+mandatory = true
+versionRange = "[${loader_version},)"
+
+[[dependencies.simpletms]]
+modId = "kotlinforforge"
+mandatory = true
+versionRange = "[${forge_kotlin_version},)"
+
+[[dependencies.simpletms]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[${minecraft_version}]"
+
+[[dependencies.simpletms]]
+modId = "architectury"
+mandatory = true
+versionRange = "[${architectury_version},)"
+
+[[dependencies.simpletms]]
+modId = "cobblemon"
+mandatory = true
+versionRange = "[${cobblemon_version},)"

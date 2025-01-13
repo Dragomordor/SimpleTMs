@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "simpletms",
+  "version": "${version}",
+  "name": "SimpleTMs",
+  "description": "Brings TM's and HM's to Cobblemon",
+  "authors": [
+    "Dragomordor"
+  ],
+  "contact": {
+    "sources": "TODO",
+    "issues": "TODO"
+  },
+  "license": "MIT",
+  "icon": "assets/simpletms/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "value": "dragomordor.simpletms.fabric.SimpleTMs"
+      }
+    ],
+    "client": [
+      {
+        "value": "dragomordor.simpletms.fabric.SimpleTMsClient"
+      }
+    ]
+  },
+  "depends": {
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}",
+    "architectury": "${architectury_version}.x",
+    "cobblemon": ">=${cobblemon_version}"
+  }
+}
