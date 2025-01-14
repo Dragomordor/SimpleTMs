@@ -43,6 +43,11 @@ object SimpleTMsItemGroups {
         // Add all tm items here
         entries.accept(SimpleTMsItems.BLANK_TM.get())
         // entries.accept(SimpleTMsItems.TM_TACKLE.get())
+
+        //TODO: accept all TM items -- collection
+        for (item in SimpleTMsItems.TM_ITEMS) {
+            entries.accept(item.get())
+        }
     }
 
     // TR Items
@@ -51,8 +56,10 @@ object SimpleTMsItemGroups {
         entries.accept(SimpleTMsItems.BLANK_TR.get())
         // entries.accept(SimpleTMsItems.TR_TACKLE.get())
 
-        // accept all TR items -- collection
-        entries.acceptAll(SimpleTMsItems.TR_ITEMS)
+        //TODO: accept all TR items -- collection
+        for (item in SimpleTMsItems.TR_ITEMS) {
+            entries.accept(item.get())
+        }
     }
 
     // TODO: Custom tms and custom trs from users in separate tabs
@@ -65,31 +72,12 @@ object SimpleTMsItemGroups {
         ALL.forEach(consumer::invoke)
     }
 
-
-//    data class ItemGroupHolder(
-//        val key: ResourceKey<CreativeModeTab>,
-//        val displayIconProvider: () -> ItemStack,
-//        val entryCollector: KFunction2<ItemDisplayContext, Output, Unit>,
-//        val displayName: Component = Component.translatable("itemGroup.${key.location().namespace}.${key.location().path}")
-//    ) {
-//        fun entryCollector(adaptedParams: CreativeModeTab.ItemDisplayParameters, output: CreativeModeTab.Output) {
-//
-//        }
-//    }
-
     data class ItemGroupHolder(
         val key: ResourceKey<CreativeModeTab>,
         val displayIconProvider: () -> ItemStack,
         val entryCollector: CreativeModeTab.DisplayItemsGenerator,
         val displayName: Component = Component.translatable("itemGroup.${key.location().namespace}.${key.location().path}")
     )
-
-
-//    private fun create(name: String, entryCollector: KFunction2<ItemDisplayContext, Output, Unit>, displayIconProvider: () -> ItemStack): ResourceKey<CreativeModeTab> {
-//        val key = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), simpletmsResource(name))
-//        this.ALL += ItemGroupHolder(key, displayIconProvider, entryCollector)
-//        return key
-//    }
 
     private fun create(name: String, entryCollector: CreativeModeTab.DisplayItemsGenerator, displayIconProvider: () -> ItemStack): ResourceKey<CreativeModeTab> {
         val key = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), simpletmsResource(name))
