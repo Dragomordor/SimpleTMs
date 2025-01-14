@@ -42,12 +42,17 @@ object SimpleTMsItemGroups {
     private fun tmItemEntries(displayContext: ItemDisplayParameters, entries: Output) {
         // Add all tm items here
         entries.accept(SimpleTMsItems.BLANK_TM.get())
+        // entries.accept(SimpleTMsItems.TM_TACKLE.get())
     }
 
     // TR Items
     private fun trItemEntries(displayContext: ItemDisplayParameters, entries: Output) {
         // Add all tr items here
         entries.accept(SimpleTMsItems.BLANK_TR.get())
+        // entries.accept(SimpleTMsItems.TR_TACKLE.get())
+
+        // accept all TR items -- collection
+        entries.acceptAll(SimpleTMsItems.TR_ITEMS)
     }
 
     // TODO: Custom tms and custom trs from users in separate tabs

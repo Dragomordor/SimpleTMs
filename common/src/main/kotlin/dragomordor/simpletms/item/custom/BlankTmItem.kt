@@ -15,9 +15,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 
-class BlankTmItem(singleUse: Boolean) : SimpleTMsItem(Properties().stacksTo(16)), PokemonAndMoveSelectingItemNonBattle {
-
-    val singleUse = singleUse
+class BlankTmItem(val singleUse: Boolean) : SimpleTMsItem(Properties().stacksTo(16)), PokemonAndMoveSelectingItemNonBattle {
 
     // Blank TMs can only be used on Pokémon moves, not on the Pokémon itself
     override fun canUseOnPokemon(pokemon: Pokemon) = pokemon.moveSet.any(::canUseOnMove)

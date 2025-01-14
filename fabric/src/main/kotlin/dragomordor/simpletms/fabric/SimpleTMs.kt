@@ -15,24 +15,6 @@ class SimpleTMs : ModInitializer {
         registerItemGroups()
     }
 
-//    fun registerItemGroups() {
-//        SimpleTMsItemGroups.register { provider ->
-//            Registry.register(
-//                BuiltInRegistries.CREATIVE_MODE_TAB,
-//                provider.key,
-//                FabricItemGroup.builder()
-//                    .title(provider.displayName)
-//                    .icon(provider.displayIconProvider)
-//                    .displayItems { params, output ->
-//                        // Explicitly adapt parameters if required
-//                        val adaptedParams = params as CreativeModeTab.ItemDisplayParameters
-//                        provider.entryCollector(adaptedParams, output)
-//                    }
-//                    .build()
-//            )
-//        }
-//    }
-
     fun registerItemGroups() {
         SimpleTMsItemGroups.register { provider ->
             Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, provider.key, FabricItemGroup.builder()

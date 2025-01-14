@@ -3,15 +3,18 @@ package dragomordor.simpletms
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
 import dragomordor.simpletms.item.custom.BlankTmItem
+//import dragomordor.simpletms.item.custom.MoveLearnItem
 import net.minecraft.world.item.Item
 import net.minecraft.core.registries.Registries
+import net.minecraft.world.item.ItemStack
 
 
 @Suppress("unused", "SameParameterValue")
 object SimpleTMsItems {
     internal val ITEMS: DeferredRegister<Item> = DeferredRegister.create(SimpleTMs.MOD_ID, Registries.ITEM)
 
-    // TODO: Lists for tm and tr items
+    // TODO: Tags for tm and tr items
+    val TR_ITEMS: MutableCollection<ItemStack> = TODO()
 
 
     // ------------------------------------------------------------
@@ -24,7 +27,15 @@ object SimpleTMsItems {
     val BLANK_TM = registerBlankTmItem("tm_blank", false)
     val BLANK_TR = registerBlankTmItem("tr_blank", true)
 
-    // TODO: Add blank TM and TR to respective lists
+
+//    // TM items
+//    // TODO: Testing using tackle
+//    val TM_TACKLE = registerMoveLearnItem("tm_tackle", "tackle", "Normal", false)
+//
+//    // TR items
+//    val TR_TACKLE = registerMoveLearnItem("tr_tackle", "tackle", "Normal", true)
+
+    // TODO: items to tags above
 
 
     // ------------------------------------------------------------
@@ -38,7 +49,12 @@ object SimpleTMsItems {
         return item
     }
 
-
+//    fun registerMoveLearnItem(name: String, moveName: String, moveType: String, singleUse: Boolean): RegistrySupplier<MoveLearnItem> {
+//        val item = ITEMS.register(name) {
+//            MoveLearnItem(moveName, moveType, singleUse)
+//        }
+//        return item
+//    }
 
     // Register all mod items
     fun registerModItems() {

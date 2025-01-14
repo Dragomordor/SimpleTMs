@@ -21,28 +21,8 @@ object SimpleTMs {
             SimpleTMsClient.init()
         }
     }
-//
-//
-//    fun registerItemGroups() {
-//        with(MOD_BUS) {
-//            addListener<RegisterEvent> { event ->
-//                event.register(Registries.CREATIVE_MODE_TAB) { helper ->
-//                    SimpleTMsItemGroups.register { holder ->
-//                        val itemGroup = CreativeModeTab.builder()
-//                            .title(holder.displayName)
-//                            .icon(holder.displayIconProvider)
-//                            .displayItems { parameters, output ->
-//                                holder.entryCollector(parameters, output)
-//                            }
-//                            .build()
-//                        helper.register(holder.key, itemGroup)
-//                    }
-//                }
-//            }
-//        }
-//    }
 
-    fun registerItemGroups() {
+    private fun registerItemGroups() {
         with(MOD_BUS) {
 
             addListener<RegisterEvent> { event ->
