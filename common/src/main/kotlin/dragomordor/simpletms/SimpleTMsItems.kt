@@ -4,16 +4,17 @@ import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
 import dragomordor.simpletms.item.custom.BlankTmItem
 import dragomordor.simpletms.item.custom.MoveLearnItem
+import dragomordor.simpletms.util.loadMoveLearnItemsFromJson
 import net.minecraft.world.item.Item
 import net.minecraft.core.registries.Registries
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.level.ItemLike
 
 
 @Suppress("unused", "SameParameterValue")
 object SimpleTMsItems {
 
     internal val ITEMS: DeferredRegister<Item> = DeferredRegister.create(SimpleTMs.MOD_ID, Registries.ITEM)
+    val defaultMoveJsonPath = "simpletms/movelearnitems/default.json"
+    val customMoveJsonPath = "simpletms/movelearnitems/custom.json"
 
     // TODO: Tags for tm and tr items
     val TM_ITEMS = mutableListOf<RegistrySupplier<MoveLearnItem>>()
@@ -25,17 +26,6 @@ object SimpleTMsItems {
     // Blank TM and TR
     val BLANK_TM = registerBlankTmItem("tm_blank", false)
     val BLANK_TR = registerBlankTmItem("tr_blank", true)
-
-    // TM items
-    // TODO: Testing using a few items
-    val TM_10000000VOLTTHUNDERBOLT = registerMoveLearnItem("tm_10000000voltthunderbolt", "10000000voltthunderbolt", "Electric", false)
-    val TM_ABSORB = registerMoveLearnItem("tm_absorb", "absorb", "Grass", false)
-    val TM_TACKLE = registerMoveLearnItem("tm_tackle", "tackle", "Normal", false)
-
-    // TR items
-    val TR_10000000VOLTTHUNDERBOLT = registerMoveLearnItem("tr_10000000voltthunderbolt", "10000000voltthunderbolt", "Electric", true)
-    val TR_ABSORB = registerMoveLearnItem("tr_absorb", "absorb", "Grass", true)
-    val TR_TACKLE = registerMoveLearnItem("tr_tackle", "tackle", "Normal", true)
 
     // ------------------------------------------------------------
     // Register Item Functions
@@ -60,16 +50,46 @@ object SimpleTMsItems {
         return item
     }
 
-    // Register all mod items
-    fun registerModItems() {
-        SimpleTMs.LOGGER.info("Register Mod Items for " + SimpleTMs.MOD_ID)
-        ITEMS.register()
+    fun registerMoveLearnItemsFromJSON(jsonFilePath: String) {
+        // Load JSON file from resource directory
+        val itemDefinitions = loadMoveLearnItemsFromJson(jsonFilePath)
+        // Register TMs
+        for (itemDefinition in itemDefinitions) {
+            registerMoveLearnItem(
+                name = "tm_" + itemDefinition.moveName,
+                moveName = itemDefinition.moveName,
+                moveType = itemDefinition.moveType,
+                singleUse = false
+            )
+        }
+        // Register TRs
+        for (itemDefinition in itemDefinitions) {
+            registerMoveLearnItem(
+                name = "tr_" + itemDefinition.moveName,
+                moveName = itemDefinition.moveName,
+                moveType = itemDefinition.moveType,
+                singleUse = true
+            )
+        }
     }
 
     // ------------------------------------------------------------
     // Other Functions
     // ------------------------------------------------------------
 
+    // Register all mod items
+    fun registerModItems() {
+        SimpleTMs.LOGGER.info("Register Mod Items for " + SimpleTMs.MOD_ID)
+        // TODO: This is a test
+        // Register items from JSON
+            // Default moves
+        registerMoveLearnItemsFromJSON(defaultMoveJsonPath)
+            // Custom moves -- check if the file contain any items
+        // TODO: add a check from config file to see if the file should be loaded
+        registerMoveLearnItemsFromJSON(customMoveJsonPath)
+
+        ITEMS.register()
+    }
 
 
 }
