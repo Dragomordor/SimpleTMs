@@ -1,9 +1,5 @@
 [
     {
-        "moveName": "10000000voltthunderbolt",
-        "moveType": "Electric"
-    },
-    {
         "moveName": "absorb",
         "moveType": "Grass"
     },
@@ -17,10 +13,6 @@
     },
     {
         "moveName": "acidarmor",
-        "moveType": "Poison"
-    },
-    {
-        "moveName": "aciddownpour",
         "moveType": "Poison"
     },
     {
@@ -58,10 +50,6 @@
     {
         "moveName": "airslash",
         "moveType": "Flying"
-    },
-    {
-        "moveName": "alloutpummeling",
-        "moveType": "Fighting"
     },
     {
         "moveName": "alluringvoice",
@@ -252,10 +240,6 @@
         "moveType": "Ghost"
     },
     {
-        "moveName": "blackholeeclipse",
-        "moveType": "Dark"
-    },
-    {
         "moveName": "blastburn",
         "moveType": "Fire"
     },
@@ -282,10 +266,6 @@
     {
         "moveName": "bloodmoon",
         "moveType": "Normal"
-    },
-    {
-        "moveName": "bloomdoom",
-        "moveType": "Grass"
     },
     {
         "moveName": "blueflare",
@@ -342,10 +322,6 @@
     {
         "moveName": "breakingswipe",
         "moveType": "Dragon"
-    },
-    {
-        "moveName": "breakneckblitz",
-        "moveType": "Normal"
     },
     {
         "moveName": "brickbreak",
@@ -420,10 +396,6 @@
         "moveType": "Normal"
     },
     {
-        "moveName": "catastropika",
-        "moveType": "Electric"
-    },
-    {
         "moveName": "ceaselessedge",
         "moveType": "Dark"
     },
@@ -480,10 +452,6 @@
         "moveType": "Dragon"
     },
     {
-        "moveName": "clangoroussoulblaze",
-        "moveType": "Dragon"
-    },
-    {
         "moveName": "clearsmog",
         "moveType": "Poison"
     },
@@ -532,10 +500,6 @@
         "moveType": "Normal"
     },
     {
-        "moveName": "continentalcrush",
-        "moveType": "Rock"
-    },
-    {
         "moveName": "conversion",
         "moveType": "Normal"
     },
@@ -550,10 +514,6 @@
     {
         "moveName": "coreenforcer",
         "moveType": "Dragon"
-    },
-    {
-        "moveName": "corkscrewcrash",
-        "moveType": "Steel"
     },
     {
         "moveName": "corrosivegas",
@@ -658,10 +618,6 @@
     {
         "moveName": "detect",
         "moveType": "Fighting"
-    },
-    {
-        "moveName": "devastatingdrake",
-        "moveType": "Dragon"
     },
     {
         "moveName": "diamondstorm",
@@ -922,10 +878,6 @@
     {
         "moveName": "extrasensory",
         "moveType": "Psychic"
-    },
-    {
-        "moveName": "extremeevoboost",
-        "moveType": "Normal"
     },
     {
         "moveName": "extremespeed",
@@ -1200,10 +1152,6 @@
         "moveType": "Steel"
     },
     {
-        "moveName": "genesissupernova",
-        "moveType": "Psychic"
-    },
-    {
         "moveName": "geomancy",
         "moveType": "Fairy"
     },
@@ -1218,10 +1166,6 @@
     {
         "moveName": "gigatonhammer",
         "moveType": "Steel"
-    },
-    {
-        "moveName": "gigavolthavoc",
-        "moveType": "Electric"
     },
     {
         "moveName": "glaciallance",
@@ -1416,10 +1360,6 @@
         "moveType": "Ghost"
     },
     {
-        "moveName": "guardianofalola",
-        "moveType": "Fairy"
-    },
-    {
         "moveName": "guardsplit",
         "moveType": "Psychic"
     },
@@ -1532,74 +1472,6 @@
         "moveType": "Ghost"
     },
     {
-        "moveName": "hiddenpower",
-        "moveType": "Normal"
-    },
-    {
-        "moveName": "hiddenpowerbug",
-        "moveType": "Bug"
-    },
-    {
-        "moveName": "hiddenpowerdark",
-        "moveType": "Dark"
-    },
-    {
-        "moveName": "hiddenpowerdragon",
-        "moveType": "Dragon"
-    },
-    {
-        "moveName": "hiddenpowerelectric",
-        "moveType": "Electric"
-    },
-    {
-        "moveName": "hiddenpowerfighting",
-        "moveType": "Fighting"
-    },
-    {
-        "moveName": "hiddenpowerfire",
-        "moveType": "Fire"
-    },
-    {
-        "moveName": "hiddenpowerflying",
-        "moveType": "Flying"
-    },
-    {
-        "moveName": "hiddenpowerghost",
-        "moveType": "Ghost"
-    },
-    {
-        "moveName": "hiddenpowergrass",
-        "moveType": "Grass"
-    },
-    {
-        "moveName": "hiddenpowerground",
-        "moveType": "Ground"
-    },
-    {
-        "moveName": "hiddenpowerice",
-        "moveType": "Ice"
-    },
-    {
-        "moveName": "hiddenpowerpoison",
-        "moveType": "Poison"
-    },
-    {
-        "moveName": "hiddenpowerpsychic",
-        "moveType": "Psychic"
-    },
-    {
-        "moveName": "hiddenpowerrock",
-        "moveType": "Rock"
-    },
-    {
-        "moveName": "hiddenpowersteel",
-        "moveType": "Steel"
-    },
-    {
-        "moveName": "hiddenpowerwater",
-        "moveType": "Water"
-    },
-    {
         "moveName": "highhorsepower",
         "moveType": "Ground"
     },
@@ -1649,10 +1521,6 @@
     },
     {
         "moveName": "hydrosteam",
-        "moveType": "Water"
-    },
-    {
-        "moveName": "hydrovortex",
         "moveType": "Water"
     },
     {
@@ -1741,10 +1609,6 @@
     },
     {
         "moveName": "inferno",
-        "moveType": "Fire"
-    },
-    {
-        "moveName": "infernooverdrive",
         "moveType": "Fire"
     },
     {
@@ -1872,10 +1736,6 @@
         "moveType": "Normal"
     },
     {
-        "moveName": "letssnuggleforever",
-        "moveType": "Fairy"
-    },
-    {
         "moveName": "lick",
         "moveType": "Ghost"
     },
@@ -1889,10 +1749,6 @@
     },
     {
         "moveName": "lightscreen",
-        "moveType": "Psychic"
-    },
-    {
-        "moveName": "lightthatburnsthesky",
         "moveType": "Psychic"
     },
     {
@@ -1986,10 +1842,6 @@
     {
         "moveName": "makeitrain",
         "moveType": "Steel"
-    },
-    {
-        "moveName": "maliciousmoonsault",
-        "moveType": "Dark"
     },
     {
         "moveName": "malignantchain",
@@ -2110,10 +1962,6 @@
     {
         "moveName": "memento",
         "moveType": "Dark"
-    },
-    {
-        "moveName": "menacingmoonrazemaelstrom",
-        "moveType": "Ghost"
     },
     {
         "moveName": "metalburst",
@@ -2276,10 +2124,6 @@
         "moveType": "Grass"
     },
     {
-        "moveName": "neverendingnightmare",
-        "moveType": "Ghost"
-    },
-    {
         "moveName": "nightdaze",
         "moveType": "Dark"
     },
@@ -2318,10 +2162,6 @@
     {
         "moveName": "obstruct",
         "moveType": "Dark"
-    },
-    {
-        "moveName": "oceanicoperetta",
-        "moveType": "Water"
     },
     {
         "moveName": "octazooka",
@@ -2588,10 +2428,6 @@
         "moveType": "Psychic"
     },
     {
-        "moveName": "pulverizingpancake",
-        "moveType": "Normal"
-    },
-    {
         "moveName": "punishment",
         "moveType": "Dark"
     },
@@ -2824,10 +2660,6 @@
         "moveType": "Grass"
     },
     {
-        "moveName": "savagespinout",
-        "moveType": "Bug"
-    },
-    {
         "moveName": "scald",
         "moveType": "Water"
     },
@@ -2854,10 +2686,6 @@
     {
         "moveName": "searingshot",
         "moveType": "Fire"
-    },
-    {
-        "moveName": "searingsunrazesmash",
-        "moveType": "Steel"
     },
     {
         "moveName": "secretpower",
@@ -2916,10 +2744,6 @@
         "moveType": "Normal"
     },
     {
-        "moveName": "shatteredpsyche",
-        "moveType": "Psychic"
-    },
-    {
         "moveName": "shedtail",
         "moveType": "Normal"
     },
@@ -2974,10 +2798,6 @@
     {
         "moveName": "sing",
         "moveType": "Normal"
-    },
-    {
-        "moveName": "sinisterarrowraid",
-        "moveType": "Ghost"
     },
     {
         "moveName": "sizzlyslide",
@@ -3108,10 +2928,6 @@
         "moveType": "Normal"
     },
     {
-        "moveName": "soulstealing7starstrike",
-        "moveType": "Ghost"
-    },
-    {
         "moveName": "spacialrend",
         "moveType": "Dragon"
     },
@@ -3180,10 +2996,6 @@
         "moveType": "Normal"
     },
     {
-        "moveName": "splinteredstormshards",
-        "moveType": "Rock"
-    },
-    {
         "moveName": "splishysplash",
         "moveType": "Water"
     },
@@ -3230,10 +3042,6 @@
     {
         "moveName": "stockpile",
         "moveType": "Normal"
-    },
-    {
-        "moveName": "stokedsparksurfer",
-        "moveType": "Electric"
     },
     {
         "moveName": "stomp",
@@ -3300,10 +3108,6 @@
         "moveType": "Normal"
     },
     {
-        "moveName": "subzeroslammer",
-        "moveType": "Ice"
-    },
-    {
         "moveName": "suckerpunch",
         "moveType": "Dark"
     },
@@ -3330,10 +3134,6 @@
     {
         "moveName": "supersonic",
         "moveType": "Normal"
-    },
-    {
-        "moveName": "supersonicskystrike",
-        "moveType": "Flying"
     },
     {
         "moveName": "surf",
@@ -3434,10 +3234,6 @@
     {
         "moveName": "technoblast",
         "moveType": "Normal"
-    },
-    {
-        "moveName": "tectonicrage",
-        "moveType": "Ground"
     },
     {
         "moveName": "teeterdance",
@@ -3610,10 +3406,6 @@
     {
         "moveName": "twineedle",
         "moveType": "Bug"
-    },
-    {
-        "moveName": "twinkletackle",
-        "moveType": "Fairy"
     },
     {
         "moveName": "twister",

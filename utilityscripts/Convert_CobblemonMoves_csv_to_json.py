@@ -6,17 +6,37 @@ import json
 import os
 
 # Import csv
-csv_path = r"AllCobblemonMoves.csv"
+csv_path = r"AllMoves.csv"
 data = pd.read_csv(csv_path)
 
 # Sort the data by moveName
 data = data.sort_values(by=['moveName'])
 
 # Format of csv file:
-# moveName,moveType,Name,Description
-# 10000000voltthunderbolt,Electric,"10,000,000 Volt Thunderbolt","The user, Pikachu wearing a cap, powers up a jolt of electricity using its Z-Power and unleashes it. Critical hits land more easily."
-# absorb,Grass,Absorb,A nutrient-draining attack. The user�s HP is restored by half the damage taken by the target.
-# accelerock,Rock,Accelerock,The user smashes into the target at high speed. This move always goes first.
+# moveName,moveType,Name
+# 10000000voltthunderbolt,Electric
+# absorb,Grass,Absorb
+# accelerock,Rock,Accelerock
+
+# ----------------------------------------------------------
+## Modify data to remove unwanted move entries (delete entire row)
+# ----------------------------------------------------------
+
+# The following moves are not needed:
+    # All moves that start with 'hiddenpower'
+data = data[~data['moveName'].str.startswith('hiddenpower')]
+
+# All Moves in ZTypeMoves.csv (same format as AllMoves.csv)
+ztype_csv_path = r"ZTypeMoves.csv"
+ztype_data = pd.read_csv(ztype_csv_path)
+data = data[~data['moveName'].isin(ztype_data['moveName'])]
+
+# ----------------------------------------------------------
+## Extract data into dictionary
+# ----------------------------------------------------------
+
+##### All Moves dictionary
+# --------------------------------
 
 # Create a list to store the data
 cobblemon_moves = []
@@ -34,8 +54,7 @@ for index, row in data.iterrows():
 ## Json Files
 # ----------------------------------------------------------
 
-##### MoveLearnItems default.json
-# --------------------------------
+
 
 # Format of json file:
 # [
@@ -63,21 +82,24 @@ for index, row in data.iterrows():
         "moveType": row['moveType'],
     })
 
-# Create a JSON file movelearnitems/default.json
+
+
+##### Create a JSON file movelearnitems/default.json
+# ----------------------------------------------------------
 
 # Ensure the directory exists
-os.makedirs("simpletms/movelearnitems", exist_ok=True)
-default_json_path = r"simpletms/movelearnitems/default.json"
+os.makedirs("resources/simpletms/movelearnitems", exist_ok=True)
+default_json_path = r"resources/simpletms/movelearnitems/default.json"
 with open(default_json_path, 'w') as json_file:
     json.dump(movelearnitems, json_file, indent=4)
 
-print("SUCCESS: (1/3) MoveLearnItems default.json JSON file created successfully!")
-
 # Create custom.json file with empty array []
 # Ensure the directory exists
-custom_json_path = r"simpletms/movelearnitems/custom.json"
+custom_json_path = r"resources/simpletms/movelearnitems/custom.json"
 with open(custom_json_path, 'w') as json_file:
     json.dump([], json_file, indent=4)
+
+print("SUCCESS: (1/3) MoveLearnItems default.json JSON file created successfully!")
 
 ##### lang file
 # --------------------------------
@@ -95,29 +117,30 @@ with open(custom_json_path, 'w') as json_file:
 #     "item.simpletms.tr_accelerock":"TR-3: Accelerock"
 # }
 
-# Add the following to the top of the lang/en_us.json file before the first key-value pair
-#   "item.simpletms.tm_blank": "Blank TM",
-#   "item.simpletms.tr_blank": "Blank TR",
-#   "itemGroup.simpletms.tm_items": "TM's",
-#   "itemGroup.simpletms.tr_items": "TR's"
-
 # Create a dictionary to store the data
 lang_data = {}
 
-# Add the standard keys
+# Add Standard keys to top of the file
+    # Display messages
+lang_data["simpletms.success.learned"] = "%1$s learned %2$s!"
+lang_data["simpletms.error.not_learnable.not_valid_move"] = "Not a valid move -- move does not exist!"
+lang_data["simpletms.error.not_learnable.already_knows_move"] = "%1$s already knows %2$s"
+lang_data["simpletms.error.not_learnable.not_in_learnable_moves"] = "%1$s can't learn %2$s"
+    # blank TM and TR
 lang_data["item.simpletms.tm_blank"] = "Blank TM"
 lang_data["item.simpletms.tr_blank"] = "Blank TR"
+    # item groups
 lang_data["itemGroup.simpletms.tm_items"] = "TM's"
 lang_data["itemGroup.simpletms.tr_items"] = "TR's"
 
-# Add the move names
+# Add the move display names 
 for i, move in enumerate(cobblemon_moves, start=1):
     lang_data[f"item.simpletms.tm_{move['moveName']}"] = f"TM-{i}: {move['Name']}"
     lang_data[f"item.simpletms.tr_{move['moveName']}"] = f"TR-{i}: {move['Name']}"
 
 # Create a JSON file lang/en_us.json
-os.makedirs("assets/simpletms/lang", exist_ok=True)
-lang_json_path = r"assets/simpletms/lang/en_us.json"
+os.makedirs("resources/assets/simpletms/lang", exist_ok=True)
+lang_json_path = r"resources/assets/simpletms/lang/en_us.json"
 with open(lang_json_path, 'w') as json_file:
     json.dump(lang_data, json_file, indent=4)
 
@@ -166,14 +189,14 @@ print("SUCCESS: (2/3) lang/en_us.json JSON file created successfully!")
 model_data = {}
 
 # Ensure the directory exists
-os.makedirs("assets/simpletms/models/item", exist_ok=True)
+os.makedirs("resources/assets/simpletms/models/item", exist_ok=True)
 
 # Create the model files
 
 # All default moves
 for move in cobblemon_moves:
-    tm_file_path = f"assets/simpletms/models/item/tm_{move['moveName']}.json"
-    tr_file_path = f"assets/simpletms/models/item/tr_{move['moveName']}.json"
+    tm_file_path = f"resources/assets/simpletms/models/item/tm_{move['moveName']}.json"
+    tr_file_path = f"resources/assets/simpletms/models/item/tr_{move['moveName']}.json"
     
     tm_data = {
         "parent": "item/generated",
@@ -209,8 +232,8 @@ tr_blank_data = {
     }
 }
 
-tm_blank_file_path = f"assets/simpletms/models/item/tm_blank.json"
-tr_blank_file_path = f"assets/simpletms/models/item/tr_blank.json"
+tm_blank_file_path = f"resources/assets/simpletms/models/item/tm_blank.json"
+tr_blank_file_path = f"resources/assets/simpletms/models/item/tr_blank.json"
 
 with open(tm_blank_file_path, 'w') as tm_blank_file:
     json.dump(tm_blank_data, tm_blank_file, indent=4)
