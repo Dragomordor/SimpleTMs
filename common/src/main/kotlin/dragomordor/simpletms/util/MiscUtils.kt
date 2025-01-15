@@ -1,10 +1,10 @@
 package dragomordor.simpletms.util
 
-import com.cobblemon.mod.common.api.moves.MoveTemplate
-import com.cobblemon.mod.common.api.moves.Moves
+import com.cobblemon.mod.common.util.asTranslated
 import dragomordor.simpletms.SimpleTMs
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import java.io.InputStreamReader
 
@@ -27,3 +27,22 @@ fun loadMoveLearnItemsFromJson(jsonFilePath: String): List<MoveLearnItemDefiniti
     return itemDefinitions
 }
 
+fun fromLang(
+    prefixOrModid: String,
+    subKey: String,
+    vararg objects: Any
+) = "$prefixOrModid.$subKey".asTranslated(*objects)
+
+class FailureMessage() {
+    companion object {
+        lateinit var message: Component
+
+        fun getFailureMessage(): Component {
+            return message
+        }
+
+        fun setFailureMessage(message: Component) {
+            this.message = message
+        }
+    }
+}

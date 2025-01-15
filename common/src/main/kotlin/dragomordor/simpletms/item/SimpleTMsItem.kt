@@ -1,5 +1,6 @@
 package dragomordor.simpletms.item
 
+import dragomordor.simpletms.SimpleTMs
 import net.minecraft.world.item.Item
 
 /**
@@ -8,7 +9,6 @@ import net.minecraft.world.item.Item
  * Containing common shared code.
  */
 open class SimpleTMsItem(settings : Properties) : Item(settings) {
-    companion object {
 
-    }
+
 }

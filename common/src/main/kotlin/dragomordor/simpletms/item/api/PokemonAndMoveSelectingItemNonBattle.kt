@@ -10,6 +10,7 @@ import com.cobblemon.mod.common.util.getBattleState
 import com.cobblemon.mod.common.util.isHeld
 import com.cobblemon.mod.common.util.isLookingAt
 import com.cobblemon.mod.common.util.party
+import dragomordor.simpletms.SimpleTMs
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.item.ItemStack
@@ -77,7 +78,6 @@ interface PokemonAndMoveSelectingItemNonBattle {
         )
         return InteractionResultHolder.success(stack)
     }
-
 
 
 

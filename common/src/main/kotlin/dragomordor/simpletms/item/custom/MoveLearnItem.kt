@@ -1,12 +1,12 @@
 package dragomordor.simpletms.item.custom
 
 import com.cobblemon.mod.common.api.moves.*
-import com.cobblemon.mod.common.api.text.text
 import com.cobblemon.mod.common.pokemon.Pokemon
-import com.cobblemon.mod.common.util.lang
+import dragomordor.simpletms.SimpleTMs
 import dragomordor.simpletms.item.SimpleTMsItem
 import dragomordor.simpletms.item.api.PokemonSelectingItemNonBattle
-import net.minecraft.network.chat.Component
+import dragomordor.simpletms.util.FailureMessage
+import dragomordor.simpletms.util.fromLang
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvents
@@ -16,13 +16,15 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.sounds.SoundSource
+import net.minecraft.world.entity.EquipmentSlot
 
 
 class MoveLearnItem(
     val moveName: String,
     val moveType: String,
-    val singleUse: Boolean,
-) : SimpleTMsItem(Properties().stacksTo(16)), PokemonSelectingItemNonBattle {
+    val isTR: Boolean,
+    val settings: Properties
+) : SimpleTMsItem(settings), PokemonSelectingItemNonBattle {
 
     // ------------------------------------------------------------------
     // Override methods from PokemonSelectingItemNonBattle
@@ -40,7 +42,7 @@ class MoveLearnItem(
 
         // (0) Get the moveName from class, not interface (this)
         val moveName = this.moveName
-        val singleUse = this.singleUse
+        val singleUse = this.isTR
 
         // Get the move to teach
         val moveToTeach = Moves.getByName(moveName)
@@ -55,18 +57,39 @@ class MoveLearnItem(
 
         val moveTranslatedName = moveToTeach.displayName
 
-        // (2) Check if the Pokémon can learn the move
+        // (2+3) Check if the Pokémon can learn the move
         if (!canPokemonLearnMove(pokemon, moveToTeach)) {
             // Pokémon can't learn the move, so do nothing
             // Display the failure message
             player.displayClientMessage(FailureMessage.getFailureMessage(), true)
             return InteractionResultHolder.fail(stack)
         } else {
-            // (4) If the Pokémon can learn the move, teach it the move
+
+            // (4) Check item cooldown if applicable
+            val cooldownTicks = SimpleTMs.config.TMCoolDownTicks
+
+            if (player.cooldowns.isOnCooldown(this)) {
+                // Convert cooldown ticks to hours, minutes, and seconds
+                val cooldownHH = Math.floorDiv(cooldownTicks, 72000)
+                val cooldownMM = Math.floorDiv(cooldownTicks- (cooldownHH * 72000), 1200)
+                val cooldownSS = Math.floorDiv(cooldownTicks - (cooldownHH * 72000) - (cooldownMM * 1200), 20)
+                val cooldownString = "$cooldownHH:$cooldownMM:$cooldownSS"
+                // Display the failure message
+                FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_learnable.on_cooldown", stack.displayName ,cooldownString))
+                player.displayClientMessage(FailureMessage.getFailureMessage(), true)
+                return InteractionResultHolder.fail(stack)
+            }
+
+            // (5) If the Pokémon can learn the move, teach it the move
+            // Success message
+            val successMessage = fromLang(SimpleTMs.MOD_ID,"success.learned", pokemon.species.translatedName, moveTranslatedName)
+            player.displayClientMessage(
+                successMessage, true
+            )
+
+            // Put move into the move set if there is an empty slot
             val currentMoves = pokemon.moveSet
             val benchedMoves = pokemon.benchedMoves
-
-                // Put move into the move set if there is an empty slot
             if (currentMoves.hasSpace()) {
                 currentMoves.add(moveToTeach.create())
             } else {
@@ -74,17 +97,10 @@ class MoveLearnItem(
                 benchedMoves.add(BenchedMove(moveToTeach, 0))
             }
 
-            // Success message
-            val successMessage = lang("success.learned", pokemon.species.translatedName, moveTranslatedName)
-
-            player.displayClientMessage(
-                successMessage, true
-            )
-
             // Success sound and stack shrink
             player.playNotifySound(SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 1.0F, 1.0F)
 
-            // Shrink the stack if player is not in creative mode
+            // Damage the stack if player is not in creative mode
             if (!player.isCreative) {
                 // If the item is single use, shrink the stack
                 if (singleUse) {
@@ -92,9 +108,11 @@ class MoveLearnItem(
                 }
             }
 
-            // TODO: From config -- add cooldown to the item
+            // Put item on cooldown if applicable
+            if (!player.isCreative && !singleUse && stack.count > 0 && cooldownTicks > 0) {
+                player.cooldowns.addCooldown(this, cooldownTicks)
+            }
 
-            // Success
             return InteractionResultHolder.success(stack)
         }
     }
@@ -123,7 +141,7 @@ class MoveLearnItem(
 
         // (2.3) Check if the moveToTeach is a valid move
         if (moveToTeach == null) {
-            FailureMessage.setFailureMessage(lang("error.not_learnable.not_valid_move"))
+            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_learnable.not_valid_move"))
             return false
         }
         val moveTranslatedName = moveToTeach.displayName
@@ -131,19 +149,19 @@ class MoveLearnItem(
 
         // (2.4) Check if the move is already in the move set
         if (currentMoves.getMoves().stream().anyMatch { it.name == moveToTeach.name }) {
-            FailureMessage.setFailureMessage(lang("error.not_learnable.already_knows_move", pokemonTranslateName, moveTranslatedName))
+            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_learnable.already_knows_move", pokemonTranslateName, moveTranslatedName))
             return false
         }
         // (2.5) Check if the move is already in the benched moves
 
             // Check if the move is in the benched moves
         if (benchedMoveContainsMove(benchedMoves, moveToTeach)) {
-            FailureMessage.setFailureMessage(lang("error.not_learnable.already_knows_move", pokemonTranslateName, moveTranslatedName))
+            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_learnable.already_knows_move", pokemonTranslateName, moveTranslatedName))
             return false
         }
         // (2.6) Check if the move is a valid move for the Pokémon
         if (!inPokemonMoveList(pokemon, moveToTeach)) {
-            FailureMessage.setFailureMessage(lang("error.not_learnable.not_in_learnable_moves", pokemonTranslateName, moveTranslatedName))
+            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_learnable.not_in_learnable_moves", pokemonTranslateName, moveTranslatedName))
             return false
         }
         // (3) If all checks pass, return true
@@ -152,44 +170,56 @@ class MoveLearnItem(
 
     // Wrapper for canPokemonLearnMove with only pokemon as input
     fun canPokemonLearnMove(pokemon: Pokemon): Boolean {
+        val singleUse = this.isTR
+
+        // First check if config allows TMs and TRs
+        if (!SimpleTMs.config.TMsUsable && !singleUse) {
+            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_usable.tms_disabled"))
+            return false
+        }
+        if (!SimpleTMs.config.TRsUsable && singleUse) {
+            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_usable.trs_disabled"))
+            return false
+        }
+
+        // TODO: add excluded moves from config here
+
         val moveName = this.moveName
         val move = Moves.getByNameOrDummy(moveName)
         return canPokemonLearnMove(pokemon, move)
     }
 
 
-    class FailureMessage() {
-        companion object {
-            lateinit var message: Component
-
-            fun getFailureMessage(): Component {
-                return message
-            }
-            fun setFailureMessage(message: Component) {
-                this.message = message
-            }
-        }
-    }
-
     // Function to check if pokemon is capable of learning this specific move
     fun inPokemonMoveList(pokemon: Pokemon, move: MoveTemplate): Boolean {
 
-        // (1) TODO: From config -- check if any pokemon can learn any move
-
+        if (SimpleTMs.config.anyMovesLearnable) {
+            return true
+        }
         // (2) Check if the move is in the pokemons tm move list
-        if (pokemon.form.moves.tmMoves.contains(move)) {
+        if (SimpleTMs.config.TMMovesLearnable && pokemon.form.moves.tmMoves.contains(move)) {
             return true
         }
         // (3) Check if the move is in the pokemons tutor move list
-            // TODO: From config -- check if TMs can be used for tutor moves
-        if (pokemon.form.moves.tutorMoves.contains(move)) {
+        if (SimpleTMs.config.tutorMovesLearnable && pokemon.form.moves.tutorMoves.contains(move)) {
             return true
         }
         // (4) Check if the move is in the pokemons egg move list
-            // TODO: From config -- check if TMs can be used for egg moves
-        if (pokemon.form.moves.eggMoves.contains(move)) {
+        if (SimpleTMs.config.eggMovesLearnable && pokemon.form.moves.eggMoves.contains(move)) {
             return true
         }
+        // (5) Check if the move is in the pokemons level up move list
+        if (SimpleTMs.config.levelMovesLearnable) {
+            // Get all level moves of the pokemon
+            val levelMoves = pokemon.form.moves.levelUpMoves //  MutableMap<Int, MutableList<MoveTemplate>>
+            // Check if the move is in the level moves
+            for (level in levelMoves.keys) {
+                if (levelMoves[level]!!.contains(move)) {
+                    return true
+                }
+            }
+        }
+
         // By default, return false
         return false
     }
@@ -205,3 +235,6 @@ class MoveLearnItem(
     }
 
 }
+
+
+

@@ -9,6 +9,7 @@ import dragomordor.simpletms.util.simpletmsResource
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.item.Item
 import net.minecraft.core.registries.Registries
+import net.minecraft.world.item.Item.Properties
 import net.minecraft.world.item.ItemStack
 
 
@@ -19,11 +20,10 @@ object SimpleTMsItems {
     val defaultMoveJsonPath = "simpletms/movelearnitems/default.json"
     val customMoveJsonPath = "simpletms/movelearnitems/custom.json"
 
-    // TODO: Separate Z type Moves
-    // TODO: hiddenpower moves should be removed
-
-
+    // TODO:  Z type Moves have been removed -- add file with config check to add them back if desired
+    // TODO: Add a config file to allow for the removal of certain moves from the TM and TR lists
     // TODO: Tags for tm and tr items
+
     val TM_ITEMS = mutableListOf<RegistrySupplier<MoveLearnItem>>()
     val TR_ITEMS = mutableListOf<RegistrySupplier<MoveLearnItem>>()
 
@@ -38,23 +38,46 @@ object SimpleTMsItems {
     // Register Item Functions
     // ------------------------------------------------------------
 
-    fun registerBlankTmItem(name: String, singleUse: Boolean): RegistrySupplier<BlankTmItem> {
-        val item = ITEMS.register(name) {
-            BlankTmItem(singleUse)
+    fun registerBlankTmItem(name: String, isTR: Boolean): RegistrySupplier<BlankTmItem> {
+        if (isTR) {
+            val settings: Properties =
+                Properties().
+                    stacksTo(SimpleTMs.config.TRStackSize)
+            val item = ITEMS.register(name) {
+                BlankTmItem(isTR, settings)
+            }
+            return item
+        } else {
+            val settings: Properties =
+                Properties().
+                    stacksTo(SimpleTMs.config.TMStackSize)
+            val item = ITEMS.register(name) {
+                BlankTmItem(isTR, settings)
+            }
+            return item
         }
-        return item
     }
 
-    fun registerMoveLearnItem(name: String, moveName: String, moveType: String, singleUse: Boolean): RegistrySupplier<MoveLearnItem> {
-        val item = ITEMS.register(name) {
-            MoveLearnItem(moveName, moveType, singleUse)
-        }
-        if (singleUse) {
+    fun registerMoveLearnItem(name: String, moveName: String, moveType: String, isTR: Boolean): RegistrySupplier<MoveLearnItem> {
+        if (isTR) {
+            val settings: Properties =
+                Properties().
+                    stacksTo(SimpleTMs.config.TRStackSize)
+            val item = ITEMS.register(name) {
+                MoveLearnItem(moveName, moveType, isTR, settings)
+            }
             TR_ITEMS.add(item)
+            return item
         } else {
+            val settings: Properties =
+                Properties().
+                    stacksTo(SimpleTMs.config.TMStackSize)
+            val item = ITEMS.register(name) {
+                MoveLearnItem(moveName, moveType, isTR, settings)
+            }
             TM_ITEMS.add(item)
+            return item
         }
-        return item
     }
 
     fun registerMoveLearnItemsFromJSON(jsonFilePath: String) {
@@ -66,7 +89,7 @@ object SimpleTMsItems {
                 name = "tm_" + itemDefinition.moveName,
                 moveName = itemDefinition.moveName,
                 moveType = itemDefinition.moveType,
-                singleUse = false
+                isTR = false
             )
         }
         // Register TRs
@@ -75,7 +98,7 @@ object SimpleTMsItems {
                 name = "tr_" + itemDefinition.moveName,
                 moveName = itemDefinition.moveName,
                 moveType = itemDefinition.moveType,
-                singleUse = true
+                isTR = true
             )
         }
     }

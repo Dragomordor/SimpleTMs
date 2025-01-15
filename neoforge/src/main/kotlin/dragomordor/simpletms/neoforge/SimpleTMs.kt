@@ -1,7 +1,7 @@
 package dragomordor.simpletms.neoforge
 
 import dragomordor.simpletms.SimpleTMs.MOD_ID
-import dragomordor.simpletms.SimpleTMs.init
+import dragomordor.simpletms.SimpleTMs
 import dragomordor.simpletms.SimpleTMsClient
 import dragomordor.simpletms.item.group.SimpleTMsItemGroups
 import net.minecraft.core.registries.Registries
@@ -15,7 +15,8 @@ import thedarkcolour.kotlinforforge.neoforge.forge.MOD_BUS
 @Mod(MOD_ID)
 object SimpleTMs {
     init {
-        init()
+        SimpleTMs.preinit()
+        SimpleTMs.init()
         registerItemGroups()
         if (FMLEnvironment.dist == Dist.CLIENT) {
             SimpleTMsClient.init()
