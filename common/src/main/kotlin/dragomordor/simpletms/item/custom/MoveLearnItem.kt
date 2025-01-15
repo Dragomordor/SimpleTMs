@@ -1,12 +1,13 @@
 package dragomordor.simpletms.item.custom
 
-import com.cobblemon.mod.common.api.moves.MoveTemplate
-import com.cobblemon.mod.common.api.moves.Moves
+import com.cobblemon.mod.common.api.moves.*
 import com.cobblemon.mod.common.api.text.text
 import com.cobblemon.mod.common.pokemon.Pokemon
-import com.cobblemon.mod.common.util.giveOrDropItemStack
 import dragomordor.simpletms.item.SimpleTMsItem
 import dragomordor.simpletms.item.api.PokemonSelectingItemNonBattle
+import dragomordor.simpletms.util.simpletmsResource
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvents
@@ -14,8 +15,11 @@ import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
+import net.minecraft.core.Registry
+import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.sounds.SoundSource
+
 
 class MoveLearnItem(
     val moveName: String,
@@ -23,15 +27,13 @@ class MoveLearnItem(
     val singleUse: Boolean,
 ) : SimpleTMsItem(Properties().stacksTo(16)), PokemonSelectingItemNonBattle {
 
-    val moveToTeach = Moves.getByName(moveName)
+    // ------------------------------------------------------------------
+    // Override methods from PokemonSelectingItemNonBattle
+    // ------------------------------------------------------------------
 
     // TMs/TRs can be used on the Pokémon itself under certain conditions
-    override fun canUseOnPokemon(pokemon: Pokemon) = true
-
-    // ------------------------------------------------------------------
-    // Overriden methods from PokemonAndMoveSelectingItemNonBattle
-    // ------------------------------------------------------------------
-
+    override fun canUseOnPokemon(pokemon: Pokemon) = canPokemonLearnMove(pokemon)
+    // override fun canUseOnPokemon(pokemon: Pokemon) = true
 
     // Once the TM can be used on the Pokémon, apply the move to the Pokémon
     override fun applyToPokemon(
@@ -39,22 +41,45 @@ class MoveLearnItem(
         stack: ItemStack,
         pokemon: Pokemon) : InteractionResultHolder<ItemStack> {
 
-        // Check if the Pokémon can learn the move
+        // (0) Get the moveName from class, not interface (this)
+        val moveName = this.moveName
+        val moveType = this.moveType
+        val singleUse = this.singleUse
+        val moveToTeach = Moves.getByName(moveName)
+
+        // (2) Check if the Pokémon can learn the move
         if (!canPokemonLearnMove(pokemon, moveToTeach)) {
             // Pokémon can't learn the move, so do nothing
             // Display the failure message
             player.displayClientMessage(FailureMessage.getFailureMessage().text(), true)
             return InteractionResultHolder.fail(stack)
         } else {
-            // If the Pokémon can learn the move, teach it the move
+            // (4) If the Pokémon can learn the move, teach it the move
+            val currentMoves = pokemon.moveSet
+            val benchedMoves = pokemon.benchedMoves
 
-            // Teach the move on the TM/TR to the Pokémon adn put it either in a empty slot in the move set or into benched moves if the move set is full
-            // TODO: Implement this
-            // For now, give the player a restone for testing
-            player.giveOrDropItemStack(ItemStack(Items.REDSTONE))
+                // Put move into the move set if there is an empty slot
+            if (currentMoves.hasSpace()) {
+                moveToTeach.let {
+                    if (it != null) {
+                        currentMoves.add(it.create())
+                    }
+                }
+            } else {
+                // Put move into benched moves if there is no empty slot
+                if (moveToTeach != null) {
+                    BenchedMove(moveToTeach, 0).let { benchedMoves.add(it) }
+                }
+            }
+
+            // Success message
+            player.displayClientMessage(
+                (pokemon.species.name + " " + "success.simpletms.learned" + " " + moveToTeach?.name).text(), true
+            )
 
             // Success sound and stack shrink
-            player.playSound(SoundEvents.PLAYER_LEVELUP, 1.0F, 1.0F)
+            player.playNotifySound(SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 1.0F, 1.0F)
+
             // Shrink the stack if player is not in creative mode
             if (!player.isCreative) {
                 // If the item is single use, shrink the stack
@@ -62,11 +87,13 @@ class MoveLearnItem(
                     stack.shrink(1)
                 }
             }
+
+            // TODO: From config -- add cooldown to the item
+
             // Success
             return InteractionResultHolder.success(stack)
         }
     }
-
 
     override fun use(world: Level, user: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
         if (world is ServerLevel && user is ServerPlayer) {
@@ -76,16 +103,51 @@ class MoveLearnItem(
         return super<SimpleTMsItem>.use(world, user, hand)
     }
 
-    private fun canPokemonLearnMove(pokemon: Pokemon, move: MoveTemplate?): Boolean {
+    // ------------------------------------------------------------------
+    // Custom Functions
+    // ------------------------------------------------------------------
 
-        // If pokemon can't learn move because of on the checks, the failure message is set using this setFailureMessage() method
-        // Like so --> FailureMessage.setFailureMessage("")
-        // Use lang file to get the failure message -- eg. "error.not_learnable.not_in_move_set"
+    private fun canPokemonLearnMove(pokemon: Pokemon, moveToTeach: MoveTemplate?): Boolean {
 
+        // (2.1) Get current move set and benched moves of the pokemon
+        val currentMoves = pokemon.moveSet
+        val benchedMoves = pokemon.benchedMoves
 
-        // TODO: Implement this
+        // (2.2) TODO: Get cooldown of TM from config and fail if item is on cooldown
+
+        // (2.3) Check if the moveToTeach is a valid move
+        if (moveToTeach == null) {
+            FailureMessage.setFailureMessage("error.simpletms.not_learnable.not_valid_move")
+            return false
+        }
+        // (2.4) Check if the move is already in the move set
+        if (currentMoves.getMoves().stream().anyMatch { it.name == moveToTeach.name }) {
+            FailureMessage.setFailureMessage("error.simpletms.not_learnable.already_knows_move")
+            return false
+        }
+        // (2.5) Check if the move is already in the benched moves
+
+            // Check if the move is in the benched moves
+        if (benchedMoveContainsMove(benchedMoves, moveToTeach)) {
+            FailureMessage.setFailureMessage("error.simpletms.not_learnable.already_knows_move")
+            return false
+        }
+        // (2.6) Check if the move is a valid move for the Pokémon
+        if (!inPokemonMoveList(pokemon, moveToTeach)) {
+            FailureMessage.setFailureMessage("error.simpletms.not_learnable.not_in_learnable_moves")
+            return false
+        }
+        // (3) If all checks pass, return true
         return true
     }
+
+    // Wrapper for canPokemonLearnMove with only pokemon as input
+    fun canPokemonLearnMove(pokemon: Pokemon): Boolean {
+        val moveName = this.moveName
+        val move = Moves.getByNameOrDummy(moveName)
+        return canPokemonLearnMove(pokemon, move)
+    }
+
 
     class FailureMessage() {
         companion object {
@@ -98,6 +160,39 @@ class MoveLearnItem(
                 this.message = message
             }
         }
+    }
+
+    // Function to check if pokemon is capable of learning this specific move
+    fun inPokemonMoveList(pokemon: Pokemon, move: MoveTemplate): Boolean {
+
+        // (1) TODO: From config -- check if any pokemon can learn any move
+
+        // (2) Check if the move is in the pokemons tm move list
+        if (pokemon.form.moves.tmMoves.contains(move)) {
+            return true
+        }
+        // (3) Check if the move is in the pokemons tutor move list
+            // TODO: From config -- check if TMs can be used for tutor moves
+        if (pokemon.form.moves.tutorMoves.contains(move)) {
+            return true
+        }
+        // (4) Check if the move is in the pokemons egg move list
+            // TODO: From config -- check if TMs can be used for egg moves
+        if (pokemon.form.moves.eggMoves.contains(move)) {
+            return true
+        }
+        // By default, return false
+        return false
+    }
+
+    // Function to check if a move is in the benched moves
+    fun benchedMoveContainsMove(benchedMoves: BenchedMoves, move: MoveTemplate): Boolean {
+        for (benchedMove in benchedMoves) {
+            if (benchedMove.moveTemplate == move) {
+                return true
+            }
+        }
+        return false
     }
 
 }

@@ -1,5 +1,7 @@
 package dragomordor.simpletms.util
 
+import com.cobblemon.mod.common.api.moves.MoveTemplate
+import com.cobblemon.mod.common.api.moves.Moves
 import dragomordor.simpletms.SimpleTMs
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -24,3 +26,4 @@ fun loadMoveLearnItemsFromJson(jsonFilePath: String): List<MoveLearnItemDefiniti
 
     return itemDefinitions
 }
+

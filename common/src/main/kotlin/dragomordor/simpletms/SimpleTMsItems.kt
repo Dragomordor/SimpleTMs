@@ -5,8 +5,11 @@ import dev.architectury.registry.registries.RegistrySupplier
 import dragomordor.simpletms.item.custom.BlankTmItem
 import dragomordor.simpletms.item.custom.MoveLearnItem
 import dragomordor.simpletms.util.loadMoveLearnItemsFromJson
+import dragomordor.simpletms.util.simpletmsResource
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.item.Item
 import net.minecraft.core.registries.Registries
+import net.minecraft.world.item.ItemStack
 
 
 @Suppress("unused", "SameParameterValue")
@@ -15,6 +18,10 @@ object SimpleTMsItems {
     internal val ITEMS: DeferredRegister<Item> = DeferredRegister.create(SimpleTMs.MOD_ID, Registries.ITEM)
     val defaultMoveJsonPath = "simpletms/movelearnitems/default.json"
     val customMoveJsonPath = "simpletms/movelearnitems/custom.json"
+
+    // TODO: Separate Z type Moves
+    // TODO: hiddenpower moves should be removed
+
 
     // TODO: Tags for tm and tr items
     val TM_ITEMS = mutableListOf<RegistrySupplier<MoveLearnItem>>()
@@ -80,7 +87,6 @@ object SimpleTMsItems {
     // Register all mod items
     fun registerModItems() {
         SimpleTMs.LOGGER.info("Register Mod Items for " + SimpleTMs.MOD_ID)
-        // TODO: This is a test
         // Register items from JSON
             // Default moves
         registerMoveLearnItemsFromJSON(defaultMoveJsonPath)
@@ -91,5 +97,17 @@ object SimpleTMsItems {
         ITEMS.register()
     }
 
+    fun getItemStackFromName(name: String): ItemStack {
+        val identifier = simpletmsResource(name)
+        val item = BuiltInRegistries.ITEM.get(identifier)
+        val itemStack = ItemStack(item)
+        return itemStack
+    }
+
+    fun getItemFromName(name: String): Item {
+        val identifier = simpletmsResource(name)
+        val item = BuiltInRegistries.ITEM.get(identifier)
+        return item
+    }
 
 }
