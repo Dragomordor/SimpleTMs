@@ -4,10 +4,10 @@ import com.cobblemon.mod.common.api.moves.Move
 import com.cobblemon.mod.common.pokemon.Pokemon
 import com.cobblemon.mod.common.util.giveOrDropItemStack
 import dragomordor.simpletms.SimpleTMs
-import dragomordor.simpletms.SimpleTMsItems
 import dragomordor.simpletms.item.SimpleTMsItem
 import dragomordor.simpletms.item.api.PokemonAndMoveSelectingItemNonBattle
 import dragomordor.simpletms.util.fromLang
+import dragomordor.simpletms.util.getTMorTRItemFromMove
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
@@ -15,9 +15,7 @@ import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
-import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
@@ -34,10 +32,10 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
     override fun canUseOnMove(move: Move) = canUseBlankOnMove(isTR);
 
     override fun applyToPokemon(player: ServerPlayer, stack: ItemStack, pokemon: Pokemon, move: Move) {
-        val singleUse = this.isTR
+        val isTR = this.isTR
 
         // (1) Check if config is allowed
-        if (!canUseBlank(singleUse)) {
+        if (!canUseBlank(isTR)) {
             // Display the failure message
             player.displayClientMessage(FailureMessage.getFailureMessage(), true)
             return
@@ -59,10 +57,8 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
         }
 
         // (3) Give the item to the player
-        val newMoveLearnItem = getTMorTRItemFromMove(move, singleUse)
+        val newMoveLearnItem = getTMorTRItemFromMove(move, isTR)
         player.giveOrDropItemStack(ItemStack(newMoveLearnItem))
-
-
 
         // Success sound and shrink the stack
         player.playNotifySound(SoundEvents.NOTE_BLOCK_PLING.value(), SoundSource.PLAYERS, 1.0F, 1.0F)
@@ -70,13 +66,13 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
         // Damage the stack if player is not in creative mode
         if (!player.isCreative) {
             // If the item is single use, shrink the stack
-            if (singleUse) {
+            if (isTR) {
                 stack.shrink(1)
             }
         }
 
         // Put item on cooldown if applicable
-        if (!player.isCreative && !singleUse && stack.count > 0 && cooldownTicks > 0) {
+        if (!player.isCreative && !isTR && stack.count > 0 && cooldownTicks > 0) {
             player.cooldowns.addCooldown(this, cooldownTicks)
         }
     }
@@ -97,27 +93,21 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
     // Helper methods
     // ------------------------------------------------------------------
 
-    fun getTMorTRItemFromMove(move: Move, singleUse: Boolean): Item {
-        // Get prefix for TM or TR
-        val prefix = if (singleUse) "tr_" else "tm_"
-        val moveName = move.name
-        val newMoveLearnItem = SimpleTMsItems.getItemFromName(prefix + moveName)
-        return newMoveLearnItem
-    }
 
 
-    private fun canUseBlankOnMove(singleUse: Boolean): Boolean {
-        val canUseBlank = canUseBlank(singleUse)
+
+    private fun canUseBlankOnMove(isTR: Boolean): Boolean {
+        val canUseBlank = canUseBlank(isTR)
         // TODO: Add excluded moves here?
         return canUseBlank
     }
 
-    private fun canUseBlank(singleUse: Boolean): Boolean {
-        if (!SimpleTMs.config.blankTRsUsable && singleUse) {
+    private fun canUseBlank(isTR: Boolean): Boolean {
+        if (!SimpleTMs.config.blankTRsUsable && isTR) {
             FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID, "error.not_usable.blank_trs_disabled"))
             return false
         }
-        if (!SimpleTMs.config.blankTMsUsable && !singleUse) {
+        if (!SimpleTMs.config.blankTMsUsable && !isTR) {
             FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID, "error.not_usable.blank_tms_disabled"))
             return false
         }

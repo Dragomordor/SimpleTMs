@@ -2,9 +2,9 @@ package dragomordor.simpletms
 
 import com.cobblemon.mod.common.config.constraint.IntConstraint
 import com.mojang.logging.LogUtils.getLogger
-import dragomordor.simpletms.config.FloatConstraint
+import dragomordor.simpletms.config.DoubleConstraint
 import dragomordor.simpletms.config.SimpleTMsConfig
-import net.minecraft.server.MinecraftServer
+import dragomordor.simpletms.events.MoveLearnItemDropHandler
 import org.slf4j.Logger
 import java.io.File
 import java.io.FileReader
@@ -29,6 +29,7 @@ object SimpleTMs {
     fun init() {
         LOGGER.info("Using SimpleTMs ($VERSION)")
         SimpleTMsItems.registerModItems()
+        MoveLearnItemDropHandler.registerListeners()
     }
 
 
@@ -66,7 +67,7 @@ object SimpleTMs {
                                 field.set(config, value)
                             }
                         }
-                        is FloatConstraint -> {
+                        is DoubleConstraint -> {
                             var value = field.get(config)
                             if (value is Double) {
                                 value = value.coerceIn(it.min, it.max)

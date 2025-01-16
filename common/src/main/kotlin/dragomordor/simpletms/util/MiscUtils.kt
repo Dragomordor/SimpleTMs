@@ -1,11 +1,14 @@
 package dragomordor.simpletms.util
 
+import com.cobblemon.mod.common.api.moves.Move
 import com.cobblemon.mod.common.util.asTranslated
 import dragomordor.simpletms.SimpleTMs
+import dragomordor.simpletms.SimpleTMsItems
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.item.Item
 import java.io.InputStreamReader
 
 fun simpletmsResource(path: String) = ResourceLocation.fromNamespaceAndPath(SimpleTMs.MOD_ID, path)
@@ -45,4 +48,12 @@ class FailureMessage() {
             this.message = message
         }
     }
+}
+
+fun getTMorTRItemFromMove(move: Move, isTR: Boolean): Item {
+    // Get prefix for TM or TR
+    val prefix = if (isTR) "tr_" else "tm_"
+    val moveName = move.name
+    val newMoveLearnItem = SimpleTMsItems.getItemFromName(prefix + moveName)
+    return newMoveLearnItem
 }

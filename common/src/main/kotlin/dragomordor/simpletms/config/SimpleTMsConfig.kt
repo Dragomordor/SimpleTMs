@@ -45,11 +45,11 @@ class SimpleTMsConfig {
 
     @NodeCategory(Category.Cooldown)
     @IntConstraint(min = 0, max = 51840000)
-    var TMCoolDownTicks: Int = 6000
+    var TMCoolDownTicks: Int = 500
 
     @NodeCategory(Category.Cooldown)
     @IntConstraint(min = 0, max = 51840000)
-    var blankTMCooldownTicks: Int = 6000
+    var blankTMCooldownTicks: Int = 500
 
     @NodeCategory(Category.Stacks)
     @IntConstraint(min = 0, max = 64)
@@ -60,27 +60,36 @@ class SimpleTMsConfig {
     var TRStackSize: Int = 16
 
     @NodeCategory(Category.DropRate)
-    @FloatConstraint(min = 0.0, max = 1.0)
-    var TRDropRate: Float = 0.1f
+    @DoubleConstraint(min = 0.0, max = 1.0)
+    var DropRateTR: Double = 0.1
 
     @NodeCategory(Category.DropRate)
-    @FloatConstraint(min = 0.0, max = 1.0)
-    var TMDropRate: Float = 0.001f
+    @DoubleConstraint(min = 0.0, max = 1.0)
+    var DropRateTMtoTRRatio: Double = 0.1
 
     @NodeCategory(Category.DropRate)
-    var pokemonDropTMorTRofType: Boolean = true
+    var DropAny: Boolean = false
 
     @NodeCategory(Category.DropRate)
-    var pokemonDropTMorTRfromLevelList: Boolean = true
+    var DropPrimaryType: Boolean = false
 
     @NodeCategory(Category.DropRate)
-    var pokemonDropTMorTRfromTMMoveList: Boolean = true
+    var DropSecondaryType: Boolean = false
 
     @NodeCategory(Category.DropRate)
-    var pokemonDropTMorTRfromTutorMoveList: Boolean = true
+    var DropFromLevelList: Boolean = true
 
     @NodeCategory(Category.DropRate)
-    var pokemonDropTMorTRfromEggMoveList: Boolean = true
+    var DropAnyLevelMoveFromLevelList = false
+
+    @NodeCategory(Category.DropRate)
+    var DropFromTmMoveList: Boolean = true
+
+    @NodeCategory(Category.DropRate)
+    var DropFromTutorMoveList: Boolean = true
+
+    @NodeCategory(Category.DropRate)
+    var DropFromEggMoveList: Boolean = true
 }
 
 
@@ -98,4 +107,4 @@ enum class Category {
     Stacks
 }
 
-annotation class FloatConstraint(val min: Double, val max: Double)
+annotation class DoubleConstraint(val min: Double, val max: Double)

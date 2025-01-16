@@ -38,7 +38,7 @@ object SimpleTMsItems {
     // Register Item Functions
     // ------------------------------------------------------------
 
-    fun registerBlankTmItem(name: String, isTR: Boolean): RegistrySupplier<BlankTmItem> {
+    private fun registerBlankTmItem(name: String, isTR: Boolean): RegistrySupplier<BlankTmItem> {
         if (isTR) {
             val settings: Properties =
                 Properties().
@@ -58,7 +58,7 @@ object SimpleTMsItems {
         }
     }
 
-    fun registerMoveLearnItem(name: String, moveName: String, moveType: String, isTR: Boolean): RegistrySupplier<MoveLearnItem> {
+    private fun registerMoveLearnItem(name: String, moveName: String, moveType: String, isTR: Boolean): RegistrySupplier<MoveLearnItem> {
         if (isTR) {
             val settings: Properties =
                 Properties().
@@ -80,7 +80,7 @@ object SimpleTMsItems {
         }
     }
 
-    fun registerMoveLearnItemsFromJSON(jsonFilePath: String) {
+    private fun registerMoveLearnItemsFromJSON(jsonFilePath: String) {
         // Load JSON file from resource directory
         val itemDefinitions = loadMoveLearnItemsFromJson(jsonFilePath)
         // Register TMs
@@ -130,6 +130,7 @@ object SimpleTMsItems {
     fun getItemFromName(name: String): Item {
         val identifier = simpletmsResource(name)
         val item = BuiltInRegistries.ITEM.get(identifier)
+
         return item
     }
 

@@ -42,7 +42,7 @@ class MoveLearnItem(
 
         // (0) Get the moveName from class, not interface (this)
         val moveName = this.moveName
-        val singleUse = this.isTR
+        val isTR = this.isTR
 
         // Get the move to teach
         val moveToTeach = Moves.getByName(moveName)
@@ -103,13 +103,13 @@ class MoveLearnItem(
             // Damage the stack if player is not in creative mode
             if (!player.isCreative) {
                 // If the item is single use, shrink the stack
-                if (singleUse) {
+                if (isTR) {
                     stack.shrink(1)
                 }
             }
 
             // Put item on cooldown if applicable
-            if (!player.isCreative && !singleUse && stack.count > 0 && cooldownTicks > 0) {
+            if (!player.isCreative && !isTR && stack.count > 0 && cooldownTicks > 0) {
                 player.cooldowns.addCooldown(this, cooldownTicks)
             }
 
@@ -170,14 +170,14 @@ class MoveLearnItem(
 
     // Wrapper for canPokemonLearnMove with only pokemon as input
     fun canPokemonLearnMove(pokemon: Pokemon): Boolean {
-        val singleUse = this.isTR
+        val isTR = this.isTR
 
         // First check if config allows TMs and TRs
-        if (!SimpleTMs.config.TMsUsable && !singleUse) {
+        if (!SimpleTMs.config.TMsUsable && !isTR) {
             FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_usable.tms_disabled"))
             return false
         }
-        if (!SimpleTMs.config.TRsUsable && singleUse) {
+        if (!SimpleTMs.config.TRsUsable && isTR) {
             FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_usable.trs_disabled"))
             return false
         }
@@ -205,8 +205,24 @@ class MoveLearnItem(
             return true
         }
         // (4) Check if the move is in the pokemons egg move list
-        if (SimpleTMs.config.eggMovesLearnable && pokemon.form.moves.eggMoves.contains(move)) {
-            return true
+            // TODO: Check if egg move is in pokemons egg move list or in its pre-evolutions egg move list
+        if (SimpleTMs.config.eggMovesLearnable) {
+            // Current pokemon has the move as an egg move
+            if (pokemon.form.moves.eggMoves.contains(move)) {
+                return true
+            }
+            var preEvolution = pokemon.preEvolution
+            if (preEvolution == null) {
+                return false
+            }
+            while (preEvolution != null) {
+                if (preEvolution.form.moves.eggMoves.contains(move)) {
+                    return true
+                }
+                preEvolution = preEvolution.form.preEvolution
+            }
+            // if pre-evolution is null, but the move is not in the egg moves, do not learn the move
+            return false
         }
         // (5) Check if the move is in the pokemons level up move list
         if (SimpleTMs.config.levelMovesLearnable) {
@@ -233,7 +249,6 @@ class MoveLearnItem(
         }
         return false
     }
-
 }
 
 
