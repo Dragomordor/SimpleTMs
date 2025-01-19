@@ -4,20 +4,35 @@ import com.cobblemon.mod.common.Cobblemon
 import com.cobblemon.mod.common.api.Priority
 import com.cobblemon.mod.common.api.events.CobblemonEvents
 import com.cobblemon.mod.common.api.events.battles.BattleFaintedEvent
+import com.cobblemon.mod.common.api.events.pokemon.PokemonFaintedEvent
 import com.cobblemon.mod.common.api.moves.MoveTemplate
 import com.cobblemon.mod.common.api.moves.Moves
+import com.cobblemon.mod.common.entity.pokemon.PokemonEntity
 import com.cobblemon.mod.common.pokemon.Pokemon
 import com.cobblemon.mod.common.util.giveOrDropItemStack
+import com.cobblemon.mod.common.util.ifIsType
+import dev.architectury.event.EventResult
+import dev.architectury.event.events.common.EntityEvent
 import dragomordor.simpletms.SimpleTMs
 import dragomordor.simpletms.SimpleTMsItems.getTMorTRItemFromMove
+import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ItemStack
+
 
 object MoveLearnItemDropHandler : EventHandler {
 
     override fun registerListeners() {
         CobblemonEvents.BATTLE_FAINTED.subscribe(Priority.NORMAL, ::onBattleFainted)
+        EntityEvent.LIVING_DEATH.register(EntityEvent.LivingDeath { entity: LivingEntity, source: DamageSource -> onEntityFainted(entity, source) })
     }
 
+    // ------------------------------------------------------------
+    // Event Handlers
+    // ------------------------------------------------------------
+
+    // When a pokemon faints in battle, drop a TM or TR
     fun onBattleFainted(event: BattleFaintedEvent) {
         // Get all players involved in the battle
         val players = event.battle.players
@@ -30,38 +45,83 @@ object MoveLearnItemDropHandler : EventHandler {
 
             // Make sure killed pokemon is a wild pokemon
             if (!killedPokemon.isPlayerOwned()) {
-
-                // Get config options
-                val DropRateTR = SimpleTMs.config.DropRateTR
-                val DropRateTMtoTRRatio = SimpleTMs.config.DropRateTMtoTRRatio
-
-                // Get an applicable move template from the killed pokemon
-                val droppedMoveTemplate = getRandomApplicableMoveTemplate(killedPokemon)
-
-                // Determine whether to drop a TM or TR
-                val randomDouble = Math.random().toDouble()
-                println("Random double: $randomDouble") // TODO: DEBUG
-                if (randomDouble < (DropRateTR*DropRateTMtoTRRatio)) {
-                    // Drop a TM
-                    val droppedTM = getTMorTRItemFromMove(droppedMoveTemplate.create(), false)
-                    val droppedTMStack = ItemStack(droppedTM)
-                    // TODO: add message in battle chat
-                    player.giveOrDropItemStack(droppedTMStack, true)
-
-                } else if (randomDouble < DropRateTR) {
-                    // Drop a TR
-                    val droppedTR = getTMorTRItemFromMove(droppedMoveTemplate.create(), true)
-                    val droppedTRStack = ItemStack(droppedTR)
-                    // TODO: add message in battle chat
-                    player.giveOrDropItemStack(droppedTRStack, true)
-                } else {
-                    // Drop nothing
-                    return
-                }
+                dropMoveLearnItemOnPlayer(killedPokemon, player, true)
             }
         }
         return
     }
+
+    // When pokemon faints outside of battle because of player, drop TM or TR if config allows
+    fun onPokemonFainted(killedPokemon: Pokemon, player: ServerPlayer) {
+        // Check if config allows dropping items when pokemon faints
+        if (!SimpleTMs.config.DropOutsideOfBattle) {
+            return
+        }
+
+        // Make sure killed pokemon is a wild pokemon
+        if (!killedPokemon.isPlayerOwned()) {
+            // Thread.sleep(10)
+            dropMoveLearnItemOnPlayer(killedPokemon, player, false)
+        }
+        return
+    }
+
+    fun onEntityFainted(entity: LivingEntity, source: DamageSource): EventResult? {
+
+        // If entity is pokemon and source is player, activate onPokemonFainted.
+        // Either way, return normal behaviour of event
+        if (entity::class == PokemonEntity::class && source.entity?.javaClass == ServerPlayer::class.java) {
+            val player = source.entity as ServerPlayer
+            onPokemonFainted((entity as PokemonEntity).pokemon, player)
+        }
+
+        // Return normal behaviour of event
+        return EventResult.pass()
+    }
+
+    // ------------------------------------------------------------
+    // Helper Functions
+    // ------------------------------------------------------------
+
+    fun dropMoveLearnItemOnPlayer(killedPokemon: Pokemon, player: ServerPlayer, inBattle: Boolean) {
+        // Get config options
+
+        var DropRateTR = 0.0
+        var DropRateTMtoTRRatio = 0.0
+        if (inBattle) {
+            // If in battle, use in battle Drop rates
+            DropRateTR = SimpleTMs.config.DropRateTRInBattle
+            DropRateTMtoTRRatio = SimpleTMs.config.DropRateTMtoTRRatioInBattle
+        } else {
+            // If outside of battle, use outside of battle Drop rates
+            DropRateTR = SimpleTMs.config.DropRateTROutsideOfBattle
+            DropRateTMtoTRRatio = SimpleTMs.config.DropRateTMtoTRRatioOutsideOfBattle
+        }
+        // Get an applicable move template from the killed pokemon
+        // TODO: Change so move can be selected from list of 3/4 random moves (amount from config) -- only inside battle. Outside of battle, config whether screen is shown
+        val droppedMoveTemplate = getRandomApplicableMoveTemplate(killedPokemon)
+
+        // Determine whether to drop a TM or TR
+        val randomDouble = Math.random().toDouble()
+        if (randomDouble < (DropRateTR * DropRateTMtoTRRatio)) {
+            // Drop a TM
+            val droppedTM = getTMorTRItemFromMove(droppedMoveTemplate.create(), false)
+            val droppedTMStack = ItemStack(droppedTM)
+            // TODO: add message in battle chat
+            player.giveOrDropItemStack(droppedTMStack, true)
+
+        } else if (randomDouble < DropRateTR) {
+            // Drop a TR
+            val droppedTR = getTMorTRItemFromMove(droppedMoveTemplate.create(), true)
+            val droppedTRStack = ItemStack(droppedTR)
+            // TODO: add message in battle chat
+            player.giveOrDropItemStack(droppedTRStack, true)
+        } else {
+            // Drop nothing
+            return
+        }
+    }
+
 
 
     fun getRandomApplicableMoveTemplate(pokemon: Pokemon): MoveTemplate {

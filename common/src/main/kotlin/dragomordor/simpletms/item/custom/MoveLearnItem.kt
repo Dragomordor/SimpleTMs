@@ -1,12 +1,22 @@
 package dragomordor.simpletms.item.custom
 
+import com.cobblemon.mod.common.Cobblemon
 import com.cobblemon.mod.common.api.moves.*
+import com.cobblemon.mod.common.api.pokemon.PokemonSpecies
+import com.cobblemon.mod.common.api.pokemon.evolution.PreEvolution
+import com.cobblemon.mod.common.api.pokemon.moves.Learnset
+import com.cobblemon.mod.common.api.text.text
 import com.cobblemon.mod.common.pokemon.Pokemon
+import com.cobblemon.mod.common.pokemon.Species
+import com.cobblemon.mod.common.util.asTranslated
 import dragomordor.simpletms.SimpleTMs
 import dragomordor.simpletms.item.SimpleTMsItem
 import dragomordor.simpletms.item.api.PokemonSelectingItemNonBattle
 import dragomordor.simpletms.util.FailureMessage
 import dragomordor.simpletms.util.fromLang
+import net.minecraft.client.gui.screens.Screen
+import net.minecraft.core.component.DataComponentMap
+import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvents
@@ -17,6 +27,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.entity.EquipmentSlot
+import net.minecraft.world.item.TooltipFlag
 
 
 class MoveLearnItem(
@@ -105,6 +116,8 @@ class MoveLearnItem(
                 // If the item is single use, shrink the stack
                 if (isTR) {
                     stack.shrink(1)
+                } else {
+                    stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND)
                 }
             }
 
@@ -136,16 +149,12 @@ class MoveLearnItem(
         val benchedMoves = pokemon.benchedMoves
         val pokemonTranslateName = pokemon.species.translatedName
 
-
-        // (2.2) TODO: Get cooldown of TM from config and fail if item is on cooldown
-
         // (2.3) Check if the moveToTeach is a valid move
         if (moveToTeach == null) {
             FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_learnable.not_valid_move"))
             return false
         }
         val moveTranslatedName = moveToTeach.displayName
-
 
         // (2.4) Check if the move is already in the move set
         if (currentMoves.getMoves().stream().anyMatch { it.name == moveToTeach.name }) {
@@ -193,6 +202,8 @@ class MoveLearnItem(
     // Function to check if pokemon is capable of learning this specific move
     fun inPokemonMoveList(pokemon: Pokemon, move: MoveTemplate): Boolean {
 
+        // TODO: change to add all learnable moves to a list and check if move is in list
+
         if (SimpleTMs.config.anyMovesLearnable) {
             return true
         }
@@ -209,34 +220,32 @@ class MoveLearnItem(
         if (SimpleTMs.config.eggMovesLearnable) {
             // Current pokemon has the move as an egg move
             if (pokemon.form.moves.eggMoves.contains(move)) {
+                println("Move is in egg moves")
                 return true
             }
-            var preEvolution = pokemon.preEvolution
-            if (preEvolution == null) {
-                return false
-            }
-            while (preEvolution != null) {
+            // Check if the move is in the egg moves any pre-evolution
+            var preEvolution = pokemon.form.preEvolution
+            for (i in 0 until 4) {
+                if (preEvolution?.species == null) {
+                    return false
+                }
                 if (preEvolution.form.moves.eggMoves.contains(move)) {
                     return true
                 }
                 preEvolution = preEvolution.form.preEvolution
             }
-            // if pre-evolution is null, but the move is not in the egg moves, do not learn the move
-            return false
         }
+
         // (5) Check if the move is in the pokemons level up move list
         if (SimpleTMs.config.levelMovesLearnable) {
             // Get all level moves of the pokemon
-            val levelMoves = pokemon.form.moves.levelUpMoves //  MutableMap<Int, MutableList<MoveTemplate>>
-            // Check if the move is in the level moves
-            for (level in levelMoves.keys) {
-                if (levelMoves[level]!!.contains(move)) {
-                    return true
-                }
+            // TODO: Check if level moves are correctly learned
+            val levelMoves = pokemon.form.moves.getLevelUpMovesUpTo(Cobblemon.config.maxPokemonLevel)
+            if (levelMoves.contains(move)) {
+                return true
             }
         }
 
-        // By default, return false
         return false
     }
 
@@ -248,6 +257,32 @@ class MoveLearnItem(
             }
         }
         return false
+    }
+
+
+
+    // ------------------------------------------------------------------
+    // Hover Text
+    // ------------------------------------------------------------------
+
+    override fun appendHoverText(
+        itemStack: ItemStack,
+        tooltipContext: TooltipContext,
+        list: MutableList<Component>,
+        tooltipFlag: TooltipFlag
+    ) {
+
+        // Normal Text
+
+        if (Screen.hasShiftDown()) {
+            // Shift is pressed
+            if (Screen.hasControlDown()) {
+                // Shift + Control is pressed
+                    // Add the move name just for easier searching in creative and jei -- hidden
+                // list.add(this.moveName.text())
+            }
+        }
+        super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag)
     }
 }
 

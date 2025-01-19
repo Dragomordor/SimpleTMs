@@ -1,24 +1,15 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "category": "misc",
-    "pattern": [
-      "RTR",
-      "TXT",
-      "RTR"
-    ],
-    "key": {
-      "R": {
-        "item": "minecraft:quartz"
-      },
-      "T": {
-        "item": "minecraft:iron_ingot"
-      },
-      "X": {
-        "item": "minecraft:nether_star"
-      }
-    },
-    "result": {
-      "id": "simpletms:tm_blank",
-      "count": 1
-    }
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "cobblemon:upgrade"
+  },
+  "base": {
+    "item": "simpletms:tr_blank"
+  },
+  "addition": {
+    "item": "minecraft:echo_shard"
+  },
+  "result": {
+    "id": "simpletms:tm_blank"
+  }
 }

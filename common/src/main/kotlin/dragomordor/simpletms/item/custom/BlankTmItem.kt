@@ -15,6 +15,7 @@ import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
+import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
@@ -75,6 +76,8 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
             // If the item is single use, shrink the stack
             if (isTR) {
                 stack.shrink(1)
+            } else {
+                stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND)
             }
         }
 

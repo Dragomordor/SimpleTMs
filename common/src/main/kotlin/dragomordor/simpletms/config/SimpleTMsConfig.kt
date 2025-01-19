@@ -43,27 +43,42 @@ class SimpleTMsConfig {
 
     @NodeCategory(Category.Cooldown)
     @IntConstraint(min = 0, max = 51840000)
-    var TMCoolDownTicks: Int = 500
+    var TMCoolDownTicks: Int = 0
 
     @NodeCategory(Category.Cooldown)
     @IntConstraint(min = 0, max = 51840000)
-    var blankTMCooldownTicks: Int = 500
+    var blankTMCooldownTicks: Int = 0
 
-    @NodeCategory(Category.Stacks)
-    @IntConstraint(min = 0, max = 64)
-    var TMStackSize: Int = 1
+    @NodeCategory(Category.ItemProperties)
+    @IntConstraint(min = 0, max = 1024)
+    var blankTMBaseDurability: Int = 1
 
-    @NodeCategory(Category.Stacks)
+    @NodeCategory(Category.ItemProperties)
+    @IntConstraint(min = 0, max = 1024)
+    var TMBaseDurability: Int = 32
+
+    @NodeCategory(Category.DropRate)
+    var DropOutsideOfBattle: Boolean = true
+
+    @NodeCategory(Category.ItemProperties)
     @IntConstraint(min = 0, max = 64)
     var TRStackSize: Int = 16
 
     @NodeCategory(Category.DropRate)
     @DoubleConstraint(min = 0.0, max = 1.0)
-    var DropRateTR: Double = 0.1
+    var DropRateTRInBattle: Double = 1.0
 
     @NodeCategory(Category.DropRate)
     @DoubleConstraint(min = 0.0, max = 1.0)
-    var DropRateTMtoTRRatio: Double = 0.1
+    var DropRateTMtoTRRatioInBattle: Double = 0.5
+
+    @NodeCategory(Category.DropRate)
+    @DoubleConstraint(min = 0.0, max = 1.0)
+    var DropRateTROutsideOfBattle: Double = 1.0
+
+    @NodeCategory(Category.DropRate)
+    @DoubleConstraint(min = 0.0, max = 1.0)
+    var DropRateTMtoTRRatioOutsideOfBattle: Double = 0.5
 
     @NodeCategory(Category.DropRate)
     var DropAny: Boolean = false
@@ -88,6 +103,8 @@ class SimpleTMsConfig {
 
     @NodeCategory(Category.DropRate)
     var DropFromEggMoveList: Boolean = true
+
+
 }
 
 
@@ -102,7 +119,7 @@ enum class Category {
     Usable,
     DropRate,
     Cooldown,
-    Stacks
+    ItemProperties
 }
 
 annotation class DoubleConstraint(val min: Double, val max: Double)

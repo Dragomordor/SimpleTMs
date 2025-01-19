@@ -41,14 +41,15 @@ data = data[~data['moveName'].isin(ztype_data['moveName'])]
 # --------------------------------
 
 # Create a list to store the data
-cobblemon_moves = []
+default_moves = []
 
 # Loop through the data and store it in the dictionary
 for index, row in data.iterrows():
-    cobblemon_moves.append({
+    default_moves.append({
         "moveName": row['moveName'],
         "moveType": row['moveType'],
         "Name": row['Name'],
+        "Category": row['Category'],
     })
 
 
@@ -101,28 +102,17 @@ custom_json_path = r"resources/simpletms/movelearnitems/custom.json"
 with open(custom_json_path, 'w') as json_file:
     json.dump([], json_file, indent=4)
 
-print("SUCCESS: (1/3) MoveLearnItems default.json JSON file created successfully!")
+print("SUCCESS: (1/5) MoveLearnItems default.json JSON file created successfully!")
 
 ##### lang file
 # --------------------------------
 
 # Create a JSON file lang/en_us.json
-# Format of json file:
-
-# {
-#     "item.simpletms.tm_10000000voltthunderbolt":"TM-1: 10,000,000 Volt Thunderbolt",
-#     "item.simpletms.tm_absorb":"TM-2: Absorb",
-#     "item.simpletms.tm_accelerock":"TM-3: Accelerock"
-#     ....
-#     "item.simpletms.tr_10000000voltthunderbolt":"TR-1: 10,000,000 Volt Thunderbolt",
-#     "item.simpletms.tr_absorb":"TR-2: Absorb",
-#     "item.simpletms.tr_accelerock":"TR-3: Accelerock"
-# }
-
 # Create a dictionary to store the data
 lang_data = {}
 
 # Add Standard keys to top of the file
+# --------------------------------
     # Display messages
 lang_data["simpletms.success.learned"] = "%1$s learned %2$s!"
 lang_data["simpletms.error.not_learnable.not_valid_move"] = "Not a valid move -- move does not exist!"
@@ -140,10 +130,14 @@ lang_data["item.simpletms.tr_blank"] = "Blank TR"
 lang_data["itemGroup.simpletms.tm_items"] = "TM's"
 lang_data["itemGroup.simpletms.tr_items"] = "TR's"
 
-# Add the move display names 
-for i, move in enumerate(cobblemon_moves, start=1):
-    lang_data[f"item.simpletms.tm_{move['moveName']}"] = f"TM-{i}: {move['Name']}"
-    lang_data[f"item.simpletms.tr_{move['moveName']}"] = f"TR-{i}: {move['Name']}"
+# Add the move display names
+# --------------------------------
+for move in default_moves:
+    lang_data[f"item.simpletms.tm_{move['moveName']}"] = f"TM: {move['Name']}"
+    lang_data[f"item.simpletms.tr_{move['moveName']}"] = f"TR: {move['Name']}"
+
+# Create the json file
+# --------------------------------
 
 # Create a JSON file lang/en_us.json
 os.makedirs("resources/assets/simpletms/lang", exist_ok=True)
@@ -151,57 +145,19 @@ lang_json_path = r"resources/assets/simpletms/lang/en_us.json"
 with open(lang_json_path, 'w') as json_file:
     json.dump(lang_data, json_file, indent=4)
 
-print("SUCCESS: (2/3) lang/en_us.json JSON file created successfully!")
+print("SUCCESS: (2/5) lang/en_us.json JSON file created successfully!")
 
 ##### models/item json files
 # --------------------------------
-
-# Create 2 json files per move - 1 for TM and 1 for TR
-# Create all files in simpletms/models/item
-# Format of json file:
-# tm_10000000voltthunderbolt.json:
-# {
-#     "parent": "item/generated",
-#     "textures": {
-#         "layer0": "simpletms:item/tm/electric"
-#     }
-# }
-# tr_10000000voltthunderbolt.json:
-# {
-#     "parent": "item/generated",
-#     "textures": {
-#     "layer0": "simpletms:item/tr/electric"
-#     }
-# }
-
-# Therfore the format of the json file is:
-# {tr/tm}_{moveName}.json:
-# {
-#     "parent": "item/generated",
-#     "textures": {
-#         "layer0": "simpletms:item/{tr/tm}/{moveType--lowercase}"
-#     }
-# }
-
-# Additionally, the blank TM and TR files should be created
-# tm_blank.json AND tr_blank.json
-# {
-#   "parent": "minecraft:item/generated",
-#   "textures": {
-#     "layer0": "simpletms:item/{tm/tr}/blank"
-#   }
-
-
 # Create a dictionary to store the data
 model_data = {}
-
 # Ensure the directory exists
 os.makedirs("resources/assets/simpletms/models/item", exist_ok=True)
 
 # Create the model files
-
+# --------------------------------
 # All default moves
-for move in cobblemon_moves:
+for move in default_moves:
     tm_file_path = f"resources/assets/simpletms/models/item/tm_{move['moveName']}.json"
     tr_file_path = f"resources/assets/simpletms/models/item/tr_{move['moveName']}.json"
     
@@ -247,5 +203,105 @@ with open(tm_blank_file_path, 'w') as tm_blank_file:
 with open(tr_blank_file_path, 'w') as tr_blank_file:
     json.dump(tr_blank_data, tr_blank_file, indent=4)
 
-print("SUCCESS: (3/3) All JSON files created successfully!")
+print("SUCCESS: (3/5) Models JSON files created successfully!")
+
+##### item tags
+# --------------------------------
+
+# Adding the TM and TR items to the item tags
+# The following tag files are made in resources/data/minecraft/tags/item:
+# Overall
+    # tm_items.json
+    # tr_items.json
+# For each type
+    # type_normal_tm
+    # type_normal_tr
+    # type_fighting_tm
+    # type_fighting_tr
+    # ... for all types
+# For each category
+    # category_physical_tm
+    # category_physical_tr
+    # category_status_tm
+    # category_status_tr
+    # category_special_tm
+    # category_special_tr
+
+
+# Format of each file:
+
+# {
+#     values: [
+#         "simpletms:{tm/tr}_{movename}",
+#     ]
+# }
+
+
+# Create the tag files
+# --------------------------------
+# Overall
+tm_items_data = {
+        "values": [f"simpletms:tm_{move['moveName']}" for move in default_moves]
+    }
+
+tr_items_data = {
+    "values": [f"simpletms:tr_{move['moveName']}" for move in default_moves]
+}
+
+# Write the tag files
+os.makedirs("resources/data/minecraft/tags/item", exist_ok=True)
+
+tm_items_path = r"resources/data/minecraft/tags/item/tm_items.json"
+tr_items_path = r"resources/data/minecraft/tags/item/tr_items.json"
+
+with open(tm_items_path, 'w') as tm_items_file:
+    json.dump(tm_items_data, tm_items_file, indent=4)
+
+with open(tr_items_path, 'w') as tr_items_file:
+    json.dump(tr_items_data, tr_items_file, indent=4)
+
+# For each type
+for moveType in data['moveType'].unique():
+    tm_type_data = {
+        "values": [f"simpletms:tm_{move['moveName']}" for move in default_moves if move['moveType'] == moveType]
+    }
+    
+    tr_type_data = {
+        "values": [f"simpletms:tr_{move['moveName']}" for move in default_moves if move['moveType'] == moveType]
+    }
+    
+    tm_type_path = f"resources/data/minecraft/tags/item/type_{moveType.lower()}_tm.json"
+    tr_type_path = f"resources/data/minecraft/tags/item/type_{moveType.lower()}_tr.json"
+    
+    with open(tm_type_path, 'w') as tm_type_file:
+        json.dump(tm_type_data, tm_type_file, indent=4)
+    
+    with open(tr_type_path, 'w') as tr_type_file:
+        json.dump(tr_type_data, tr_type_file, indent=4)
+
+# For each category
+for category in data['Category'].unique():
+    tm_category_data = {
+        "values": [f"simpletms:tm_{move['moveName']}" for move in default_moves if move['Category'] == category]
+    }
+    
+    tr_category_data = {
+        "values": [f"simpletms:tr_{move['moveName']}" for move in default_moves if move['Category'] == category]
+    }
+    
+    tm_category_path = f"resources/data/minecraft/tags/item/category_{category.lower()}_tm.json"
+    tr_category_path = f"resources/data/minecraft/tags/item/category_{category.lower()}_tr.json"
+    
+    with open(tm_category_path, 'w') as tm_category_file:
+        json.dump(tm_category_data, tm_category_file, indent=4)
+    
+    with open(tr_category_path, 'w') as tr_category_file:
+        json.dump(tr_category_data, tr_category_file, indent=4)
+
+
+print("SUCCESS: (4/5) Item Tags JSON files created successfully!")
+
+print("SUCCESS: (5/5) All JSON files created successfully!")
+
+
 
