@@ -11,7 +11,7 @@ authors = [
     "Dragomordor"
 ]
 description = '''
-Brings TM's and HM's to Cobblemon
+Brings TM's and TRs's to Cobblemon -- New ways to learn Moves!
 '''
 logoFile = "assets/simpletms/icon.png"
 

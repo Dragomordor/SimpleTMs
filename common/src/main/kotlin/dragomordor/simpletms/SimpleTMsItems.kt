@@ -1,16 +1,24 @@
 package dragomordor.simpletms
 
+import com.cobblemon.mod.common.api.moves.Move
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
+import dragomordor.simpletms.SimpleTMs.LOGGER
+import dragomordor.simpletms.SimpleTMs.MOD_ID
 import dragomordor.simpletms.item.custom.BlankTmItem
 import dragomordor.simpletms.item.custom.MoveLearnItem
-import dragomordor.simpletms.util.loadMoveLearnItemsFromJson
+import dragomordor.simpletms.util.MoveLearnItemDefinition
 import dragomordor.simpletms.util.simpletmsResource
+import kotlinx.serialization.json.Json
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.item.Item
 import net.minecraft.core.registries.Registries
 import net.minecraft.world.item.Item.Properties
 import net.minecraft.world.item.ItemStack
+import java.io.File
+import java.io.FileReader
+import java.io.FileWriter
+import java.io.InputStreamReader
 
 
 @Suppress("unused", "SameParameterValue")
@@ -18,9 +26,11 @@ object SimpleTMsItems {
 
     internal val ITEMS: DeferredRegister<Item> = DeferredRegister.create(SimpleTMs.MOD_ID, Registries.ITEM)
     val defaultMoveJsonPath = "simpletms/movelearnitems/default.json"
-    val customMoveJsonPath = "simpletms/movelearnitems/custom.json"
+    // val customMoveJsonPath = "simpletms/movelearnitems/custom.json"
 
-    // TODO:  Z type Moves have been removed -- add file with config check to add them back if desired
+    const val DEFAULT_MOVE_CONFIG_PATH = "config/$MOD_ID/default_moves.json"
+    val defaultMoveConfigFile = File(DEFAULT_MOVE_CONFIG_PATH)
+
     // TODO: Add a config file to allow for the removal of certain moves from the TM and TR lists
     // TODO: Tags for tm and tr items
 
@@ -80,9 +90,33 @@ object SimpleTMsItems {
         }
     }
 
-    private fun registerMoveLearnItemsFromJSON(jsonFilePath: String) {
-        // Load JSON file from resource directory
-        val itemDefinitions = loadMoveLearnItemsFromJson(jsonFilePath)
+//    private fun registerMoveLearnItemsFromJSON(jsonFilePath: String) {
+//        // Load JSON file from resource directory
+//        val itemDefinitions = loadMoveLearnItemsFromJson(jsonFilePath)
+//        // Register TMs
+//        for (itemDefinition in itemDefinitions) {
+//            registerMoveLearnItem(
+//                name = "tm_" + itemDefinition.moveName,
+//                moveName = itemDefinition.moveName,
+//                moveType = itemDefinition.moveType,
+//                isTR = false
+//            )
+//        }
+//        // Register TRs
+//        for (itemDefinition in itemDefinitions) {
+//            registerMoveLearnItem(
+//                name = "tr_" + itemDefinition.moveName,
+//                moveName = itemDefinition.moveName,
+//                moveType = itemDefinition.moveType,
+//                isTR = true
+//            )
+//        }
+//    }
+
+    private fun registerMoveLearnItemsFromConfig(moveFile: File) {
+        // Read Json file moveFile
+        val jsonContent = FileReader(moveFile).use { it.readText() }
+        val itemDefinitions = Json.decodeFromString<List<MoveLearnItemDefinition>>(jsonContent)
         // Register TMs
         for (itemDefinition in itemDefinitions) {
             registerMoveLearnItem(
@@ -103,19 +137,51 @@ object SimpleTMsItems {
         }
     }
 
+    private fun loadDefaultMoveConfig(moveConfigFile: File) {
+        if (moveConfigFile.exists()) {
+            // If file exists, report that it was found
+            LOGGER.info("Found default moves config file for SimpleTMs")
+
+        } else {
+            LOGGER.info("Default moves config file not found. Creating default moves config file")
+            // Load default moves from resource
+            val resourceStream =  SimpleTMs::class.java.getResourceAsStream("/$defaultMoveJsonPath")
+                ?: throw IllegalArgumentException("Resource not found: $defaultMoveJsonPath")
+            val jsonContent = InputStreamReader(resourceStream).use {  it.readText() }
+            // copy to config json
+            try {
+                val fileWriter = FileWriter(moveConfigFile)
+                fileWriter.write(jsonContent)
+                fileWriter.close()
+            } catch (exception: Exception) {
+                LOGGER.error("Failed to save config file for $MOD_ID. Reason:")
+                exception.printStackTrace()
+            }
+        }
+    }
+
     // ------------------------------------------------------------
     // Other Functions
     // ------------------------------------------------------------
 
     // Register all mod items
     fun registerModItems() {
-        SimpleTMs.LOGGER.info("Register Mod Items for " + SimpleTMs.MOD_ID)
+        LOGGER.info("Register Mod Items for $MOD_ID")
+        // Load Default Moves Config
+        LOGGER.info("Loading default moves config")
+        loadDefaultMoveConfig(defaultMoveConfigFile)
+        // Register items from config
+            // Default moves
+        LOGGER.info("Registering default move TMs and TRs")
+        registerMoveLearnItemsFromConfig(defaultMoveConfigFile)
+            // TODO: Custom moves
+
         // Register items from JSON
             // Default moves
-        registerMoveLearnItemsFromJSON(defaultMoveJsonPath)
+        // registerMoveLearnItemsFromJSON(defaultMoveJsonPath)
             // Custom moves -- check if the file contain any items
         // TODO: add a check from config file to see if the file should be loaded
-        registerMoveLearnItemsFromJSON(customMoveJsonPath)
+        // registerMoveLearnItemsFromJSON(customMoveJsonPath)
 
         ITEMS.register()
     }
@@ -130,8 +196,15 @@ object SimpleTMsItems {
     fun getItemFromName(name: String): Item {
         val identifier = simpletmsResource(name)
         val item = BuiltInRegistries.ITEM.get(identifier)
-
         return item
+    }
+
+    fun getTMorTRItemFromMove(move: Move, isTR: Boolean): Item {
+        // Get prefix for TM or TR
+        val prefix = if (isTR) "tr_" else "tm_"
+        val moveName = move.name
+        val newMoveLearnItem = getItemFromName(prefix + moveName)
+        return newMoveLearnItem
     }
 
 }

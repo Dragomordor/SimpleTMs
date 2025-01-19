@@ -4,10 +4,10 @@ import com.cobblemon.mod.common.api.moves.Move
 import com.cobblemon.mod.common.pokemon.Pokemon
 import com.cobblemon.mod.common.util.giveOrDropItemStack
 import dragomordor.simpletms.SimpleTMs
+import dragomordor.simpletms.SimpleTMsItems.getTMorTRItemFromMove
 import dragomordor.simpletms.item.SimpleTMsItem
 import dragomordor.simpletms.item.api.PokemonAndMoveSelectingItemNonBattle
 import dragomordor.simpletms.util.fromLang
-import dragomordor.simpletms.util.getTMorTRItemFromMove
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
@@ -58,6 +58,13 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
 
         // (3) Give the item to the player
         val newMoveLearnItem = getTMorTRItemFromMove(move, isTR)
+            // If the item is not found, display the failure message
+        if (newMoveLearnItem == null) {
+            // Display the failure message
+            player.displayClientMessage(FailureMessage.getFailureMessage(), true)
+            return
+        }
+
         player.giveOrDropItemStack(ItemStack(newMoveLearnItem))
 
         // Success sound and shrink the stack

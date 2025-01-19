@@ -19,16 +19,16 @@ data class MoveLearnItemDefinition(
     val moveType: String,
 )
 
-fun loadMoveLearnItemsFromJson(jsonFilePath: String): List<MoveLearnItemDefinition> {
-    // Load JSON file from resource directory
-    val resourceStream =  SimpleTMs::class.java.getResourceAsStream("/$jsonFilePath")
-        ?: throw IllegalArgumentException("Resource not found: $jsonFilePath")
-
-    val jsonContent = InputStreamReader(resourceStream).use {  it.readText() }
-    val itemDefinitions = Json.decodeFromString<List<MoveLearnItemDefinition>>(jsonContent)
-
-    return itemDefinitions
-}
+//fun loadMoveLearnItemsFromJson(jsonFilePath: String): List<MoveLearnItemDefinition> {
+//    // Load JSON file from resource directory
+//    val resourceStream =  SimpleTMs::class.java.getResourceAsStream("/$jsonFilePath")
+//        ?: throw IllegalArgumentException("Resource not found: $jsonFilePath")
+//
+//    val jsonContent = InputStreamReader(resourceStream).use {  it.readText() }
+//    val itemDefinitions = Json.decodeFromString<List<MoveLearnItemDefinition>>(jsonContent)
+//
+//    return itemDefinitions
+//}
 
 fun fromLang(
     prefixOrModid: String,
@@ -50,10 +50,4 @@ class FailureMessage() {
     }
 }
 
-fun getTMorTRItemFromMove(move: Move, isTR: Boolean): Item {
-    // Get prefix for TM or TR
-    val prefix = if (isTR) "tr_" else "tm_"
-    val moveName = move.name
-    val newMoveLearnItem = SimpleTMsItems.getItemFromName(prefix + moveName)
-    return newMoveLearnItem
-}
+

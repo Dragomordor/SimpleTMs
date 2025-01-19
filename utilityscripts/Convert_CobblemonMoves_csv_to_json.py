@@ -25,6 +25,8 @@ data = data.sort_values(by=['moveName'])
 # The following moves are not needed:
     # All moves that start with 'hiddenpower'
 data = data[~data['moveName'].str.startswith('hiddenpower')]
+    # All moves that start with 'gmax'
+data = data[~data['moveName'].str.startswith('gmax')]
 
 # All Moves in ZTypeMoves.csv (same format as AllMoves.csv)
 ztype_csv_path = r"ZTypeMoves.csv"

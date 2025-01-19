@@ -6,8 +6,6 @@ import com.google.gson.GsonBuilder
 
 class SimpleTMsConfig {
 
-    //TODO: Implement config options
-
     companion object {
         val GSON = GsonBuilder()
             .disableHtmlEscaping()

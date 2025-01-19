@@ -9,7 +9,7 @@ import com.cobblemon.mod.common.api.moves.Moves
 import com.cobblemon.mod.common.pokemon.Pokemon
 import com.cobblemon.mod.common.util.giveOrDropItemStack
 import dragomordor.simpletms.SimpleTMs
-import dragomordor.simpletms.util.getTMorTRItemFromMove
+import dragomordor.simpletms.SimpleTMsItems.getTMorTRItemFromMove
 import net.minecraft.world.item.ItemStack
 
 object MoveLearnItemDropHandler : EventHandler {
@@ -45,12 +45,15 @@ object MoveLearnItemDropHandler : EventHandler {
                     // Drop a TM
                     val droppedTM = getTMorTRItemFromMove(droppedMoveTemplate.create(), false)
                     val droppedTMStack = ItemStack(droppedTM)
+                    // TODO: add message in battle chat
                     player.giveOrDropItemStack(droppedTMStack, true)
 
                 } else if (randomDouble < DropRateTR) {
                     // Drop a TR
-                    val droppedItem = getTMorTRItemFromMove(droppedMoveTemplate.create(), true)
-                    player.giveOrDropItemStack(ItemStack(droppedItem), true)
+                    val droppedTR = getTMorTRItemFromMove(droppedMoveTemplate.create(), true)
+                    val droppedTRStack = ItemStack(droppedTR)
+                    // TODO: add message in battle chat
+                    player.giveOrDropItemStack(droppedTRStack, true)
                 } else {
                     // Drop nothing
                     return
