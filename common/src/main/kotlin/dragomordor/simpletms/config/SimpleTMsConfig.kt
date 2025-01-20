@@ -43,7 +43,7 @@ class SimpleTMsConfig {
 
     @NodeCategory(Category.Cooldown)
     @IntConstraint(min = 0, max = 51840000)
-    var TMCoolDownTicks: Int = 0
+    var TMCoolDownTicks: Int = 600
 
     @NodeCategory(Category.Cooldown)
     @IntConstraint(min = 0, max = 51840000)
@@ -85,6 +85,14 @@ class SimpleTMsConfig {
     var DropRateTMtoTRRatioOutsideOfBattle: Double = 0.1
 
     @NodeCategory(Category.DropRate)
+    @IntConstraint(min = 1, max = 4)
+    var NumberOfMovesToChooseFromInBattle: Int = 4
+
+    @NodeCategory(Category.DropRate)
+    @IntConstraint(min = 1, max = 4)
+    var NumberOfMovesToChooseFromoutsideBattle: Int = 1
+
+    @NodeCategory(Category.DropRate)
     var DropAny: Boolean = false
 
     @NodeCategory(Category.DropRate)
@@ -107,7 +115,6 @@ class SimpleTMsConfig {
 
     @NodeCategory(Category.DropRate)
     var DropFromEggMoveList: Boolean = true
-
 
 }
 

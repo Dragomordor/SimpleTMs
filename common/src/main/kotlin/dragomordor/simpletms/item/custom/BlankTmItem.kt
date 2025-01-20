@@ -1,10 +1,13 @@
 package dragomordor.simpletms.item.custom
 
 import com.cobblemon.mod.common.api.moves.Move
+import com.cobblemon.mod.common.api.moves.MoveTemplate
+import com.cobblemon.mod.common.api.moves.Moves
 import com.cobblemon.mod.common.api.text.text
 import com.cobblemon.mod.common.pokemon.Pokemon
 import com.cobblemon.mod.common.util.giveOrDropItemStack
 import dragomordor.simpletms.SimpleTMs
+import dragomordor.simpletms.SimpleTMsItems
 import dragomordor.simpletms.SimpleTMsItems.getTMorTRItemFromMove
 import dragomordor.simpletms.item.SimpleTMsItem
 import dragomordor.simpletms.item.api.PokemonAndMoveSelectingItemNonBattle
@@ -34,7 +37,7 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
     override fun canUseOnPokemon(pokemon: Pokemon) = pokemon.moveSet.any(::canUseOnMove)
 
     // Blank TMs can be used on any move the pokemon knows (except for excluded moves and if config disables it)
-    override fun canUseOnMove(move: Move) = canUseBlankOnMove(isTR);
+    override fun canUseOnMove(move: Move) = canUseBlankOnMove(isTR, move);
 
     override fun applyToPokemon(player: ServerPlayer, stack: ItemStack, pokemon: Pokemon, move: Move) {
         val isTR = this.isTR
@@ -48,7 +51,6 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
 
         // (2) Check item cooldown if applicable
         val cooldownTicks = SimpleTMs.config.blankTMCooldownTicks
-
         if (player.cooldowns.isOnCooldown(this)) {
             // Convert cooldown ticks to hours, minutes, and seconds
             val cooldownHH = Math.floorDiv(cooldownTicks, 72000)
@@ -63,15 +65,9 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
 
         // (3) Give the item to the player
         val newMoveLearnItem = getTMorTRItemFromMove(move, isTR)
-            // If the item is not found, display the failure message
-        if (newMoveLearnItem == null) {
-            // Display the failure message
-            player.displayClientMessage(FailureMessage.getFailureMessage(), true)
-            return
-        }
-
         player.giveOrDropItemStack(ItemStack(newMoveLearnItem))
 
+        // (4) Play success sound, damage the stack, and put item on cooldown if applicable
         // Success sound
         player.playNotifySound(SoundEvents.NOTE_BLOCK_PLING.value(), SoundSource.PLAYERS, 1.0F, 1.0F)
         // Damage the stack if player is not in creative mode
@@ -100,10 +96,37 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
     // Helper methods
     // ------------------------------------------------------------------
 
-    private fun canUseBlankOnMove(isTR: Boolean): Boolean {
+    private fun canUseBlankOnMove(isTR: Boolean, move: Move): Boolean {
         val canUseBlank = canUseBlank(isTR)
-        // TODO: Add excluded moves here?
-        return canUseBlank
+        if (!canUseBlank) {
+            return false
+        }
+
+        // Check if move is in the list of moves with items
+        if (!SimpleTMsItems.hasItemForMove(move)) {
+            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID, "error.not_usable.move_not_in_list"))
+            return false
+        }
+
+
+//        // If move has no TM/TR, can't use blank on that move
+//        val allMovesWithItems = SimpleTMsItems.getAllMovesWithItems()
+//
+//        // TODO: DEBUG - Print all moves with items
+//        for (moveWithItem in allMovesWithItems) {
+//            println("Following move has an item: ${moveWithItem.name}")
+//        }
+//
+//        // Check if move is in the list of moves with items
+//        if (!allMovesWithItems.contains(move.template)) {
+//            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID, "error.not_usable.move_not_in_list"))
+//            return false
+//        }
+
+        // TODO: Add excluded moves here
+
+        // Passed all checks
+        return true
     }
 
     private fun canUseBlank(isTR: Boolean): Boolean {
@@ -132,6 +155,9 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
         }
     }
 
+
+
+
     // ------------------------------------------------------------------
     // Hover text
     // ------------------------------------------------------------------
@@ -143,6 +169,7 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
         tooltipFlag: TooltipFlag
     ) {
 
+        // TODO: Update all text to use lang files
         val baseGreyColor = Color.decode("#C6BDBD")
         val isTR = this.isTR
         val itemType = if (isTR) "TR" else "TM"

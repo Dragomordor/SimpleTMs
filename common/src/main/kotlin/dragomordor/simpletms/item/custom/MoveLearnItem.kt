@@ -7,6 +7,7 @@ import com.cobblemon.mod.common.api.moves.categories.DamageCategory
 import com.cobblemon.mod.common.api.text.text
 import com.cobblemon.mod.common.pokemon.Pokemon
 import dragomordor.simpletms.SimpleTMs
+import dragomordor.simpletms.SimpleTMsItems
 import dragomordor.simpletms.item.SimpleTMsItem
 import dragomordor.simpletms.item.api.PokemonSelectingItemNonBattle
 import dragomordor.simpletms.util.FailureMessage
@@ -49,12 +50,11 @@ class MoveLearnItem(
         stack: ItemStack,
         pokemon: Pokemon) : InteractionResultHolder<ItemStack> {
 
-        // (0) Get the moveName from class, not interface (this)
+        // (1) Get the move properties
         val moveName = this.moveName
         val isTR = this.isTR
-
-        // Get the move to teach
         val moveToTeach = Moves.getByName(moveName)
+
 
         // (1) Check if the move is a valid move
         if (moveToTeach == null) {
@@ -65,7 +65,6 @@ class MoveLearnItem(
         }
 
         val moveTranslatedName = moveToTeach.displayName
-
         val TMusuable = SimpleTMs.config.TMsUsable
         val TRusuable = SimpleTMs.config.TRsUsable
 
@@ -137,7 +136,6 @@ class MoveLearnItem(
     // Custom Functions
     // ------------------------------------------------------------------
 
-    // TODO: Replacer funciton for all canPokemonLearnMove functions
     private fun canPokemonLearnMove(pokemon: Pokemon, moveToTeach: MoveTemplate): Boolean {
 
         // (3.1) Get current move set and benched moves of the pokemon
@@ -166,28 +164,20 @@ class MoveLearnItem(
         }
 
         // (3.3) Add all list of learnable moves to a list and check if the move is in the list, otherwise return false
-        println("Checking if move is in learnable moves")
         val learnableMoves = mutableListOf<MoveTemplate>()
-        println("Learnable moves list: $learnableMoves")
 
         // TM Moves
         if (TMMovesLearnable) {
-            println("Adding TM moves")
             learnableMoves.addAll(pokemon.form.moves.tmMoves)
-            println("Learnable moves list after tm moves: $learnableMoves")
 
         }
         // Tutor Moves
         if (tutorMovesLearnable) {
-            println("Adding Tutor moves")
             learnableMoves.addAll(pokemon.form.moves.tutorMoves)
-            println("Learnable moves list after tutor moves: $learnableMoves")
         }
         // Egg Moves
         if (eggMovesLearnable) {
-            println("Adding Egg moves")
             learnableMoves.addAll(pokemon.form.moves.eggMoves)
-            println("Learnable moves list after egg moves: $learnableMoves")
             // Check if the move is in the egg moves any pre-evolution
             var preEvolution = pokemon.form.preEvolution
             for (i in 0 until 4) {
@@ -197,19 +187,14 @@ class MoveLearnItem(
                 learnableMoves.addAll(preEvolution.form.moves.eggMoves)
                 preEvolution = preEvolution.form.preEvolution
             }
-            println("Learnable moves list after pre-evolution: $learnableMoves")
         }
         // Level Moves
         if (levelMovesLearnable) {
-            println("Adding Level moves")
             learnableMoves.addAll(pokemon.form.moves.getLevelUpMovesUpTo(Cobblemon.config.maxPokemonLevel))
-            println("Learnable moves list after level moves: $learnableMoves")
         }
 
         // Remove duplicates
-        println("Learnable moves list before distinct: $learnableMoves")
         learnableMoves.distinct()
-        println("Learnable moves list after distinct: $learnableMoves")
 
         // Check if the move is in the learnable moves list
         return learnableMoves.contains(moveToTeach)
@@ -244,6 +229,8 @@ class MoveLearnItem(
         list: MutableList<Component>,
         tooltipFlag: TooltipFlag
     ) {
+        // TODO: Update all text to use lang files
+
         // Normal hover text
         val baseGreyColor = Color.decode("#C6BDBD")
 

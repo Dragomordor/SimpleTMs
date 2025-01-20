@@ -25,45 +25,74 @@ modid = "simpletms"
 
 # The following moves are not needed:
     # Z-type moves should be removed
+
 z_type_moves = [
-    "10,000,000 Volt Thunderbolt",
+    # Table 1 on https://bulbapedia.bulbagarden.net/wiki/Z-Move
     "Acid Downpour",
     "All-Out Pummeling",
     "Black Hole Eclipse",
     "Bloom Doom",
     "Breakneck Blitz",
-    "Catastropika",
-    "Clangorous Soulblaze",
     "Continental Crush",
     "Corkscrew Crash",
     "Devastating Drake",
-    "Extreme Evoboost",
-    "Genesis Supernova",
     "Gigavolt Havoc",
-    "Guardian of Alola",
     "Hydro Vortex",
     "Inferno Overdrive",
+    "Never-Ending Nightmare",
+    "Savage Spin-Out",
+    "Shattered Psyche",
+    "Subzero Slammer",
+    "Supersonic Skystrike",
+    "Tectonic Rage",
+    "Twinkle Tackle",
+    # Table 2 on https://bulbapedia.bulbagarden.net/wiki/Z-Move
+    "10,000,000 Volt Thunderbolt",
+    "Catastropika",
+    "Clangorous Soulblaze",
+    "Extreme Evoboost",
+    "Genesis Supernova",
+    "Guardian of Alola",
     "Let's Snuggle Forever",
     "Light That Burns the Sky",
     "Malicious Moonsault",
     "Menacing Moonraze Maelstrom",
-    "Never-Ending Nightmare",
     "Oceanic Operetta",
     "Pulverizing Pancake",
-    "Savage Spin-Out",
     "Searing Sunraze Smash",
-    "Shattered Psyche",
     "Sinister Arrow Raid",
     "Soul-Stealing 7-Star Strike",
     "Splintered Stormshards",
     "Stoked Sparksurfer",
-    "Subzero Slammer",
-    "Supersonic Skystrike",
-    "Tectonic Rage",
-    "Twinkle Tackle"
 ]
-    # remove the Z-type moves from the data
+
+max_type_moves = [
+    # From https://bulbapedia.bulbagarden.net/wiki/Max_Move
+    "Max Airstream",
+    "Max Darkness",
+    "Max Flare",
+    "Max Flutterby",
+    "Max Geyser",
+    "Max Guard",
+    "Max Hailstorm",
+    "Max Knuckle",
+    "Max Lightning",
+    "Max Mindstorm",
+    "Max Ooze",
+    "Max Overgrowth",
+    "Max Phantasm",
+    "Max Quake",
+    "Max Rockfall",
+    "Max Starfall",
+    "Max Steelspike",
+    "Max Strike",
+    "Max Wyrmwind",
+]
+
+# Remove the Z-type moves from the data
 data = data[~data['Name'].isin(z_type_moves)]
+# Remove the Max-type moves from the data
+data = data[~data['Name'].isin(max_type_moves)]
 
 # ----------------------------------------------------------
 ## Modify data to add new columns
@@ -77,11 +106,8 @@ data['moveName'] = data['Name'].str.lower().str.replace(' ', '').str.replace("'"
 data = data.sort_values(by=['moveName'])
 
 # Remove the following columns:
-    # Category, Gen, PP, Power, Accuracy
-data.drop(columns=['Category', 'Gen', 'PP', 'Power', 'Accuracy'], inplace=True)
-
 # Reorder the columns
-data = data[['moveName', 'Name', 'Type']]
+data = data[['moveName', 'Name', 'Type', 'Category', 'Gen', 'PP', 'Power', 'Accuracy']]
 
 # ----------------------------------------------------------
 ## Json Files
@@ -94,7 +120,8 @@ os.makedirs(f"resources/{modid}/movelearnitems", exist_ok=True)
 # Make sure to remove the Name column only for the default.json file
 default_json_path = f"resources/{modid}/movelearnitems/default.json"
 default_data = data.copy()
-default_data.drop(columns=['Name'], inplace=True)
+# remove all columns excep moveName and Type
+default_data.drop(columns=['Name', 'Category', 'Gen', 'PP', 'Power', 'Accuracy'], inplace=True)
 with open(default_json_path, 'w') as json_file:
     json.dump(default_data.to_dict(orient='records'), json_file, indent=4)
 
@@ -250,6 +277,27 @@ for Type in data['Type'].unique():
     
     with open(tr_type_path, 'w') as tr_type_file:
         json.dump(tr_type_data, tr_type_file, indent=4)
+
+# For each category
+for Category in data['Category'].unique():
+    tm_category_data = {
+        "replace": False,
+        "values": [f"{modid}:tm_{row['moveName']}" for index, row in data.iterrows() if row['Category'] == Category]
+    }
+    
+    tr_category_data = {
+        "replace": False,
+        "values": [f"{modid}:tr_{row['moveName']}" for index, row in data.iterrows() if row['Category'] == Category]
+    }
+    
+    tm_category_path = f"resources/data/{modid}/tags/item/category_{Category.lower()}_tm.json"
+    tr_category_path = f"resources/data/{modid}/tags/item/category_{Category.lower()}_tr.json"
+    
+    with open(tm_category_path, 'w') as tm_category_file:
+        json.dump(tm_category_data, tm_category_file, indent=4)
+    
+    with open(tr_category_path, 'w') as tr_category_file:
+        json.dump(tr_category_data, tr_category_file, indent=4)
 
 
 print("SUCCESS: (4/5) Item Tags JSON files created successfully!")

@@ -2,19 +2,25 @@ package dragomordor.simpletms.events
 
 import com.cobblemon.mod.common.Cobblemon
 import com.cobblemon.mod.common.api.Priority
+import com.cobblemon.mod.common.api.callback.MoveSelectCallback
+import com.cobblemon.mod.common.api.callback.MoveSelectCallbacks
+import com.cobblemon.mod.common.api.callback.MoveSelectDTO
 import com.cobblemon.mod.common.api.events.CobblemonEvents
 import com.cobblemon.mod.common.api.events.battles.BattleFaintedEvent
-import com.cobblemon.mod.common.api.events.pokemon.PokemonFaintedEvent
+import com.cobblemon.mod.common.api.moves.Move
 import com.cobblemon.mod.common.api.moves.MoveTemplate
 import com.cobblemon.mod.common.api.moves.Moves
+import com.cobblemon.mod.common.api.text.text
 import com.cobblemon.mod.common.entity.pokemon.PokemonEntity
 import com.cobblemon.mod.common.pokemon.Pokemon
 import com.cobblemon.mod.common.util.giveOrDropItemStack
-import com.cobblemon.mod.common.util.ifIsType
 import dev.architectury.event.EventResult
 import dev.architectury.event.events.common.EntityEvent
 import dragomordor.simpletms.SimpleTMs
+import dragomordor.simpletms.SimpleTMsItems
 import dragomordor.simpletms.SimpleTMsItems.getTMorTRItemFromMove
+import dragomordor.simpletms.item.custom.BlankTmItem.FailureMessage
+import dragomordor.simpletms.util.fromLang
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.LivingEntity
@@ -52,7 +58,7 @@ object MoveLearnItemDropHandler : EventHandler {
     }
 
     // When pokemon faints outside of battle because of player, drop TM or TR if config allows
-    fun onPokemonFainted(killedPokemon: Pokemon, player: ServerPlayer) {
+    private fun onPokemonFainted(killedPokemon: Pokemon, player: ServerPlayer) {
         // Check if config allows dropping items when pokemon faints
         if (!SimpleTMs.config.DropOutsideOfBattle) {
             return
@@ -66,7 +72,7 @@ object MoveLearnItemDropHandler : EventHandler {
         return
     }
 
-    fun onEntityFainted(entity: LivingEntity, source: DamageSource): EventResult? {
+    private fun onEntityFainted(entity: LivingEntity, source: DamageSource): EventResult? {
 
         // If entity is pokemon and source is player, activate onPokemonFainted.
         // Either way, return normal behaviour of event
@@ -83,40 +89,66 @@ object MoveLearnItemDropHandler : EventHandler {
     // Helper Functions
     // ------------------------------------------------------------
 
-    fun dropMoveLearnItemOnPlayer(killedPokemon: Pokemon, player: ServerPlayer, inBattle: Boolean) {
-        // Get config options
-
-        var DropRateTR = 0.0
-        var DropRateTMtoTRRatio = 0.0
-        if (inBattle) {
-            // If in battle, use in battle Drop rates
-            DropRateTR = SimpleTMs.config.DropRateTRInBattle
-            DropRateTMtoTRRatio = SimpleTMs.config.DropRateTMtoTRRatioInBattle
+    private fun dropMoveLearnItemOnPlayer(killedPokemon: Pokemon, player: ServerPlayer, inBattle: Boolean) {
+        // Get drop rates from config
+        val (dropRateTR, dropRateTMtoTRRatio) = if (inBattle) {
+            SimpleTMs.config.DropRateTRInBattle to SimpleTMs.config.DropRateTMtoTRRatioInBattle
         } else {
-            // If outside of battle, use outside of battle Drop rates
-            DropRateTR = SimpleTMs.config.DropRateTROutsideOfBattle
-            DropRateTMtoTRRatio = SimpleTMs.config.DropRateTMtoTRRatioOutsideOfBattle
+            SimpleTMs.config.DropRateTROutsideOfBattle to SimpleTMs.config.DropRateTMtoTRRatioOutsideOfBattle
         }
         // Get an applicable move template from the killed pokemon
-        // TODO: Change so move can be selected from list of 3/4 random moves (amount from config) -- only inside battle. Outside of battle, config whether screen is shown
-        val droppedMoveTemplate = getRandomApplicableMoveTemplate(killedPokemon)
+        val numberOfMovesToChooseFrom = when {
+            inBattle -> SimpleTMs.config.NumberOfMovesToChooseFromInBattle
+            else -> SimpleTMs.config.NumberOfMovesToChooseFromoutsideBattle
+        }
+
+        val moveTemplatesToChooseFrom = getRandomApplicableMoveTemplates(killedPokemon, numberOfMovesToChooseFrom)
         val randomDouble = Math.random()
-        val isTM = randomDouble < (DropRateTR * DropRateTMtoTRRatio)
-        val isTR = randomDouble < DropRateTR
+        val isTM = randomDouble < (dropRateTR * dropRateTMtoTRRatio)
+        val isTR = randomDouble < dropRateTR
+
+        // Check if moveTemplatesToChooseFrom is empty. If it is, return
+        if (moveTemplatesToChooseFrom.isEmpty()) {
+            return
+        }
 
         if (isTM || isTR) {
-            val isTRItem = isTR && !isTM
-            val droppedItem = getTMorTRItemFromMove(droppedMoveTemplate.create(), isTRItem)
-            val droppedItemStack = ItemStack(droppedItem)
-            // TODO: add message in battle chat
-            player.giveOrDropItemStack(droppedItemStack, true)
+            val shouldUseMoveSelect = numberOfMovesToChooseFrom > 1
+            if (shouldUseMoveSelect) {
+                // Display Client message
+                val textToDisplay = "Select a move to drop as a TM or TR"
+                player.displayClientMessage(textToDisplay.text(), true)
+
+                // if shouldUseMoveSelect, open MoveSelectCallback screen
+                val movesToChooseFrom = moveTemplatesToChooseFrom.map { it.create() }
+                MoveSelectCallbacks.create(
+                    player = player,
+                    // possibleMoves = movesToChooseFrom,
+                    possibleMoves = movesToChooseFrom.map { battleMove -> MoveSelectDTO(battleMove) },
+                    // TODO: Update title to language file
+                    // title does not actually display anything afaik
+                    title = textToDisplay.text(),
+                    //handler = { move -> dropMoveLearnItemOnPlayerHandler(player, move, isTR, isTM) }
+                    handler = {_, index, _ -> dropMoveLearnItemOnPlayerHandler(player, movesToChooseFrom[index], isTR, isTM) }
+                )
+            } else {
+                // Else drop a random move template
+                dropMoveLearnItemOnPlayerHandler(player, moveTemplatesToChooseFrom.random().create(), isTR, isTM)
+            }
         }
 
     }
 
+    private fun dropMoveLearnItemOnPlayerHandler(player: ServerPlayer, move: Move, isTR: Boolean, isTM: Boolean) {
+        val isTRItem = isTR && !isTM
+        val droppedItem = getTMorTRItemFromMove(move, isTRItem)
+        val droppedItemStack = ItemStack(droppedItem)
+        player.giveOrDropItemStack(droppedItemStack, true)
+    }
 
 
-    fun getRandomApplicableMoveTemplate(pokemon: Pokemon): MoveTemplate {
+
+    private fun getRandomApplicableMoveTemplates(pokemon: Pokemon, numberOfMovesToChooseFrom: Int): List<MoveTemplate> {
         // Get all move information from pokemon
         val allMoves = Moves.all()
         val pokemonPrimaryType = pokemon.primaryType
@@ -138,13 +170,11 @@ object MoveLearnItemDropHandler : EventHandler {
         val DropTutors = SimpleTMs.config.DropFromTutorMoveList
         val DropEggMoves = SimpleTMs.config.DropFromEggMoveList
 
-        var moveToDrop: MoveTemplate? = null
-
         // If any move can be dropped, return a random move from all moves
         if (DropAny) {
             // TODO: Exclude moves based on config options
-            moveToDrop = allMoves.random()
-            return moveToDrop
+            // Return numberOfMovesToChooseFrom random moves from allMoves
+            return allMoves.shuffled().take(numberOfMovesToChooseFrom)
         }
         // The rest of the checks will append to a list of applicable moves
         val applicableMoves = mutableListOf<MoveTemplate>()
@@ -183,13 +213,24 @@ object MoveLearnItemDropHandler : EventHandler {
             applicableMoves.addAll(eggMoves)
         }
 
-        // Return a random move from the applicable moves
-        moveToDrop = applicableMoves.random()
+        // TODO: Remove moves that don't have a TM or TR
+        for (move in applicableMoves) {
+            // Remove moves that don't have a TM or TR
+            if (!SimpleTMsItems.hasItemForMove(move.create())) {
+                applicableMoves.remove(move)
+            }
+        }
+
+
         // TODO: Exclude moves based on config options
 
-        return moveToDrop
+        // If the list is empty, return null
+        if (applicableMoves.isEmpty()) {
+            return listOf()
+        }
+
+        // Return numberOfMovesToChooseFrom random moves from applicableMoves
+        return applicableMoves.shuffled().take(numberOfMovesToChooseFrom)
     }
-
-
 
 }

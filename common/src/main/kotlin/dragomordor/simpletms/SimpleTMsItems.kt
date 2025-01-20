@@ -1,6 +1,8 @@
 package dragomordor.simpletms
 
 import com.cobblemon.mod.common.api.moves.Move
+import com.cobblemon.mod.common.api.moves.MoveTemplate
+import com.cobblemon.mod.common.api.moves.Moves
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
 import dragomordor.simpletms.SimpleTMs.LOGGER
@@ -25,16 +27,22 @@ import java.io.InputStreamReader
 object SimpleTMsItems {
 
     internal val ITEMS: DeferredRegister<Item> = DeferredRegister.create(MOD_ID, Registries.ITEM)
-    // val defaultMoveJsonPath = "simpletms/movelearnitems/default.json"
     val defaultMoveJsonPath = "$MOD_ID/movelearnitems/default.json"
-    // val customMoveJsonPath = "simpletms/movelearnitems/custom.json"
+    // TODO: Add custom moves path here
 
     const val DEFAULT_MOVE_CONFIG_PATH = "config/$MOD_ID/default_moves.json"
     val defaultMoveConfigFile = File(DEFAULT_MOVE_CONFIG_PATH)
 
-    // TODO: Add a config file to allow for the removal of certain moves from the TM and TR lists
-    // TODO: Tags for tm and tr items
+    // Create empty list of all moves with items.
+    val ALL_MOVE_NAMES_WITH_ITEMS: MutableList<String> = mutableListOf()
+    val ALL_MOVES_WITH_ITEMS: List<Move> = mutableListOf()
+    val ALL_MOVE_TEMPLATES_WITH_ITEMS: List<MoveTemplate> = mutableListOf()
 
+    val ALL_REMOVED_DEFAULT_MOVES: List<String> = mutableListOf()
+
+    // TODO: Add a config file to allow for the removal of certain moves from the TM and TR lists
+
+    // List of all TM and TR items
     val TM_ITEMS = mutableListOf<RegistrySupplier<MoveLearnItem>>()
     val TR_ITEMS = mutableListOf<RegistrySupplier<MoveLearnItem>>()
 
@@ -70,6 +78,7 @@ object SimpleTMsItems {
 
     private fun registerMoveLearnItem(name: String, moveName: String, moveType: String, isTR: Boolean): RegistrySupplier<MoveLearnItem> {
         val item : RegistrySupplier<MoveLearnItem>
+
         if (isTR) {
             val settings: Properties = Properties().stacksTo(SimpleTMs.config.TRStackSize)
             item = ITEMS.register(name) {
@@ -86,6 +95,10 @@ object SimpleTMsItems {
             }
             TM_ITEMS.add(item)
         }
+
+        // Add move name to list of all moves with items
+        ALL_MOVE_NAMES_WITH_ITEMS.add(moveName)
+
         return item
     }
 
@@ -137,7 +150,7 @@ object SimpleTMsItems {
     }
 
     // ------------------------------------------------------------
-    // Other Functions
+    // Register Mod Items
     // ------------------------------------------------------------
 
     // Register all mod items
@@ -147,13 +160,23 @@ object SimpleTMsItems {
         LOGGER.info("Loading default moves config")
         loadDefaultMoveConfig(defaultMoveConfigFile)
         // Register items from config
-            // Default moves
+        // Default moves
         LOGGER.info("Registering default move TMs and TRs")
         registerMoveLearnItemsFromConfig(defaultMoveConfigFile)
-            // TODO: Custom moves
+        // TODO: Custom moves
         // LOGGER.info("Registering custom move TMs and TRs")
         ITEMS.register()
+
+        // Populate list of all moves with items
+        populateAllRemovedDefaultMoves()
     }
+
+
+    // ------------------------------------------------------------
+    // Other Functions
+    // ------------------------------------------------------------
+
+
 
     fun getItemStackFromName(name: String): ItemStack {
         val identifier = simpletmsResource(name)
@@ -174,6 +197,21 @@ object SimpleTMsItems {
         val moveName = move.name
         val newMoveLearnItem = getItemFromName(prefix + moveName)
         return newMoveLearnItem
+    }
+
+    fun populateAllRemovedDefaultMoves() {
+     // Moves that are not in the default moves config file, but in the resource file
+        val resourceStream =  SimpleTMs::class.java.getResourceAsStream("/$defaultMoveJsonPath")
+            ?: throw IllegalArgumentException("Resource not found: $defaultMoveJsonPath")
+        val jsonContent = InputStreamReader(resourceStream).use {  it.readText() }
+        val defaultMoves = Json.decodeFromString<List<MoveLearnItemDefinition>>(jsonContent)
+        val defaultMoveNames = defaultMoves.map { it.moveName }
+        val removedMoves = ALL_MOVE_NAMES_WITH_ITEMS.filter { !defaultMoveNames.contains(it) }
+        ALL_REMOVED_DEFAULT_MOVES.plus(removedMoves)
+    }
+
+    fun hasItemForMove(move: Move): Boolean {
+        return ALL_MOVE_NAMES_WITH_ITEMS.contains(move.name)
     }
 
 }
