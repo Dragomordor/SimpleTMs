@@ -2,20 +2,17 @@ package dragomordor.simpletms.item.custom
 
 import com.cobblemon.mod.common.Cobblemon
 import com.cobblemon.mod.common.api.moves.*
-import com.cobblemon.mod.common.api.pokemon.PokemonSpecies
-import com.cobblemon.mod.common.api.pokemon.evolution.PreEvolution
-import com.cobblemon.mod.common.api.pokemon.moves.Learnset
+import com.cobblemon.mod.common.api.moves.categories.DamageCategories
+import com.cobblemon.mod.common.api.moves.categories.DamageCategory
 import com.cobblemon.mod.common.api.text.text
 import com.cobblemon.mod.common.pokemon.Pokemon
-import com.cobblemon.mod.common.pokemon.Species
-import com.cobblemon.mod.common.util.asTranslated
 import dragomordor.simpletms.SimpleTMs
 import dragomordor.simpletms.item.SimpleTMsItem
 import dragomordor.simpletms.item.api.PokemonSelectingItemNonBattle
 import dragomordor.simpletms.util.FailureMessage
 import dragomordor.simpletms.util.fromLang
+import dragomordor.simpletms.util.interpolateColor
 import net.minecraft.client.gui.screens.Screen
-import net.minecraft.core.component.DataComponentMap
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
@@ -26,10 +23,8 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.sounds.SoundSource
-import net.minecraft.util.ColorRGBA
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.item.TooltipFlag
-import org.apache.commons.codec.binary.Hex
 import java.awt.Color
 
 
@@ -250,34 +245,133 @@ class MoveLearnItem(
         tooltipFlag: TooltipFlag
     ) {
         // Normal hover text
+        val baseGreyColor = Color.decode("#C6BDBD")
 
-        // get move from moveName
+        // Move properties
         val moveName = this.moveName
         val move = Moves.getByNameOrDummy(moveName)
-//        move.accuracy
-//        move.pp
-//        move.power
-//        move.damageCategory
+        val moveTranslatedName = move.displayName
+        val moveType = move.elementalType
+        val moveAccuracy = move.accuracy
+        val movebasePP = move.pp
+        val movemaxPP = move.maxPp
+        val movePower = move.power
+        val moveCritRatio = move.critRatio
+        val moveDamageCategory = move.damageCategory
+        val moveColour = moveType.hue // Int given by the hue of the type
 
-        // Description
-        val moveDescription = move.description
-        // Make the description
-        val moveDescriptionColourHexString = "CECACA"
-        val moveDescriptionColour = Color.decode(moveDescriptionColourHexString)
-        val moveDescriptionComponent = moveDescription.withColor(moveDescriptionColour.rgb)
-        list.add(moveDescription)
+        // Ranges for power, accuracy and crit for colour scales
+        val powerRange = 0.0 to 200.0
+        val accuracyRange = 0.0 to 100.0
+        val critRange = 1.0 to 4.0
+        val ppRange = 0.0 to 48.0
 
-        if (Screen.hasShiftDown()) {
+        // Colour scales
+        val powerColors = Color.WHITE to Color.ORANGE
+        val accuracyColors = Color.RED to Color.GREEN
+        val ppColors = Color.WHITE to Color.ORANGE
+        val critColors = Color.WHITE to Color.ORANGE
+
+        // Exceptions:
+        // Power = 0 -> Show 'N/A' instead of 0
+        // Accuracy = -1 -> Show 'N/A' instead of -1
+        // N/A should be in blue
+
+        // Get the colour for power, accuracy and crit
+        val movePowerColor = interpolateColor(movePower, powerRange.first, powerRange.second, powerColors.first, powerColors.second)
+        val moveAccuracyColor = interpolateColor(moveAccuracy, accuracyRange.first, accuracyRange.second, accuracyColors.first, accuracyColors.second)
+        val movePPColor = interpolateColor(movemaxPP.toDouble(), ppRange.first, ppRange.second, ppColors.first, ppColors.second)
+        val moveCritColor = interpolateColor(moveCritRatio, critRange.first, critRange.second, critColors.first, critColors.second)
+
+        if (!Screen.hasShiftDown()) {
+            // item description
+            val itemDescription = ("Teaches the move ").text().withColor(baseGreyColor.rgb).append(moveTranslatedName.withColor(moveColour)).append(" to any Pokémon able to learn it.".text().withColor(baseGreyColor.rgb))
+            list.add(itemDescription)
+
+            // Hold shift for move info text
+            val holdShiftText = ("Hold".text().withColor(baseGreyColor.rgb)).append(" §oSHIFT§r ".text().withColor(Color.ORANGE.rgb)).append("for move info.".text().withColor(baseGreyColor.rgb))
+            list.add(holdShiftText)
+        } else {
+            // Show move info
+            // Move Description
+            val moveDescription = move.description
+            // Make the description
+            val moveDescriptionComponent = moveDescription.withColor(baseGreyColor.rgb)
+            list.add(moveDescriptionComponent)
+
             // Move Type
-            val moveElementalType = move.elementalType
-            val moveTypeName = moveElementalType.displayName
-            val moveColour = moveElementalType.hue // Int given by the hue of the type
-            val moveTypeComponent = moveTypeName.withColor(moveColour)
-            val langTypeText = ("Move Type: ").text()
-            list.add(langTypeText.append(moveTypeComponent))
-            // Line break
-            list.add("".text())
+            val moveTypeBase = ("Type: ").text().withColor(baseGreyColor.rgb)
+            val moveTypeComponent = moveType.displayName.withColor(moveColour)
+            list.add(moveTypeBase.append(moveTypeComponent))
+
+            // Move Category
+            // Colours for categories
+                // Red for physical
+            val physicalColour = Color.RED
+                // Yellow for special
+            val specialColour = Color.YELLOW
+                // Green for status
+            val statusColour = Color.GREEN
+            // Get the colour for the category
+            val moveCategoryColour = when (moveDamageCategory) { // Get the colour for the category
+                DamageCategories.PHYSICAL -> physicalColour
+                DamageCategories.SPECIAL -> specialColour
+                DamageCategories.STATUS -> statusColour
+                else -> {
+                    baseGreyColor
+                }
+            }
+            // Category Text
+            val moveCategoryBase = ("Category: ").text().withColor(baseGreyColor.rgb)
+            val moveCategoryComponent = moveDamageCategory.displayName.copy().withColor(moveCategoryColour.rgb)
+            list.add(moveCategoryBase.append(moveCategoryComponent))
+
+            // Move Power
+            var movePowerBase = ("Power: ").text().withColor(baseGreyColor.rgb)
+            var movePowerComponent = movePower.toString().text().withColor(movePowerColor.rgb)
+            if (movePower == 0.0) { // If power is 0, show N/A
+                movePowerBase = ("Power: ").text().withColor(baseGreyColor.rgb)
+                movePowerComponent = "N/A".text().withColor(Color.BLUE.rgb)
+            }
+            list.add(movePowerBase.append(movePowerComponent))
+
+            // Move Accuracy
+            var moveAccuracyBase = ("Accuracy: ").text().withColor(baseGreyColor.rgb)
+            var moveAccuracyComponent = moveAccuracy.toString().text().withColor(moveAccuracyColor.rgb)
+            if (moveAccuracy == -1.0) { // If accuracy is -1, show N/A
+                moveAccuracyBase = ("Accuracy: ").text().withColor(baseGreyColor.rgb)
+                moveAccuracyComponent = "N/A".text().withColor(Color.BLUE.rgb)
+            }
+            list.add(moveAccuracyBase.append(moveAccuracyComponent))
+
+            // Move PP
+                // Show base and max PP:
+                // Base PP: 10, Max PP: 12
+
+            val movePPBase = ("Base PP: ").text().withColor(baseGreyColor.rgb)
+            val movePPComponent = movebasePP.toString().text().withColor(movePPColor.rgb)
+            val movePPMax = (", Max PP: ").text().withColor(baseGreyColor.rgb)
+            val movePPMaxComponent = movemaxPP.toString().text().withColor(movePPColor.rgb)
+            list.add(movePPBase.append(movePPComponent).append(movePPMax).append(movePPMaxComponent))
+
+            // Move Crit Ratio
+            val moveCritBase = ("Crit Ratio: ").text().withColor(baseGreyColor.rgb)
+            val moveCritComponent = moveCritRatio.toString().text().withColor(moveCritColor.rgb)
+            list.add(moveCritBase.append(moveCritComponent))
         }
+
+        if (Screen.hasControlDown()) {
+            // Show number of uses left
+            var usesLeftNr = itemStack.maxDamage - itemStack.damageValue
+            if (usesLeftNr == 0) {
+                usesLeftNr = 1
+            }
+            val usesLeft = usesLeftNr.toString().text().withColor(Color.RED.rgb)
+            val usesLeftText = ("Uses left: ").text().withColor(baseGreyColor.rgb)
+            list.add(usesLeftText.append(usesLeft))
+        }
+
+        // Super call
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag)
     }
 }

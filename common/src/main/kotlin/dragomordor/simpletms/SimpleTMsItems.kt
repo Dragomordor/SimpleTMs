@@ -25,7 +25,8 @@ import java.io.InputStreamReader
 object SimpleTMsItems {
 
     internal val ITEMS: DeferredRegister<Item> = DeferredRegister.create(MOD_ID, Registries.ITEM)
-    val defaultMoveJsonPath = "simpletms/movelearnitems/default.json"
+    // val defaultMoveJsonPath = "simpletms/movelearnitems/default.json"
+    val defaultMoveJsonPath = "$MOD_ID/movelearnitems/default.json"
     // val customMoveJsonPath = "simpletms/movelearnitems/custom.json"
 
     const val DEFAULT_MOVE_CONFIG_PATH = "config/$MOD_ID/default_moves.json"
@@ -97,7 +98,7 @@ object SimpleTMsItems {
             registerMoveLearnItem(
                 name = "tm_" + itemDefinition.moveName,
                 moveName = itemDefinition.moveName,
-                moveType = itemDefinition.moveType,
+                moveType = itemDefinition.Type,
                 isTR = false
             )
         }
@@ -106,7 +107,7 @@ object SimpleTMsItems {
             registerMoveLearnItem(
                 name = "tr_" + itemDefinition.moveName,
                 moveName = itemDefinition.moveName,
-                moveType = itemDefinition.moveType,
+                moveType = itemDefinition.Type,
                 isTR = true
             )
         }

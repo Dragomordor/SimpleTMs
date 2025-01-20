@@ -9,6 +9,7 @@ import kotlinx.serialization.json.Json
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item
+import java.awt.Color
 import java.io.InputStreamReader
 
 fun simpletmsResource(path: String) = ResourceLocation.fromNamespaceAndPath(SimpleTMs.MOD_ID, path)
@@ -16,19 +17,8 @@ fun simpletmsResource(path: String) = ResourceLocation.fromNamespaceAndPath(Simp
 @Serializable
 data class MoveLearnItemDefinition(
     val moveName: String,
-    val moveType: String,
+    val Type: String,
 )
-
-//fun loadMoveLearnItemsFromJson(jsonFilePath: String): List<MoveLearnItemDefinition> {
-//    // Load JSON file from resource directory
-//    val resourceStream =  SimpleTMs::class.java.getResourceAsStream("/$jsonFilePath")
-//        ?: throw IllegalArgumentException("Resource not found: $jsonFilePath")
-//
-//    val jsonContent = InputStreamReader(resourceStream).use {  it.readText() }
-//    val itemDefinitions = Json.decodeFromString<List<MoveLearnItemDefinition>>(jsonContent)
-//
-//    return itemDefinitions
-//}
 
 fun fromLang(
     prefixOrModid: String,
@@ -49,5 +39,14 @@ class FailureMessage() {
         }
     }
 }
+
+fun interpolateColor(value: Double, min: Double, max: Double, startColor: Color, endColor: Color): Color {
+    val ratio = ((value - min) / (max - min)).coerceIn(0.0, 1.0) // Clamp ratio between 0 and 1
+    val red = (startColor.red + (endColor.red - startColor.red) * ratio).toInt()
+    val green = (startColor.green + (endColor.green - startColor.green) * ratio).toInt()
+    val blue = (startColor.blue + (endColor.blue - startColor.blue) * ratio).toInt()
+    return Color(red, green, blue)
+}
+
 
 

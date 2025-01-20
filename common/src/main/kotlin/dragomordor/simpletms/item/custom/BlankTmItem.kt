@@ -1,6 +1,7 @@
 package dragomordor.simpletms.item.custom
 
 import com.cobblemon.mod.common.api.moves.Move
+import com.cobblemon.mod.common.api.text.text
 import com.cobblemon.mod.common.pokemon.Pokemon
 import com.cobblemon.mod.common.util.giveOrDropItemStack
 import dragomordor.simpletms.SimpleTMs
@@ -8,6 +9,7 @@ import dragomordor.simpletms.SimpleTMsItems.getTMorTRItemFromMove
 import dragomordor.simpletms.item.SimpleTMsItem
 import dragomordor.simpletms.item.api.PokemonAndMoveSelectingItemNonBattle
 import dragomordor.simpletms.util.fromLang
+import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
@@ -18,7 +20,9 @@ import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
+import java.awt.Color
 
 class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(settings), PokemonAndMoveSelectingItemNonBattle {
 
@@ -129,6 +133,37 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
                 this.message = message
             }
         }
+    }
+
+    // ------------------------------------------------------------------
+    // Hover text
+    // ------------------------------------------------------------------
+
+    override fun appendHoverText(
+        itemStack: ItemStack,
+        tooltipContext: TooltipContext,
+        list: MutableList<Component>,
+        tooltipFlag: TooltipFlag
+    ) {
+
+        val baseGreyColor = Color.decode("#C6BDBD")
+        val isTR = this.isTR
+        val itemType = if (isTR) "TR" else "TM"
+
+        // Normal hover text
+        // val blankItemDescription = ("An item that turns a Pokémon's known move into a $ to teach others.").text().withColor(baseGreyColor.rgb)
+        val blankItemDescription = ("Copies a Pokémon's move into a $itemType for teaching.").text().withColor(baseGreyColor.rgb)
+        list.add(blankItemDescription)
+
+        if (Screen.hasControlDown()) {
+            // Show number of uses left
+            val usesLeft = (itemStack.maxDamage - itemStack.damageValue).toString().text().withColor(Color.RED.rgb)
+            val usesLeftText = ("Uses left: ").text().withColor(baseGreyColor.rgb)
+            list.add(usesLeftText.append(usesLeft))
+        }
+
+        // Super call
+        super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag)
     }
 
 }
