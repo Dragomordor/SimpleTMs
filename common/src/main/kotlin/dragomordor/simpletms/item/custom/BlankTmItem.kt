@@ -68,19 +68,12 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
 
         player.giveOrDropItemStack(ItemStack(newMoveLearnItem))
 
-        // Success sound and shrink the stack
+        // Success sound
         player.playNotifySound(SoundEvents.NOTE_BLOCK_PLING.value(), SoundSource.PLAYERS, 1.0F, 1.0F)
-
         // Damage the stack if player is not in creative mode
         if (!player.isCreative) {
-            // If the item is single use, shrink the stack
-            if (isTR) {
-                stack.shrink(1)
-            } else {
-                stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND)
-            }
+            stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND)
         }
-
         // Put item on cooldown if applicable
         if (!player.isCreative && !isTR && stack.count > 0 && cooldownTicks > 0) {
             player.cooldowns.addCooldown(this, cooldownTicks)

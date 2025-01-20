@@ -1,4 +1,5 @@
 {
+    "replace": false,
     "values": [
         "simpletms:tr_accelerock",
         "simpletms:tr_ancientpower",

@@ -68,28 +68,24 @@ class MoveLearnItem(
 
         val moveTranslatedName = moveToTeach.displayName
 
-        // (2+3) Check if the Pokémon can learn the move
+        val TMusuable = SimpleTMs.config.TMsUsable
+        val TRusuable = SimpleTMs.config.TRsUsable
+
+        // (2) Check if the TM/TR is usable
+        if ((!TMusuable && !isTR) || (!TRusuable && isTR)) {
+            val errorKey = if (isTR) "error.not_usable.trs_disabled" else "error.not_usable.tms_disabled"
+            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID, errorKey))
+            player.displayClientMessage(FailureMessage.getFailureMessage(), true)
+            return InteractionResultHolder.fail(stack)
+        }
+
+        // (3+4) Check if the Pokémon can learn the move
         if (!canPokemonLearnMove(pokemon, moveToTeach)) {
             // Pokémon can't learn the move, so do nothing
             // Display the failure message
             player.displayClientMessage(FailureMessage.getFailureMessage(), true)
             return InteractionResultHolder.fail(stack)
         } else {
-
-            // (4) Check item cooldown if applicable
-            val cooldownTicks = SimpleTMs.config.TMCoolDownTicks
-
-            if (player.cooldowns.isOnCooldown(this)) {
-                // Convert cooldown ticks to hours, minutes, and seconds
-                val cooldownHH = Math.floorDiv(cooldownTicks, 72000)
-                val cooldownMM = Math.floorDiv(cooldownTicks- (cooldownHH * 72000), 1200)
-                val cooldownSS = Math.floorDiv(cooldownTicks - (cooldownHH * 72000) - (cooldownMM * 1200), 20)
-                val cooldownString = "$cooldownHH:$cooldownMM:$cooldownSS"
-                // Display the failure message
-                FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_learnable.on_cooldown", stack.displayName ,cooldownString))
-                player.displayClientMessage(FailureMessage.getFailureMessage(), true)
-                return InteractionResultHolder.fail(stack)
-            }
 
             // (5) If the Pokémon can learn the move, teach it the move
             // Success message
@@ -122,6 +118,7 @@ class MoveLearnItem(
             }
 
             // Put item on cooldown if applicable
+            val cooldownTicks = SimpleTMs.config.TMCoolDownTicks
             if (!player.isCreative && !isTR && stack.count > 0 && cooldownTicks > 0) {
                 player.cooldowns.addCooldown(this, cooldownTicks)
             }
@@ -142,43 +139,86 @@ class MoveLearnItem(
     // Custom Functions
     // ------------------------------------------------------------------
 
-    private fun canPokemonLearnMove(pokemon: Pokemon, moveToTeach: MoveTemplate?): Boolean {
+    // TODO: Replacer funciton for all canPokemonLearnMove functions
+    private fun canPokemonLearnMove(pokemon: Pokemon, moveToTeach: MoveTemplate): Boolean {
 
-        // (2.1) Get current move set and benched moves of the pokemon
+        // (3.1) Get current move set and benched moves of the pokemon
         val currentMoves = pokemon.moveSet
         val benchedMoves = pokemon.benchedMoves
         val pokemonTranslateName = pokemon.species.translatedName
-
-        // (2.3) Check if the moveToTeach is a valid move
-        if (moveToTeach == null) {
-            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_learnable.not_valid_move"))
-            return false
-        }
         val moveTranslatedName = moveToTeach.displayName
 
-        // (2.4) Check if the move is already in the move set
-        if (currentMoves.getMoves().stream().anyMatch { it.name == moveToTeach.name }) {
-            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_learnable.already_knows_move", pokemonTranslateName, moveTranslatedName))
-            return false
-        }
-        // (2.5) Check if the move is already in the benched moves
+        val TMMovesLearnable = SimpleTMs.config.TMMovesLearnable
+        val eggMovesLearnable = SimpleTMs.config.eggMovesLearnable
+        val tutorMovesLearnable = SimpleTMs.config.tutorMovesLearnable
+        val levelMovesLearnable = SimpleTMs.config.levelMovesLearnable
+        val anyMoveLearnable = SimpleTMs.config.anyMovesLearnable
 
-            // Check if the move is in the benched moves
-        if (benchedMoveContainsMove(benchedMoves, moveToTeach)) {
+        // (3.2) Check if the move is already in the move set or benched moves
+        if ((currentMoves.getMoves().stream().anyMatch { it.name == moveToTeach.name }) ||
+            // (benchedMoveContainsMove(benchedMoves, moveToTeach)))
+            benchedMoves.any { it.moveTemplate == moveToTeach } ) {
             FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_learnable.already_knows_move", pokemonTranslateName, moveTranslatedName))
             return false
         }
-        // (2.6) Check if the move is a valid move for the Pokémon
-        if (!inPokemonMoveList(pokemon, moveToTeach)) {
-            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_learnable.not_in_learnable_moves", pokemonTranslateName, moveTranslatedName))
-            return false
+
+        // (3.3) Check if any move is learnable
+        if (anyMoveLearnable) {
+            return true
         }
-        // (3) If all checks pass, return true
-        return true
+
+        // (3.3) Add all list of learnable moves to a list and check if the move is in the list, otherwise return false
+        println("Checking if move is in learnable moves")
+        val learnableMoves = mutableListOf<MoveTemplate>()
+        println("Learnable moves list: $learnableMoves")
+
+        // TM Moves
+        if (TMMovesLearnable) {
+            println("Adding TM moves")
+            learnableMoves.addAll(pokemon.form.moves.tmMoves)
+            println("Learnable moves list after tm moves: $learnableMoves")
+
+        }
+        // Tutor Moves
+        if (tutorMovesLearnable) {
+            println("Adding Tutor moves")
+            learnableMoves.addAll(pokemon.form.moves.tutorMoves)
+            println("Learnable moves list after tutor moves: $learnableMoves")
+        }
+        // Egg Moves
+        if (eggMovesLearnable) {
+            println("Adding Egg moves")
+            learnableMoves.addAll(pokemon.form.moves.eggMoves)
+            println("Learnable moves list after egg moves: $learnableMoves")
+            // Check if the move is in the egg moves any pre-evolution
+            var preEvolution = pokemon.form.preEvolution
+            for (i in 0 until 4) {
+                if (preEvolution?.species == null) {
+                    break
+                }
+                learnableMoves.addAll(preEvolution.form.moves.eggMoves)
+                preEvolution = preEvolution.form.preEvolution
+            }
+            println("Learnable moves list after pre-evolution: $learnableMoves")
+        }
+        // Level Moves
+        if (levelMovesLearnable) {
+            println("Adding Level moves")
+            learnableMoves.addAll(pokemon.form.moves.getLevelUpMovesUpTo(Cobblemon.config.maxPokemonLevel))
+            println("Learnable moves list after level moves: $learnableMoves")
+        }
+
+        // Remove duplicates
+        println("Learnable moves list before distinct: $learnableMoves")
+        learnableMoves.distinct()
+        println("Learnable moves list after distinct: $learnableMoves")
+
+        // Check if the move is in the learnable moves list
+        return learnableMoves.contains(moveToTeach)
     }
 
     // Wrapper for canPokemonLearnMove with only pokemon as input
-    fun canPokemonLearnMove(pokemon: Pokemon): Boolean {
+    private fun canPokemonLearnMove(pokemon: Pokemon): Boolean {
         val isTR = this.isTR
 
         // First check if config allows TMs and TRs
@@ -191,75 +231,10 @@ class MoveLearnItem(
             return false
         }
 
-        // TODO: add excluded moves from config here
-
         val moveName = this.moveName
         val move = Moves.getByNameOrDummy(moveName)
         return canPokemonLearnMove(pokemon, move)
     }
-
-
-    // Function to check if pokemon is capable of learning this specific move
-    fun inPokemonMoveList(pokemon: Pokemon, move: MoveTemplate): Boolean {
-
-        // TODO: change to add all learnable moves to a list and check if move is in list
-
-        if (SimpleTMs.config.anyMovesLearnable) {
-            return true
-        }
-        // (2) Check if the move is in the pokemons tm move list
-        if (SimpleTMs.config.TMMovesLearnable && pokemon.form.moves.tmMoves.contains(move)) {
-            return true
-        }
-        // (3) Check if the move is in the pokemons tutor move list
-        if (SimpleTMs.config.tutorMovesLearnable && pokemon.form.moves.tutorMoves.contains(move)) {
-            return true
-        }
-        // (4) Check if the move is in the pokemons egg move list
-            // TODO: Check if egg move is in pokemons egg move list or in its pre-evolutions egg move list
-        if (SimpleTMs.config.eggMovesLearnable) {
-            // Current pokemon has the move as an egg move
-            if (pokemon.form.moves.eggMoves.contains(move)) {
-                println("Move is in egg moves")
-                return true
-            }
-            // Check if the move is in the egg moves any pre-evolution
-            var preEvolution = pokemon.form.preEvolution
-            for (i in 0 until 4) {
-                if (preEvolution?.species == null) {
-                    return false
-                }
-                if (preEvolution.form.moves.eggMoves.contains(move)) {
-                    return true
-                }
-                preEvolution = preEvolution.form.preEvolution
-            }
-        }
-
-        // (5) Check if the move is in the pokemons level up move list
-        if (SimpleTMs.config.levelMovesLearnable) {
-            // Get all level moves of the pokemon
-            // TODO: Check if level moves are correctly learned
-            val levelMoves = pokemon.form.moves.getLevelUpMovesUpTo(Cobblemon.config.maxPokemonLevel)
-            if (levelMoves.contains(move)) {
-                return true
-            }
-        }
-
-        return false
-    }
-
-    // Function to check if a move is in the benched moves
-    fun benchedMoveContainsMove(benchedMoves: BenchedMoves, move: MoveTemplate): Boolean {
-        for (benchedMove in benchedMoves) {
-            if (benchedMove.moveTemplate == move) {
-                return true
-            }
-        }
-        return false
-    }
-
-
 
     // ------------------------------------------------------------------
     // Hover Text

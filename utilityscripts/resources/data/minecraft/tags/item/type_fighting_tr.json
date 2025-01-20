@@ -1,4 +1,5 @@
 {
+    "replace": false,
     "values": [
         "simpletms:tr_armthrust",
         "simpletms:tr_aurasphere",

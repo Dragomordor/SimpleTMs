@@ -1,4 +1,5 @@
 {
+    "replace": false,
     "values": [
         "simpletms:tm_attackorder",
         "simpletms:tm_bugbite",

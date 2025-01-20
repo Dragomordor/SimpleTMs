@@ -1,4 +1,5 @@
 {
+    "replace": false,
     "values": [
         "simpletms:tr_acid",
         "simpletms:tr_acidarmor",

@@ -1,4 +1,5 @@
 {
+    "replace": false,
     "values": [
         "simpletms:tm_assurance",
         "simpletms:tm_baddybad",

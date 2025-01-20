@@ -1,4 +1,5 @@
 {
+    "replace": false,
     "values": [
         "simpletms:tm_absorb",
         "simpletms:tm_appleacid",

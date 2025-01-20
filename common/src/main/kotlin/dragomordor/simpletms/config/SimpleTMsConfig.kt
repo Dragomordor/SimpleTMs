@@ -55,6 +55,10 @@ class SimpleTMsConfig {
 
     @NodeCategory(Category.ItemProperties)
     @IntConstraint(min = 0, max = 1024)
+    var blankTRBaseDurability: Int = 1
+
+    @NodeCategory(Category.ItemProperties)
+    @IntConstraint(min = 0, max = 1024)
     var TMBaseDurability: Int = 32
 
     @NodeCategory(Category.DropRate)
@@ -66,19 +70,19 @@ class SimpleTMsConfig {
 
     @NodeCategory(Category.DropRate)
     @DoubleConstraint(min = 0.0, max = 1.0)
-    var DropRateTRInBattle: Double = 1.0
+    var DropRateTRInBattle: Double = 0.1
 
     @NodeCategory(Category.DropRate)
     @DoubleConstraint(min = 0.0, max = 1.0)
-    var DropRateTMtoTRRatioInBattle: Double = 0.5
+    var DropRateTMtoTRRatioInBattle: Double = 0.1
 
     @NodeCategory(Category.DropRate)
     @DoubleConstraint(min = 0.0, max = 1.0)
-    var DropRateTROutsideOfBattle: Double = 1.0
+    var DropRateTROutsideOfBattle: Double = 0.1
 
     @NodeCategory(Category.DropRate)
     @DoubleConstraint(min = 0.0, max = 1.0)
-    var DropRateTMtoTRRatioOutsideOfBattle: Double = 0.5
+    var DropRateTMtoTRRatioOutsideOfBattle: Double = 0.1
 
     @NodeCategory(Category.DropRate)
     var DropAny: Boolean = false

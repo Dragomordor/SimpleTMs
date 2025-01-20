@@ -1,4 +1,5 @@
 {
+    "replace": false,
     "values": [
         "simpletms:tm_boneclub",
         "simpletms:tm_bonemerang",

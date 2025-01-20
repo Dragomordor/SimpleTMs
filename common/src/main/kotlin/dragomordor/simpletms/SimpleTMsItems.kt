@@ -50,13 +50,16 @@ object SimpleTMsItems {
 
     private fun registerBlankTmItem(name: String, isTR: Boolean): RegistrySupplier<BlankTmItem> {
 
-        var settings: Properties
+        val settings: Properties
 
         if (isTR) {
             settings = Properties().stacksTo(SimpleTMs.config.TRStackSize)
+            if (SimpleTMs.config.blankTRBaseDurability > 0) {
+                settings.durability(SimpleTMs.config.blankTRBaseDurability)
+            }
         } else {
             settings = Properties().stacksTo(1)
-            if (SimpleTMs.config.TMBaseDurability > 0) {
+            if (SimpleTMs.config.blankTMBaseDurability > 0) {
                 settings.durability(SimpleTMs.config.blankTMBaseDurability)
             }
         }
@@ -67,18 +70,13 @@ object SimpleTMsItems {
     private fun registerMoveLearnItem(name: String, moveName: String, moveType: String, isTR: Boolean): RegistrySupplier<MoveLearnItem> {
         val item : RegistrySupplier<MoveLearnItem>
         if (isTR) {
-            val settings: Properties =
-                Properties()
-                    .stacksTo(SimpleTMs.config.TRStackSize)
+            val settings: Properties = Properties().stacksTo(SimpleTMs.config.TRStackSize)
             item = ITEMS.register(name) {
                 MoveLearnItem(moveName, moveType, isTR, settings)
             }
             TR_ITEMS.add(item)
         } else {
-            val settings: Properties =
-                Properties()
-                    .stacksTo(1)
-                    // TODO: if TMBaseDurability is 0, make it unbreakable
+            val settings: Properties = Properties().stacksTo(1)
             if (SimpleTMs.config.TMBaseDurability > 0) {
                 settings.durability(SimpleTMs.config.TMBaseDurability)
             }

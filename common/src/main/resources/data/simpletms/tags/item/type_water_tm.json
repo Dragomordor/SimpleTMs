@@ -1,4 +1,5 @@
 {
+    "replace": false,
     "values": [
         "simpletms:tm_aquacutter",
         "simpletms:tm_aquajet",

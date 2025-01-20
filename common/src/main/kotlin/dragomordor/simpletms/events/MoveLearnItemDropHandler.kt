@@ -100,26 +100,18 @@ object MoveLearnItemDropHandler : EventHandler {
         // Get an applicable move template from the killed pokemon
         // TODO: Change so move can be selected from list of 3/4 random moves (amount from config) -- only inside battle. Outside of battle, config whether screen is shown
         val droppedMoveTemplate = getRandomApplicableMoveTemplate(killedPokemon)
+        val randomDouble = Math.random()
+        val isTM = randomDouble < (DropRateTR * DropRateTMtoTRRatio)
+        val isTR = randomDouble < DropRateTR
 
-        // Determine whether to drop a TM or TR
-        val randomDouble = Math.random().toDouble()
-        if (randomDouble < (DropRateTR * DropRateTMtoTRRatio)) {
-            // Drop a TM
-            val droppedTM = getTMorTRItemFromMove(droppedMoveTemplate.create(), false)
-            val droppedTMStack = ItemStack(droppedTM)
+        if (isTM || isTR) {
+            val isTRItem = isTR && !isTM
+            val droppedItem = getTMorTRItemFromMove(droppedMoveTemplate.create(), isTRItem)
+            val droppedItemStack = ItemStack(droppedItem)
             // TODO: add message in battle chat
-            player.giveOrDropItemStack(droppedTMStack, true)
-
-        } else if (randomDouble < DropRateTR) {
-            // Drop a TR
-            val droppedTR = getTMorTRItemFromMove(droppedMoveTemplate.create(), true)
-            val droppedTRStack = ItemStack(droppedTR)
-            // TODO: add message in battle chat
-            player.giveOrDropItemStack(droppedTRStack, true)
-        } else {
-            // Drop nothing
-            return
+            player.giveOrDropItemStack(droppedItemStack, true)
         }
+
     }
 
 

@@ -1,4 +1,5 @@
 {
+    "replace": false,
     "values": [
         "simpletms:tm_acrobatics",
         "simpletms:tm_aerialace",

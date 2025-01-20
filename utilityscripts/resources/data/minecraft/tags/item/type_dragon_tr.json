@@ -1,4 +1,5 @@
 {
+    "replace": false,
     "values": [
         "simpletms:tr_breakingswipe",
         "simpletms:tr_clangingscales",

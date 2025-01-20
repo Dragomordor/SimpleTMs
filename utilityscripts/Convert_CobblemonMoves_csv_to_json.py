@@ -231,8 +231,11 @@ print("SUCCESS: (3/5) Models JSON files created successfully!")
 # Format of each file:
 
 # {
-#     values: [
+#     "replace": false,
+#     "values": [
 #         "simpletms:{tm/tr}_{movename}",
+#         "simpletms:{tm/tr}_{movename}",
+#         "simpletms:{tm/tr}_{movename}"
 #     ]
 # }
 
@@ -241,10 +244,12 @@ print("SUCCESS: (3/5) Models JSON files created successfully!")
 # --------------------------------
 # Overall
 tm_items_data = {
-        "values": [f"simpletms:tm_{move['moveName']}" for move in default_moves]
-    }
+    "replace": False,
+    "values": [f"simpletms:tm_{move['moveName']}" for move in default_moves]
+}
 
 tr_items_data = {
+    "replace": False,
     "values": [f"simpletms:tr_{move['moveName']}" for move in default_moves]
 }
 
@@ -259,44 +264,47 @@ with open(tm_items_path, 'w') as tm_items_file:
 
 with open(tr_items_path, 'w') as tr_items_file:
     json.dump(tr_items_data, tr_items_file, indent=4)
+    # For each type
+    for moveType in data['moveType'].unique():
+        tm_type_data = {
+            "replace": False,
+            "values": [f"simpletms:tm_{move['moveName']}" for move in default_moves if move['moveType'] == moveType]
+        }
+        
+        tr_type_data = {
+            "replace": False,
+            "values": [f"simpletms:tr_{move['moveName']}" for move in default_moves if move['moveType'] == moveType]
+        }
+        
+        tm_type_path = f"resources/data/minecraft/tags/item/type_{moveType.lower()}_tm.json"
+        tr_type_path = f"resources/data/minecraft/tags/item/type_{moveType.lower()}_tr.json"
+        
+        with open(tm_type_path, 'w') as tm_type_file:
+            json.dump(tm_type_data, tm_type_file, indent=4)
+        
+        with open(tr_type_path, 'w') as tr_type_file:
+            json.dump(tr_type_data, tr_type_file, indent=4)
 
-# For each type
-for moveType in data['moveType'].unique():
-    tm_type_data = {
-        "values": [f"simpletms:tm_{move['moveName']}" for move in default_moves if move['moveType'] == moveType]
-    }
-    
-    tr_type_data = {
-        "values": [f"simpletms:tr_{move['moveName']}" for move in default_moves if move['moveType'] == moveType]
-    }
-    
-    tm_type_path = f"resources/data/minecraft/tags/item/type_{moveType.lower()}_tm.json"
-    tr_type_path = f"resources/data/minecraft/tags/item/type_{moveType.lower()}_tr.json"
-    
-    with open(tm_type_path, 'w') as tm_type_file:
-        json.dump(tm_type_data, tm_type_file, indent=4)
-    
-    with open(tr_type_path, 'w') as tr_type_file:
-        json.dump(tr_type_data, tr_type_file, indent=4)
-
-# For each category
-for category in data['Category'].unique():
-    tm_category_data = {
-        "values": [f"simpletms:tm_{move['moveName']}" for move in default_moves if move['Category'] == category]
-    }
-    
-    tr_category_data = {
-        "values": [f"simpletms:tr_{move['moveName']}" for move in default_moves if move['Category'] == category]
-    }
-    
-    tm_category_path = f"resources/data/minecraft/tags/item/category_{category.lower()}_tm.json"
-    tr_category_path = f"resources/data/minecraft/tags/item/category_{category.lower()}_tr.json"
-    
-    with open(tm_category_path, 'w') as tm_category_file:
-        json.dump(tm_category_data, tm_category_file, indent=4)
-    
-    with open(tr_category_path, 'w') as tr_category_file:
-        json.dump(tr_category_data, tr_category_file, indent=4)
+    # For each category
+    for category in data['Category'].unique():
+        tm_category_data = {
+            "replace": False,
+            "values": [f"simpletms:tm_{move['moveName']}" for move in default_moves if move['Category'] == category]
+        }
+        
+        tr_category_data = {
+            "replace": False,
+            "values": [f"simpletms:tr_{move['moveName']}" for move in default_moves if move['Category'] == category]
+        }
+        
+        tm_category_path = f"resources/data/minecraft/tags/item/category_{category.lower()}_tm.json"
+        tr_category_path = f"resources/data/minecraft/tags/item/category_{category.lower()}_tr.json"
+        
+        with open(tm_category_path, 'w') as tm_category_file:
+            json.dump(tm_category_data, tm_category_file, indent=4)
+        
+        with open(tr_category_path, 'w') as tr_category_file:
+            json.dump(tr_category_data, tr_category_file, indent=4)
 
 
 print("SUCCESS: (4/5) Item Tags JSON files created successfully!")

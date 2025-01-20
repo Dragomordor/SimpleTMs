@@ -1,4 +1,5 @@
 {
+    "replace": false,
     "values": [
         "simpletms:tr_aurawheel",
         "simpletms:tr_boltbeak",

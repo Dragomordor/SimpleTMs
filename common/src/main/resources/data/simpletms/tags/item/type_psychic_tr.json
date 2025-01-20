@@ -1,4 +1,5 @@
 {
+    "replace": false,
     "values": [
         "simpletms:tr_agility",
         "simpletms:tr_allyswitch",
