@@ -100,9 +100,6 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
     // Helper methods
     // ------------------------------------------------------------------
 
-
-
-
     private fun canUseBlankOnMove(isTR: Boolean): Boolean {
         val canUseBlank = canUseBlank(isTR)
         // TODO: Add excluded moves here?
