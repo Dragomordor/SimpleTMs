@@ -26,8 +26,11 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.sounds.SoundSource
+import net.minecraft.util.ColorRGBA
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.item.TooltipFlag
+import org.apache.commons.codec.binary.Hex
+import java.awt.Color
 
 
 class MoveLearnItem(
@@ -246,16 +249,34 @@ class MoveLearnItem(
         list: MutableList<Component>,
         tooltipFlag: TooltipFlag
     ) {
+        // Normal hover text
 
-        // Normal Text
+        // get move from moveName
+        val moveName = this.moveName
+        val move = Moves.getByNameOrDummy(moveName)
+//        move.accuracy
+//        move.pp
+//        move.power
+//        move.damageCategory
+
+        // Description
+        val moveDescription = move.description
+        // Make the description
+        val moveDescriptionColourHexString = "CECACA"
+        val moveDescriptionColour = Color.decode(moveDescriptionColourHexString)
+        val moveDescriptionComponent = moveDescription.withColor(moveDescriptionColour.rgb)
+        list.add(moveDescription)
 
         if (Screen.hasShiftDown()) {
-            // Shift is pressed
-            if (Screen.hasControlDown()) {
-                // Shift + Control is pressed
-                    // Add the move name just for easier searching in creative and jei -- hidden
-                // list.add(this.moveName.text())
-            }
+            // Move Type
+            val moveElementalType = move.elementalType
+            val moveTypeName = moveElementalType.displayName
+            val moveColour = moveElementalType.hue // Int given by the hue of the type
+            val moveTypeComponent = moveTypeName.withColor(moveColour)
+            val langTypeText = ("Move Type: ").text()
+            list.add(langTypeText.append(moveTypeComponent))
+            // Line break
+            list.add("".text())
         }
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag)
     }

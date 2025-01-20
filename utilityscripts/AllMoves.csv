@@ -1,953 +1,902 @@
-﻿moveName,moveType,Name,Category
-10000000voltthunderbolt,Electric,"10,000,000 Volt Thunderbolt",Special
-absorb,Grass,Absorb,Special
-accelerock,Rock,Accelerock,Physical
-acid,Poison,Acid,Special
-acidarmor,Poison,Acid Armor,Status
-aciddownpour,Poison,Acid Downpour,Physical
-acidspray,Poison,Acid Spray,Special
-acrobatics,Flying,Acrobatics,Physical
-acupressure,Normal,Acupressure,Status
-aerialace,Flying,Aerial Ace,Physical
-aeroblast,Flying,Aeroblast,Special
-afteryou,Normal,After You,Status
-agility,Psychic,Agility,Status
-aircutter,Flying,Air Cutter,Special
-airslash,Flying,Air Slash,Special
-alloutpummeling,Fighting,All-Out Pummeling,Physical
-allyswitch,Psychic,Ally Switch,Status
-amnesia,Psychic,Amnesia,Status
-anchorshot,Steel,Anchor Shot,Physical
-ancientpower,Rock,Ancient Power,Special
-appleacid,Grass,Apple Acid,Special
-aquacutter,Water,Aqua Cutter,Physical
-aquajet,Water,Aqua Jet,Physical
-aquaring,Water,Aqua Ring,Status
-aquastep,Water,Aqua Step,Physical
-aquatail,Water,Aqua Tail,Physical
-armorcannon,Fire,Armor Cannon,Special
-armthrust,Fighting,Arm Thrust,Physical
-aromatherapy,Grass,Aromatherapy,Status
-aromaticmist,Fairy,Aromatic Mist,Status
-assist,Normal,Assist,Status
-assurance,Dark,Assurance,Physical
-astonish,Ghost,Astonish,Physical
-astralbarrage,Ghost,Astral Barrage,Special
-attackorder,Bug,Attack Order,Physical
-attract,Normal,Attract,Status
-aurasphere,Fighting,Aura Sphere,Special
-aurawheel,Electric,Aura Wheel,Physical
-aurorabeam,Ice,Aurora Beam,Special
-auroraveil,Ice,Aurora Veil,Status
-autotomize,Steel,Autotomize,Status
-avalanche,Ice,Avalanche,Physical
-axekick,Fighting,Axe Kick,Physical
-babydolleyes,Fairy,Baby-Doll Eyes,Status
-brutalswing,Dark,Brutal Swing,Physical
-baddybad,Dark,Baddy Bad,Special
-banefulbunker,Poison,Baneful Bunker,Status
-barbbarrage,Poison,Barb Barrage,Physical
-barrage,Normal,Barrage,Physical
-barrier,Psychic,Barrier,Status
-batonpass,Normal,Baton Pass,Status
-beakblast,Flying,Beak Blast,Physical
-beatup,Dark,Beat Up,Physical
-behemothbash,Steel,Behemoth Bash,Physical
-behemothblade,Steel,Behemoth Blade,Physical
-belch,Poison,Belch,Special
-bellydrum,Normal,Belly Drum,Status
-bestow,Normal,Bestow,Status
-bide,Normal,Bide,Physical
-bind,Normal,Bind,Physical
-bite,Dark,Bite,Physical
-bitterblade,Fire,Bitter Blade,Physical
-bittermalice,Ghost,Bitter Malice,Special
-blackholeeclipse,Dark,Black Hole Eclipse,Physical
-blastburn,Fire,Blast Burn,Special
-blazekick,Fire,Blaze Kick,Physical
-blazingtorque,Fire,Blazing Torque,Physical
-bleakwindstorm,Flying,Bleakwind Storm,Special
-blizzard,Ice,Blizzard,Special
-block,Normal,Block,Status
-bloodmoon,Normal,bloodmoon,Special
-bloomdoom,Grass,Bloom Doom,Physical
-blueflare,Fire,Blue Flare,Special
-bodypress,Fighting,Body Press,Physical
-bodyslam,Normal,Body Slam,Physical
-boltbeak,Electric,Bolt Beak,Physical
-boltstrike,Electric,Bolt Strike,Physical
-boneclub,Ground,Bone Club,Physical
-bonemerang,Ground,Bonemerang,Physical
-bonerush,Ground,Bone Rush,Physical
-boomburst,Normal,Boomburst,Special
-bounce,Flying,Bounce,Physical
-bouncybubble,Water,Bouncy Bubble,Special
-branchpoke,Grass,Branch Poke,Physical
-bravebird,Flying,Brave Bird,Physical
-breakingswipe,Dragon,Breaking Swipe,Physical
-breakneckblitz,Normal,Breakneck Blitz,Physical
-brickbreak,Fighting,Brick Break,Physical
-brine,Water,Brine,Special
-bubble,Water,Bubble,Special
-bubblebeam,Water,Bubble Beam,Special
-bugbite,Bug,Bug Bite,Physical
-bugbuzz,Bug,Bug Buzz,Special
-bulkup,Fighting,Bulk Up,Status
-bulldoze,Ground,Bulldoze,Physical
-bulletpunch,Steel,Bullet Punch,Physical
-bulletseed,Grass,Bullet Seed,Physical
-burningjealousy,Fire,Burning Jealousy,Special
-burnup,Fire,Burn Up,Special
-buzzybuzz,Electric,Buzzy Buzz,Special
-calmmind,Psychic,Calm Mind,Status
-camouflage,Normal,Camouflage,Status
-captivate,Normal,Captivate,Status
-catastropika,Electric,Catastropika,Physical
-ceaselessedge,Dark,Ceaseless Edge,Physical
-celebrate,Normal,Celebrate,Status
-charge,Electric,Charge,Status
-chargebeam,Electric,Charge Beam,Special
-charm,Fairy,Charm,Status
-chatter,Flying,Chatter,Special
-chillingwater,Water,Chilling Water,Special
-chillyreception,Ice,Chilly Reception,Status
-chipaway,Normal,Chip Away,Physical
-chloroblast,Grass,Chloroblast,Special
-circlethrow,Fighting,Circle Throw,Physical
-clamp,Water,Clamp,Physical
-clangingscales,Dragon,Clanging Scales,Special
-clangoroussoul,Dragon,Clangorous Soul,Status
-clangoroussoulblaze,Dragon,Clangorous Soulblaze,Special
-clearsmog,Poison,Clear Smog,Special
-closecombat,Fighting,Close Combat,Physical
-coaching,Fighting,Coaching,Status
-coil,Poison,Coil,Status
-collisioncourse,Fighting,Collision Course,Physical
-combattorque,Fighting,Combat Torque,Physical
-cometpunch,Normal,Comet Punch,Physical
-comeuppance,Dark,Comeuppance,Physical
-confide,Normal,Confide,Status
-confuseray,Ghost,Confuse Ray,Status
-confusion,Psychic,Confusion,Special
-constrict,Normal,Constrict,Physical
-continentalcrush,Rock,Continental Crush,Physical
-conversion,Normal,Conversion,Status
-conversion2,Normal,Conversion 2,Status
-copycat,Normal,Copycat,Status
-coreenforcer,Dragon,Core Enforcer,Special
-corkscrewcrash,Steel,Corkscrew Crash,Physical
-corrosivegas,Poison,Corrosive Gas,Status
-cosmicpower,Psychic,Cosmic Power,Status
-cottonguard,Grass,Cotton Guard,Status
-cottonspore,Grass,Cotton Spore,Status
-counter,Fighting,Counter,Physical
-courtchange,Normal,Court Change,Status
-covet,Normal,Covet,Physical
-crabhammer,Water,Crabhammer,Physical
-craftyshield,Fairy,Crafty Shield,Status
-crosschop,Fighting,Cross Chop,Physical
-crosspoison,Poison,Cross Poison,Physical
-crunch,Dark,Crunch,Physical
-crushclaw,Normal,Crush Claw,Physical
-crushgrip,Normal,Crush Grip,Physical
-curse,Ghost,Curse,Status
-cut,Normal,Cut,Physical
-darkestlariat,Dark,Darkest Lariat,Physical
-darkpulse,Dark,Dark Pulse,Special
-darkvoid,Dark,Dark Void,Status
-dazzlinggleam,Fairy,Dazzling Gleam,Special
-decorate,Fairy,Decorate,Status
-defendorder,Bug,Defend Order,Status
-defensecurl,Normal,Defense Curl,Status
-defog,Flying,Defog,Status
-destinybond,Ghost,Destiny Bond,Status
-detect,Fighting,Detect,Status
-devastatingdrake,Dragon,Devastating Drake,Physical
-diamondstorm,Rock,Diamond Storm,Physical
-dig,Ground,Dig,Physical
-disable,Normal,Disable,Status
-disarmingvoice,Fairy,Disarming Voice,Special
-discharge,Electric,Discharge,Special
-direclaw,Poison,Dire Claw,Physical
-dive,Water,Dive,Physical
-hiddenpowerground,Ground,hiddenpowerground,Special
-dizzypunch,Normal,Dizzy Punch,Physical
-doodle,Normal,Doodle,Status
-doomdesire,Steel,Doom Desire,Special
-doubleedge,Normal,Double-Edge,Physical
-doublehit,Normal,Double Hit,Physical
-doubleironbash,Steel,Double Iron Bash,Physical
-doublekick,Fighting,Double Kick,Physical
-doubleshock,Electric,Double Shock,Physical
-doubleslap,Normal,Double Slap,Physical
-doubleteam,Normal,Double Team,Status
-dracometeor,Dragon,Draco Meteor,Special
-dragonascent,Flying,Dragon Ascent,Physical
-dragonbreath,Dragon,Dragon Breath,Special
-dragonclaw,Dragon,Dragon Claw,Physical
-dragondance,Dragon,Dragon Dance,Status
-dragondarts,Dragon,Dragon Darts,Physical
-dragonenergy,Dragon,Dragon Energy,Special
-dragonhammer,Dragon,Dragon Hammer,Physical
-dragonpulse,Dragon,Dragon Pulse,Special
-dragonrage,Dragon,Dragon Rage,Special
-dragonrush,Dragon,Dragon Rush,Physical
-dragontail,Dragon,Dragon Tail,Physical
-drainingkiss,Fairy,Draining Kiss,Special
-drainpunch,Fighting,Drain Punch,Physical
-dreameater,Psychic,Dream Eater,Special
-drillpeck,Flying,Drill Peck,Physical
-drillrun,Ground,Drill Run,Physical
-drumbeating,Grass,Drum Beating,Physical
-dualchop,Dragon,Dual Chop,Physical
-dualwingbeat,Flying,Dual Wingbeat,Physical
-dynamaxcannon,Dragon,Dynamax Cannon,Special
-dynamicpunch,Fighting,Dynamic Punch,Physical
-earthpower,Ground,Earth Power,Special
-earthquake,Ground,Earthquake,Physical
-echoedvoice,Normal,Echoed Voice,Special
-eerieimpulse,Electric,Eerie Impulse,Status
-eeriespell,Psychic,Eerie Spell,Special
-eggbomb,Normal,Egg Bomb,Physical
-electricterrain,Electric,Electric Terrain,Status
-electrify,Electric,Electrify,Status
-electroball,Electric,Electro Ball,Special
-electrodrift,Electric,Electro Drift,Special
-electroweb,Electric,Electroweb,Special
-embargo,Dark,Embargo,Status
-ember,Fire,Ember,Special
-encore,Normal,Encore,Status
-endeavor,Normal,Endeavor,Physical
-endure,Normal,Endure,Status
-energyball,Grass,Energy Ball,Special
-entrainment,Normal,Entrainment,Status
-eruption,Fire,Eruption,Special
-esperwing,Psychic,Esper Wing,Special
-eternabeam,Dragon,Eternabeam,Special
-expandingforce,Psychic,Expanding Force,Special
-explosion,Normal,Explosion,Physical
-extrasensory,Psychic,Extrasensory,Special
-extremeevoboost,Normal,Extreme Evoboost,Status
-extremespeed,Normal,Extreme Speed,Physical
-facade,Normal,Facade,Physical
-fairylock,Fairy,Fairy Lock,Status
-fairywind,Fairy,Fairy Wind,Special
-fakeout,Normal,Fake Out,Physical
-faketears,Dark,Fake Tears,Status
-falsesurrender,Dark,False Surrender,Physical
-falseswipe,Normal,False Swipe,Physical
-featherdance,Flying,Feather Dance,Status
-feint,Normal,Feint,Physical
-feintattack,Dark,Feint Attack,Physical
-fellstinger,Bug,Fell Stinger,Physical
-fierydance,Fire,Fiery Dance,Special
-fierywrath,Dark,Fiery Wrath,Special
-filletaway,Normal,Fillet Away,Status
-finalgambit,Fighting,Final Gambit,Special
-fireblast,Fire,Fire Blast,Special
-firefang,Fire,Fire Fang,Physical
-firelash,Fire,Fire Lash,Physical
-firepledge,Fire,Fire Pledge,Special
-firepunch,Fire,Fire Punch,Physical
-firespin,Fire,Fire Spin,Special
-firstimpression,Bug,First Impression,Physical
-fishiousrend,Water,Fishious Rend,Physical
-fissure,Ground,Fissure,Physical
-hiddenpowerice,Ice,hiddenpowerice,Special
-flail,Normal,Flail,Physical
-flameburst,Fire,Flame Burst,Special
-flamecharge,Fire,Flame Charge,Physical
-flamewheel,Fire,Flame Wheel,Physical
-flamethrower,Fire,Flamethrower,Special
-flareblitz,Fire,Flare Blitz,Physical
-flash,Normal,Flash,Status
-flashcannon,Steel,Flash Cannon,Special
-flatter,Dark,Flatter,Status
-fleurcannon,Fairy,Fleur Cannon,Special
-fling,Dark,Fling,Physical
-flipturn,Water,Flip Turn,Physical
-floatyfall,Flying,Floaty Fall,Physical
-floralhealing,Fairy,Floral Healing,Status
-flowershield,Fairy,Flower Shield,Status
-flowertrick,Grass,Flower Trick,Physical
-fly,Flying,Fly,Physical
-flyingpress,Fighting,Flying Press,Physical
-focusblast,Fighting,Focus Blast,Special
-focusenergy,Normal,Focus Energy,Status
-focuspunch,Fighting,Focus Punch,Physical
-followme,Normal,Follow Me,Status
-forcepalm,Fighting,Force Palm,Physical
-foresight,Normal,Foresight,Status
-forestscurse,Grass,Forest’s Curse,Status
-foulplay,Dark,Foul Play,Physical
-freezedry,Ice,Freeze-Dry,Special
-freezeshock,Ice,Freeze Shock,Physical
-freezingglare,Psychic,Freezing Glare,Special
-freezyfrost,Ice,Freezy Frost,Special
-frenzyplant,Grass,Frenzy Plant,Special
-frostbreath,Ice,Frost Breath,Special
-frustration,Normal,Frustration,Physical
-furyattack,Normal,Fury Attack,Physical
-furycutter,Bug,Fury Cutter,Physical
-furyswipes,Normal,Fury Swipes,Physical
-fusionbolt,Electric,Fusion Bolt,Physical
-fusionflare,Fire,Fusion Flare,Special
-futuresight,Psychic,Future Sight,Special
-gastroacid,Poison,Gastro Acid,Status
-geargrind,Steel,Gear Grind,Physical
-gearup,Steel,Gear Up,Status
-genesissupernova,Psychic,Genesis Supernova,Special
-hiddenpowerpoison,Poison,hiddenpowerpoison,Special
-geomancy,Fairy,Geomancy,Status
-gigadrain,Grass,Giga Drain,Special
-gigaimpact,Normal,Giga Impact,Physical
-gigatonhammer,Steel,Gigaton Hammer,Physical
-gigavolthavoc,Electric,Gigavolt Havoc,Physical
-glaciallance,Ice,Glacial Lance,Physical
-glaciate,Ice,Glaciate,Special
-glaiverush,Dragon,Glaive Rush,Physical
-glare,Normal,Glare,Status
-glitzyglow,Psychic,Glitzy Glow,Special
-gmaxbefuddle,Bug,G-Max Befuddle,Physical
-gmaxcannonade,Water,G-Max Cannonade,Physical
-gmaxcentiferno,Fire,G-Max Centiferno,Physical
-gmaxchistrike,Fighting,G-Max Chi Strike,Physical
-gmaxcuddle,Normal,G-Max Cuddle,Physical
-gmaxdepletion,Dragon,G-Max Depletion,Physical
-gmaxdrumsolo,Grass,gmaxdrumsolo,Physical
-gmaxfinale,Fairy,G-Max Finale,Physical
-gmaxfireball,Fire,G-Max Fireball,Physical
-gmaxfoamburst,Water,G-Max Foam Burst,Physical
-gmaxgoldrush,Normal,G-Max Gold Rush,Physical
-gmaxgravitas,Psychic,G-Max Gravitas,Physical
-gmaxhydrosnipe,Water,G-Max Hydrosnipe,Physical
-gmaxmalodor,Poison,G-Max Malodor,Physical
-gmaxmeltdown,Steel,G-Max Meltdown,Physical
-gmaxoneblow,Dark,G-Max One Blow,Physical
-gmaxrapidflow,Water,G-Max Rapid Flow,Physical
-gmaxreplenish,Normal,G-Max Replenish,Physical
-gmaxresonance,Ice,G-Max Resonance,Physical
-gmaxsandblast,Ground,G-Max Sandblast,Physical
-gmaxsmite,Fairy,G-Max Smite,Physical
-gmaxsnooze,Dark,G-Max Snooze,Physical
-gmaxsteelsurge,Steel,G-Max Steelsurge,Physical
-gmaxstonesurge,Water,G-Max Stonesurge,Physical
-gmaxstunshock,Electric,G-Max Stun Shock,Physical
-gmaxsweetness,Grass,G-Max Sweetness,Physical
-gmaxtartness,Grass,G-Max Tartness,Physical
-gmaxterror,Ghost,G-Max Terror,Physical
-gmaxvinelash,Grass,G-Max Vine Lash,Physical
-gmaxvolcalith,Rock,G-Max Volcalith,Physical
-gmaxvoltcrash,Electric,G-Max Volt Crash,Physical
-gmaxwildfire,Fire,G-Max Wildfire,Physical
-gmaxwindrage,Flying,G-Max Wind Rage,Physical
-grassknot,Grass,Grass Knot,Special
-grasspledge,Grass,Grass Pledge,Special
-grasswhistle,Grass,Grass Whistle,Status
-grassyglide,Grass,Grassy Glide,Physical
-grassyterrain,Grass,Grassy Terrain,Status
-gravapple,Grass,Grav Apple,Physical
-gravity,Psychic,Gravity,Status
-growl,Normal,Growl,Status
-growth,Normal,Growth,Status
-grudge,Ghost,Grudge,Status
-guardianofalola,Fairy,Guardian of Alola,Special
-guardsplit,Psychic,Guard Split,Status
-guardswap,Psychic,Guard Swap,Status
-guillotine,Normal,Guillotine,Physical
-gunkshot,Poison,Gunk Shot,Physical
-gust,Flying,Gust,Special
-gyroball,Steel,Gyro Ball,Physical
-hail,Ice,Hail,Status
-hammerarm,Fighting,Hammer Arm,Physical
-happyhour,Normal,Happy Hour,Status
-harden,Normal,Harden,Status
-haze,Ice,Haze,Status
-headbutt,Normal,Headbutt,Physical
-headcharge,Normal,Head Charge,Physical
-headlongrush,Ground,Headlong Rush,Physical
-headsmash,Rock,Head Smash,Physical
-healbell,Normal,Heal Bell,Status
-healblock,Psychic,Heal Block,Status
-healingwish,Psychic,Healing Wish,Status
-healorder,Bug,Heal Order,Status
-healpulse,Psychic,Heal Pulse,Status
-heartstamp,Psychic,Heart Stamp,Physical
-heartswap,Psychic,Heart Swap,Status
-heatcrash,Fire,Heat Crash,Physical
-heatwave,Fire,Heat Wave,Special
-heavyslam,Steel,Heavy Slam,Physical
-helpinghand,Normal,Helping Hand,Status
-hex,Ghost,Hex,Special
-hiddenpower,Normal,Hidden Power,Special
-hiddenpowerbug,Bug,hiddenpowerbug,Special
-hiddenpowerdark,Dark,hiddenpowerdark,Special
-hiddenpowerdragon,Dragon,hiddenpowerdragon,Special
-hiddenpowerelectric,Electric,hiddenpowerelectric,Special
-hiddenpowerfighting,Fighting,hiddenpowerfighting,Special
-hiddenpowerfire,Fire,hiddenpowerfire,Special
-hiddenpowerflying,Flying,hiddenpowerflying,Special
-hiddenpowerghost,Ghost,hiddenpowerghost,Special
-hiddenpowergrass,Grass,hiddenpowergrass,Special
-hiddenpowerpsychic,Psychic,hiddenpowerpsychic,Special
-hiddenpowerrock,Rock,hiddenpowerrock,Special
-hiddenpowersteel,Steel,hiddenpowersteel,Special
-hiddenpowerwater,Water,hiddenpowerwater,Special
-highhorsepower,Ground,High Horsepower,Physical
-highjumpkick,Fighting,High Jump Kick,Physical
-holdback,Normal,Hold Back,Physical
-holdhands,Normal,Hold Hands,Status
-honeclaws,Dark,Hone Claws,Status
-hornattack,Normal,Horn Attack,Physical
-horndrill,Normal,Horn Drill,Physical
-hornleech,Grass,Horn Leech,Physical
-howl,Normal,Howl,Status
-hurricane,Flying,Hurricane,Special
-hydrocannon,Water,Hydro Cannon,Special
-hydropump,Water,Hydro Pump,Special
-hydrosteam,Water,hydrosteam,Special
-hydrovortex,Water,Hydro Vortex,Physical
-hyperbeam,Normal,Hyper Beam,Special
-hyperdrill,Normal,Hyper Drill,Physical
-hyperfang,Normal,Hyper Fang,Physical
-hyperspacefury,Dark,Hyperspace Fury,Physical
-hyperspacehole,Psychic,Hyperspace Hole,Special
-hypervoice,Normal,Hyper Voice,Special
-hypnosis,Psychic,Hypnosis,Status
-iceball,Ice,Ice Ball,Physical
-icebeam,Ice,Ice Beam,Special
-iceburn,Ice,Ice Burn,Special
-icefang,Ice,Ice Fang,Physical
-icehammer,Ice,Ice Hammer,Physical
-icepunch,Ice,Ice Punch,Physical
-iceshard,Ice,Ice Shard,Physical
-icespinner,Ice,Ice Spinner,Physical
-iciclecrash,Ice,Icicle Crash,Physical
-iciclespear,Ice,Icicle Spear,Physical
-icywind,Ice,Icy Wind,Special
-imprison,Psychic,Imprison,Status
-incinerate,Fire,Incinerate,Special
-infernalparade,Ghost,Infernal Parade,Special
-inferno,Fire,Inferno,Special
-infernooverdrive,Fire,Inferno Overdrive,Physical
-infestation,Bug,Infestation,Special
-ingrain,Grass,Ingrain,Status
-instruct,Psychic,Instruct,Status
-iondeluge,Electric,Ion Deluge,Status
-irondefense,Steel,Iron Defense,Status
-ironhead,Steel,Iron Head,Physical
-magicaltorque,Fairy,Magical Torque,Physical
-irontail,Steel,Iron Tail,Physical
-ivycudgel,Grass,ivycudgel,Physical
-jawlock,Dark,Jaw Lock,Physical
-jetpunch,Water,Jet Punch,Physical
-judgment,Normal,Judgment,Special
-jumpkick,Fighting,Jump Kick,Physical
-junglehealing,Grass,Jungle Healing,Status
-karatechop,Fighting,Karate Chop,Physical
-kinesis,Psychic,Kinesis,Status
-king’sshield,Steel,King’s Shield,Status
-knockoff,Dark,Knock Off,Physical
-kowtowcleave,Dark,Kowtow Cleave,Physical
-land’swrath,Ground,Land’s Wrath,Physical
-laserfocus,Normal,Laser Focus,Status
-lashout,Dark,Lash Out,Physical
-lastresort,Normal,Last Resort,Physical
-lastrespects,Ghost,Last Respects,Physical
-lavaplume,Fire,Lava Plume,Special
-leafage,Grass,Leafage,Physical
-leafblade,Grass,Leaf Blade,Physical
-leafstorm,Grass,Leaf Storm,Special
-leaftornado,Grass,Leaf Tornado,Special
-leechlife,Bug,Leech Life,Physical
-leechseed,Grass,Leech Seed,Status
-leer,Normal,Leer,Status
-let’ssnuggleforever,Fairy,Let’s Snuggle Forever,Physical
-lick,Ghost,Lick,Physical
-lifedew,Water,Life Dew,Status
-lightofruin,Fairy,Light of Ruin,Special
-lightscreen,Psychic,Light Screen,Status
-lightthatburnsthesky,Psychic,Light That Burns the Sky,Special
-liquidation,Water,Liquidation,Physical
-lockon,Normal,Lock-On,Status
-lovelykiss,Normal,Lovely Kiss,Status
-lowkick,Fighting,Low Kick,Physical
-lowsweep,Fighting,Low Sweep,Physical
-luckychant,Normal,Lucky Chant,Status
-luminacrash,Psychic,Lumina Crash,Special
-lunarblessing,Psychic,Lunar Blessing,Status
-lunardance,Psychic,Lunar Dance,Status
-lunge,Bug,Lunge,Physical
-lusterpurge,Psychic,Luster Purge,Special
-machpunch,Fighting,Mach Punch,Physical
-magicalleaf,Grass,Magical Leaf,Special
-magiccoat,Psychic,Magic Coat,Status
-magicpowder,Psychic,Magic Powder,Status
-magicroom,Psychic,Magic Room,Status
-magmastorm,Fire,Magma Storm,Special
-magnetbomb,Steel,Magnet Bomb,Physical
-magneticflux,Electric,Magnetic Flux,Status
-magnetrise,Electric,Magnet Rise,Status
-magnitude,Ground,Magnitude,Physical
-makeitrain,Steel,Make It Rain,Special
-maliciousmoonsault,Dark,Malicious Moonsault,Physical
-matblock,Fighting,Mat Block,Status
-matchagotcha,Grass,matchagotcha,Special
-maxairstream,Flying,Max Airstream,Physical
-maxdarkness,Dark,Max Darkness,Physical
-maxflare,Fire,Max Flare,Physical
-maxflutterby,Bug,Max Flutterby,Physical
-maxgeyser,Water,Max Geyser,Physical
-maxguard,Normal,Max Guard,Status
-maxhailstorm,Ice,Max Hailstorm,Physical
-maxknuckle,Fighting,Max Knuckle,Physical
-maxlightning,Electric,Max Lightning,Physical
-maxmindstorm,Psychic,Max Mindstorm,Physical
-maxooze,Poison,Max Ooze,Physical
-maxovergrowth,Grass,Max Overgrowth,Physical
-maxphantasm,Ghost,Max Phantasm,Physical
-maxquake,Ground,Max Quake,Physical
-maxrockfall,Rock,Max Rockfall,Physical
-maxstarfall,Fairy,Max Starfall,Physical
-maxsteelspike,Steel,Max Steelspike,Physical
-maxstrike,Normal,Max Strike,Physical
-maxwyrmwind,Dragon,Max Wyrmwind,Physical
-meanlook,Normal,Mean Look,Status
-meditate,Psychic,Meditate,Status
-mefirst,Normal,Me First,Status
-megadrain,Grass,Mega Drain,Special
-megahorn,Bug,Megahorn,Physical
-megakick,Normal,Mega Kick,Physical
-megapunch,Normal,Mega Punch,Physical
-memento,Dark,Memento,Status
-menacingmoonrazemaelstrom,Ghost,Menacing Moonraze Maelstrom,Special
-metalburst,Steel,Metal Burst,Physical
-metalclaw,Steel,Metal Claw,Physical
-metalsound,Steel,Metal Sound,Status
-meteorassault,Fighting,Meteor Assault,Physical
-meteorbeam,Rock,Meteor Beam,Special
-meteormash,Steel,Meteor Mash,Physical
-metronome,Normal,Metronome,Status
-milkdrink,Normal,Milk Drink,Status
-mimic,Normal,Mimic,Status
-mindblown,Fire,Mind Blown,Special
-mindreader,Normal,Mind Reader,Status
-minimize,Normal,Minimize,Status
-miracleeye,Psychic,Miracle Eye,Status
-mirrorcoat,Psychic,Mirror Coat,Special
-mirrormove,Flying,Mirror Move,Status
-mirrorshot,Steel,Mirror Shot,Special
-mist,Ice,Mist,Status
-mistball,Psychic,Mist Ball,Special
-mistyexplosion,Fairy,Misty Explosion,Special
-mistyterrain,Fairy,Misty Terrain,Status
-moonblast,Fairy,Moonblast,Special
-moongeistbeam,Ghost,Moongeist Beam,Special
-moonlight,Fairy,Moonlight,Status
-morningsun,Normal,Morning Sun,Status
-mortalspin,Poison,Mortal Spin,Physical
-mountaingale,Ice,Mountain Gale,Physical
-mudbomb,Ground,Mud Bomb,Special
-mudshot,Ground,Mud Shot,Special
-mudslap,Ground,Mud-Slap,Special
-mudsport,Ground,Mud Sport,Status
-muddywater,Water,Muddy Water,Special
-multiattack,Normal,Multi-Attack,Physical
-mysticalfire,Fire,Mystical Fire,Special
-mysticalpower,Psychic,Mystical Power,Special
-nastyplot,Dark,Nasty Plot,Status
-naturalgift,Normal,Natural Gift,Physical
-naturepower,Normal,Nature Power,Status
-nature’smadness,Fairy,Nature’s Madness,Special
-needlearm,Grass,Needle Arm,Physical
-neverendingnightmare,Ghost,Never-Ending Nightmare,Physical
-nightdaze,Dark,Night Daze,Special
-nightmare,Ghost,Nightmare,Status
-nightshade,Ghost,Night Shade,Special
-nightslash,Dark,Night Slash,Physical
-nobleroar,Normal,Noble Roar,Status
-noretreat,Fighting,No Retreat,Status
-noxioustorque,Poison,Noxious Torque,Physical
-nuzzle,Electric,Nuzzle,Physical
-oblivionwing,Flying,Oblivion Wing,Special
-sandsearstorm,Ground,Sandsear Storm,Special
-obstruct,Dark,Obstruct,Status
-oceanicoperetta,Water,Oceanic Operetta,Special
-octazooka,Water,Octazooka,Special
-octolock,Fighting,Octolock,Status
-odorsleuth,Normal,Odor Sleuth,Status
-ominouswind,Ghost,Ominous Wind,Special
-orderup,Dragon,Order Up,Physical
-originpulse,Water,Origin Pulse,Special
-outrage,Dragon,Outrage,Physical
-overdrive,Electric,Overdrive,Special
-overheat,Fire,Overheat,Special
-painsplit,Normal,Pain Split,Status
-paleowave,Rock,paleowave,Special
-paraboliccharge,Electric,Parabolic Charge,Special
-partingshot,Dark,Parting Shot,Status
-payback,Dark,Payback,Physical
-payday,Normal,Pay Day,Physical
-peck,Flying,Peck,Physical
-perishsong,Normal,Perish Song,Status
-petalblizzard,Grass,Petal Blizzard,Physical
-petaldance,Grass,Petal Dance,Special
-phantomforce,Ghost,Phantom Force,Physical
-photongeyser,Psychic,Photon Geyser,Special
-pikapapow,Electric,Pika Papow,Special
-pinmissile,Bug,Pin Missile,Physical
-plasmafists,Electric,Plasma Fists,Physical
-playnice,Normal,Play Nice,Status
-playrough,Fairy,Play Rough,Physical
-pluck,Flying,Pluck,Physical
-poisonfang,Poison,Poison Fang,Physical
-poisongas,Poison,Poison Gas,Status
-poisonjab,Poison,Poison Jab,Physical
-poisonpowder,Poison,Poison Powder,Status
-poisonsting,Poison,Poison Sting,Physical
-poisontail,Poison,Poison Tail,Physical
-pollenpuff,Bug,Pollen Puff,Special
-poltergeist,Ghost,Poltergeist,Physical
-populationbomb,Normal,Population Bomb,Physical
-pounce,Bug,Pounce,Physical
-pound,Normal,Pound,Physical
-powder,Bug,Powder,Status
-powdersnow,Ice,Powder Snow,Special
-powergem,Rock,Power Gem,Special
-powershift,Normal,Power Shift,Status
-powersplit,Psychic,Power Split,Status
-powerswap,Psychic,Power Swap,Status
-powertrick,Psychic,Power Trick,Status
-powertrip,Dark,Power Trip,Physical
-poweruppunch,Fighting,Power-Up Punch,Physical
-powerwhip,Grass,Power Whip,Physical
-precipiceblades,Ground,Precipice Blades,Physical
-present,Normal,Present,Physical
-prismaticlaser,Psychic,Prismatic Laser,Special
-protect,Normal,Protect,Status
-psybeam,Psychic,Psybeam,Special
-psyblade,Psychic,psyblade,Physical
-psychup,Normal,Psych Up,Status
-psychic,Psychic,Psychic,Special
-psychicfangs,Psychic,Psychic Fangs,Physical
-psychicterrain,Psychic,Psychic Terrain,Status
-psychoboost,Psychic,Psycho Boost,Special
-psychocut,Psychic,Psycho Cut,Physical
-psychoshift,Psychic,Psycho Shift,Status
-psyshieldbash,Psychic,Psyshield Bash,Physical
-psyshock,Psychic,Psyshock,Special
-psystrike,Psychic,Psystrike,Special
-psywave,Psychic,Psywave,Special
-pulverizingpancake,Normal,Pulverizing Pancake,Physical
-punishment,Dark,Punishment,Physical
-purify,Poison,Purify,Status
-pursuit,Dark,Pursuit,Physical
-pyroball,Fire,Pyro Ball,Physical
-quash,Dark,Quash,Status
-quickattack,Normal,Quick Attack,Physical
-quickguard,Fighting,Quick Guard,Status
-quiverdance,Bug,Quiver Dance,Status
-rage,Normal,Rage,Physical
-ragefist,Ghost,Rage Fist,Physical
-ragepowder,Bug,Rage Powder,Status
-ragingbull,Normal,Raging Bull,Physical
-sandstorm,Rock,Sandstorm,Status
-sandtomb,Ground,Sand Tomb,Physical
-ragingfury,Fire,Raging Fury,Physical
-raindance,Water,Rain Dance,Status
-rapidspin,Normal,Rapid Spin,Physical
-razorleaf,Grass,Razor Leaf,Physical
-razorshell,Water,Razor Shell,Physical
-razorwind,Normal,Razor Wind,Special
-recover,Normal,Recover,Status
-recycle,Normal,Recycle,Status
-reflect,Psychic,Reflect,Status
-reflecttype,Normal,Reflect Type,Status
-refresh,Normal,Refresh,Status
-relicsong,Normal,Relic Song,Special
-rest,Psychic,Rest,Status
-retaliate,Normal,Retaliate,Physical
-return,Normal,Return,Physical
-revelationdance,Normal,Revelation Dance,Special
-revenge,Fighting,Revenge,Physical
-reversal,Fighting,Reversal,Physical
-revivalblessing,Normal,Revival Blessing,Status
-risingvoltage,Electric,Rising Voltage,Special
-roar,Normal,Roar,Status
-roaroftime,Dragon,Roar of Time,Special
-rockblast,Rock,Rock Blast,Physical
-rockclimb,Normal,Rock Climb,Physical
-rockpolish,Rock,Rock Polish,Status
-rockslide,Rock,Rock Slide,Physical
-rocksmash,Fighting,Rock Smash,Physical
-rockthrow,Rock,Rock Throw,Physical
-rocktomb,Rock,Rock Tomb,Physical
-rockwrecker,Rock,Rock Wrecker,Physical
-roleplay,Psychic,Role Play,Status
-rollingkick,Fighting,Rolling Kick,Physical
-rollout,Rock,Rollout,Physical
-roost,Flying,Roost,Status
-rototiller,Ground,Rototiller,Status
-round,Normal,Round,Special
-ruination,Dark,Ruination,Special
-sacredfire,Fire,Sacred Fire,Physical
-sacredsword,Fighting,Sacred Sword,Physical
-safeguard,Normal,Safeguard,Status
-saltcure,Rock,Salt Cure,Physical
-sandattack,Ground,Sand Attack,Status
-sappyseed,Grass,Sappy Seed,Physical
-savagespinout,Bug,Savage Spin-Out,Physical
-scald,Water,Scald,Special
-scaleshot,Dragon,Scale Shot,Physical
-scaryface,Normal,Scary Face,Status
-scorchingsands,Ground,Scorching Sands,Special
-scratch,Normal,Scratch,Physical
-screech,Normal,Screech,Status
-searingshot,Fire,Searing Shot,Special
-searingsunrazesmash,Steel,Searing Sunraze Smash,Physical
-secretpower,Normal,Secret Power,Physical
-secretsword,Fighting,Secret Sword,Special
-seedbomb,Grass,Seed Bomb,Physical
-seedflare,Grass,Seed Flare,Special
-seismictoss,Fighting,Seismic Toss,Physical
-selfdestruct,Normal,Self-Destruct,Physical
-shadowball,Ghost,Shadow Ball,Special
-shadowbone,Ghost,Shadow Bone,Physical
-shadowclaw,Ghost,Shadow Claw,Physical
-shadowforce,Ghost,Shadow Force,Physical
-shadowpunch,Ghost,Shadow Punch,Physical
-shadowsneak,Ghost,Shadow Sneak,Physical
-shadowstrike,Ghost,shadowstrike,Physical
-sharpen,Normal,Sharpen,Status
-shatteredpsyche,Psychic,Shattered Psyche,Physical
-shedtail,Normal,Shed Tail,Status
-sheercold,Ice,Sheer Cold,Special
-shellsidearm,Poison,Shell Side Arm,Special
-shellsmash,Normal,Shell Smash,Status
-shelltrap,Fire,Shell Trap,Special
-shelter,Steel,Shelter,Status
-shiftgear,Steel,Shift Gear,Status
-shockwave,Electric,Shock Wave,Special
-shoreup,Ground,Shore Up,Status
-signalbeam,Bug,Signal Beam,Special
-silktrap,Bug,Silk Trap,Status
-silverwind,Bug,Silver Wind,Special
-simplebeam,Normal,Simple Beam,Status
-sing,Normal,Sing,Status
-sinisterarrowraid,Ghost,Sinister Arrow Raid,Physical
-sizzlyslide,Fire,Sizzly Slide,Physical
-sketch,Normal,Sketch,Status
-skillswap,Psychic,Skill Swap,Status
-skittersmack,Bug,Skitter Smack,Physical
-skullbash,Normal,Skull Bash,Physical
-skyattack,Flying,Sky Attack,Physical
-skydrop,Flying,Sky Drop,Physical
-skyuppercut,Fighting,Sky Uppercut,Physical
-slackoff,Normal,Slack Off,Status
-slam,Normal,Slam,Physical
-slash,Normal,Slash,Physical
-sleeppowder,Grass,Sleep Powder,Status
-sleeptalk,Normal,Sleep Talk,Status
-sludge,Poison,Sludge,Special
-sludgebomb,Poison,Sludge Bomb,Special
-sludgewave,Poison,Sludge Wave,Special
-smackdown,Rock,Smack Down,Physical
-smartstrike,Steel,Smart Strike,Physical
-smellingsalts,Normal,Smelling Salts,Physical
-smog,Poison,Smog,Special
-smokescreen,Normal,Smokescreen,Status
-snaptrap,Grass,Snap Trap,Physical
-snarl,Dark,Snarl,Special
-snatch,Dark,Snatch,Status
-snipeshot,Water,Snipe Shot,Special
-snore,Normal,Snore,Special
-snowscape,Ice,Snowscape,Status
-soak,Water,Soak,Status
-softboiled,Normal,Soft-Boiled,Status
-solarbeam,Grass,Solar Beam,Special
-solarblade,Grass,Solar Blade,Physical
-sonicboom,Normal,Sonic Boom,Special
-soulstealing7starstrike,Ghost,Soul-Stealing 7-Star Strike,Physical
-spacialrend,Dragon,Spacial Rend,Special
-spark,Electric,Spark,Physical
-sparklingaria,Water,Sparkling Aria,Special
-sparklyswirl,Fairy,Sparkly Swirl,Special
-spectralthief,Ghost,Spectral Thief,Physical
-speedswap,Psychic,Speed Swap,Status
-spicyextract,Grass,Spicy Extract,Status
-spiderweb,Bug,Spider Web,Status
-spikecannon,Normal,Spike Cannon,Physical
-spikes,Ground,Spikes,Status
-spikyshield,Grass,Spiky Shield,Status
-spinout,Steel,Spin Out,Physical
-spiritbreak,Fairy,Spirit Break,Physical
-spiritshackle,Ghost,Spirit Shackle,Physical
-spitup,Normal,Spit Up,Special
-spite,Ghost,Spite,Status
-splash,Normal,Splash,Status
-splinteredstormshards,Rock,Splintered Stormshards,Physical
-splishysplash,Water,Splishy Splash,Special
-spore,Grass,Spore,Status
-spotlight,Normal,Spotlight,Status
-springtidestorm,Fairy,Springtide Storm,Special
-stealthrock,Rock,Stealth Rock,Status
-steameruption,Water,Steam Eruption,Special
-steamroller,Bug,Steamroller,Physical
-steelbeam,Steel,Steel Beam,Special
-steelroller,Steel,Steel Roller,Physical
-steelwing,Steel,Steel Wing,Physical
-stickyweb,Bug,Sticky Web,Status
-stockpile,Normal,Stockpile,Status
-stokedsparksurfer,Electric,Stoked Sparksurfer,Special
-stomp,Normal,Stomp,Physical
-stompingtantrum,Ground,Stomping Tantrum,Physical
-stoneaxe,Rock,Stone Axe,Physical
-stoneedge,Rock,Stone Edge,Physical
-storedpower,Psychic,Stored Power,Special
-stormthrow,Fighting,Storm Throw,Physical
-strangesteam,Fairy,Strange Steam,Special
-strength,Normal,Strength,Physical
-strengthsap,Grass,Strength Sap,Status
-stringshot,Bug,String Shot,Status
-struggle,Normal,Struggle,Physical
-strugglebug,Bug,Struggle Bug,Special
-stuffcheeks,Normal,Stuff Cheeks,Status
-stunspore,Grass,Stun Spore,Status
-submission,Fighting,Submission,Physical
-substitute,Normal,Substitute,Status
-subzeroslammer,Ice,Subzero Slammer,Physical
-suckerpunch,Dark,Sucker Punch,Physical
-sunnyday,Fire,Sunny Day,Status
-sunsteelstrike,Steel,Sunsteel Strike,Physical
-superfang,Normal,Super Fang,Physical
-superpower,Fighting,Superpower,Physical
-supersonic,Normal,Supersonic,Status
-supersonicskystrike,Flying,Supersonic Skystrike,Physical
-surf,Water,Surf,Special
-surgingstrikes,Water,Surging Strikes,Physical
-swagger,Normal,Swagger,Status
-swallow,Normal,Swallow,Status
-sweetkiss,Fairy,Sweet Kiss,Status
-sweetscent,Normal,Sweet Scent,Status
-swift,Normal,Swift,Special
-switcheroo,Dark,Switcheroo,Status
-swordsdance,Normal,Swords Dance,Status
-synchronoise,Psychic,Synchronoise,Special
-synthesis,Grass,Synthesis,Status
-syrupbomb,Grass,syrupbomb,Special
-tackle,Normal,Tackle,Physical
-tailglow,Bug,Tail Glow,Status
-tailslap,Normal,Tail Slap,Physical
-tailwhip,Normal,Tail Whip,Status
-tailwind,Flying,Tailwind,Status
-takedown,Normal,Take Down,Physical
-takeheart,Psychic,Take Heart,Status
-tarshot,Rock,Tar Shot,Status
-taunt,Dark,Taunt,Status
-tearfullook,Normal,Tearful Look,Status
-teatime,Normal,Teatime,Status
-technoblast,Normal,Techno Blast,Special
-tectonicrage,Ground,Tectonic Rage,Physical
-teeterdance,Normal,Teeter Dance,Status
-telekinesis,Psychic,Telekinesis,Status
-teleport,Psychic,Teleport,Status
-terablast,Normal,Tera Blast,Special
-terrainpulse,Normal,Terrain Pulse,Special
-thief,Dark,Thief,Physical
-thousandarrows,Ground,Thousand Arrows,Physical
-thousandwaves,Ground,Thousand Waves,Physical
-thrash,Normal,Thrash,Physical
-throatchop,Dark,Throat Chop,Physical
-thunder,Electric,Thunder,Special
-thunderbolt,Electric,Thunderbolt,Special
-thundercage,Electric,Thunder Cage,Special
-thunderfang,Electric,Thunder Fang,Physical
-thunderouskick,Fighting,Thunderous Kick,Physical
-thunderpunch,Electric,Thunder Punch,Physical
-thundershock,Electric,Thunder Shock,Special
-thunderwave,Electric,Thunder Wave,Status
-tickle,Normal,Tickle,Status
-tidyup,Normal,Tidy Up,Status
-topsyturvy,Dark,Topsy-Turvy,Status
-torchsong,Fire,Torch Song,Special
-torment,Dark,Torment,Status
-toxic,Poison,Toxic,Status
-toxicspikes,Poison,Toxic Spikes,Status
-toxicthread,Poison,Toxic Thread,Status
-trailblaze,Grass,Trailblaze,Physical
-transform,Normal,Transform,Status
-triattack,Normal,Tri Attack,Special
-trick,Psychic,Trick,Status
-trickortreat,Ghost,Trick-or-Treat,Status
-trickroom,Psychic,Trick Room,Status
-triplearrows,Fighting,Triple Arrows,Physical
-tripleaxel,Ice,Triple Axel,Physical
-tripledive,Water,Triple Dive,Physical
-triplekick,Fighting,Triple Kick,Physical
-tropkick,Grass,Trop Kick,Physical
-trumpcard,Normal,Trump Card,Special
-twinbeam,Psychic,Twin Beam,Special
-twineedle,Bug,Twineedle,Physical
-twinkletackle,Fairy,Twinkle Tackle,Physical
-twister,Dragon,Twister,Special
-uturn,Bug,U-turn,Physical
-uproar,Normal,Uproar,Special
-vacuumwave,Fighting,Vacuum Wave,Special
-vcreate,Fire,V-create,Physical
-veeveevolley,Normal,Veevee Volley,Physical
-venomdrench,Poison,Venom Drench,Status
-venoshock,Poison,Venoshock,Special
-victorydance,Fighting,Victory Dance,Status
-vinewhip,Grass,Vine Whip,Physical
-visegrip,Normal,Vise Grip,Physical
-vitalthrow,Fighting,Vital Throw,Physical
-voltswitch,Electric,Volt Switch,Special
-volttackle,Electric,Volt Tackle,Physical
-wakeupslap,Fighting,Wake-Up Slap,Physical
-waterfall,Water,Waterfall,Physical
-watergun,Water,Water Gun,Special
-waterpledge,Water,Water Pledge,Special
-waterpulse,Water,Water Pulse,Special
-watershuriken,Water,Water Shuriken,Special
-watersport,Water,Water Sport,Status
-waterspout,Water,Water Spout,Special
-wavecrash,Water,Wave Crash,Physical
-weatherball,Normal,Weather Ball,Special
-whirlpool,Water,Whirlpool,Special
-whirlwind,Normal,Whirlwind,Status
-wickedblow,Dark,Wicked Blow,Physical
-wickedtorque,Dark,Wicked Torque,Physical
-wideguard,Rock,Wide Guard,Status
-wildboltstorm,Electric,Wildbolt Storm,Special
-wildcharge,Electric,Wild Charge,Physical
-willowisp,Fire,Will-O-Wisp,Status
-wingattack,Flying,Wing Attack,Physical
-wish,Normal,Wish,Status
-withdraw,Water,Withdraw,Status
-wonderroom,Psychic,Wonder Room,Status
-woodhammer,Grass,Wood Hammer,Physical
-workup,Normal,Work Up,Status
-worryseed,Grass,Worry Seed,Status
-wrap,Normal,Wrap,Physical
-wringout,Normal,Wring Out,Special
-xscissor,Bug,X-Scissor,Physical
-yawn,Normal,Yawn,Status
-zapcannon,Electric,Zap Cannon,Special
-zenheadbutt,Psychic,Zen Headbutt,Physical
-zingzap,Electric,Zing Zap,Physical
-zippyzap,Electric,Zippy Zap,Physical
-alluringvoice,Fairy,alluringvoice,Special
-burningbulwark,Fire,burningbulwark,Status
-dragoncheer,Dragon,dragoncheer,Status
-electroshot,Electric,electroshot,Special
-ficklebeam,Dragon,ficklebeam,Special
-hardpress,Steel,hardpress,Physical
-malignantchain,Poison,Malignant Chain,Special
-mightycleave,Rock,mightycleave,Physical
-psychicnoise,Psychic,psychicnoise,Special
-supercellslam,Electric,supercellslam,Physical
-tachyoncutter,Steel,tachyoncutter,Special
-temperflare,Fire,temperflare,Physical
-terastarstorm,Normal,terastarstorm,Special
-thunderclap,Electric,thunderclap,Special
-upperhand,Fighting,upperhand,Physical
+﻿Name,Type,Category,Gen,PP,Power,Accuracy
+Pound,Normal,Physical,I,35,40,100%
+Karate Chop,Fighting,Physical,I,25,50,100%
+Double Slap,Normal,Physical,I,10,15,85%
+Comet Punch,Normal,Physical,I,15,18,85%
+Mega Punch,Normal,Physical,I,20,80,85%
+Pay Day,Normal,Physical,I,20,40,100%
+Fire Punch,Fire,Physical,I,15,75,100%
+Ice Punch,Ice,Physical,I,15,75,100%
+Thunder Punch,Electric,Physical,I,15,75,100%
+Scratch,Normal,Physical,I,35,40,100%
+Vise Grip,Normal,Physical,I,30,55,100%
+Guillotine,Normal,Physical,I,5,∞,30%
+Razor Wind,Normal,Special,I,10,80,100%
+Swords Dance,Normal,Status,I,20,—,—%
+Cut,Normal,Physical,I,30,50,95%
+Gust,Flying,Special,I,35,40,100%
+Wing Attack,Flying,Physical,I,35,60,100%
+Whirlwind,Normal,Status,I,20,—,∞%
+Fly,Flying,Physical,I,15,90,95%
+Bind,Normal,Physical,I,20,15,85%
+Slam,Normal,Physical,I,20,80,75%
+Vine Whip,Grass,Physical,I,25,45,100%
+Stomp,Normal,Physical,I,20,65,100%
+Double Kick,Fighting,Physical,I,30,30,100%
+Mega Kick,Normal,Physical,I,5,120,75%
+Jump Kick,Fighting,Physical,I,10,100,95%
+Rolling Kick,Fighting,Physical,I,15,60,85%
+Sand Attack,Ground,Status,I,15,—,100%
+Headbutt,Normal,Physical,I,15,70,100%
+Horn Attack,Normal,Physical,I,25,65,100%
+Fury Attack,Normal,Physical,I,20,15,85%
+Horn Drill,Normal,Physical,I,5,∞,30%
+Tackle,Normal,Physical,I,35,40,100%
+Body Slam,Normal,Physical,I,15,85,100%
+Wrap,Normal,Physical,I,20,15,90%
+Take Down,Normal,Physical,I,20,90,85%
+Thrash,Normal,Physical,I,10,120,100%
+Double-Edge,Normal,Physical,I,15,120,100%
+Tail Whip,Normal,Status,I,30,—,100%
+Poison Sting,Poison,Physical,I,35,15,100%
+Twineedle,Bug,Physical,I,20,25,100%
+Pin Missile,Bug,Physical,I,20,25,95%
+Leer,Normal,Status,I,30,—,100%
+Bite,Dark,Physical,I,25,60,100%
+Growl,Normal,Status,I,40,—,100%
+Roar,Normal,Status,I,20,—,∞%
+Sing,Normal,Status,I,15,—,55%
+Supersonic,Normal,Status,I,20,—,55%
+Sonic Boom,Normal,Special,I,20,—,90%
+Disable,Normal,Status,I,20,—,100%
+Acid,Poison,Special,I,30,40,100%
+Ember,Fire,Special,I,25,40,100%
+Flamethrower,Fire,Special,I,15,90,100%
+Mist,Ice,Status,I,30,—,—%
+Water Gun,Water,Special,I,25,40,100%
+Hydro Pump,Water,Special,I,5,110,80%
+Surf,Water,Special,I,15,90,100%
+Ice Beam,Ice,Special,I,10,90,100%
+Blizzard,Ice,Special,I,5,110,70%
+Psybeam,Psychic,Special,I,20,65,100%
+Bubble Beam,Water,Special,I,20,65,100%
+Aurora Beam,Ice,Special,I,20,65,100%
+Hyper Beam,Normal,Special,I,5,150,90%
+Peck,Flying,Physical,I,35,35,100%
+Drill Peck,Flying,Physical,I,20,80,100%
+Submission,Fighting,Physical,I,20,80,80%
+Low Kick,Fighting,Physical,I,20,—,100%
+Counter,Fighting,Physical,I,20,—,100%
+Seismic Toss,Fighting,Physical,I,20,—,100%
+Strength,Normal,Physical,I,15,80,100%
+Absorb,Grass,Special,I,25,20,100%
+Mega Drain,Grass,Special,I,15,40,100%
+Leech Seed,Grass,Status,I,10,—,90%
+Growth,Normal,Status,I,20,—,—%
+Razor Leaf,Grass,Physical,I,25,55,95%
+Solar Beam,Grass,Special,I,10,120,100%
+Poison Powder,Poison,Status,I,35,—,75%
+Stun Spore,Grass,Status,I,30,—,75%
+Sleep Powder,Grass,Status,I,15,—,75%
+Petal Dance,Grass,Special,I,10,120,100%
+String Shot,Bug,Status,I,40,—,95%
+Dragon Rage,Dragon,Special,I,10,—,100%
+Fire Spin,Fire,Special,I,15,35,85%
+Thunder Shock,Electric,Special,I,30,40,100%
+Thunderbolt,Electric,Special,I,15,90,100%
+Thunder Wave,Electric,Status,I,20,—,90%
+Thunder,Electric,Special,I,10,110,70%
+Rock Throw,Rock,Physical,I,15,50,90%
+Earthquake,Ground,Physical,I,10,100,100%
+Fissure,Ground,Physical,I,5,∞,30%
+Dig,Ground,Physical,I,10,80,100%
+Toxic,Poison,Status,I,10,—,90%
+Confusion,Psychic,Special,I,25,50,100%
+Psychic,Psychic,Special,I,10,90,100%
+Hypnosis,Psychic,Status,I,20,—,60%
+Meditate,Psychic,Status,I,40,—,—%
+Agility,Psychic,Status,I,30,—,—%
+Quick Attack,Normal,Physical,I,30,40,100%
+Rage,Normal,Physical,I,20,20,100%
+Teleport,Psychic,Status,I,20,—,—%
+Night Shade,Ghost,Special,I,15,—,100%
+Mimic,Normal,Status,I,10,—,∞%
+Screech,Normal,Status,I,40,—,85%
+Double Team,Normal,Status,I,15,—,—%
+Recover,Normal,Status,I,5,—,—%
+Harden,Normal,Status,I,30,—,—%
+Minimize,Normal,Status,I,10,—,—%
+Smokescreen,Normal,Status,I,20,—,100%
+Confuse Ray,Ghost,Status,I,10,—,100%
+Withdraw,Water,Status,I,40,—,—%
+Defense Curl,Normal,Status,I,40,—,—%
+Barrier,Psychic,Status,I,20,—,—%
+Light Screen,Psychic,Status,I,30,—,—%
+Haze,Ice,Status,I,30,—,—%
+Reflect,Psychic,Status,I,20,—,—%
+Focus Energy,Normal,Status,I,30,—,—%
+Bide,Normal,Physical,I,10,—,∞%
+Metronome,Normal,Status,I,10,—,—%
+Mirror Move,Flying,Status,I,20,—,—%
+Self-Destruct,Normal,Physical,I,5,200,100%
+Egg Bomb,Normal,Physical,I,10,100,75%
+Lick,Ghost,Physical,I,30,30,100%
+Smog,Poison,Special,I,20,30,70%
+Sludge,Poison,Special,I,20,65,100%
+Bone Club,Ground,Physical,I,20,65,85%
+Fire Blast,Fire,Special,I,5,110,85%
+Waterfall,Water,Physical,I,15,80,100%
+Clamp,Water,Physical,I,15,35,85%
+Swift,Normal,Special,I,20,60,∞%
+Skull Bash,Normal,Physical,I,10,130,100%
+Spike Cannon,Normal,Physical,I,15,20,100%
+Constrict,Normal,Physical,I,35,10,100%
+Amnesia,Psychic,Status,I,20,—,—%
+Kinesis,Psychic,Status,I,15,—,80%
+Soft-Boiled,Normal,Status,I,5,—,—%
+High Jump Kick,Fighting,Physical,I,10,130,90%
+Glare,Normal,Status,I,30,—,100%
+Dream Eater,Psychic,Special,I,15,100,100%
+Poison Gas,Poison,Status,I,40,—,90%
+Barrage,Normal,Physical,I,20,15,85%
+Leech Life,Bug,Physical,I,10,80,100%
+Lovely Kiss,Normal,Status,I,10,—,75%
+Sky Attack,Flying,Physical,I,5,140,90%
+Transform,Normal,Status,I,10,—,∞%
+Bubble,Water,Special,I,30,40,100%
+Dizzy Punch,Normal,Physical,I,10,70,100%
+Spore,Grass,Status,I,15,—,100%
+Flash,Normal,Status,I,20,—,100%
+Psywave,Psychic,Special,I,15,—,100%
+Splash,Normal,Status,I,40,—,—%
+Acid Armor,Poison,Status,I,20,—,—%
+Crabhammer,Water,Physical,I,10,100,90%
+Explosion,Normal,Physical,I,5,250,100%
+Fury Swipes,Normal,Physical,I,15,18,80%
+Bonemerang,Ground,Physical,I,10,50,90%
+Rest,Psychic,Status,I,5,—,—%
+Rock Slide,Rock,Physical,I,10,75,90%
+Hyper Fang,Normal,Physical,I,15,80,90%
+Sharpen,Normal,Status,I,30,—,—%
+Conversion,Normal,Status,I,30,—,—%
+Tri Attack,Normal,Special,I,10,80,100%
+Super Fang,Normal,Physical,I,10,—,90%
+Slash,Normal,Physical,I,20,70,100%
+Substitute,Normal,Status,I,10,—,—%
+Struggle,Normal,Physical,I,1,50,∞%
+Sketch,Normal,Status,II,1,—,∞%
+Triple Kick,Fighting,Physical,II,10,10,90%
+Thief,Dark,Physical,II,25,60,100%
+Spider Web,Bug,Status,II,10,—,∞%
+Mind Reader,Normal,Status,II,5,—,∞%
+Nightmare,Ghost,Status,II,15,—,100%
+Flame Wheel,Fire,Physical,II,25,60,100%
+Snore,Normal,Special,II,15,50,100%
+Curse,Ghost,Status,II,10,—,—%
+Flail,Normal,Physical,II,15,—,100%
+Conversion 2,Normal,Status,II,30,—,∞%
+Aeroblast,Flying,Special,II,5,100,95%
+Cotton Spore,Grass,Status,II,40,—,100%
+Reversal,Fighting,Physical,II,15,—,100%
+Spite,Ghost,Status,II,10,—,100%
+Powder Snow,Ice,Special,II,25,40,100%
+Protect,Normal,Status,II,10,—,—%
+Mach Punch,Fighting,Physical,II,30,40,100%
+Scary Face,Normal,Status,II,10,—,100%
+Feint Attack,Dark,Physical,II,20,60,∞%
+Sweet Kiss,Fairy,Status,II,10,—,75%
+Belly Drum,Normal,Status,II,10,—,—%
+Sludge Bomb,Poison,Special,II,10,90,100%
+Mud-Slap,Ground,Special,II,10,20,100%
+Octazooka,Water,Special,II,10,65,85%
+Spikes,Ground,Status,II,20,—,—%
+Zap Cannon,Electric,Special,II,5,120,50%
+Foresight,Normal,Status,II,40,—,∞%
+Destiny Bond,Ghost,Status,II,5,—,—%
+Perish Song,Normal,Status,II,5,—,—%
+Icy Wind,Ice,Special,II,15,55,95%
+Detect,Fighting,Status,II,5,—,—%
+Bone Rush,Ground,Physical,II,10,25,90%
+Lock-On,Normal,Status,II,5,—,∞%
+Outrage,Dragon,Physical,II,10,120,100%
+Sandstorm,Rock,Status,II,10,—,—%
+Giga Drain,Grass,Special,II,10,75,100%
+Endure,Normal,Status,II,10,—,—%
+Charm,Fairy,Status,II,20,—,100%
+Rollout,Rock,Physical,II,20,30,90%
+False Swipe,Normal,Physical,II,40,40,100%
+Swagger,Normal,Status,II,15,—,85%
+Milk Drink,Normal,Status,II,5,—,—%
+Spark,Electric,Physical,II,20,65,100%
+Fury Cutter,Bug,Physical,II,20,40,95%
+Steel Wing,Steel,Physical,II,25,70,90%
+Mean Look,Normal,Status,II,5,—,∞%
+Attract,Normal,Status,II,15,—,100%
+Sleep Talk,Normal,Status,II,10,—,—%
+Heal Bell,Normal,Status,II,5,—,—%
+Return,Normal,Physical,II,20,—,100%
+Present,Normal,Physical,II,15,—,90%
+Frustration,Normal,Physical,II,20,—,100%
+Safeguard,Normal,Status,II,25,—,—%
+Pain Split,Normal,Status,II,20,—,∞%
+Sacred Fire,Fire,Physical,II,5,100,95%
+Magnitude,Ground,Physical,II,30,—,100%
+Dynamic Punch,Fighting,Physical,II,5,100,50%
+Megahorn,Bug,Physical,II,10,120,85%
+Dragon Breath,Dragon,Special,II,20,60,100%
+Baton Pass,Normal,Status,II,40,—,—%
+Encore,Normal,Status,II,5,—,100%
+Pursuit,Dark,Physical,II,20,40,100%
+Rapid Spin,Normal,Physical,II,40,50,100%
+Sweet Scent,Normal,Status,II,20,—,100%
+Iron Tail,Steel,Physical,II,15,100,75%
+Metal Claw,Steel,Physical,II,35,50,95%
+Vital Throw,Fighting,Physical,II,10,70,∞%
+Morning Sun,Normal,Status,II,5,—,—%
+Synthesis,Grass,Status,II,5,—,—%
+Moonlight,Fairy,Status,II,5,—,—%
+Hidden Power,Normal,Special,II,15,60,100%
+Cross Chop,Fighting,Physical,II,5,100,80%
+Twister,Dragon,Special,II,20,40,100%
+Rain Dance,Water,Status,II,5,—,—%
+Sunny Day,Fire,Status,II,5,—,—%
+Crunch,Dark,Physical,II,15,80,100%
+Mirror Coat,Psychic,Special,II,20,—,100%
+Psych Up,Normal,Status,II,10,—,∞%
+Extreme Speed,Normal,Physical,II,5,80,100%
+Ancient Power,Rock,Special,II,5,60,100%
+Shadow Ball,Ghost,Special,II,15,80,100%
+Future Sight,Psychic,Special,II,10,120,100%
+Rock Smash,Fighting,Physical,II,15,40,100%
+Whirlpool,Water,Special,II,15,35,85%
+Beat Up,Dark,Physical,II,10,—,100%
+Fake Out,Normal,Physical,III,10,40,100%
+Uproar,Normal,Special,III,10,90,100%
+Stockpile,Normal,Status,III,20,—,—%
+Spit Up,Normal,Special,III,10,—,100%
+Swallow,Normal,Status,III,10,—,—%
+Heat Wave,Fire,Special,III,10,95,90%
+Hail,Ice,Status,III,10,—,—%
+Torment,Dark,Status,III,15,—,100%
+Flatter,Dark,Status,III,15,—,100%
+Will-O-Wisp,Fire,Status,III,15,—,85%
+Memento,Dark,Status,III,10,—,100%
+Facade,Normal,Physical,III,20,70,100%
+Focus Punch,Fighting,Physical,III,20,150,100%
+Smelling Salts,Normal,Physical,III,10,70,100%
+Follow Me,Normal,Status,III,20,—,—%
+Nature Power,Normal,Status,III,20,—,—%
+Charge,Electric,Status,III,20,—,—%
+Taunt,Dark,Status,III,20,—,100%
+Helping Hand,Normal,Status,III,20,—,—%
+Trick,Psychic,Status,III,10,—,100%
+Role Play,Psychic,Status,III,10,—,∞%
+Wish,Normal,Status,III,10,—,—%
+Assist,Normal,Status,III,20,—,—%
+Ingrain,Grass,Status,III,20,—,—%
+Superpower,Fighting,Physical,III,5,120,100%
+Magic Coat,Psychic,Status,III,15,—,—%
+Recycle,Normal,Status,III,10,—,—%
+Revenge,Fighting,Physical,III,10,60,100%
+Brick Break,Fighting,Physical,III,15,75,100%
+Yawn,Normal,Status,III,10,—,∞%
+Knock Off,Dark,Physical,III,20,65,100%
+Endeavor,Normal,Physical,III,5,—,100%
+Eruption,Fire,Special,III,5,150,100%
+Skill Swap,Psychic,Status,III,10,—,∞%
+Imprison,Psychic,Status,III,10,—,—%
+Refresh,Normal,Status,III,20,—,—%
+Grudge,Ghost,Status,III,5,—,—%
+Snatch,Dark,Status,III,10,—,—%
+Secret Power,Normal,Physical,III,20,70,100%
+Dive,Water,Physical,III,10,80,100%
+Arm Thrust,Fighting,Physical,III,20,15,100%
+Camouflage,Normal,Status,III,20,—,—%
+Tail Glow,Bug,Status,III,20,—,—%
+Luster Purge,Psychic,Special,III,5,95,100%
+Mist Ball,Psychic,Special,III,5,95,100%
+Feather Dance,Flying,Status,III,15,—,100%
+Teeter Dance,Normal,Status,III,20,—,100%
+Blaze Kick,Fire,Physical,III,10,85,90%
+Mud Sport,Ground,Status,III,15,—,—%
+Ice Ball,Ice,Physical,III,20,30,90%
+Needle Arm,Grass,Physical,III,15,60,100%
+Slack Off,Normal,Status,III,5,—,—%
+Hyper Voice,Normal,Special,III,10,90,100%
+Poison Fang,Poison,Physical,III,15,50,100%
+Crush Claw,Normal,Physical,III,10,75,95%
+Blast Burn,Fire,Special,III,5,150,90%
+Hydro Cannon,Water,Special,III,5,150,90%
+Meteor Mash,Steel,Physical,III,10,90,90%
+Astonish,Ghost,Physical,III,15,30,100%
+Weather Ball,Normal,Special,III,10,50,100%
+Aromatherapy,Grass,Status,III,5,—,—%
+Fake Tears,Dark,Status,III,20,—,100%
+Air Cutter,Flying,Special,III,25,60,95%
+Overheat,Fire,Special,III,5,130,90%
+Odor Sleuth,Normal,Status,III,40,—,∞%
+Rock Tomb,Rock,Physical,III,15,60,95%
+Silver Wind,Bug,Special,III,5,60,100%
+Metal Sound,Steel,Status,III,40,—,85%
+Grass Whistle,Grass,Status,III,15,—,55%
+Tickle,Normal,Status,III,20,—,100%
+Cosmic Power,Psychic,Status,III,20,—,—%
+Water Spout,Water,Special,III,5,150,100%
+Signal Beam,Bug,Special,III,15,75,100%
+Shadow Punch,Ghost,Physical,III,20,60,∞%
+Extrasensory,Psychic,Special,III,20,80,100%
+Sky Uppercut,Fighting,Physical,III,15,85,90%
+Sand Tomb,Ground,Physical,III,15,35,85%
+Sheer Cold,Ice,Special,III,5,∞,30%
+Muddy Water,Water,Special,III,10,90,85%
+Bullet Seed,Grass,Physical,III,30,25,100%
+Aerial Ace,Flying,Physical,III,20,60,∞%
+Icicle Spear,Ice,Physical,III,30,25,100%
+Iron Defense,Steel,Status,III,15,—,—%
+Block,Normal,Status,III,5,—,∞%
+Howl,Normal,Status,III,40,—,—%
+Dragon Claw,Dragon,Physical,III,15,80,100%
+Frenzy Plant,Grass,Special,III,5,150,90%
+Bulk Up,Fighting,Status,III,20,—,—%
+Bounce,Flying,Physical,III,5,85,85%
+Mud Shot,Ground,Special,III,15,55,95%
+Poison Tail,Poison,Physical,III,25,50,100%
+Covet,Normal,Physical,III,25,60,100%
+Volt Tackle,Electric,Physical,III,15,120,100%
+Magical Leaf,Grass,Special,III,20,60,∞%
+Water Sport,Water,Status,III,15,—,—%
+Calm Mind,Psychic,Status,III,20,—,—%
+Leaf Blade,Grass,Physical,III,15,90,100%
+Dragon Dance,Dragon,Status,III,20,—,—%
+Rock Blast,Rock,Physical,III,10,25,90%
+Shock Wave,Electric,Special,III,20,60,∞%
+Water Pulse,Water,Special,III,20,60,100%
+Doom Desire,Steel,Special,III,5,140,100%
+Psycho Boost,Psychic,Special,III,5,140,90%
+Roost,Flying,Status,IV,5,—,—%
+Gravity,Psychic,Status,IV,5,—,—%
+Miracle Eye,Psychic,Status,IV,40,—,∞%
+Wake-Up Slap,Fighting,Physical,IV,10,70,100%
+Hammer Arm,Fighting,Physical,IV,10,100,90%
+Gyro Ball,Steel,Physical,IV,5,—,100%
+Healing Wish,Psychic,Status,IV,10,—,—%
+Brine,Water,Special,IV,10,65,100%
+Natural Gift,Normal,Physical,IV,15,—,100%
+Feint,Normal,Physical,IV,10,30,100%
+Pluck,Flying,Physical,IV,20,60,100%
+Tailwind,Flying,Status,IV,15,—,—%
+Acupressure,Normal,Status,IV,30,—,—%
+Metal Burst,Steel,Physical,IV,10,—,100%
+U-turn,Bug,Physical,IV,20,70,100%
+Close Combat,Fighting,Physical,IV,5,120,100%
+Payback,Dark,Physical,IV,10,50,100%
+Assurance,Dark,Physical,IV,10,60,100%
+Embargo,Dark,Status,IV,15,—,100%
+Fling,Dark,Physical,IV,10,—,100%
+Psycho Shift,Psychic,Status,IV,10,—,100%
+Trump Card,Normal,Special,IV,5,—,∞%
+Heal Block,Psychic,Status,IV,15,—,100%
+Wring Out,Normal,Special,IV,5,—,100%
+Power Trick,Psychic,Status,IV,10,—,—%
+Gastro Acid,Poison,Status,IV,10,—,100%
+Lucky Chant,Normal,Status,IV,30,—,—%
+Me First,Normal,Status,IV,20,—,∞%
+Copycat,Normal,Status,IV,20,—,—%
+Power Swap,Psychic,Status,IV,10,—,∞%
+Guard Swap,Psychic,Status,IV,10,—,∞%
+Punishment,Dark,Physical,IV,5,—,100%
+Last Resort,Normal,Physical,IV,5,140,100%
+Worry Seed,Grass,Status,IV,10,—,100%
+Sucker Punch,Dark,Physical,IV,5,70,100%
+Toxic Spikes,Poison,Status,IV,20,—,—%
+Heart Swap,Psychic,Status,IV,10,—,∞%
+Aqua Ring,Water,Status,IV,20,—,—%
+Magnet Rise,Electric,Status,IV,10,—,—%
+Flare Blitz,Fire,Physical,IV,15,120,100%
+Force Palm,Fighting,Physical,IV,10,60,100%
+Aura Sphere,Fighting,Special,IV,20,80,∞%
+Rock Polish,Rock,Status,IV,20,—,—%
+Poison Jab,Poison,Physical,IV,20,80,100%
+Dark Pulse,Dark,Special,IV,15,80,100%
+Night Slash,Dark,Physical,IV,15,70,100%
+Aqua Tail,Water,Physical,IV,10,90,90%
+Seed Bomb,Grass,Physical,IV,15,80,100%
+Air Slash,Flying,Special,IV,15,75,95%
+X-Scissor,Bug,Physical,IV,15,80,100%
+Bug Buzz,Bug,Special,IV,10,90,100%
+Dragon Pulse,Dragon,Special,IV,10,85,100%
+Dragon Rush,Dragon,Physical,IV,10,100,75%
+Power Gem,Rock,Special,IV,20,80,100%
+Drain Punch,Fighting,Physical,IV,10,75,100%
+Vacuum Wave,Fighting,Special,IV,30,40,100%
+Focus Blast,Fighting,Special,IV,5,120,70%
+Energy Ball,Grass,Special,IV,10,90,100%
+Brave Bird,Flying,Physical,IV,15,120,100%
+Earth Power,Ground,Special,IV,10,90,100%
+Switcheroo,Dark,Status,IV,10,—,100%
+Giga Impact,Normal,Physical,IV,5,150,90%
+Nasty Plot,Dark,Status,IV,20,—,—%
+Bullet Punch,Steel,Physical,IV,30,40,100%
+Avalanche,Ice,Physical,IV,10,60,100%
+Ice Shard,Ice,Physical,IV,30,40,100%
+Shadow Claw,Ghost,Physical,IV,15,70,100%
+Thunder Fang,Electric,Physical,IV,15,65,95%
+Ice Fang,Ice,Physical,IV,15,65,95%
+Fire Fang,Fire,Physical,IV,15,65,95%
+Shadow Sneak,Ghost,Physical,IV,30,40,100%
+Mud Bomb,Ground,Special,IV,10,65,85%
+Psycho Cut,Psychic,Physical,IV,20,70,100%
+Zen Headbutt,Psychic,Physical,IV,15,80,90%
+Mirror Shot,Steel,Special,IV,10,65,85%
+Flash Cannon,Steel,Special,IV,10,80,100%
+Rock Climb,Normal,Physical,IV,20,90,85%
+Defog,Flying,Status,IV,15,—,∞%
+Trick Room,Psychic,Status,IV,5,—,—%
+Draco Meteor,Dragon,Special,IV,5,130,90%
+Discharge,Electric,Special,IV,15,80,100%
+Lava Plume,Fire,Special,IV,15,80,100%
+Leaf Storm,Grass,Special,IV,5,130,90%
+Power Whip,Grass,Physical,IV,10,120,85%
+Rock Wrecker,Rock,Physical,IV,5,150,90%
+Cross Poison,Poison,Physical,IV,20,70,100%
+Gunk Shot,Poison,Physical,IV,5,120,80%
+Iron Head,Steel,Physical,IV,15,80,100%
+Magnet Bomb,Steel,Physical,IV,20,60,∞%
+Stone Edge,Rock,Physical,IV,5,100,80%
+Captivate,Normal,Status,IV,20,—,100%
+Stealth Rock,Rock,Status,IV,20,—,—%
+Grass Knot,Grass,Special,IV,20,—,100%
+Chatter,Flying,Special,IV,20,65,100%
+Judgment,Normal,Special,IV,10,100,100%
+Bug Bite,Bug,Physical,IV,20,60,100%
+Charge Beam,Electric,Special,IV,10,50,90%
+Wood Hammer,Grass,Physical,IV,15,120,100%
+Aqua Jet,Water,Physical,IV,20,40,100%
+Attack Order,Bug,Physical,IV,15,90,100%
+Defend Order,Bug,Status,IV,10,—,—%
+Heal Order,Bug,Status,IV,10,—,—%
+Head Smash,Rock,Physical,IV,5,150,80%
+Double Hit,Normal,Physical,IV,10,35,90%
+Roar of Time,Dragon,Special,IV,5,150,90%
+Spacial Rend,Dragon,Special,IV,5,100,95%
+Lunar Dance,Psychic,Status,IV,10,—,—%
+Crush Grip,Normal,Physical,IV,5,—,100%
+Magma Storm,Fire,Special,IV,5,100,75%
+Dark Void,Dark,Status,IV,10,—,50%
+Seed Flare,Grass,Special,IV,5,120,85%
+Ominous Wind,Ghost,Special,IV,5,60,100%
+Shadow Force,Ghost,Physical,IV,5,120,100%
+Hone Claws,Dark,Status,V,15,—,—%
+Wide Guard,Rock,Status,V,10,—,—%
+Guard Split,Psychic,Status,V,10,—,∞%
+Power Split,Psychic,Status,V,10,—,∞%
+Wonder Room,Psychic,Status,V,10,—,—%
+Psyshock,Psychic,Special,V,10,80,100%
+Venoshock,Poison,Special,V,10,65,100%
+Autotomize,Steel,Status,V,15,—,—%
+Rage Powder,Bug,Status,V,20,—,—%
+Telekinesis,Psychic,Status,V,15,—,∞%
+Magic Room,Psychic,Status,V,10,—,—%
+Smack Down,Rock,Physical,V,15,50,100%
+Storm Throw,Fighting,Physical,V,10,60,100%
+Flame Burst,Fire,Special,V,15,70,100%
+Sludge Wave,Poison,Special,V,10,95,100%
+Quiver Dance,Bug,Status,V,20,—,—%
+Heavy Slam,Steel,Physical,V,10,—,100%
+Synchronoise,Psychic,Special,V,10,120,100%
+Electro Ball,Electric,Special,V,10,—,100%
+Soak,Water,Status,V,20,—,100%
+Flame Charge,Fire,Physical,V,20,50,100%
+Coil,Poison,Status,V,20,—,—%
+Low Sweep,Fighting,Physical,V,20,65,100%
+Acid Spray,Poison,Special,V,20,40,100%
+Foul Play,Dark,Physical,V,15,95,100%
+Simple Beam,Normal,Status,V,15,—,100%
+Entrainment,Normal,Status,V,15,—,100%
+After You,Normal,Status,V,15,—,∞%
+Round,Normal,Special,V,15,60,100%
+Echoed Voice,Normal,Special,V,15,40,100%
+Chip Away,Normal,Physical,V,20,70,100%
+Clear Smog,Poison,Special,V,15,50,∞%
+Stored Power,Psychic,Special,V,10,20,100%
+Quick Guard,Fighting,Status,V,15,—,—%
+Ally Switch,Psychic,Status,V,15,—,—%
+Scald,Water,Special,V,15,80,100%
+Shell Smash,Normal,Status,V,15,—,—%
+Heal Pulse,Psychic,Status,V,10,—,∞%
+Hex,Ghost,Special,V,10,65,100%
+Sky Drop,Flying,Physical,V,10,60,100%
+Shift Gear,Steel,Status,V,10,—,—%
+Circle Throw,Fighting,Physical,V,10,60,90%
+Incinerate,Fire,Special,V,15,60,100%
+Quash,Dark,Status,V,15,—,100%
+Acrobatics,Flying,Physical,V,15,55,100%
+Reflect Type,Normal,Status,V,15,—,∞%
+Retaliate,Normal,Physical,V,5,70,100%
+Final Gambit,Fighting,Special,V,5,—,100%
+Bestow,Normal,Status,V,15,—,∞%
+Inferno,Fire,Special,V,5,100,50%
+Water Pledge,Water,Special,V,10,80,100%
+Fire Pledge,Fire,Special,V,10,80,100%
+Grass Pledge,Grass,Special,V,10,80,100%
+Volt Switch,Electric,Special,V,20,70,100%
+Struggle Bug,Bug,Special,V,20,50,100%
+Bulldoze,Ground,Physical,V,20,60,100%
+Frost Breath,Ice,Special,V,10,60,90%
+Dragon Tail,Dragon,Physical,V,10,60,90%
+Work Up,Normal,Status,V,30,—,—%
+Electroweb,Electric,Special,V,15,55,95%
+Wild Charge,Electric,Physical,V,15,90,100%
+Drill Run,Ground,Physical,V,10,80,95%
+Dual Chop,Dragon,Physical,V,15,40,90%
+Heart Stamp,Psychic,Physical,V,25,60,100%
+Horn Leech,Grass,Physical,V,10,75,100%
+Sacred Sword,Fighting,Physical,V,15,90,100%
+Razor Shell,Water,Physical,V,10,75,95%
+Heat Crash,Fire,Physical,V,10,—,100%
+Leaf Tornado,Grass,Special,V,10,65,90%
+Steamroller,Bug,Physical,V,20,65,100%
+Cotton Guard,Grass,Status,V,10,—,—%
+Night Daze,Dark,Special,V,10,85,95%
+Psystrike,Psychic,Special,V,10,100,100%
+Tail Slap,Normal,Physical,V,10,25,85%
+Hurricane,Flying,Special,V,10,110,70%
+Head Charge,Normal,Physical,V,15,120,100%
+Gear Grind,Steel,Physical,V,15,50,85%
+Searing Shot,Fire,Special,V,5,100,100%
+Techno Blast,Normal,Special,V,5,120,100%
+Relic Song,Normal,Special,V,10,75,100%
+Secret Sword,Fighting,Special,V,10,85,100%
+Glaciate,Ice,Special,V,10,65,95%
+Bolt Strike,Electric,Physical,V,5,130,85%
+Blue Flare,Fire,Special,V,5,130,85%
+Fiery Dance,Fire,Special,V,10,80,100%
+Freeze Shock,Ice,Physical,V,5,140,90%
+Ice Burn,Ice,Special,V,5,140,90%
+Snarl,Dark,Special,V,15,55,95%
+Icicle Crash,Ice,Physical,V,10,85,90%
+V-create,Fire,Physical,V,5,180,95%
+Fusion Flare,Fire,Special,V,5,100,100%
+Fusion Bolt,Electric,Physical,V,5,100,100%
+Flying Press,Fighting,Physical,VI,10,100,95%
+Mat Block,Fighting,Status,VI,10,—,—%
+Belch,Poison,Special,VI,10,120,90%
+Rototiller,Ground,Status,VI,10,—,—%
+Sticky Web,Bug,Status,VI,20,—,—%
+Fell Stinger,Bug,Physical,VI,25,50,100%
+Phantom Force,Ghost,Physical,VI,10,90,100%
+Trick-or-Treat,Ghost,Status,VI,20,—,100%
+Noble Roar,Normal,Status,VI,30,—,100%
+Ion Deluge,Electric,Status,VI,25,—,—%
+Parabolic Charge,Electric,Special,VI,20,65,100%
+Forest's Curse,Grass,Status,VI,20,—,100%
+Petal Blizzard,Grass,Physical,VI,15,90,100%
+Freeze-Dry,Ice,Special,VI,20,70,100%
+Disarming Voice,Fairy,Special,VI,15,40,∞%
+Parting Shot,Dark,Status,VI,20,—,100%
+Topsy-Turvy,Dark,Status,VI,20,—,∞%
+Draining Kiss,Fairy,Special,VI,10,50,100%
+Crafty Shield,Fairy,Status,VI,10,—,—%
+Flower Shield,Fairy,Status,VI,10,—,—%
+Grassy Terrain,Grass,Status,VI,10,—,—%
+Misty Terrain,Fairy,Status,VI,10,—,—%
+Electrify,Electric,Status,VI,20,—,∞%
+Play Rough,Fairy,Physical,VI,10,90,90%
+Fairy Wind,Fairy,Special,VI,30,40,100%
+Moonblast,Fairy,Special,VI,15,95,100%
+Boomburst,Normal,Special,VI,10,140,100%
+Fairy Lock,Fairy,Status,VI,10,—,—%
+King's Shield,Steel,Status,VI,10,—,—%
+Play Nice,Normal,Status,VI,20,—,∞%
+Confide,Normal,Status,VI,20,—,∞%
+Diamond Storm,Rock,Physical,VI,5,100,95%
+Steam Eruption,Water,Special,VI,5,110,95%
+Hyperspace Hole,Psychic,Special,VI,5,80,—%
+Water Shuriken,Water,Special,VI,20,15,100%
+Mystical Fire,Fire,Special,VI,10,75,100%
+Spiky Shield,Grass,Status,VI,10,—,—%
+Aromatic Mist,Fairy,Status,VI,20,—,—%
+Eerie Impulse,Electric,Status,VI,15,—,100%
+Venom Drench,Poison,Status,VI,20,—,100%
+Powder,Bug,Status,VI,20,—,100%
+Geomancy,Fairy,Status,VI,10,—,—%
+Magnetic Flux,Electric,Status,VI,20,—,—%
+Happy Hour,Normal,Status,VI,30,—,—%
+Electric Terrain,Electric,Status,VI,10,—,—%
+Dazzling Gleam,Fairy,Special,VI,10,80,100%
+Celebrate,Normal,Status,VI,40,—,—%
+Hold Hands,Normal,Status,VI,40,—,—%
+Baby-Doll Eyes,Fairy,Status,VI,30,—,100%
+Nuzzle,Electric,Physical,VI,20,20,100%
+Hold Back,Normal,Physical,VI,40,40,100%
+Infestation,Bug,Special,VI,20,20,100%
+Power-Up Punch,Fighting,Physical,VI,20,40,100%
+Oblivion Wing,Flying,Special,VI,10,80,100%
+Thousand Arrows,Ground,Physical,VI,10,90,100%
+Thousand Waves,Ground,Physical,VI,10,90,100%
+Land's Wrath,Ground,Physical,VI,10,90,100%
+Light of Ruin,Fairy,Special,VI,5,140,90%
+Origin Pulse,Water,Special,VI,10,110,85%
+Precipice Blades,Ground,Physical,VI,10,120,85%
+Dragon Ascent,Flying,Physical,VI,5,120,100%
+Hyperspace Fury,Dark,Physical,VI,5,100,—%
+Breakneck Blitz,Normal,???,VII,1,—,∞%
+All-Out Pummeling,Fighting,???,VII,1,—,∞%
+Supersonic Skystrike,Flying,???,VII,1,—,∞%
+Acid Downpour,Poison,???,VII,1,—,∞%
+Tectonic Rage,Ground,???,VII,1,—,∞%
+Continental Crush,Rock,???,VII,1,—,∞%
+Savage Spin-Out,Bug,???,VII,1,—,∞%
+Never-Ending Nightmare,Ghost,???,VII,1,—,∞%
+Corkscrew Crash,Steel,???,VII,1,—,∞%
+Inferno Overdrive,Fire,???,VII,1,—,∞%
+Hydro Vortex,Water,???,VII,1,—,∞%
+Bloom Doom,Grass,???,VII,1,—,∞%
+Gigavolt Havoc,Electric,???,VII,1,—,∞%
+Shattered Psyche,Psychic,???,VII,1,—,∞%
+Subzero Slammer,Ice,???,VII,1,—,∞%
+Devastating Drake,Dragon,???,VII,1,—,∞%
+Black Hole Eclipse,Dark,???,VII,1,—,∞%
+Twinkle Tackle,Fairy,???,VII,1,—,∞%
+Catastropika,Electric,Physical,VII,1,210,∞%
+Shore Up,Ground,Status,VII,5,—,—%
+First Impression,Bug,Physical,VII,10,90,100%
+Baneful Bunker,Poison,Status,VII,10,—,—%
+Spirit Shackle,Ghost,Physical,VII,10,80,100%
+Darkest Lariat,Dark,Physical,VII,10,85,100%
+Sparkling Aria,Water,Special,VII,10,90,100%
+Ice Hammer,Ice,Physical,VII,10,100,90%
+Floral Healing,Fairy,Status,VII,10,—,∞%
+High Horsepower,Ground,Physical,VII,10,95,95%
+Strength Sap,Grass,Status,VII,10,—,100%
+Solar Blade,Grass,Physical,VII,10,125,100%
+Leafage,Grass,Physical,VII,40,40,100%
+Spotlight,Normal,Status,VII,15,—,—%
+Toxic Thread,Poison,Status,VII,20,—,100%
+Laser Focus,Normal,Status,VII,30,—,—%
+Gear Up,Steel,Status,VII,20,—,—%
+Throat Chop,Dark,Physical,VII,15,80,100%
+Pollen Puff,Bug,Special,VII,15,90,100%
+Anchor Shot,Steel,Physical,VII,20,80,100%
+Psychic Terrain,Psychic,Status,VII,10,—,—%
+Lunge,Bug,Physical,VII,15,80,100%
+Fire Lash,Fire,Physical,VII,15,80,100%
+Power Trip,Dark,Physical,VII,10,20,100%
+Burn Up,Fire,Special,VII,5,130,100%
+Speed Swap,Psychic,Status,VII,10,—,∞%
+Smart Strike,Steel,Physical,VII,10,70,∞%
+Purify,Poison,Status,VII,20,—,—%
+Revelation Dance,Normal,Special,VII,15,90,100%
+Core Enforcer,Dragon,Special,VII,10,100,100%
+Trop Kick,Grass,Physical,VII,15,70,100%
+Instruct,Psychic,Status,VII,15,—,—%
+Beak Blast,Flying,Physical,VII,15,100,100%
+Clanging Scales,Dragon,Special,VII,5,110,100%
+Dragon Hammer,Dragon,Physical,VII,15,90,100%
+Brutal Swing,Dark,Physical,VII,20,60,100%
+Aurora Veil,Ice,Status,VII,20,—,—%
+Sinister Arrow Raid,Ghost,Physical,VII,1,180,∞%
+Malicious Moonsault,Dark,Physical,VII,1,180,∞%
+Oceanic Operetta,Water,Special,VII,1,195,∞%
+Guardian of Alola,Fairy,Special,VII,1,—,∞%
+Soul-Stealing 7-Star Strike,Ghost,Physical,VII,1,195,∞%
+Stoked Sparksurfer,Electric,Special,VII,1,175,∞%
+Pulverizing Pancake,Normal,Physical,VII,1,210,∞%
+Extreme Evoboost,Normal,Status,VII,1,—,—%
+Genesis Supernova,Psychic,Special,VII,1,185,∞%
+Shell Trap,Fire,Special,VII,5,150,100%
+Fleur Cannon,Fairy,Special,VII,5,130,90%
+Psychic Fangs,Psychic,Physical,VII,10,85,100%
+Stomping Tantrum,Ground,Physical,VII,10,75,100%
+Shadow Bone,Ghost,Physical,VII,10,85,100%
+Accelerock,Rock,Physical,VII,20,40,100%
+Liquidation,Water,Physical,VII,10,85,100%
+Prismatic Laser,Psychic,Special,VII,10,160,100%
+Spectral Thief,Ghost,Physical,VII,10,90,100%
+Sunsteel Strike,Steel,Physical,VII,5,100,100%
+Moongeist Beam,Ghost,Special,VII,5,100,100%
+Tearful Look,Normal,Status,VII,20,—,—%
+Zing Zap,Electric,Physical,VII,10,80,100%
+Nature's Madness,Fairy,Special,VII,10,—,90%
+Multi-Attack,Normal,Physical,VII,10,120,100%
+"10,000,000 Volt Thunderbolt",Electric,Special,VII,1,195,∞%
+Mind Blown,Fire,Special,VII,5,150,100%
+Plasma Fists,Electric,Physical,VII,15,100,100%
+Photon Geyser,Psychic,Special,VII,5,100,100%
+Light That Burns the Sky,Psychic,Special,VII,1,200,∞%
+Searing Sunraze Smash,Steel,Physical,VII,1,200,∞%
+Menacing Moonraze Maelstrom,Ghost,Special,VII,1,200,∞%
+Let's Snuggle Forever,Fairy,Physical,VII,1,190,∞%
+Splintered Stormshards,Rock,Physical,VII,1,190,∞%
+Clangorous Soulblaze,Dragon,Special,VII,1,185,∞%
+Zippy Zap,Electric,Physical,VII,10,80,100%
+Splishy Splash,Water,Special,VII,15,90,100%
+Floaty Fall,Flying,Physical,VII,15,90,95%
+Pika Papow,Electric,Special,VII,20,—,∞%
+Bouncy Bubble,Water,Special,VII,20,60,100%
+Buzzy Buzz,Electric,Special,VII,20,60,100%
+Sizzly Slide,Fire,Physical,VII,20,60,100%
+Glitzy Glow,Psychic,Special,VII,15,80,95%
+Baddy Bad,Dark,Special,VII,15,80,95%
+Sappy Seed,Grass,Physical,VII,10,100,90%
+Freezy Frost,Ice,Special,VII,10,100,90%
+Sparkly Swirl,Fairy,Special,VII,5,120,85%
+Veevee Volley,Normal,Physical,VII,20,—,∞%
+Double Iron Bash,Steel,Physical,VII,5,60,100%
+Max Guard,Normal,Status,VIII,10,—,—%
+Dynamax Cannon,Dragon,Special,VIII,5,100,100%
+Snipe Shot,Water,Special,VIII,15,80,100%
+Jaw Lock,Dark,Physical,VIII,10,80,100%
+Stuff Cheeks,Normal,Status,VIII,10,—,—%
+No Retreat,Fighting,Status,VIII,5,—,—%
+Tar Shot,Rock,Status,VIII,15,—,100%
+Magic Powder,Psychic,Status,VIII,20,—,100%
+Dragon Darts,Dragon,Physical,VIII,10,50,100%
+Teatime,Normal,Status,VIII,10,—,—%
+Octolock,Fighting,Status,VIII,15,—,100%
+Bolt Beak,Electric,Physical,VIII,10,85,100%
+Fishious Rend,Water,Physical,VIII,10,85,100%
+Court Change,Normal,Status,VIII,10,—,100%
+Max Flare,Fire,???,VIII,10,—,∞%
+Max Flutterby,Bug,???,VIII,10,—,∞%
+Max Lightning,Electric,???,VIII,10,—,∞%
+Max Strike,Normal,???,VIII,10,—,∞%
+Max Knuckle,Fighting,???,VIII,10,—,∞%
+Max Phantasm,Ghost,???,VIII,10,—,∞%
+Max Hailstorm,Ice,???,VIII,10,—,∞%
+Max Ooze,Poison,???,VIII,10,—,∞%
+Max Geyser,Water,???,VIII,10,—,∞%
+Max Airstream,Flying,???,VIII,10,—,∞%
+Max Starfall,Fairy,???,VIII,10,—,∞%
+Max Wyrmwind,Dragon,???,VIII,10,—,∞%
+Max Mindstorm,Psychic,???,VIII,10,—,∞%
+Max Rockfall,Rock,???,VIII,10,—,∞%
+Max Quake,Ground,???,VIII,10,—,∞%
+Max Darkness,Dark,???,VIII,10,—,∞%
+Max Overgrowth,Grass,???,VIII,10,—,∞%
+Max Steelspike,Steel,???,VIII,10,—,∞%
+Clangorous Soul,Dragon,Status,VIII,5,—,—%
+Body Press,Fighting,Physical,VIII,10,80,100%
+Decorate,Fairy,Status,VIII,15,—,—%
+Drum Beating,Grass,Physical,VIII,10,80,100%
+Snap Trap,Grass,Physical,VIII,15,35,100%
+Pyro Ball,Fire,Physical,VIII,5,120,90%
+Behemoth Blade,Steel,Physical,VIII,5,100,100%
+Behemoth Bash,Steel,Physical,VIII,5,100,100%
+Aura Wheel,Electric,Physical,VIII,10,110,100%
+Breaking Swipe,Dragon,Physical,VIII,15,60,100%
+Branch Poke,Grass,Physical,VIII,40,40,100%
+Overdrive,Electric,Special,VIII,10,80,100%
+Apple Acid,Grass,Special,VIII,10,80,100%
+Grav Apple,Grass,Physical,VIII,10,80,100%
+Spirit Break,Fairy,Physical,VIII,15,75,100%
+Strange Steam,Fairy,Special,VIII,10,90,95%
+Life Dew,Water,Status,VIII,10,—,∞%
+Obstruct,Dark,Status,VIII,10,—,100%
+False Surrender,Dark,Physical,VIII,10,80,∞%
+Meteor Assault,Fighting,Physical,VIII,5,150,100%
+Eternabeam,Dragon,Special,VIII,5,160,90%
+Steel Beam,Steel,Special,VIII,5,140,95%
+Expanding Force,Psychic,Special,VIII,10,80,100%
+Steel Roller,Steel,Physical,VIII,5,130,100%
+Scale Shot,Dragon,Physical,VIII,20,25,90%
+Meteor Beam,Rock,Special,VIII,10,120,90%
+Shell Side Arm,Poison,Special,VIII,10,90,100%
+Misty Explosion,Fairy,Special,VIII,5,100,100%
+Grassy Glide,Grass,Physical,VIII,20,55,100%
+Rising Voltage,Electric,Special,VIII,20,70,100%
+Terrain Pulse,Normal,Special,VIII,10,50,100%
+Skitter Smack,Bug,Physical,VIII,10,70,90%
+Burning Jealousy,Fire,Special,VIII,5,70,100%
+Lash Out,Dark,Physical,VIII,5,75,100%
+Poltergeist,Ghost,Physical,VIII,5,110,90%
+Corrosive Gas,Poison,Status,VIII,40,—,100%
+Coaching,Fighting,Status,VIII,10,—,—%
+Flip Turn,Water,Physical,VIII,20,60,100%
+Triple Axel,Ice,Physical,VIII,10,20,90%
+Dual Wingbeat,Flying,Physical,VIII,10,40,90%
+Scorching Sands,Ground,Special,VIII,10,70,100%
+Jungle Healing,Grass,Status,VIII,10,—,—%
+Wicked Blow,Dark,Physical,VIII,5,75,100%
+Surging Strikes,Water,Physical,VIII,5,25,100%
+Thunder Cage,Electric,Special,VIII,15,80,90%
+Dragon Energy,Dragon,Special,VIII,5,150,100%
+Freezing Glare,Psychic,Special,VIII,10,90,100%
+Fiery Wrath,Dark,Special,VIII,10,90,100%
+Thunderous Kick,Fighting,Physical,VIII,10,90,100%
+Glacial Lance,Ice,Physical,VIII,5,120,100%
+Astral Barrage,Ghost,Special,VIII,5,120,100%
+Eerie Spell,Psychic,Special,VIII,5,80,100%
+Dire Claw,Poison,Physical,VIII,15,80,100%
+Psyshield Bash,Psychic,Physical,VIII,10,70,90%
+Power Shift,Normal,Status,VIII,10,—,—%
+Stone Axe,Rock,Physical,VIII,15,65,90%
+Springtide Storm,Fairy,Special,VIII,5,100,80%
+Mystical Power,Psychic,Special,VIII,10,70,90%
+Raging Fury,Fire,Physical,VIII,10,120,100%
+Wave Crash,Water,Physical,VIII,10,120,100%
+Chloroblast,Grass,Special,VIII,5,150,95%
+Mountain Gale,Ice,Physical,VIII,10,100,85%
+Victory Dance,Fighting,Status,VIII,10,—,—%
+Headlong Rush,Ground,Physical,VIII,5,120,100%
+Barb Barrage,Poison,Physical,VIII,10,60,100%
+Esper Wing,Psychic,Special,VIII,10,80,100%
+Bitter Malice,Ghost,Special,VIII,10,75,100%
+Shelter,Steel,Status,VIII,10,—,—%
+Triple Arrows,Fighting,Physical,VIII,10,90,100%
+Infernal Parade,Ghost,Special,VIII,15,60,100%
+Ceaseless Edge,Dark,Physical,VIII,15,65,90%
+Bleakwind Storm,Flying,Special,VIII,10,100,80%
+Wildbolt Storm,Electric,Special,VIII,10,100,80%
+Sandsear Storm,Ground,Special,VIII,10,100,80%
+Lunar Blessing,Psychic,Status,VIII,5,—,—%
+Take Heart,Psychic,Status,VIII,15,—,—%
+Tera Blast,Normal,Special,IX,10,80,100%
+Silk Trap,Bug,Status,IX,10,—,—%
+Axe Kick,Fighting,Physical,IX,10,120,90%
+Last Respects,Ghost,Physical,IX,10,50,100%
+Lumina Crash,Psychic,Special,IX,10,80,100%
+Order Up,Dragon,Physical,IX,10,80,100%
+Jet Punch,Water,Physical,IX,15,60,100%
+Spicy Extract,Grass,Status,IX,15,—,∞%
+Spin Out,Steel,Physical,IX,5,100,100%
+Population Bomb,Normal,Physical,IX,10,20,90%
+Ice Spinner,Ice,Physical,IX,15,80,100%
+Glaive Rush,Dragon,Physical,IX,5,120,100%
+Revival Blessing,Normal,Status,IX,1,—,—%
+Salt Cure,Rock,Physical,IX,15,40,100%
+Triple Dive,Water,Physical,IX,10,30,95%
+Mortal Spin,Poison,Physical,IX,15,30,100%
+Doodle,Normal,Status,IX,10,—,100%
+Fillet Away,Normal,Status,IX,10,—,—%
+Kowtow Cleave,Dark,Physical,IX,10,85,∞%
+Flower Trick,Grass,Physical,IX,10,70,∞%
+Torch Song,Fire,Special,IX,10,80,100%
+Aqua Step,Water,Physical,IX,10,80,100%
+Raging Bull,Normal,Physical,IX,10,90,100%
+Make It Rain,Steel,Special,IX,5,120,100%
+Psyblade,Psychic,Physical,IX,15,80,100%
+Hydro Steam,Water,Special,IX,15,80,100%
+Ruination,Dark,Special,IX,10,—,90%
+Collision Course,Fighting,Physical,IX,5,100,100%
+Electro Drift,Electric,Special,IX,5,100,100%
+Shed Tail,Normal,Status,IX,10,—,—%
+Chilly Reception,Ice,Status,IX,10,—,—%
+Tidy Up,Normal,Status,IX,10,—,—%
+Snowscape,Ice,Status,IX,10,—,—%
+Pounce,Bug,Physical,IX,20,50,100%
+Trailblaze,Grass,Physical,IX,20,50,100%
+Chilling Water,Water,Special,IX,20,50,100%
+Hyper Drill,Normal,Physical,IX,5,100,100%
+Twin Beam,Psychic,Special,IX,10,40,100%
+Rage Fist,Ghost,Physical,IX,10,50,100%
+Armor Cannon,Fire,Special,IX,5,120,100%
+Bitter Blade,Fire,Physical,IX,10,90,100%
+Double Shock,Electric,Physical,IX,5,120,100%
+Gigaton Hammer,Steel,Physical,IX,5,160,100%
+Comeuppance,Dark,Physical,IX,10,—,100%
+Aqua Cutter,Water,Physical,IX,20,70,100%
+Blazing Torque,Fire,Physical,IX,10,80,100%
+Wicked Torque,Dark,Physical,IX,10,80,100%
+Noxious Torque,Poison,Physical,IX,10,100,100%
+Combat Torque,Fighting,Physical,IX,10,100,100%
+Magical Torque,Fairy,Physical,IX,10,100,100%
+Blood Moon,Normal,Special,IX,5,140,100%
+Matcha Gotcha,Grass,Special,IX,15,80,90%
+Syrup Bomb,Grass,Special,IX,10,60,85%
+Ivy Cudgel,Grass,Physical,IX,10,100,100%
+Electro Shot,Electric,Special,IX,10,130,100%
+Tera Starstorm,Normal,Special,IX,5,120,100%
+Fickle Beam,Dragon,Special,IX,5,80,100%
+Burning Bulwark,Fire,Status,IX,10,—,—%
+Thunderclap,Electric,Special,IX,5,70,100%
+Mighty Cleave,Rock,Physical,IX,5,95,100%
+Tachyon Cutter,Steel,Special,IX,10,50,∞%
+Hard Press,Steel,Physical,IX,10,—,100%
+Dragon Cheer,Dragon,Status,IX,15,—,—%
+Alluring Voice,Fairy,Special,IX,10,80,100%
+Temper Flare,Fire,Physical,IX,10,75,100%
+Supercell Slam,Electric,Physical,IX,15,100,95%
+Psychic Noise,Psychic,Special,IX,10,75,100%
+Upper Hand,Fighting,Physical,IX,15,65,100%
+Malignant Chain,Poison,Special,IX,5,100,100%

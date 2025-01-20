@@ -1,3470 +1,3466 @@
 [
     {
         "moveName": "absorb",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "accelerock",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "acid",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "acidarmor",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "acidspray",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "acrobatics",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "acupressure",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "aerialace",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "aeroblast",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "afteryou",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "agility",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "aircutter",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "airslash",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "alluringvoice",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "allyswitch",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "amnesia",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "anchorshot",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "ancientpower",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "appleacid",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "aquacutter",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "aquajet",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "aquaring",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "aquastep",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "aquatail",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "armorcannon",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "armthrust",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "aromatherapy",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "aromaticmist",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "assist",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "assurance",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "astonish",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "astralbarrage",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "attackorder",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "attract",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "aurasphere",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "aurawheel",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "aurorabeam",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "auroraveil",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "autotomize",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "avalanche",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "axekick",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "babydolleyes",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "baddybad",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "banefulbunker",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "barbbarrage",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "barrage",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "barrier",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "batonpass",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "beakblast",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "beatup",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "behemothbash",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "behemothblade",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "belch",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "bellydrum",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "bestow",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "bide",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "bind",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "bite",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "bitterblade",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "bittermalice",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "blastburn",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "blazekick",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "blazingtorque",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "bleakwindstorm",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "blizzard",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "block",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "bloodmoon",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "blueflare",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "bodypress",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "bodyslam",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "boltbeak",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "boltstrike",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "boneclub",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "bonemerang",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "bonerush",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "boomburst",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "bounce",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "bouncybubble",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "branchpoke",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "bravebird",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "breakingswipe",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "brickbreak",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "brine",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "brutalswing",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "bubble",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "bubblebeam",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "bugbite",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "bugbuzz",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "bulkup",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "bulldoze",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "bulletpunch",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "bulletseed",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "burningbulwark",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "burningjealousy",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "burnup",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "buzzybuzz",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "calmmind",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "camouflage",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "captivate",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "ceaselessedge",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "celebrate",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "charge",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "chargebeam",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "charm",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "chatter",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "chillingwater",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "chillyreception",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "chipaway",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "chloroblast",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "circlethrow",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "clamp",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "clangingscales",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "clangoroussoul",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "clearsmog",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "closecombat",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "coaching",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "coil",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "collisioncourse",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "combattorque",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "cometpunch",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "comeuppance",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "confide",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "confuseray",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "confusion",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "constrict",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "conversion",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "conversion2",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "copycat",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "coreenforcer",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "corrosivegas",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "cosmicpower",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "cottonguard",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "cottonspore",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "counter",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "courtchange",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "covet",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "crabhammer",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "craftyshield",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "crosschop",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "crosspoison",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "crunch",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "crushclaw",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "crushgrip",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "curse",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "cut",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "darkestlariat",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "darkpulse",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "darkvoid",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "dazzlinggleam",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "decorate",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "defendorder",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "defensecurl",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "defog",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "destinybond",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "detect",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "diamondstorm",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "dig",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "direclaw",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "disable",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "disarmingvoice",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "discharge",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "dive",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "dizzypunch",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "doodle",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "doomdesire",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "doubleedge",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "doublehit",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "doubleironbash",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "doublekick",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "doubleshock",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "doubleslap",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "doubleteam",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "dracometeor",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "dragonascent",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "dragonbreath",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "dragoncheer",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "dragonclaw",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "dragondance",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "dragondarts",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "dragonenergy",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "dragonhammer",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "dragonpulse",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "dragonrage",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "dragonrush",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "dragontail",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "drainingkiss",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "drainpunch",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "dreameater",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "drillpeck",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "drillrun",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "drumbeating",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "dualchop",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "dualwingbeat",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "dynamaxcannon",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "dynamicpunch",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "earthpower",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "earthquake",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "echoedvoice",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "eerieimpulse",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "eeriespell",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "eggbomb",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "electricterrain",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "electrify",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "electroball",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "electrodrift",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "electroshot",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "electroweb",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "embargo",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "ember",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "encore",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "endeavor",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "endure",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "energyball",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "entrainment",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "eruption",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "esperwing",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "eternabeam",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "expandingforce",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "explosion",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "extrasensory",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "extremespeed",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "facade",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "fairylock",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "fairywind",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "fakeout",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "faketears",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "falsesurrender",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "falseswipe",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "featherdance",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "feint",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "feintattack",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "fellstinger",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "ficklebeam",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "fierydance",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "fierywrath",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "filletaway",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "finalgambit",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "fireblast",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "firefang",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "firelash",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "firepledge",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "firepunch",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "firespin",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "firstimpression",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "fishiousrend",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "fissure",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "flail",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "flameburst",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "flamecharge",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "flamethrower",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "flamewheel",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "flareblitz",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "flash",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "flashcannon",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "flatter",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "fleurcannon",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "fling",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "flipturn",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "floatyfall",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "floralhealing",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "flowershield",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "flowertrick",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "fly",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "flyingpress",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "focusblast",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "focusenergy",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "focuspunch",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "followme",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "forcepalm",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "foresight",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "forestscurse",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "foulplay",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "freezedry",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "freezeshock",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "freezingglare",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "freezyfrost",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "frenzyplant",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "frostbreath",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "frustration",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "furyattack",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "furycutter",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "furyswipes",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "fusionbolt",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "fusionflare",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "futuresight",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "gastroacid",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "geargrind",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "gearup",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "geomancy",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "gigadrain",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "gigaimpact",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "gigatonhammer",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "glaciallance",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "glaciate",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "glaiverush",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "glare",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "glitzyglow",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "grassknot",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "grasspledge",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "grasswhistle",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "grassyglide",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "grassyterrain",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "gravapple",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "gravity",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "growl",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "growth",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "grudge",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "guardsplit",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "guardswap",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "guillotine",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "gunkshot",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "gust",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "gyroball",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "hail",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "hammerarm",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "happyhour",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "harden",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "hardpress",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "haze",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "headbutt",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "headcharge",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "headlongrush",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "headsmash",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "healbell",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "healblock",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "healingwish",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "healorder",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "healpulse",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "heartstamp",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "heartswap",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "heatcrash",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "heatwave",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "heavyslam",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "helpinghand",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "hex",
-        "moveType": "Ghost"
+        "Type": "Ghost"
+    },
+    {
+        "moveName": "hiddenpower",
+        "Type": "Normal"
     },
     {
         "moveName": "highhorsepower",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "highjumpkick",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "holdback",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "holdhands",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "honeclaws",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "hornattack",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "horndrill",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "hornleech",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "howl",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "hurricane",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "hydrocannon",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "hydropump",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "hydrosteam",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "hyperbeam",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "hyperdrill",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "hyperfang",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "hyperspacefury",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "hyperspacehole",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "hypervoice",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "hypnosis",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "iceball",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "icebeam",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "iceburn",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "icefang",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "icehammer",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "icepunch",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "iceshard",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "icespinner",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "iciclecrash",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "iciclespear",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "icywind",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "imprison",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "incinerate",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "infernalparade",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "inferno",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "infestation",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "ingrain",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "instruct",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "iondeluge",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "irondefense",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "ironhead",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "irontail",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "ivycudgel",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "jawlock",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "jetpunch",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "judgment",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "jumpkick",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "junglehealing",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "karatechop",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "kinesis",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "kingsshield",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "knockoff",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "kowtowcleave",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "landswrath",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "laserfocus",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "lashout",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "lastresort",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "lastrespects",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "lavaplume",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "leafage",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "leafblade",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "leafstorm",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "leaftornado",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "leechlife",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "leechseed",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "leer",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "lick",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "lifedew",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "lightofruin",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "lightscreen",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "liquidation",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "lockon",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "lovelykiss",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "lowkick",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "lowsweep",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "luckychant",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "luminacrash",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "lunarblessing",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "lunardance",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "lunge",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "lusterpurge",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "machpunch",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "magicalleaf",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "magicaltorque",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "magiccoat",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "magicpowder",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "magicroom",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "magmastorm",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "magnetbomb",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "magneticflux",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "magnetrise",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "magnitude",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "makeitrain",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "malignantchain",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "matblock",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "matchagotcha",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "maxairstream",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "maxdarkness",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "maxflare",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "maxflutterby",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "maxgeyser",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "maxguard",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "maxhailstorm",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "maxknuckle",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "maxlightning",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "maxmindstorm",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "maxooze",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "maxovergrowth",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "maxphantasm",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "maxquake",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "maxrockfall",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "maxstarfall",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "maxsteelspike",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "maxstrike",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "maxwyrmwind",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "meanlook",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "meditate",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "mefirst",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "megadrain",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "megahorn",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "megakick",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "megapunch",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "memento",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "metalburst",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "metalclaw",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "metalsound",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "meteorassault",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "meteorbeam",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "meteormash",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "metronome",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "mightycleave",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "milkdrink",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "mimic",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "mindblown",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "mindreader",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "minimize",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "miracleeye",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "mirrorcoat",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "mirrormove",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "mirrorshot",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "mist",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "mistball",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "mistyexplosion",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "mistyterrain",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "moonblast",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "moongeistbeam",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "moonlight",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "morningsun",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "mortalspin",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "mountaingale",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "mudbomb",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "muddywater",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "mudshot",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "mudslap",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "mudsport",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "multiattack",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "mysticalfire",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "mysticalpower",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "nastyplot",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "naturalgift",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "naturepower",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "naturesmadness",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "needlearm",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "nightdaze",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "nightmare",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "nightshade",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "nightslash",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "nobleroar",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "noretreat",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "noxioustorque",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "nuzzle",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "oblivionwing",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "obstruct",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "octazooka",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "octolock",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "odorsleuth",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "ominouswind",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "orderup",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "originpulse",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "outrage",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "overdrive",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "overheat",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "painsplit",
-        "moveType": "Normal"
-    },
-    {
-        "moveName": "paleowave",
-        "moveType": "Rock"
+        "Type": "Normal"
     },
     {
         "moveName": "paraboliccharge",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "partingshot",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "payback",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "payday",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "peck",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "perishsong",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "petalblizzard",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "petaldance",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "phantomforce",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "photongeyser",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "pikapapow",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "pinmissile",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "plasmafists",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "playnice",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "playrough",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "pluck",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "poisonfang",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "poisongas",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "poisonjab",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "poisonpowder",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "poisonsting",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "poisontail",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "pollenpuff",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "poltergeist",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "populationbomb",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "pounce",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "pound",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "powder",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "powdersnow",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "powergem",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "powershift",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "powersplit",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "powerswap",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "powertrick",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "powertrip",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "poweruppunch",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "powerwhip",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "precipiceblades",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "present",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "prismaticlaser",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "protect",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "psybeam",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "psyblade",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "psychic",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "psychicfangs",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "psychicnoise",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "psychicterrain",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "psychoboost",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "psychocut",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "psychoshift",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "psychup",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "psyshieldbash",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "psyshock",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "psystrike",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "psywave",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "punishment",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "purify",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "pursuit",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "pyroball",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "quash",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "quickattack",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "quickguard",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "quiverdance",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "rage",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "ragefist",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "ragepowder",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "ragingbull",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "ragingfury",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "raindance",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "rapidspin",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "razorleaf",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "razorshell",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "razorwind",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "recover",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "recycle",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "reflect",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "reflecttype",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "refresh",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "relicsong",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "rest",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "retaliate",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "return",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "revelationdance",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "revenge",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "reversal",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "revivalblessing",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "risingvoltage",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "roar",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "roaroftime",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "rockblast",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "rockclimb",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "rockpolish",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "rockslide",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "rocksmash",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "rockthrow",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "rocktomb",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "rockwrecker",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "roleplay",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "rollingkick",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "rollout",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "roost",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "rototiller",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "round",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "ruination",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "sacredfire",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "sacredsword",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "safeguard",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "saltcure",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "sandattack",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "sandsearstorm",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "sandstorm",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "sandtomb",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "sappyseed",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "scald",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "scaleshot",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "scaryface",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "scorchingsands",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "scratch",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "screech",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "searingshot",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "secretpower",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "secretsword",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "seedbomb",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "seedflare",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "seismictoss",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "selfdestruct",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "shadowball",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "shadowbone",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "shadowclaw",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "shadowforce",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "shadowpunch",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "shadowsneak",
-        "moveType": "Ghost"
-    },
-    {
-        "moveName": "shadowstrike",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "sharpen",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "shedtail",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "sheercold",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "shellsidearm",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "shellsmash",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "shelltrap",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "shelter",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "shiftgear",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "shockwave",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "shoreup",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "signalbeam",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "silktrap",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "silverwind",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "simplebeam",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "sing",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "sizzlyslide",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "sketch",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "skillswap",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "skittersmack",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "skullbash",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "skyattack",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "skydrop",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "skyuppercut",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "slackoff",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "slam",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "slash",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "sleeppowder",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "sleeptalk",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "sludge",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "sludgebomb",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "sludgewave",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "smackdown",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "smartstrike",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "smellingsalts",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "smog",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "smokescreen",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "snaptrap",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "snarl",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "snatch",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "snipeshot",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "snore",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "snowscape",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "soak",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "softboiled",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "solarbeam",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "solarblade",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "sonicboom",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "spacialrend",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "spark",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "sparklingaria",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "sparklyswirl",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "spectralthief",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "speedswap",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "spicyextract",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "spiderweb",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "spikecannon",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "spikes",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "spikyshield",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "spinout",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "spiritbreak",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "spiritshackle",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "spite",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "spitup",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "splash",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "splishysplash",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "spore",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "spotlight",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "springtidestorm",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "stealthrock",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "steameruption",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "steamroller",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "steelbeam",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "steelroller",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "steelwing",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "stickyweb",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "stockpile",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "stomp",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "stompingtantrum",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "stoneaxe",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "stoneedge",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "storedpower",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "stormthrow",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "strangesteam",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "strength",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "strengthsap",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "stringshot",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "struggle",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "strugglebug",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "stuffcheeks",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "stunspore",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "submission",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "substitute",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "suckerpunch",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "sunnyday",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "sunsteelstrike",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "supercellslam",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "superfang",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "superpower",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "supersonic",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "surf",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "surgingstrikes",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "swagger",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "swallow",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "sweetkiss",
-        "moveType": "Fairy"
+        "Type": "Fairy"
     },
     {
         "moveName": "sweetscent",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "swift",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "switcheroo",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "swordsdance",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "synchronoise",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "synthesis",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "syrupbomb",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "tachyoncutter",
-        "moveType": "Steel"
+        "Type": "Steel"
     },
     {
         "moveName": "tackle",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "tailglow",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "tailslap",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "tailwhip",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "tailwind",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "takedown",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "takeheart",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "tarshot",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "taunt",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "tearfullook",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "teatime",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "technoblast",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "teeterdance",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "telekinesis",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "teleport",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "temperflare",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "terablast",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "terastarstorm",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "terrainpulse",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "thief",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "thousandarrows",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "thousandwaves",
-        "moveType": "Ground"
+        "Type": "Ground"
     },
     {
         "moveName": "thrash",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "throatchop",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "thunder",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "thunderbolt",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "thundercage",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "thunderclap",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "thunderfang",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "thunderouskick",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "thunderpunch",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "thundershock",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "thunderwave",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "tickle",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "tidyup",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "topsyturvy",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "torchsong",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "torment",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "toxic",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "toxicspikes",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "toxicthread",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "trailblaze",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "transform",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "triattack",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "trick",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "trickortreat",
-        "moveType": "Ghost"
+        "Type": "Ghost"
     },
     {
         "moveName": "trickroom",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "triplearrows",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "tripleaxel",
-        "moveType": "Ice"
+        "Type": "Ice"
     },
     {
         "moveName": "tripledive",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "triplekick",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "tropkick",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "trumpcard",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "twinbeam",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "twineedle",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "twister",
-        "moveType": "Dragon"
+        "Type": "Dragon"
     },
     {
         "moveName": "upperhand",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "uproar",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "uturn",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "vacuumwave",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "vcreate",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "veeveevolley",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "venomdrench",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "venoshock",
-        "moveType": "Poison"
+        "Type": "Poison"
     },
     {
         "moveName": "victorydance",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "vinewhip",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "visegrip",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "vitalthrow",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "voltswitch",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "volttackle",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "wakeupslap",
-        "moveType": "Fighting"
+        "Type": "Fighting"
     },
     {
         "moveName": "waterfall",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "watergun",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "waterpledge",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "waterpulse",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "watershuriken",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "watersport",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "waterspout",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "wavecrash",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "weatherball",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "whirlpool",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "whirlwind",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "wickedblow",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "wickedtorque",
-        "moveType": "Dark"
+        "Type": "Dark"
     },
     {
         "moveName": "wideguard",
-        "moveType": "Rock"
+        "Type": "Rock"
     },
     {
         "moveName": "wildboltstorm",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "wildcharge",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "willowisp",
-        "moveType": "Fire"
+        "Type": "Fire"
     },
     {
         "moveName": "wingattack",
-        "moveType": "Flying"
+        "Type": "Flying"
     },
     {
         "moveName": "wish",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "withdraw",
-        "moveType": "Water"
+        "Type": "Water"
     },
     {
         "moveName": "wonderroom",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "woodhammer",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "workup",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "worryseed",
-        "moveType": "Grass"
+        "Type": "Grass"
     },
     {
         "moveName": "wrap",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "wringout",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "xscissor",
-        "moveType": "Bug"
+        "Type": "Bug"
     },
     {
         "moveName": "yawn",
-        "moveType": "Normal"
+        "Type": "Normal"
     },
     {
         "moveName": "zapcannon",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "zenheadbutt",
-        "moveType": "Psychic"
+        "Type": "Psychic"
     },
     {
         "moveName": "zingzap",
-        "moveType": "Electric"
+        "Type": "Electric"
     },
     {
         "moveName": "zippyzap",
-        "moveType": "Electric"
+        "Type": "Electric"
     }
 ]
