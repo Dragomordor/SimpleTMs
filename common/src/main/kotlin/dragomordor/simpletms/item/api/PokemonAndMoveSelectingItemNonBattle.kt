@@ -10,7 +10,6 @@ import com.cobblemon.mod.common.util.getBattleState
 import com.cobblemon.mod.common.util.isHeld
 import com.cobblemon.mod.common.util.isLookingAt
 import com.cobblemon.mod.common.util.party
-import dragomordor.simpletms.SimpleTMs
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.item.ItemStack
@@ -56,6 +55,9 @@ interface PokemonAndMoveSelectingItemNonBattle {
         PartyMoveSelectCallbacks.createFromPokemon(
             player = player,
             pokemon = player.party().toList(),
+            // TODO: Add benched moves here as well
+            // moves = { it.moveSet.getMoves() },
+            moves = { moveSetAndBenchedMoveList(it) },
             canSelectPokemon = ::canUseOnPokemon,
             canSelectMove = ::canUseOnMove,
             handler = { pk, mv -> if (stack.isHeld(player)) applyToPokemon(player, stack, pk, mv) }
@@ -72,7 +74,9 @@ interface PokemonAndMoveSelectingItemNonBattle {
 
         MoveSelectCallbacks.create(
             player = player,
-            moves = pokemon.moveSet.toList(),
+            // TODO: Add benched moves here as well
+            // moves = pokemon.moveSet.toList(),
+            moves = moveSetAndBenchedMoveList(pokemon),
             canSelect = ::canUseOnMove,
             handler = { move -> if (stack.isHeld(player)) applyToPokemon(player, stack, pokemon, move) }
         )
@@ -80,6 +84,25 @@ interface PokemonAndMoveSelectingItemNonBattle {
     }
 
 
+
+    fun moveSetAndBenchedMoveList(pokemon: Pokemon): List<Move> {
+        val moves: MutableList<Move> = mutableListOf()
+        val moveSet = pokemon.moveSet.getMoves()
+        // TODO: Showing benched moves breaks the UI, therefore only moveSet is shown
+//        val benchedMoves = pokemon.benchedMoves
+//
+//        // Make list of becnhed moves
+//        val benchedMovesList = mutableListOf<Move>()
+//        benchedMoves.forEach() {
+//            benchedMovesList.add(it.moveTemplate.create())
+//        }
+//
+//        // Add moveSet and benched moves to the list
+        moves.addAll(moveSet)
+//        moves.addAll(benchedMovesList)
+
+        return moves
+    }
 
 }
 
