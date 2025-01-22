@@ -2,7 +2,6 @@ package dragomordor.simpletms.neoforge
 
 import dragomordor.simpletms.SimpleTMs.MOD_ID
 import dragomordor.simpletms.SimpleTMs
-import dragomordor.simpletms.SimpleTMsClient
 import dragomordor.simpletms.item.group.SimpleTMsItemGroups
 import net.minecraft.core.registries.Registries
 import net.minecraft.world.item.CreativeModeTab

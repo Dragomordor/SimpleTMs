@@ -4,7 +4,8 @@ import com.cobblemon.mod.common.config.constraint.IntConstraint
 import com.mojang.logging.LogUtils.getLogger
 import dragomordor.simpletms.config.DoubleConstraint
 import dragomordor.simpletms.config.SimpleTMsConfig
-import dragomordor.simpletms.events.MoveLearnItemDropHandler
+import dragomordor.simpletms.events.CobblemonEventListeners
+import dragomordor.simpletms.events.CommonEventListeners
 import org.slf4j.Logger
 import java.io.File
 import java.io.FileReader
@@ -29,9 +30,10 @@ object SimpleTMs {
     fun init() {
         LOGGER.info("Using SimpleTMs ($VERSION)")
         SimpleTMsItems.registerModItems()
-        MoveLearnItemDropHandler.registerListeners()
+        // Event listeners
+        CobblemonEventListeners.registerListeners()
+        CommonEventListeners.registerListeners()
     }
-
 
     // ------------------------------------------------------------------
     // Save and Load Config Functions

@@ -76,21 +76,21 @@ class SimpleTMsConfig {
     @DoubleConstraint(min = 0.0, max = 1.0)
     var DropRateTMtoTRRatioInBattle: Double = 0.1
 
-    @NodeCategory(Category.DropRate)
-    @DoubleConstraint(min = 0.0, max = 1.0)
-    var DropRateTROutsideOfBattle: Double = 0.1
+//    @NodeCategory(Category.DropRate)
+//    @DoubleConstraint(min = 0.0, max = 1.0)
+//    var DropRateTROutsideOfBattle: Double = 0.1
 
-    @NodeCategory(Category.DropRate)
-    @DoubleConstraint(min = 0.0, max = 1.0)
-    var DropRateTMtoTRRatioOutsideOfBattle: Double = 0.1
+//    @NodeCategory(Category.DropRate)
+//    @DoubleConstraint(min = 0.0, max = 1.0)
+//    var DropRateTMtoTRRatioOutsideOfBattle: Double = 0.1
 
     @NodeCategory(Category.DropRate)
     @IntConstraint(min = 1, max = 4)
     var NumberOfMovesToChooseFromInBattle: Int = 4
 
-    @NodeCategory(Category.DropRate)
-    @IntConstraint(min = 1, max = 4)
-    var NumberOfMovesToChooseFromoutsideBattle: Int = 1
+//    @NodeCategory(Category.DropRate)
+//    @IntConstraint(min = 1, max = 4)
+//    var NumberOfMovesToChooseFromoutsideBattle: Int = 1
 
     @NodeCategory(Category.DropRate)
     var DropAny: Boolean = false

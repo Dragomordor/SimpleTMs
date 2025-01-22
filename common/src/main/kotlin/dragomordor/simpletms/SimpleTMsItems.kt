@@ -1,8 +1,10 @@
 package dragomordor.simpletms
 
+import com.cobblemon.mod.common.Cobblemon
 import com.cobblemon.mod.common.api.moves.Move
 import com.cobblemon.mod.common.api.moves.MoveTemplate
-import com.cobblemon.mod.common.api.moves.Moves
+import com.cobblemon.mod.common.api.pokemon.PokemonSpecies
+import com.cobblemon.mod.common.pokemon.Species
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
 import dragomordor.simpletms.SimpleTMs.LOGGER
@@ -199,7 +201,7 @@ object SimpleTMsItems {
         return newMoveLearnItem
     }
 
-    fun populateAllRemovedDefaultMoves() {
+    private fun populateAllRemovedDefaultMoves() {
      // Moves that are not in the default moves config file, but in the resource file
         val resourceStream =  SimpleTMs::class.java.getResourceAsStream("/$defaultMoveJsonPath")
             ?: throw IllegalArgumentException("Resource not found: $defaultMoveJsonPath")
@@ -210,8 +212,10 @@ object SimpleTMsItems {
         ALL_REMOVED_DEFAULT_MOVES.plus(removedMoves)
     }
 
-    fun hasItemForMove(move: Move): Boolean {
+    fun hasItemForMove(move: MoveTemplate): Boolean {
         return ALL_MOVE_NAMES_WITH_ITEMS.contains(move.name)
     }
+
+
 
 }

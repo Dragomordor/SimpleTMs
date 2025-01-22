@@ -103,25 +103,9 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
         }
 
         // Check if move is in the list of moves with items
-        if (!SimpleTMsItems.hasItemForMove(move)) {
-            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID, "error.not_usable.move_not_in_list"))
+        if (!SimpleTMsItems.hasItemForMove(move.template)) {
             return false
         }
-
-
-//        // If move has no TM/TR, can't use blank on that move
-//        val allMovesWithItems = SimpleTMsItems.getAllMovesWithItems()
-//
-//        // TODO: DEBUG - Print all moves with items
-//        for (moveWithItem in allMovesWithItems) {
-//            println("Following move has an item: ${moveWithItem.name}")
-//        }
-//
-//        // Check if move is in the list of moves with items
-//        if (!allMovesWithItems.contains(move.template)) {
-//            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID, "error.not_usable.move_not_in_list"))
-//            return false
-//        }
 
         // TODO: Add excluded moves here
 
@@ -170,7 +154,7 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
     ) {
 
         // TODO: Update all text to use lang files
-        val baseGreyColor = Color.decode("#C6BDBD")
+        val baseGreyColor = Color.LIGHT_GRAY
         val isTR = this.isTR
         val itemType = if (isTR) "TR" else "TM"
 
