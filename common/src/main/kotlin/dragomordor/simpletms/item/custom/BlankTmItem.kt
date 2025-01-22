@@ -152,21 +152,21 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
         list: MutableList<Component>,
         tooltipFlag: TooltipFlag
     ) {
-
-        // TODO: Update all text to use lang files
         val baseGreyColor = Color.LIGHT_GRAY
         val isTR = this.isTR
         val itemType = if (isTR) "TR" else "TM"
 
         // Normal hover text
         // val blankItemDescription = ("An item that turns a Pokémon's known move into a $ to teach others.").text().withColor(baseGreyColor.rgb)
-        val blankItemDescription = ("Copies a Pokémon's move into a $itemType for teaching.").text().withColor(baseGreyColor.rgb)
+        // val blankItemDescription = ("Copies a Pokémon's move into a $itemType for teaching.").text().withColor(baseGreyColor.rgb)
+        val blankItemDescription = fromLang(SimpleTMs.MOD_ID, "item.tooltip.blank_item.description", itemType).withColor(baseGreyColor.rgb)
         list.add(blankItemDescription)
 
         if (Screen.hasControlDown()) {
             // Show number of uses left
             val usesLeft = (itemStack.maxDamage - itemStack.damageValue).toString().text().withColor(Color.RED.rgb)
-            val usesLeftText = ("Uses left: ").text().withColor(baseGreyColor.rgb)
+            // val usesLeftText = ("Uses left: ").text().withColor(baseGreyColor.rgb)
+            val usesLeftText = fromLang(SimpleTMs.MOD_ID, "item.tooltip.uses_left").withColor(baseGreyColor.rgb)
             list.add(usesLeftText.append(usesLeft))
         }
 

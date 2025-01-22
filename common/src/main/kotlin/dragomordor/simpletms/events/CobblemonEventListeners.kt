@@ -15,6 +15,7 @@ import com.cobblemon.mod.common.util.giveOrDropItemStack
 import dragomordor.simpletms.SimpleTMs
 import dragomordor.simpletms.SimpleTMsItems
 import dragomordor.simpletms.SimpleTMsItems.getTMorTRItemFromMove
+import dragomordor.simpletms.util.fromLang
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.item.ItemStack
 
@@ -61,6 +62,7 @@ object CobblemonEventListeners : EventHandler {
 ////            SimpleTMs.config.DropRateTROutsideOfBattle to SimpleTMs.config.DropRateTMtoTRRatioOutsideOfBattle
 ////        }
 
+        val pokemonDisplayName = killedPokemon.species.translatedName
         val dropRateTR = SimpleTMs.config.DropRateTRInBattle
         val dropRateTMtoTRRatio = SimpleTMs.config.DropRateTMtoTRRatioInBattle
         // Get an applicable move template from the killed pokemon
@@ -76,28 +78,24 @@ object CobblemonEventListeners : EventHandler {
         val isTR = randomDouble < dropRateTR
 
         if (isTM || isTR) {
-
             // Check if moveTemplatesToChooseFrom is empty. If it is, return
             if (moveTemplatesToChooseFrom.isEmpty()) {
-                player.displayClientMessage("No moves to drop".text(), true)
+                player.displayClientMessage(fromLang(SimpleTMs.MOD_ID, "error.no_moves_to_drop", pokemonDisplayName), true)
                 return
             }
 
             val shouldUseMoveSelect = numberOfMovesToChooseFrom > 1
             if (shouldUseMoveSelect) {
                 // Display Client message
-                val textToDisplay = "Select a move to drop as a TM or TR"
-                player.displayClientMessage(textToDisplay.text(), true)
-
+                player.displayClientMessage(fromLang(SimpleTMs.MOD_ID, "message.select_move_to_drop", pokemonDisplayName), true)
                 // if shouldUseMoveSelect, open MoveSelectCallback screen
                 val movesToChooseFrom = moveTemplatesToChooseFrom.map { it.create() }
                 MoveSelectCallbacks.create(
                     player = player,
                     // possibleMoves = movesToChooseFrom,
                     possibleMoves = movesToChooseFrom.map { battleMove -> MoveSelectDTO(battleMove) },
-                    // TODO: Update title to language file
                     // title does not actually display anything afaik
-                    title = textToDisplay.text(),
+                    // title = textToDisplay.text(),
                     //handler = { move -> dropMoveLearnItemOnPlayerHandler(player, move, isTR, isTM) }
                     handler = {_, index, _ -> dropMoveLearnItemOnPlayerHandler(player, movesToChooseFrom[index], isTR, isTM) }
                 )
@@ -142,9 +140,10 @@ object CobblemonEventListeners : EventHandler {
 
         // If any move can be dropped, return a random move from all moves
         if (DropAny) {
+            // Remove moves that do not have a TM or TR
+            val applicableMoves = allMoves.filter { SimpleTMsItems.hasItemForMove(it) }
             // TODO: Exclude moves based on config options
-            // Return numberOfMovesToChooseFrom random moves from allMoves
-            return allMoves.shuffled().take(numberOfMovesToChooseFrom)
+            return applicableMoves.shuffled().take(numberOfMovesToChooseFrom)
         }
         // The rest of the checks will append to a list of applicable moves
         val applicableMoves = mutableListOf<MoveTemplate>()
@@ -183,23 +182,10 @@ object CobblemonEventListeners : EventHandler {
             applicableMoves.addAll(eggMoves)
         }
 
-//        // TODO: Remove moves that don't have a TM or TR
-//        for (move in applicableMoves) {
-//            // Remove moves that don't have a TM or TR
-//            if (!SimpleTMsItems.hasItemForMove(move)) {
-//                applicableMoves.remove(move)
-//            }
-//        }
-
+        // Remove moves that do not have a TM or TR
         applicableMoves.removeIf { move -> !SimpleTMsItems.hasItemForMove(move) }
 
-
         // TODO: Exclude moves based on config options
-//
-//        // If the list is empty, return null
-//        if (applicableMoves.isEmpty()) {
-//            return listOf()
-//        }
 
         // Return numberOfMovesToChooseFrom random moves from applicableMoves
         return applicableMoves.shuffled().take(numberOfMovesToChooseFrom)

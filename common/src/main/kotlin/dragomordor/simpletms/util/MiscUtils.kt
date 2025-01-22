@@ -102,20 +102,6 @@ fun getMovePokemonAssociation(moveName: String, speciesCollection: MutableList<S
     return pokemonList
 }
 
-
-//
-//
-//
-//fun updateAllPokemonMoveAssociations() {
-//    // get all moves with items
-//
-//    for (move in Moves.all()) {
-//        updatePokemonMoveAssociation(move)
-//    }
-//}
-
-
-
 // For move learn item tooltip pages
 object Pages {
     // Add variable CURRENT_PAGE which can be used to track the current page of the tooltip

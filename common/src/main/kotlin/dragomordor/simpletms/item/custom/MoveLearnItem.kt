@@ -280,7 +280,8 @@ class MoveLearnItem(
         // Normal hover text for item description
         if (!Screen.hasShiftDown()) {
             // item description
-            val itemDescription = ("Teaches the move ").text().withColor(baseGreyColor.rgb).append(moveTranslatedName.withColor(moveColour)).append(" to any Pokémon able to learn it.".text().withColor(baseGreyColor.rgb))
+            // val itemDescription = ("Teaches the move ").text().withColor(baseGreyColor.rgb).append(moveTranslatedName.withColor(moveColour)).append(" to any Pokémon able to learn it.".text().withColor(baseGreyColor.rgb))
+            val itemDescription = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.description_start").withColor(baseGreyColor.rgb).append(moveTranslatedName.withColor(moveColour)).append(fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.description_end").withColor(baseGreyColor.rgb))
             list.add(itemDescription)
 
             // Hold shift for move info text
@@ -302,7 +303,8 @@ class MoveLearnItem(
             list.add(moveDescriptionComponent)
 
             // Move Type
-            val moveTypeBase = ("Type: ").text().withColor(baseGreyColor.rgb)
+            // val moveTypeBase = ("Type: ").text().withColor(baseGreyColor.rgb)
+            val moveTypeBase = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.move_type").withColor(baseGreyColor.rgb)
             val moveTypeComponent = moveType.displayName.withColor(moveColour)
             list.add(moveTypeBase.append(moveTypeComponent))
 
@@ -324,24 +326,25 @@ class MoveLearnItem(
                 }
             }
             // Category Text
-            val moveCategoryBase = ("Category: ").text().withColor(baseGreyColor.rgb)
+            //val moveCategoryBase = ("Category: ").text().withColor(baseGreyColor.rgb)
+            val moveCategoryBase = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.move_category").withColor(baseGreyColor.rgb)
             val moveCategoryComponent = moveDamageCategory.displayName.copy().withColor(moveCategoryColour.rgb)
             list.add(moveCategoryBase.append(moveCategoryComponent))
 
             // Move Power
-            var movePowerBase = ("Power: ").text().withColor(baseGreyColor.rgb)
+            // val movePowerBase = ("Power: ").text().withColor(baseGreyColor.rgb)
+            val movePowerBase = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.move_power").withColor(baseGreyColor.rgb)
             var movePowerComponent = movePower.toString().text().withColor(movePowerColor.rgb)
             if (movePower == 0.0) { // If power is 0, show N/A
-                movePowerBase = ("Power: ").text().withColor(baseGreyColor.rgb)
                 movePowerComponent = "N/A".text().withColor(Color.BLUE.rgb)
             }
             list.add(movePowerBase.append(movePowerComponent))
 
             // Move Accuracy
-            var moveAccuracyBase = ("Accuracy: ").text().withColor(baseGreyColor.rgb)
+            // val moveAccuracyBase = ("Accuracy: ").text().withColor(baseGreyColor.rgb)
+            val moveAccuracyBase = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.move_accuracy").withColor(baseGreyColor.rgb)
             var moveAccuracyComponent = moveAccuracy.toString().text().withColor(moveAccuracyColor.rgb)
             if (moveAccuracy == -1.0) { // If accuracy is -1, show N/A
-                moveAccuracyBase = ("Accuracy: ").text().withColor(baseGreyColor.rgb)
                 moveAccuracyComponent = "N/A".text().withColor(Color.BLUE.rgb)
             }
             list.add(moveAccuracyBase.append(moveAccuracyComponent))
@@ -350,14 +353,17 @@ class MoveLearnItem(
             // Show base and max PP:
             // Base PP: 10, Max PP: 12
 
-            val movePPBase = ("Base PP: ").text().withColor(baseGreyColor.rgb)
+            // val movePPBase = ("Base PP: ").text().withColor(baseGreyColor.rgb)
+            val movePPBase = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.move_pp").withColor(baseGreyColor.rgb)
             val movePPComponent = movebasePP.toString().text().withColor(movePPColor.rgb)
-            val movePPMax = (", Max PP: ").text().withColor(baseGreyColor.rgb)
+            // val movePPMax = (", Max PP: ").text().withColor(baseGreyColor.rgb)
+            val movePPMax = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.move_pp_max").withColor(baseGreyColor.rgb)
             val movePPMaxComponent = movemaxPP.toString().text().withColor(movePPColor.rgb)
             list.add(movePPBase.append(movePPComponent).append(movePPMax).append(movePPMaxComponent))
 
             // Move Crit Ratio
-            val moveCritBase = ("Crit Ratio: ").text().withColor(baseGreyColor.rgb)
+            //val moveCritBase = ("Crit Ratio: ").text().withColor(baseGreyColor.rgb)
+            val moveCritBase = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.move_crit_ratio").withColor(baseGreyColor.rgb)
             val moveCritComponent = moveCritRatio.toString().text().withColor(moveCritColor.rgb)
             list.add(moveCritBase.append(moveCritComponent))
         }
@@ -444,15 +450,13 @@ class MoveLearnItem(
                 usesLeftNr = 1
             }
             val usesLeft = usesLeftNr.toString().text().withColor(Color.RED.rgb)
-            val usesLeftText = ("Uses left: ").text().withColor(baseGreyColor.rgb)
+            // val usesLeftText = ("Uses left: ").text().withColor(baseGreyColor.rgb)
+            val usesLeftText = fromLang(SimpleTMs.MOD_ID, "ite.tooltip.uses_left").withColor(baseGreyColor.rgb)
             list.add(usesLeftText.append(usesLeft))
         }
         // Super call
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag)
     }
-
-
-
 
 
     // ------------------------------------------------------------------
