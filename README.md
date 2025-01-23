@@ -15,6 +15,9 @@ This Minecraft mod is an expansion to the Cobblemon mod, integrating TMs (Techni
 - Blank TMs and TRs are used the same way as other cobblemon items which can select moves. This mean, when the player uses them, they can select a Pokémon in their party and a move in their move set. 
 - Blank TMs dro the respective TM of the selected move, whilst Blank TRs drop the respective TRs of the selected move.
 
+----------------------------------------------------------
+
+
 ### Configuration Options
 - Enable Egg Moves and Tutor Moves: TMs and TRs can be configured to teach Egg Moves and Tutor Moves to Pokémon.
 - Allow Any Move Transfer: Configure the mod to enable any move to be transferred to any Pokémon.
