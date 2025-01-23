@@ -25,21 +25,28 @@ import java.io.InputStreamReader
 @Suppress("unused", "SameParameterValue")
 object SimpleTMsItems {
 
-    internal val ITEMS: DeferredRegister<Item> = DeferredRegister.create(MOD_ID, Registries.ITEM)
-    val defaultMoveJsonPath = "$MOD_ID/movelearnitems/default.json"
+    private val ITEMS: DeferredRegister<Item> = DeferredRegister.create(MOD_ID, Registries.ITEM)
+    private const val DEFAULT_MOVE_JSON_PATH = "$MOD_ID/movelearnitems/default.json"
+    // private val defaultMoveInternalJsonFile = File(DEFAULT_MOVE_JSON_PATH)
     // TODO: Add custom moves path here
 
-    const val DEFAULT_MOVE_CONFIG_PATH = "config/$MOD_ID/default_moves.json"
-    val defaultMoveConfigFile = File(DEFAULT_MOVE_CONFIG_PATH)
+    private val defaultTMMoveConfigFile = File("config/$MOD_ID/moves/default_tm_moves.json")
+    private val defaultTRMoveConfigFile = File("config/$MOD_ID/moves/default_tr_moves.json")
+
+    private val movesExcludedFromPokemonDropsFile = File("config/$MOD_ID/moves/excluded_moves_from_pokemon_drops.json")
+    private val moveExcludedFromBlankLearningFile = File("config/$MOD_ID/moves/excluded_moves_from_blank_learning.json")
 
     // Create empty list of all moves with items.
-    val ALL_MOVE_NAMES_WITH_ITEMS: MutableList<String> = mutableListOf()
-    val ALL_MOVES_WITH_ITEMS: List<Move> = mutableListOf()
+    // val ALL_MOVE_NAMES_WITH_ITEMS: MutableList<String> = mutableListOf()
+    val ALL_MOVE_NAMES_WITH_TM_ITEMS: MutableList<String> = mutableListOf()
+    val ALL_MOVE_NAMES_WITH_TR_ITEMS: MutableList<String> = mutableListOf()
     val ALL_MOVE_TEMPLATES_WITH_ITEMS: List<MoveTemplate> = mutableListOf()
 
     val ALL_REMOVED_DEFAULT_MOVES: List<String> = mutableListOf()
 
-    // TODO: Add a config file to allow for the removal of certain moves from the TM and TR lists
+    // Excluded moves
+    val ALL_MOVES_EXCLUDED_FROM_POKEMON_DROPS: MutableList<String> = mutableListOf()
+    val ALL_MOVES_EXCLUDED_FROM_BLANK_LEARNING: MutableList<String> = mutableListOf()
 
     // List of all TM and TR items
     val TM_ITEMS = mutableListOf<RegistrySupplier<MoveLearnItem>>()
@@ -61,7 +68,7 @@ object SimpleTMsItems {
         val settings: Properties
 
         if (isTR) {
-            settings = Properties().stacksTo(SimpleTMs.config.TRStackSize)
+            settings = Properties().stacksTo(SimpleTMs.config.trStackSize)
             if (SimpleTMs.config.blankTRBaseDurability > 0) {
                 settings.durability(SimpleTMs.config.blankTRBaseDurability)
             }
@@ -75,42 +82,53 @@ object SimpleTMsItems {
         return item
     }
 
-    private fun registerMoveLearnItem(name: String, moveName: String, moveType: String, isTR: Boolean): RegistrySupplier<MoveLearnItem> {
-        val item : RegistrySupplier<MoveLearnItem>
+    private fun registerMoveLearnItem(name: String, moveName: String, isTR: Boolean): RegistrySupplier<MoveLearnItem> {
+       val item : RegistrySupplier<MoveLearnItem>
 
         if (isTR) {
-            val settings: Properties = Properties().stacksTo(SimpleTMs.config.TRStackSize)
+            val settings: Properties = Properties().stacksTo(SimpleTMs.config.trStackSize)
             item = ITEMS.register(name) {
-                MoveLearnItem(moveName, moveType, isTR, settings)
+                MoveLearnItem(moveName, isTR, settings)
             }
             TR_ITEMS.add(item)
+            ALL_MOVE_NAMES_WITH_TR_ITEMS.add(moveName)
         } else {
             val settings: Properties = Properties().stacksTo(1)
-            if (SimpleTMs.config.TMBaseDurability > 0) {
-                settings.durability(SimpleTMs.config.TMBaseDurability)
+            if (SimpleTMs.config.tmBaseDurability > 0) {
+                settings.durability(SimpleTMs.config.tmBaseDurability)
             }
             item = ITEMS.register(name) {
-                MoveLearnItem(moveName, moveType, isTR, settings)
+                MoveLearnItem(moveName, isTR, settings)
             }
             TM_ITEMS.add(item)
+            ALL_MOVE_NAMES_WITH_TM_ITEMS.add(moveName)
         }
-
-        // Add move name to list of all moves with items
-        ALL_MOVE_NAMES_WITH_ITEMS.add(moveName)
-
         return item
     }
 
-    private fun registerMoveLearnItemsFromConfig(moveFile: File) {
+    private fun registerMoveLearnItemsFromConfig(moveFile: File, isTR: Boolean) {
         // Read Json file moveFile
         val jsonContent = FileReader(moveFile).use { it.readText() }
         val itemDefinitions = Json.decodeFromString<List<MoveLearnItemDefinition>>(jsonContent)
+        // Register TMs
+        val prefixString = if (isTR) "tr_" else "tm_"
+        for (itemDefinition in itemDefinitions) {
+            registerMoveLearnItem(
+                name = prefixString + itemDefinition.moveName,
+                moveName = itemDefinition.moveName,
+                isTR = isTR
+            )
+        }
+    }
+
+        private fun registerMoveLearnItemsFromResourceJSON(jsonFilePath: String) {
+        // Load JSON file from resource directory
+        val itemDefinitions = loadMoveLearnItemsFromJson(jsonFilePath)
         // Register TMs
         for (itemDefinition in itemDefinitions) {
             registerMoveLearnItem(
                 name = "tm_" + itemDefinition.moveName,
                 moveName = itemDefinition.moveName,
-                moveType = itemDefinition.Type,
                 isTR = false
             )
         }
@@ -119,27 +137,73 @@ object SimpleTMsItems {
             registerMoveLearnItem(
                 name = "tr_" + itemDefinition.moveName,
                 moveName = itemDefinition.moveName,
-                moveType = itemDefinition.Type,
                 isTR = true
             )
         }
     }
 
-    private fun loadDefaultMoveConfig(moveConfigFile: File) {
+    private fun loadMoveLearnItemsFromJson(jsonFilePath: String): List<MoveLearnItemDefinition> {
+        // Load JSON file from resource directory
+        val resourceStream =  SimpleTMs::class.java.getResourceAsStream("/$jsonFilePath")
+            ?: throw IllegalArgumentException("Resource not found: $jsonFilePath")
+
+        val jsonContent = InputStreamReader(resourceStream).use {  it.readText() }
+        val itemDefinitions = Json.decodeFromString<List<MoveLearnItemDefinition>>(jsonContent)
+
+        return itemDefinitions
+    }
+
+
+    private fun loadDefaultMoveConfig(moveConfigFile: File, isTR: Boolean) {
+        moveConfigFile.parentFile.mkdirs()
+        val nameString = if (isTR) "TR" else "TM"
         if (moveConfigFile.exists()) {
             // If file exists, report that it was found
-            LOGGER.info("Found default moves config file for SimpleTMs")
-
+            LOGGER.info("Found default moves config file for SimpleTMs for $nameString moves")
         } else {
             LOGGER.info("Default moves config file not found. Creating default moves config file")
             // Load default moves from resource
-            val resourceStream =  SimpleTMs::class.java.getResourceAsStream("/$defaultMoveJsonPath")
-                ?: throw IllegalArgumentException("Resource not found: $defaultMoveJsonPath")
+            val resourceStream =  SimpleTMs::class.java.getResourceAsStream("/$DEFAULT_MOVE_JSON_PATH")
+                ?: throw IllegalArgumentException("Resource not found: $DEFAULT_MOVE_JSON_PATH")
             val jsonContent = InputStreamReader(resourceStream).use {  it.readText() }
             // copy to config json
             try {
                 val fileWriter = FileWriter(moveConfigFile)
                 fileWriter.write(jsonContent)
+                fileWriter.close()
+            } catch (exception: Exception) {
+                LOGGER.error("Failed to save config file for $MOD_ID. Reason:")
+                exception.printStackTrace()
+            }
+        }
+    }
+
+
+    // Excluded moves
+    private fun loadExcludedMovesFromConfig(excludedMovesFile: File, isDrops: Boolean) {
+        excludedMovesFile.parentFile.mkdirs()
+
+        if (excludedMovesFile.exists()) {
+            // If file exists, report that it was found
+            LOGGER.info("Found excluded moves config file for SimpleTMs")
+            // Read Json file moveFile
+            val jsonContent = FileReader(excludedMovesFile).use { it.readText() }
+            val moveDefinitions = Json.decodeFromString<List<MoveLearnItemDefinition>>(jsonContent)
+            ALL_MOVES_EXCLUDED_FROM_POKEMON_DROPS.clear()
+            ALL_MOVES_EXCLUDED_FROM_BLANK_LEARNING.clear()
+            for (moveDefinition in moveDefinitions) {
+                if (isDrops) {
+                    ALL_MOVES_EXCLUDED_FROM_POKEMON_DROPS.add(moveDefinition.moveName)
+                } else {
+                    ALL_MOVES_EXCLUDED_FROM_BLANK_LEARNING.add(moveDefinition.moveName)
+                }
+            }
+        } else {
+            // if files not found, create empty files in their place (just [] in the file)
+            LOGGER.info("Excluded moves config file not found. Creating empty excluded moves config file")
+            try {
+                val fileWriter = FileWriter(excludedMovesFile)
+                fileWriter.write("[]")
                 fileWriter.close()
             } catch (exception: Exception) {
                 LOGGER.error("Failed to save config file for $MOD_ID. Reason:")
@@ -156,26 +220,31 @@ object SimpleTMsItems {
     fun registerModItems() {
         LOGGER.info("Register Mod Items for $MOD_ID")
         // Load Default Moves Config
-        LOGGER.info("Loading default moves config")
-        loadDefaultMoveConfig(defaultMoveConfigFile)
+        LOGGER.info("Loading default move configs for TMs and TRs")
+        loadDefaultMoveConfig(defaultTMMoveConfigFile, false)
+        loadDefaultMoveConfig(defaultTRMoveConfigFile, true)
         // Register items from config
         // Default moves
         LOGGER.info("Registering default move TMs and TRs")
-        registerMoveLearnItemsFromConfig(defaultMoveConfigFile)
+        // If the config allows move removal, then register from configs. Otherwise, register from default internal json
+        if (SimpleTMs.config.allowItemRemovalATOWNRISK) {
+            registerMoveLearnItemsFromConfig(defaultTMMoveConfigFile, false)
+            registerMoveLearnItemsFromConfig(defaultTRMoveConfigFile, true)
+        } else {
+            registerMoveLearnItemsFromResourceJSON(DEFAULT_MOVE_JSON_PATH)
+        }
         // TODO: Custom moves
-        // LOGGER.info("Registering custom move TMs and TRs")
         ITEMS.register()
 
-        // Populate list of all moves with items
-        populateAllRemovedDefaultMoves()
+        // Load excluded moves
+        LOGGER.info("Loading excluded moves from config")
+        loadExcludedMovesFromConfig(movesExcludedFromPokemonDropsFile, true)
+        loadExcludedMovesFromConfig(moveExcludedFromBlankLearningFile, false)
     }
-
 
     // ------------------------------------------------------------
     // Other Functions
     // ------------------------------------------------------------
-
-
 
     fun getItemStackFromName(name: String): ItemStack {
         val identifier = simpletmsResource(name)
@@ -184,7 +253,7 @@ object SimpleTMsItems {
         return itemStack
     }
 
-    fun getItemFromName(name: String): Item {
+    private fun getItemFromName(name: String): Item {
         val identifier = simpletmsResource(name)
         val item = BuiltInRegistries.ITEM.get(identifier)
         return item
@@ -198,21 +267,12 @@ object SimpleTMsItems {
         return newMoveLearnItem
     }
 
-    private fun populateAllRemovedDefaultMoves() {
-     // Moves that are not in the default moves config file, but in the resource file
-        val resourceStream =  SimpleTMs::class.java.getResourceAsStream("/$defaultMoveJsonPath")
-            ?: throw IllegalArgumentException("Resource not found: $defaultMoveJsonPath")
-        val jsonContent = InputStreamReader(resourceStream).use {  it.readText() }
-        val defaultMoves = Json.decodeFromString<List<MoveLearnItemDefinition>>(jsonContent)
-        val defaultMoveNames = defaultMoves.map { it.moveName }
-        val removedMoves = ALL_MOVE_NAMES_WITH_ITEMS.filter { !defaultMoveNames.contains(it) }
-        ALL_REMOVED_DEFAULT_MOVES.plus(removedMoves)
+    fun hasItemForMove(move: MoveTemplate, isTR: Boolean): Boolean {
+        return if (isTR) {
+            ALL_MOVE_NAMES_WITH_TR_ITEMS.contains(move.name)
+        } else {
+            ALL_MOVE_NAMES_WITH_TM_ITEMS.contains(move.name)
+        }
     }
-
-    fun hasItemForMove(move: MoveTemplate): Boolean {
-        return ALL_MOVE_NAMES_WITH_ITEMS.contains(move.name)
-    }
-
-
 
 }

@@ -15,7 +15,7 @@ class SimpleTMsConfig {
     }
 
     @NodeCategory(Category.Learnable)
-    var TMMovesLearnable: Boolean = true
+    var tmMovesLearnable: Boolean = true
 
     @NodeCategory(Category.Learnable)
     var eggMovesLearnable: Boolean = true
@@ -36,14 +36,14 @@ class SimpleTMsConfig {
     var blankTRsUsable: Boolean = true
 
     @NodeCategory(Category.Usable)
-    var TMsUsable: Boolean = true
+    var tmsUsable: Boolean = true
 
     @NodeCategory(Category.Usable)
-    var TRsUsable: Boolean = true
+    var trsUsable: Boolean = true
 
     @NodeCategory(Category.Cooldown)
     @IntConstraint(min = 0, max = 51840000)
-    var TMCoolDownTicks: Int = 600
+    var tmCoolDownTicks: Int = 0
 
     @NodeCategory(Category.Cooldown)
     @IntConstraint(min = 0, max = 51840000)
@@ -59,65 +59,76 @@ class SimpleTMsConfig {
 
     @NodeCategory(Category.ItemProperties)
     @IntConstraint(min = 0, max = 1024)
-    var TMBaseDurability: Int = 32
+    var tmBaseDurability: Int = 32
 
     @NodeCategory(Category.DropRate)
-    var DropOutsideOfBattle: Boolean = true
+    var dropOutsideOfBattle: Boolean = true
+
+    @NodeCategory(Category.DropRate)
+    var dropInBattle: Boolean = true
 
     @NodeCategory(Category.ItemProperties)
     @IntConstraint(min = 0, max = 64)
-    var TRStackSize: Int = 16
+    var trStackSize: Int = 16
 
     @NodeCategory(Category.DropRate)
     @DoubleConstraint(min = 0.0, max = 1.0)
-    var DropRateTRInBattle: Double = 0.1
+    var dropRateInBattle: Double = 0.1
 
     @NodeCategory(Category.DropRate)
     @DoubleConstraint(min = 0.0, max = 1.0)
-    var DropRateTMtoTRRatioInBattle: Double = 0.1
+    var dropRateTMFractionInBattle: Double = 0.1
 
-//    @NodeCategory(Category.DropRate)
-//    @DoubleConstraint(min = 0.0, max = 1.0)
-//    var DropRateTROutsideOfBattle: Double = 0.1
+    @NodeCategory(Category.DropRate)
+    @DoubleConstraint(min = 0.0, max = 1.0)
+    var dropRateOutsideOfBattle: Double = 0.1
 
-//    @NodeCategory(Category.DropRate)
-//    @DoubleConstraint(min = 0.0, max = 1.0)
-//    var DropRateTMtoTRRatioOutsideOfBattle: Double = 0.1
+    @NodeCategory(Category.DropRate)
+    @DoubleConstraint(min = 0.0, max = 1.0)
+    var dropRateTMFractionOutsideOfBattle: Double = 0.1
 
     @NodeCategory(Category.DropRate)
     @IntConstraint(min = 1, max = 4)
-    var NumberOfMovesToChooseFromInBattle: Int = 4
-
-//    @NodeCategory(Category.DropRate)
-//    @IntConstraint(min = 1, max = 4)
-//    var NumberOfMovesToChooseFromoutsideBattle: Int = 1
+    var numberOfMovesToChooseFromInBattle: Int = 4
 
     @NodeCategory(Category.DropRate)
-    var DropAny: Boolean = false
+    @IntConstraint(min = 1, max = 4)
+    var numberOfMovesToChooseFromOutsideBattle: Int = 1
 
     @NodeCategory(Category.DropRate)
-    var DropPrimaryType: Boolean = false
+    var dropAnyMove: Boolean = false
 
     @NodeCategory(Category.DropRate)
-    var DropSecondaryType: Boolean = false
+    var dropPrimaryType: Boolean = false
 
     @NodeCategory(Category.DropRate)
-    var DropFromLevelList: Boolean = true
+    var dropSecondaryType: Boolean = false
 
     @NodeCategory(Category.DropRate)
-    var DropAnyLevelMoveFromLevelList = false
+    var dropFromLevelList: Boolean = true
 
     @NodeCategory(Category.DropRate)
-    var DropFromTmMoveList: Boolean = true
+    var dropAnyLevelMoveFromLevelList = false
 
     @NodeCategory(Category.DropRate)
-    var DropFromTutorMoveList: Boolean = true
+    var dropFromTmMoveList: Boolean = true
 
     @NodeCategory(Category.DropRate)
-    var DropFromEggMoveList: Boolean = true
+    var dropFromTutorMoveList: Boolean = true
 
+    @NodeCategory(Category.DropRate)
+    var dropFromEggMoveList: Boolean = true
+
+    @NodeCategory(Category.Visual)
+    var showPokemonThatCanLearnMove: Boolean = true
+
+    @NodeCategory(Category.Visual)
+    @EnumConstraint(enum = ["ALPHABETICAL_DESC", "ALPHABETICAL_ASC", "POKEMON_TYPE_DESC", "POKEMON_TYPE_ASC"])
+    var pokemonSortOrder: String = "ALPHABETICAL_ASC"
+
+    @NodeCategory(Category.Experimental)
+    var allowItemRemovalATOWNRISK: Boolean = false
 }
-
 
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
@@ -130,7 +141,11 @@ enum class Category {
     Usable,
     DropRate,
     Cooldown,
-    ItemProperties
+    ItemProperties,
+    Experimental,
+    Visual,
 }
 
 annotation class DoubleConstraint(val min: Double, val max: Double)
+
+annotation class EnumConstraint(val enum: Array<String>)

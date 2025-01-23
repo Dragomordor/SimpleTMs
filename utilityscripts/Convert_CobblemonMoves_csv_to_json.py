@@ -120,8 +120,8 @@ os.makedirs(f"resources/{modid}/movelearnitems", exist_ok=True)
 # Make sure to remove the Name column only for the default.json file
 default_json_path = f"resources/{modid}/movelearnitems/default.json"
 default_data = data.copy()
-# remove all columns excep moveName and Type
-default_data.drop(columns=['Name', 'Category', 'Gen', 'PP', 'Power', 'Accuracy'], inplace=True)
+# remove all columns except moveName
+default_data.drop(columns=['Name', 'Category', 'Gen', 'PP', 'Power', 'Accuracy', 'Type'], inplace=True)
 with open(default_json_path, 'w') as json_file:
     json.dump(default_data.to_dict(orient='records'), json_file, indent=4)
 
@@ -152,6 +152,13 @@ lang_data[f"{modid}.item.tooltip.blank_item.description"] = "Copies a Pokémon's
 lang_data[f"{modid}.item.tooltip.uses_left"] = "Uses Left: "
 lang_data[f"{modid}.item.move_learn_item.description_start"] = "Teaches the move "
 lang_data[f"{modid}.item.move_learn_item.description_end"] = " to a Pokémon that can learn it"
+lang_data[f"{modid}.item.tooltip.move_learn_item.hold_start"] = "Hold"
+lang_data[f"{modid}.item.tooltip.move_learn_item.hold_shift"] = " §oSHIFT§r "
+lang_data[f"{modid}.item.tooltip.move_learn_item.hold_alt"] = " §oALT§r "
+lang_data[f"{modid}.item.tooltip.move_learn_item.hold_shift_info"] = "for move info"
+lang_data[f"{modid}.item.tooltip.move_learn_item.hold_alt_info"] = "to see Pokémon that can learn this move"
+
+
 lang_data[f"{modid}.item.move_learn_item.move_type"] = "Type: "
 lang_data[f"{modid}.item.move_learn_item.move_category"] = "Category: "
 lang_data[f"{modid}.item.move_learn_item.move_power"] = "Power: "
@@ -159,6 +166,19 @@ lang_data[f"{modid}.item.move_learn_item.move_accuracy"] = "Accuracy: "
 lang_data[f"{modid}.item.move_learn_item.move_pp"] = "PP: "
 lang_data[f"{modid}.item.move_learn_item.move_pp_max"] = ", Max PP: "
 lang_data[f"{modid}.item.move_learn_item.move_crit_ratio"] = "Crit Ratio: "
+
+lang_data[f"{modid}.item.move_learn_item.all_pokemon_can_learn"] = "All Pokémon can learn this move"
+lang_data[f"{modid}.item.move_learn_item.not_activated"] = "This item must first be used while sneaking to see move list!"
+lang_data[f"{modid}.item.move_learn_item.can_learn_base"] = " Pokémon can learn this move, they are: "
+lang_data[f"{modid}.item.move_learn_item.pokemon_ways"] = "Pokemon  - Ways they can learn it"
+lang_data[f"{modid}.item.move_learn_item.level_up"] = "Level Up"
+lang_data[f"{modid}.item.move_learn_item.tm"] = "TM"
+lang_data[f"{modid}.item.move_learn_item.tutor"] = "Tutor"
+lang_data[f"{modid}.item.move_learn_item.egg"] = "Egg"
+lang_data[f"{modid}.item.move_learn_item.scroll_wheel"] = "Use the scroll wheel to navigate the list"
+lang_data[f"{modid}.item.move_learn_item.end_of_list"] = "End of list"
+lang_data[f"{modid}.item.move_learn_item.no_pokemon"] = "No Pokémon can learn this move"
+lang_data[f"{modid}.item.move_learn_item.activated"] = "The move list of this item has been updated"
 
 # blank TM and TR
 lang_data[f"item.{modid}.tm_blank"] = "Blank TM"

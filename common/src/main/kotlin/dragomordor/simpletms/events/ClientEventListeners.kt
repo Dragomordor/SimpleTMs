@@ -9,7 +9,7 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 
 object ClientEventListeners: EventHandler {
     override fun registerListeners() {
-        // ClientScreenInputEvent.MOUSE_SCROLLED_PRE.register(ClientEventListeners::onMouseScrolled)
+        ClientScreenInputEvent.MOUSE_SCROLLED_PRE.register(ClientEventListeners::onMouseScrolled)
     }
 
     private fun onMouseScrolled(minecraft: Minecraft?, screen: Screen?, d: Double, d1: Double, d2: Double, d3: Double): EventResult? {

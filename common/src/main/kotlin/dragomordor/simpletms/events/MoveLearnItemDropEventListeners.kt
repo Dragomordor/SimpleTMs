@@ -9,23 +9,28 @@ import com.cobblemon.mod.common.api.events.battles.BattleFaintedEvent
 import com.cobblemon.mod.common.api.moves.Move
 import com.cobblemon.mod.common.api.moves.MoveTemplate
 import com.cobblemon.mod.common.api.moves.Moves
-import com.cobblemon.mod.common.api.text.text
+import com.cobblemon.mod.common.entity.pokemon.PokemonEntity
 import com.cobblemon.mod.common.pokemon.Pokemon
 import com.cobblemon.mod.common.util.giveOrDropItemStack
+import dev.architectury.event.EventResult
+import dev.architectury.event.events.common.EntityEvent
 import dragomordor.simpletms.SimpleTMs
 import dragomordor.simpletms.SimpleTMsItems
 import dragomordor.simpletms.SimpleTMsItems.getTMorTRItemFromMove
 import dragomordor.simpletms.util.fromLang
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ItemStack
 
 
-object CobblemonEventListeners : EventHandler {
+object MoveLearnItemDropEventListeners : EventHandler {
 
     override fun registerListeners() {
         CobblemonEvents.BATTLE_FAINTED.subscribe(Priority.NORMAL, ::onBattleFainted)
-        // EntityEvent.LIVING_DEATH.register(EntityEvent.LivingDeath { entity: LivingEntity, source: DamageSource -> onEntityFainted(entity, source) })
+        EntityEvent.LIVING_DEATH.register(EntityEvent.LivingDeath { entity: LivingEntity, source: DamageSource -> onEntityFainted(entity, source) })
     }
+
     // ------------------------------------------------------------
     // Event Handlers
     // ------------------------------------------------------------
@@ -43,41 +48,71 @@ object CobblemonEventListeners : EventHandler {
 
             // Make sure killed pokemon is a wild pokemon
             if (!killedPokemon.isPlayerOwned()) {
-                dropMoveLearnItemOnPlayer(killedPokemon, player, true)
+                if (SimpleTMs.config.dropInBattle) {
+                    dropMoveLearnItemOnPlayer(killedPokemon, player, true)
+                }
             }
         }
         return
+    }
+
+    private fun onEntityFainted(entity: LivingEntity, source: DamageSource): EventResult? {
+
+        // If entity is pokemon and source is player, activate onPokemonFainted.
+        // Either way, return normal behaviour of event
+        if (entity::class == PokemonEntity::class && source.entity?.javaClass == ServerPlayer::class.java) {
+            val player = source.entity as ServerPlayer
+            onPokemonFainted((entity as PokemonEntity).pokemon, player)
+        }
+        // Return normal behaviour of event
+        return EventResult.pass()
     }
 
     // ------------------------------------------------------------
     // Helper Functions
     // ------------------------------------------------------------
 
-    fun dropMoveLearnItemOnPlayer(killedPokemon: Pokemon, player: ServerPlayer, inBattle: Boolean) {
-        // Get drop rates from config
-//        val (dropRateTR, dropRateTMtoTRRatio) = if (inBattle) {
-//            SimpleTMs.config.DropRateTRInBattle to SimpleTMs.config.DropRateTMtoTRRatioInBattle
-//        }
-////        else {
-////            SimpleTMs.config.DropRateTROutsideOfBattle to SimpleTMs.config.DropRateTMtoTRRatioOutsideOfBattle
-////        }
+    // When pokemon faints outside of battle because of player, drop TM or TR if config allows
+    private fun onPokemonFainted(killedPokemon: Pokemon, player: ServerPlayer) {
+        // Check if config allows dropping items when pokemon faints
+        if (!SimpleTMs.config.dropOutsideOfBattle) {
+            return
+        }
+        // Make sure killed pokemon is a wild pokemon
+        if (!killedPokemon.isPlayerOwned()) {
+             dropMoveLearnItemOnPlayer(killedPokemon, player, false)
+        }
+        return
+    }
+
+    private fun dropMoveLearnItemOnPlayer(killedPokemon: Pokemon, player: ServerPlayer, inBattle: Boolean) {
+
+         // Get drop rates from config
+        val (dropRateTR, dropRateTMtoTRRatio) = if (inBattle) {
+            SimpleTMs.config.dropRateInBattle to SimpleTMs.config.dropRateTMFractionInBattle
+        }
+        else {
+            SimpleTMs.config.dropRateOutsideOfBattle to SimpleTMs.config.dropRateTMFractionOutsideOfBattle
+        }
 
         val pokemonDisplayName = killedPokemon.species.translatedName
-        val dropRateTR = SimpleTMs.config.DropRateTRInBattle
-        val dropRateTMtoTRRatio = SimpleTMs.config.DropRateTMtoTRRatioInBattle
-        // Get an applicable move template from the killed pokemon
-//        val numberOfMovesToChooseFrom = when {
-//            inBattle -> SimpleTMs.config.NumberOfMovesToChooseFromInBattle
-//            else -> SimpleTMs.config.NumberOfMovesToChooseFromoutsideBattle
-//        }
-        val numberOfMovesToChooseFrom = SimpleTMs.config.NumberOfMovesToChooseFromInBattle
+        val numberOfMovesToChooseFrom = when {
+            inBattle -> SimpleTMs.config.numberOfMovesToChooseFromInBattle
+            else -> SimpleTMs.config.numberOfMovesToChooseFromOutsideBattle
+        }
 
-        val moveTemplatesToChooseFrom = getRandomApplicableMoveTemplates(killedPokemon, numberOfMovesToChooseFrom)
         val randomDouble = Math.random()
         val isTM = randomDouble < (dropRateTR * dropRateTMtoTRRatio)
         val isTR = randomDouble < dropRateTR
 
         if (isTM || isTR) {
+            val moveTemplatesToChooseFrom: List<MoveTemplate>
+            if (isTM) {
+                 moveTemplatesToChooseFrom = getRandomApplicableMoveTemplates(killedPokemon, numberOfMovesToChooseFrom, false)
+            } else {
+                 moveTemplatesToChooseFrom = getRandomApplicableMoveTemplates(killedPokemon, numberOfMovesToChooseFrom, true)
+            }
+
             // Check if moveTemplatesToChooseFrom is empty. If it is, return
             if (moveTemplatesToChooseFrom.isEmpty()) {
                 player.displayClientMessage(fromLang(SimpleTMs.MOD_ID, "error.no_moves_to_drop", pokemonDisplayName), true)
@@ -92,11 +127,7 @@ object CobblemonEventListeners : EventHandler {
                 val movesToChooseFrom = moveTemplatesToChooseFrom.map { it.create() }
                 MoveSelectCallbacks.create(
                     player = player,
-                    // possibleMoves = movesToChooseFrom,
                     possibleMoves = movesToChooseFrom.map { battleMove -> MoveSelectDTO(battleMove) },
-                    // title does not actually display anything afaik
-                    // title = textToDisplay.text(),
-                    //handler = { move -> dropMoveLearnItemOnPlayerHandler(player, move, isTR, isTM) }
                     handler = {_, index, _ -> dropMoveLearnItemOnPlayerHandler(player, movesToChooseFrom[index], isTR, isTM) }
                 )
             } else {
@@ -116,7 +147,7 @@ object CobblemonEventListeners : EventHandler {
 
 
 
-    private fun getRandomApplicableMoveTemplates(pokemon: Pokemon, numberOfMovesToChooseFrom: Int): List<MoveTemplate> {
+    private fun getRandomApplicableMoveTemplates(pokemon: Pokemon, numberOfMovesToChooseFrom: Int, isTR: Boolean): List<MoveTemplate> {
         // Get all move information from pokemon
         val allMoves = Moves.all()
         val pokemonPrimaryType = pokemon.primaryType
@@ -129,20 +160,23 @@ object CobblemonEventListeners : EventHandler {
         val eggMoves = learnset.eggMoves
 
         // Get config options
-        val DropAny = SimpleTMs.config.DropAny
-        val DropPrimaryType = SimpleTMs.config.DropPrimaryType
-        val DropSecondaryType = SimpleTMs.config.DropSecondaryType
-        val DropLevelList = SimpleTMs.config.DropFromLevelList
-        val DropAnyLevel = SimpleTMs.config.DropAnyLevelMoveFromLevelList
-        val DropTMs = SimpleTMs.config.DropFromTmMoveList
-        val DropTutors = SimpleTMs.config.DropFromTutorMoveList
-        val DropEggMoves = SimpleTMs.config.DropFromEggMoveList
+        val DropAny = SimpleTMs.config.dropAnyMove
+        val DropPrimaryType = SimpleTMs.config.dropPrimaryType
+        val DropSecondaryType = SimpleTMs.config.dropSecondaryType
+        val DropLevelList = SimpleTMs.config.dropFromLevelList
+        val DropAnyLevel = SimpleTMs.config.dropAnyLevelMoveFromLevelList
+        val DropTMs = SimpleTMs.config.dropFromTmMoveList
+        val DropTutors = SimpleTMs.config.dropFromTutorMoveList
+        val DropEggMoves = SimpleTMs.config.dropFromEggMoveList
 
         // If any move can be dropped, return a random move from all moves
         if (DropAny) {
             // Remove moves that do not have a TM or TR
-            val applicableMoves = allMoves.filter { SimpleTMsItems.hasItemForMove(it) }
+            val movesWithItems = (allMoves.filter { SimpleTMsItems.hasItemForMove(it, isTR) }).toMutableList()
             // TODO: Exclude moves based on config options
+            val excludedMoves = SimpleTMsItems.ALL_MOVES_EXCLUDED_FROM_POKEMON_DROPS
+            movesWithItems.removeIf({ move -> excludedMoves.contains(move.name) })
+            val applicableMoves = movesWithItems.toList()
             return applicableMoves.shuffled().take(numberOfMovesToChooseFrom)
         }
         // The rest of the checks will append to a list of applicable moves
@@ -183,9 +217,11 @@ object CobblemonEventListeners : EventHandler {
         }
 
         // Remove moves that do not have a TM or TR
-        applicableMoves.removeIf { move -> !SimpleTMsItems.hasItemForMove(move) }
+        applicableMoves.removeIf { move -> !SimpleTMsItems.hasItemForMove(move, isTR) }
 
         // TODO: Exclude moves based on config options
+        val excludedMoves = SimpleTMsItems.ALL_MOVES_EXCLUDED_FROM_POKEMON_DROPS
+        applicableMoves.removeIf({ move -> excludedMoves.contains(move.name) })
 
         // Return numberOfMovesToChooseFrom random moves from applicableMoves
         return applicableMoves.shuffled().take(numberOfMovesToChooseFrom)

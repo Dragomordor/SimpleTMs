@@ -1,0 +1,46 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 2,
+        "max": 3
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "simpletms:tr_rest"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "simpletms:tr_attract"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "simpletms:tr_captivate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "simpletms:tr_facade"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "simpletms:tr_return"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "simpletms:tr_frustration"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "simpletms:tr_endure"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "simpletms:tr_protect"
+        }
+      ]
+    }
+  ]
+}

@@ -1,9 +1,11 @@
 package dragomordor.simpletms.util
 
 import com.cobblemon.mod.common.Cobblemon
+import com.cobblemon.mod.common.api.pokemon.PokemonSpecies
 import com.cobblemon.mod.common.pokemon.Species
 import com.cobblemon.mod.common.util.asTranslated
 import dragomordor.simpletms.SimpleTMs
+import dragomordor.simpletms.SimpleTMsItems
 import kotlinx.serialization.Serializable
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
@@ -16,7 +18,6 @@ fun simpletmsResource(path: String) = ResourceLocation.fromNamespaceAndPath(Simp
 @Serializable
 data class MoveLearnItemDefinition(
     val moveName: String,
-    val Type: String,
 )
 
 // To get language translations
@@ -59,21 +60,26 @@ fun getMovePokemonAssociation(moveName: String, speciesCollection: MutableList<S
     for (pokemonSpecies in speciesCollection) {
         val pokemonLearnMethods = mutableListOf<String>()
 
+        // All pokemon learnsets
         val pokemonLearnset = pokemonSpecies.moves
-        val pokemonMoveTemplates = pokemonLearnset.tmMoves
+        val pokemonTmMoveTemplates = pokemonLearnset.tmMoves
         val pokemonTutorMoveTemplates = pokemonLearnset.tutorMoves
         val pokemonEggMoveTemplates = pokemonLearnset.eggMoves
-        // TODO - get pre evolution egg moves as well
+        var preEvolution = pokemonSpecies.preEvolution
+        // if egg moves are empty, check pre-evolution
+        if (pokemonEggMoveTemplates.isEmpty() && preEvolution != null) {
+            pokemonEggMoveTemplates.addAll(preEvolution.species.moves.eggMoves)
+            // Another check here
+            preEvolution = preEvolution.species.preEvolution
+            if (pokemonEggMoveTemplates.isEmpty() && preEvolution != null) {
+                pokemonEggMoveTemplates.addAll(preEvolution.species.moves.eggMoves)
+            }
+        }
+
         val pokemonLevelUpMoveTemplates = pokemonLearnset.getLevelUpMovesUpTo(Cobblemon.config.maxPokemonLevel).toMutableList()
-//
-//        // TODO - DEBUG if any movest besides levelmoves are empty, return dummy (excedp egg since evolutions don't have that)
-//        if (pokemonMoveTemplates.isEmpty() || pokemonTutorMoveTemplates.isEmpty()) {
-//            val dummyLearnMethods: MutableList<String> = mutableListOf()
-//            pokemonList.add(Pair(pokemonSpecies, dummyLearnMethods))
-//        }
 
         // Convert lists of MoveTemplates to lists of Strings
-        val pokemonTmMoves = pokemonMoveTemplates.map { it.name }
+        val pokemonTmMoves = pokemonTmMoveTemplates.map { it.name }
         val pokemonTutorMoves = pokemonTutorMoveTemplates.map { it.name }
         val pokemonEggMoves = pokemonEggMoveTemplates.map { it.name }
         val pokemonLevelUpMoves = pokemonLevelUpMoveTemplates.map { it.name }
@@ -88,7 +94,7 @@ fun getMovePokemonAssociation(moveName: String, speciesCollection: MutableList<S
         if (canPokemonLearnMoveAttAll) {
 
             pokemonLearnMethods.apply {
-                if (canPokemonLearnMoveTM && SimpleTMs.config.TMMovesLearnable) add("TM")
+                if (canPokemonLearnMoveTM && SimpleTMs.config.tmMovesLearnable) add("TM")
                 if (canPokemonLearnMoveTutor && SimpleTMs.config.tutorMovesLearnable) add("Tutor")
                 if (canPokemonLearnMoveEgg && SimpleTMs.config.eggMovesLearnable) add("Egg")
                 if (canPokemonLearnMoveLevelUp && SimpleTMs.config.levelMovesLearnable) add("Level Up")
@@ -100,6 +106,49 @@ fun getMovePokemonAssociation(moveName: String, speciesCollection: MutableList<S
         }
     }
     return pokemonList
+}
+
+// Loop through all moves and get the pokemon that can learn them in a complete list
+fun getAllPokemonMoveAssociations(speciesCollection: MutableList<Species>): MutableList<Pair<String, MutableList<Pair<Species, MutableList<String>>>>> {
+    // For all moveNames, map to a list of pokemon that can learn it
+    // This list should have : all move names (first key), then for each move name, a list of pokemon that can learn it (second key) with the methods they can learn it
+    val pokemonListForAllMoves = mutableListOf<Pair<String, MutableList<Pair<Species, MutableList<String>>>>>()
+
+    // val allMoveNames = Moves.all().map { it.name }
+    // Instead only get move names for existing TMs
+    val allMovesNamesWithTRItems = SimpleTMsItems.ALL_MOVE_NAMES_WITH_TR_ITEMS
+    val allMovesNamesWithTMItems = SimpleTMsItems.ALL_MOVE_NAMES_WITH_TM_ITEMS
+
+    // Combine and filter out duplicates
+    val allMoveNamesWithItems = (allMovesNamesWithTMItems + allMovesNamesWithTRItems).distinct()
+
+    for (moveName in allMoveNamesWithItems) {
+        val pokemonListForThisMove = getMovePokemonAssociation(moveName, speciesCollection)
+        pokemonListForAllMoves.add(Pair(moveName, pokemonListForThisMove))
+    }
+
+    return pokemonListForAllMoves
+}
+
+object MoveAssociations {
+    private var POKEMON_MOVE_ASSOCIATIONS = mutableListOf<Pair<String, MutableList<Pair<Species, MutableList<String>>>>>()
+    fun getMovePokemonAssociations(): MutableList<Pair<String, MutableList<Pair<Species, MutableList<String>>>>> {
+        return POKEMON_MOVE_ASSOCIATIONS
+    }
+    private fun updateMovePokemonAssociations(pokemonSpecies: PokemonSpecies) {
+        val speciesCollection = pokemonSpecies.species.toMutableList()
+        POKEMON_MOVE_ASSOCIATIONS = getAllPokemonMoveAssociations(speciesCollection)
+    }
+    fun init(pokemonSpecies: PokemonSpecies) {
+        // Clear the move associations
+        POKEMON_MOVE_ASSOCIATIONS.clear()
+        // Update the move associations
+        updateMovePokemonAssociations(pokemonSpecies)
+    }
+    fun getAssociationsForMove(moveName: String): MutableList<Pair<Species, MutableList<String>>>
+    {
+        return POKEMON_MOVE_ASSOCIATIONS.find { it.first == moveName }?.second ?: mutableListOf()
+    }
 }
 
 // For move learn item tooltip pages

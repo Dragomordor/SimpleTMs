@@ -1,9 +1,6 @@
 package dragomordor.simpletms.item.custom
 
 import com.cobblemon.mod.common.api.moves.Move
-import com.cobblemon.mod.common.api.moves.MoveTemplate
-import com.cobblemon.mod.common.api.moves.Moves
-import com.cobblemon.mod.common.api.text.text
 import com.cobblemon.mod.common.pokemon.Pokemon
 import com.cobblemon.mod.common.util.giveOrDropItemStack
 import dragomordor.simpletms.SimpleTMs
@@ -12,7 +9,6 @@ import dragomordor.simpletms.SimpleTMsItems.getTMorTRItemFromMove
 import dragomordor.simpletms.item.SimpleTMsItem
 import dragomordor.simpletms.item.api.PokemonAndMoveSelectingItemNonBattle
 import dragomordor.simpletms.util.fromLang
-import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
@@ -103,11 +99,16 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
         }
 
         // Check if move is in the list of moves with items
-        if (!SimpleTMsItems.hasItemForMove(move.template)) {
+        if (!SimpleTMsItems.hasItemForMove(move.template, isTR)) {
             return false
         }
 
         // TODO: Add excluded moves here
+        // Check if move is in the list of excluded moves
+        val excludedMoves = SimpleTMsItems.ALL_MOVES_EXCLUDED_FROM_BLANK_LEARNING
+        if (excludedMoves.contains(move.template.name)) {
+            return false
+        }
 
         // Passed all checks
         return true
@@ -162,13 +163,13 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
         val blankItemDescription = fromLang(SimpleTMs.MOD_ID, "item.tooltip.blank_item.description", itemType).withColor(baseGreyColor.rgb)
         list.add(blankItemDescription)
 
-        if (Screen.hasControlDown()) {
-            // Show number of uses left
-            val usesLeft = (itemStack.maxDamage - itemStack.damageValue).toString().text().withColor(Color.RED.rgb)
-            // val usesLeftText = ("Uses left: ").text().withColor(baseGreyColor.rgb)
-            val usesLeftText = fromLang(SimpleTMs.MOD_ID, "item.tooltip.uses_left").withColor(baseGreyColor.rgb)
-            list.add(usesLeftText.append(usesLeft))
-        }
+//        if (Screen.hasControlDown()) {
+//            // Show number of uses left
+//            val usesLeft = (itemStack.maxDamage - itemStack.damageValue).toString().text().withColor(Color.RED.rgb)
+//            // val usesLeftText = ("Uses left: ").text().withColor(baseGreyColor.rgb)
+//            val usesLeftText = fromLang(SimpleTMs.MOD_ID, "item.tooltip.uses_left").withColor(baseGreyColor.rgb)
+//            list.add(usesLeftText.append(usesLeft))
+//        }
 
         // Super call
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag)
