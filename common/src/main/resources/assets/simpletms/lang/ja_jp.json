@@ -10,7 +10,7 @@
     "simpletms.error.not_learnable.on_cooldown": "%1$sは%2$sのクールダウン中です",
     "simpletms.error.no_moves_to_drop": "%1$sは削除可能な技を持っていません",
     "simpletms.message.select_move_to_drop": "%1$sはTM/TRを削除しました。リストからアイテムを取得する技を選択してください！",
-    "simpletms.item.tooltip.blank_item.description": "ポケモンの技を$1$sにコピーします",
+    "simpletms.item.tooltip.blank_item.description": "ポケモンの技を%1$sにコピーします",
     "simpletms.item.tooltip.uses_left": "残り使用回数: ",
     "simpletms.item.move_learn_item.description_start": "次の技を教えます: ",
     "simpletms.item.move_learn_item.description_end": "ポケモンが覚えることができます",

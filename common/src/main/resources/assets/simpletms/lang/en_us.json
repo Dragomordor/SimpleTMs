@@ -10,7 +10,7 @@
     "simpletms.error.not_learnable.on_cooldown": "%1$s is on cooldown for %2$s",
     "simpletms.error.no_moves_to_drop": "%1$s has no moves to drop",
     "simpletms.message.select_move_to_drop": "%1$s has dropped a TM/TR. Select a move from the list to gain it's item!",
-    "simpletms.item.tooltip.blank_item.description": "Copies a Pok\u00e9mon's move into a $1$s",
+    "simpletms.item.tooltip.blank_item.description": "Copies a Pok\u00e9mon's move into a %1$s",
     "simpletms.item.tooltip.uses_left": "Uses Left: ",
     "simpletms.item.move_learn_item.description_start": "Teaches the move ",
     "simpletms.item.move_learn_item.description_end": " to a Pok\u00e9mon that can learn it",

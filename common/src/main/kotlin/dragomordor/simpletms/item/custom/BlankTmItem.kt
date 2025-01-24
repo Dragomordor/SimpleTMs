@@ -1,6 +1,7 @@
 package dragomordor.simpletms.item.custom
 
 import com.cobblemon.mod.common.api.moves.Move
+import com.cobblemon.mod.common.api.text.text
 import com.cobblemon.mod.common.pokemon.Pokemon
 import com.cobblemon.mod.common.util.giveOrDropItemStack
 import dragomordor.simpletms.SimpleTMs
@@ -160,7 +161,7 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
         // Normal hover text
         // val blankItemDescription = ("An item that turns a Pokémon's known move into a $ to teach others.").text().withColor(baseGreyColor.rgb)
         // val blankItemDescription = ("Copies a Pokémon's move into a $itemType for teaching.").text().withColor(baseGreyColor.rgb)
-        val blankItemDescription = fromLang(SimpleTMs.MOD_ID, "item.tooltip.blank_item.description", itemType).withColor(baseGreyColor.rgb)
+        val blankItemDescription = fromLang(SimpleTMs.MOD_ID, "item.tooltip.blank_item.description", itemType.text()).withColor(baseGreyColor.rgb)
         list.add(blankItemDescription)
 
 //        if (Screen.hasControlDown()) {
