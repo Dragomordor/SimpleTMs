@@ -40,23 +40,22 @@ SimpleTMs allows players to teach moves to their Pokémon in Cobblemon using TMs
 
 ### Obtaining TMs and TRs
 - **Crafting:**
-  - Blank TMs and TRs can be crafted. *(Add crafting recipe image below)*
-  - By default, they cannot be found naturally and must be crafted.
-![]()
+  - Blank TMs and TRs can be crafted as shown below.
+![](https://raw.githubusercontent.com/Dragomordor/SimpleTMs/refs/heads/master/utilityscripts/images/recipes.png?token=GHSAT0AAAAAAC2QW7LD7O5PH5MCHGZEWAPCZ4TVETA)
 - **Loot Chests:**
   - TRs (and rarely TMs) can be found in chests in various Minecraft structures like villages, ruined portals, etc.
   - The type of TRs that drop depends on the loot location (e.g., Fire-type moves in Nether chests, Normal-type moves in village chests).
-  - Additional integration with **Cobbletowns** (add links) and **Pokeloot** (add links) allows more ways to obtain TMs and TRs.
-![]()
+  - Additional integration with **Pokeloot** ([Modrinth](https://modrinth.com/datapack/cobblemon-pokeloot)) allows more ways to obtain TMs and TRs if that datapack is installed.
+![](https://raw.githubusercontent.com/Dragomordor/SimpleTMs/refs/heads/master/utilityscripts/images/loot_tables.png?token=GHSAT0AAAAAAC2QW7LCOLFNWVLYKAP5ZEQIZ4TVFZA)
 - **Pokémon Drops:**
   - TRs (and rarely TMs) can drop when a Pokémon faints. This is the main way to obtain TMs and TRs in Cobblemon.
   - **In Battle:** Players can choose **1 of 4 random moves** from the Pokémon’s learnset.
   - **Outside Battle:** A random move is chosen automatically.
   - This encourages battling Pokémon instead of simply defeating them outside of combat.
+![](https://raw.githubusercontent.com/Dragomordor/SimpleTMs/refs/heads/master/utilityscripts/images/pokemon_drops.png?token=GHSAT0AAAAAAC2QW7LCWTBOX3KM2QIY4NVQZ4TVJWQ)
 - **Drop Rates (Default):**
   - TRs: **10% chance** when a Pokémon faints.
   - TMs: **1% chance** when a Pokémon faints.
-![]()
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Configuration
 
@@ -66,15 +65,26 @@ SimpleTMs allows players to teach moves to their Pokémon in Cobblemon using TMs
 
 (experimental config mentions - this option is included but comes with drawback when client and server have different options. Recommended not to use, but included mainly for singleplayer users who know exactly what they want)
 
+## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Requirements
+
+#### For NeoForge and Fabric
+- **Minecraft 1.21.1** is required for SimpleTMs v2.0.0.
+- **Cobblemon v1.6** ([Curseforge](https://www.curseforge.com/minecraft/mc-mods/cobblemon) & [Modrinth](https://modrinth.com/mod/cobblemon)) is required to use SimpleTMs v2.0.0.
+- **Architectury API v13.0.6 or higher** ([Curseforge](https://www.curseforge.com/minecraft/mc-mods/architectury-api) & [Modrinth](https://modrinth.com/mod/architectury-api)) is required for SimpleTMs v2.0.0.
+#### For Fabric Only
+- **Fabric API for Minecraft 1.21.1** ([Curseforge](https://www.curseforge.com/minecraft/mc-mods/fabric-api) & [Modrinth](https://modrinth.com/mod/fabric-api)).
+#### NeoForge Only
+- **NeoForge for Minecraft 1.21.1** ([NeoForge Site](https://projects.neoforged.net/neoforged/neoforge)).
+- **Kotlin For Forge v5.5.0 or higher** ([Curseforge](https://www.curseforge.com/minecraft/mc-mods/kotlin-for-forge) & [Modrinth](https://modrinth.com/mod/kotlin-for-forge)).
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Support and Feedback
-If you encounter any issues or have suggestions for improvement, feel free to create an issue on the GitHub repository (add link here).
+If you encounter any issues or have suggestions for improvement, feel free to create an issue on the GitHub repository.
 
 There is also a support channel on the Cobblemon discord, where you can ask for help or discuss the mod with other players.
 
 <p align="center">
   <a href="https://github.com/Dragomordor/SimpleTMs">
-    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" width="50">
+    <img src="https://raw.githubusercontent.com/Dragomordor/SimpleTMs/refs/heads/master/utilityscripts/images/github-mark-white.png?token=GHSAT0AAAAAAC2QW7LDQMYL7V3TUPPLCGUSZ4TVLCA" alt="GitHub" width="50">
   </a>
   <a href="https://discord.com/channels/934267676354834442/1193517940067291157">
     <img src="https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/discord_button.png?ref_type=heads" alt="Discord" width="200" style="margin-left: 20px;">
