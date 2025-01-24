@@ -27,7 +27,7 @@ SimpleTMs allows players to teach moves to their Pokémon in Cobblemon using TMs
 #### Tooltip Preview
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Dragomordor/SimpleTMs/refs/heads/master/utilityscripts/images/tooltip.png?ref_type=heads" width="80%">
+  <img src="https://github.com/Dragomordor/SimpleTMs/blob/master/utilityscripts/images/Tooltips.png?raw=true" width="80%">
 </div>
 
 ### Blank TM and TR Usage
