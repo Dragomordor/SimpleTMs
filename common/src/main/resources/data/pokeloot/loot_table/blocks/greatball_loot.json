@@ -1,0 +1,466 @@
+{
+    "pools": [
+		{
+			"rolls": 1,
+            "entries": [
+				{
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:cherish_ball"
+                },
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:black_augurite"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:dawn_stone"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:deep_sea_scale"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:deep_sea_tooth"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:dragon_scale"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:dubious_disc"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:dusk_stone"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:electirizer"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:fire_stone"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:ice_stone"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:leaf_stone"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:magmarizer"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:moon_stone"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:oval_stone"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:peat_block"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:reaper_cloth"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:shiny_stone"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:sun_stone"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:thunder_stone"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:upgrade"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:water_stone"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:exp_share"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:black_belt"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:black_glasses"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:black_sludge"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:bright_powder"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:charcoal_stick"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:dragon_fang"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:focus_band"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:hard_stone"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:heavy_duty_boots"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:kings_rock"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:light_clay"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:magnet"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:mental_herb"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:metal_coat"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:miracle_seed"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:mystic_water"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:never_melt_ice"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:poison_barb"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:power_herb"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:prism_scale"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:protector"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:quick_claw"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:razor_claw"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:razor_fang"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:safety_goggles"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:sharp_beak"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:silk_scarf"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:silver_powder"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:soft_sand"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:spell_tag"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:twisted_spoon"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:white_herb"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:pp_max"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:leftovers"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:lucky_egg"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:power_anklet"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:power_band"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:power_belt"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:power_bracer"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:power_lens"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:power_weight"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:exp_candy_xs"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:exp_candy_s"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:exp_candy_m"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:galarica_cuff"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:galarica_wreath"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:sweet_apple"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:tart_apple"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:pp_up"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:link_cable"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:air_balloon"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:damp_rock"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:eject_button"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:flame_orb"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:heat_rock"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:icy_rock"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:iron_ball"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:light_ball"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:red_card"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:smoke_ball"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:smooth_rock"
+				},
+                {
+                    "type": "item",
+                    "weight": 1,
+                    "name": "cobblemon:toxic_orb"
+				}
+            ]
+        },
+        {
+          "rolls": 1,
+          "entries": [
+            {
+              "type": "minecraft:tag",
+              "name": "simpletms:tr_items",
+              "expand": true
+            }
+          ],
+          "conditions": [
+            {
+              "condition": "minecraft:random_chance",
+              "chance": 0.15
+            }
+          ]
+        },
+        {
+          "rolls": 1,
+          "entries": [
+            {
+              "type": "minecraft:tag",
+              "name": "simpletms:tm_items",
+              "expand": true
+            }
+          ],
+          "conditions": [
+            {
+              "condition": "minecraft:random_chance",
+              "chance": 0.02
+            }
+          ]
+        }
+    ]
+}
