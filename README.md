@@ -1,7 +1,7 @@
 # SimpleTMs: TMs and TRs for Cobblemon
 
 <div align="center">
-  <img src="https://github.com/Dragomordor/SimpleTMs/blob/master/utilityscripts/images/SimpleTMs.png?ref_type=heads" width="80%">
+  <img src="https://raw.githubusercontent.com/Dragomordor/SimpleTMs/refs/heads/master/utilityscripts/images/SimpleTMs.png" width="80%">
 </div>
 
 SimpleTMs allows players to teach moves to their Pokémon in Cobblemon using TMs and TRs.
