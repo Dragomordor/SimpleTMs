@@ -15,38 +15,48 @@ SimpleTMs allows players to teach moves to their Pokémon in Cobblemon using TMs
 - By default, Pokémon can learn moves from their **TM**, **Tutor**, and **Egg** Move groups.
   - Check [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Main_Page) for a detailed list of what moves a Pokémon can learn.
 
+![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_divider.png?ref_type=heads)
 
-#### Images of TM's and TR's being used
-(add images of TM and TR being used here)
+##### Usage Preview
+![](https://raw.githubusercontent.com/Dragomordor/SimpleTMs/refs/heads/master/utilityscripts/images/move_learn.png?token=GHSAT0AAAAAAC2QW7LDPZ4V2RRHAS6DJDEOZ4TTMCA)
 
-#### Images of TM and TR tooltips
-(add images of TM and TR tooltips here)
+#### Tooltip Preview
+![](https://raw.githubusercontent.com/Dragomordor/SimpleTMs/refs/heads/master/utilityscripts/images/Tooltips.png?token=GHSAT0AAAAAAC2QW7LC3JO27QVQGFH7Q7U6Z4TTM3A)
+
 
 ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_divider.png?ref_type=heads)
 
 
 ### Blank TM and TR Usage
-- Blank TMs and TRs are used the same way as other cobblemon items which can select moves. This means, when the player uses them, they can select a Pokémon in their party and a move in their move set. 
-- Blank TMs drop the respective TM of the selected move, whilst Blank TRs drop the respective TRs of the selected move.
-- By default, all moves can be imprinted onto a Pokémon.
+- **Blank TMs and TRs** allow players to imprint a move onto them.
+- When used, they let the player select a Pokémon from their party and a move from its moveset.
+- **Blank TMs** create a TM of the selected move, while **Blank TRs** create a TR of the selected move.
+- By default, **any move** can be imprinted onto a blank TM or TR.
 
-#### Images of Blank TM and TR being used
-(add images of Blank TM and TR being used here)
+#### Usage Preview
+![](https://raw.githubusercontent.com/Dragomordor/SimpleTMs/refs/heads/master/utilityscripts/images/blank_learning.png?token=GHSAT0AAAAAAC2QW7LC3GCIGKMF3PKUH7H2Z4TTPTA)
 
 ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_divider.png?ref_type=heads)
 
-### Obtaining Items
-- Blank TMs and TRs can be crafted as shown by the image below (add image below)
-- Blank TMs and TRs cannot be found naturally and can only be crafted by default.
-- TRs (and rarely TMs) can be found in chests all over Minecraft such as villages, ruined portals, etc.
-  - You will find that the types of TRs that drop depend on the location where the loot is found. Nether chests will probably drop Fire type moves, villages will probably drop Normal type moves, etc.
-  - Additional integration with Cobbletowns (modrinth and curseforge links here) and Pokeloot (modrinth and curseforge links here) has been added to allow for more ways to obtain TRs and TMs if you use those datapacks.
-- TRs (and rarely TMs) can also be dropped from Pokémon when they faint.
-  - By default, when a drop occurs by defeating a Pokémon through Battle, the player can choose 1 of 4 random moves that the Pokémon can learn.
-  - By default, when a drop occurs by ki.. I mean 'defeating' a Pokémon outside of Battle, the player only gets a random move and cannot choose between a set of random moves.
-  - This encourages players to defeat Pokémon through Battle, to have a better chance of getting a specific move from that Pokémon's learnset
-- By default, TR's have a 10% chance of dropping when Pokémon faints, and TM's have 1% chance.
-
+### Obtaining TMs and TRs
+- **Crafting:**
+  - Blank TMs and TRs can be crafted. *(Add crafting recipe image below)*
+  - By default, they cannot be found naturally and must be crafted.
+![]()
+- **Loot Chests:**
+  - TRs (and rarely TMs) can be found in chests in various Minecraft structures like villages, ruined portals, etc.
+  - The type of TRs that drop depends on the loot location (e.g., Fire-type moves in Nether chests, Normal-type moves in village chests).
+  - Additional integration with **Cobbletowns** (add links) and **Pokeloot** (add links) allows more ways to obtain TMs and TRs.
+![]()
+- **Pokémon Drops:**
+  - TRs (and rarely TMs) can drop when a Pokémon faints. This is the main way to obtain TMs and TRs in Cobblemon.
+  - **In Battle:** Players can choose **1 of 4 random moves** from the Pokémon’s learnset.
+  - **Outside Battle:** A random move is chosen automatically.
+  - This encourages battling Pokémon instead of simply defeating them outside of combat.
+- **Drop Rates (Default):**
+  - TRs: **10% chance** when a Pokémon faints.
+  - TMs: **1% chance** when a Pokémon faints.
+![]()
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Configuration
 

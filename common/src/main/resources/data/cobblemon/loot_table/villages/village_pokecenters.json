@@ -94,7 +94,7 @@
         {
             "rolls": {
                 "type": "minecraft:uniform",
-                "max": 3.0,
+                "max": 2.0,
                 "min": 1.0
             },
             "entries": [
@@ -107,7 +107,7 @@
             "conditions": [
                 {
                     "condition": "minecraft:random_chance",
-                    "chance": 0.25
+                    "chance": 0.5
                 }
             ]
         },
@@ -123,7 +123,7 @@
             "conditions": [
                 {
                     "condition": "minecraft:random_chance",
-                    "chance": 0.02
+                    "chance": 0.06
                 }
             ]
         }
