@@ -1,20 +1,19 @@
 # SimpleTMs: TMs and TRs for Cobblemon
 
-![SimpleTMs.png](utilityscripts/images/SimpleTMs.png)
+![](https://raw.githubusercontent.com/Dragomordor/SimpleTMs/refs/heads/master/utilityscripts/images/SimpleTMs.png?token=GHSAT0AAAAAAC2QW7LDH5YDL4CNFQ5K5N2AZ4TSOFQ)
 
-The mod allows players to teach moves to their Pokémon from Cobblemon, with either a TM or TR.
-
----
+SimpleTMs allows players to teach moves to their Pokémon in Cobblemon using TMs and TRs.
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Features
 
 ### TM and TR Usage
-- **TMs :** Teach a move associated with that TM to a Pokémon. TMs by default have 32 uses, and can optionally be enchanted with Unbreaking and Mending.
-- **TRs:** Also teach a move to a Pokémon, but TRs break after a single use.
-- TM and TR items with moves associated to them (so not Blank TMs and TRs) are used similar to most cobblemon items, with a screen appearing that allows the player to choose a Pokémon in their party, if the Pokémon can learn that move.
-- TMs and TRs have tooltips that show information about the move, such at the description, type etc.
-- TMs and TRs also have tooltips that can display all Pokémon that can learn that move, which can be scrolled through while hovering on the item. 
-- By default, Pokémon can learn moves from their TM, Tutor and Egg move groups. Check Bulbapedia(add link here) for a good idea of what moves a specific Pokémon can learn if unsure.
+- **TMs:** Teach a specific move to a Pokémon. By default, TMs have **32 uses** and can optionally be enchanted with **Unbreaking** and **Mending** using an anvil.
+- **TRs:** Function similarly but break after a **single use**.
+- TMs and TRs with assigned moves (not blank ones) are used like most Cobblemon items. A screen will appear, allowing the player to choose a Pokémon from their party if it can learn the move.
+- TMs and TRs display **tooltips** with move details, including description, type, and more.
+- Tooltips also list all Pokémon that can learn the move, scrollable while hovering over the item.
+- By default, Pokémon can learn moves from their **TM**, **Tutor**, and **Egg** Move groups.
+  - Check [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Main_Page) for a detailed list of what moves a Pokémon can learn.
 
 
 #### Images of TM's and TR's being used
@@ -48,7 +47,6 @@ The mod allows players to teach moves to their Pokémon from Cobblemon, with eit
   - This encourages players to defeat Pokémon through Battle, to have a better chance of getting a specific move from that Pokémon's learnset
 - By default, TR's have a 10% chance of dropping when Pokémon faints, and TM's have 1% chance.
 
----
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Configuration
 
@@ -58,7 +56,6 @@ The mod allows players to teach moves to their Pokémon from Cobblemon, with eit
 
 (experimental config mentions - this option is included but comes with drawback when client and server have different options. Recommended not to use, but included mainly for singleplayer users who know exactly what they want)
 
----
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Support and Feedback
 If you encounter any issues or have suggestions for improvement, feel free to create an issue on the GitHub repository (add link here).
@@ -74,22 +71,19 @@ There is also a support channel on the Cobblemon discord, where you can ask for 
   </a>
 </p>
 
----
-
-## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) License
-This mod is licensed under the MIT license. Refer to the LICENSE file for more information.
-
----
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Future development
 - Nothing planned right now. Ideas are always welcome!
 
----
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Known Issues 
 - Nothing so far :)
 
 ---
+
+## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) License
+This mod is licensed under the Mozilla Public License Version 2.0 license. Refer to the LICENSE file on the Github for more information.
+
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Credits
 
@@ -100,8 +94,7 @@ This mod is licensed under the MIT license. Refer to the LICENSE file for more i
 - Anyone and everyone that support me through kind words of how they enjoyed the original mod so much. That motivated me a lot to rework and modernize it.
 - Anyone who supports me financially using my Kofi link. This is 100% not needed by anyone, and yet some people still want to give back. HUGE props to them for making my side hobby able to make me buy pizza every now and then.
 
----
 
-## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Support the Developer
+## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Support Me
 
 <a href='https://ko-fi.com/G2G119GOZS' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
