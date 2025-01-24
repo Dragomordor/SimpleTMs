@@ -61,15 +61,15 @@ class SimpleTMsConfig {
     @IntConstraint(min = 0, max = 1024)
     var tmBaseDurability: Int = 32
 
+    @NodeCategory(Category.ItemProperties)
+    @IntConstraint(min = 0, max = 64)
+    var trStackSize: Int = 16
+
     @NodeCategory(Category.DropRate)
     var dropOutsideOfBattle: Boolean = true
 
     @NodeCategory(Category.DropRate)
     var dropInBattle: Boolean = true
-
-    @NodeCategory(Category.ItemProperties)
-    @IntConstraint(min = 0, max = 64)
-    var trStackSize: Int = 16
 
     @NodeCategory(Category.DropRate)
     @DoubleConstraint(min = 0.0, max = 1.0)

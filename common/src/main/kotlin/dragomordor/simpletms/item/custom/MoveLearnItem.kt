@@ -7,6 +7,7 @@ import com.cobblemon.mod.common.api.pokemon.PokemonSpecies
 import com.cobblemon.mod.common.api.text.text
 import com.cobblemon.mod.common.pokemon.Pokemon
 import dragomordor.simpletms.SimpleTMs
+import dragomordor.simpletms.SimpleTMsItems
 import dragomordor.simpletms.item.SimpleTMsItem
 import dragomordor.simpletms.item.api.PokemonSelectingItemNonBattle
 import dragomordor.simpletms.util.*
@@ -143,6 +144,7 @@ class MoveLearnItem(
         val tutorMovesLearnable = SimpleTMs.config.tutorMovesLearnable
         val levelMovesLearnable = SimpleTMs.config.levelMovesLearnable
         val anyMoveLearnable = SimpleTMs.config.anyMovesLearnable
+        val excludedMoveNames = SimpleTMsItems.ALL_MOVES_EXCLUDED_FROM_TMTR_LEARNING
 
         // (3.2) Check if the move is already in the move set or benched moves
         if ((currentMoves.getMoves().stream().anyMatch { it.name == moveToTeach.name }) ||
@@ -189,6 +191,9 @@ class MoveLearnItem(
 
         // Remove duplicates
         learnableMoves.distinct()
+
+        // Remove excluded moves
+        learnableMoves.removeIf { excludedMoveNames.contains(it.name) }
 
         // Check if the move is in the learnable moves list
         return learnableMoves.contains(moveToTeach)

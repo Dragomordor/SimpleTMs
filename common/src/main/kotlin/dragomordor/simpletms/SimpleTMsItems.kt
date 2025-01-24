@@ -2,6 +2,7 @@ package dragomordor.simpletms
 
 import com.cobblemon.mod.common.api.moves.Move
 import com.cobblemon.mod.common.api.moves.MoveTemplate
+import com.cobblemon.mod.common.util.ifIsType
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
 import dragomordor.simpletms.SimpleTMs.LOGGER
@@ -35,6 +36,7 @@ object SimpleTMsItems {
 
     private val movesExcludedFromPokemonDropsFile = File("config/$MOD_ID/moves/excluded_moves_from_pokemon_drops.json")
     private val moveExcludedFromBlankLearningFile = File("config/$MOD_ID/moves/excluded_moves_from_blank_learning.json")
+    private val movesExcludedFromTMTRLearningFile = File("config/$MOD_ID/moves/excluded_moves_from_tmtr_learning.json")
 
     // Create empty list of all moves with items.
     // val ALL_MOVE_NAMES_WITH_ITEMS: MutableList<String> = mutableListOf()
@@ -47,6 +49,8 @@ object SimpleTMsItems {
     // Excluded moves
     val ALL_MOVES_EXCLUDED_FROM_POKEMON_DROPS: MutableList<String> = mutableListOf()
     val ALL_MOVES_EXCLUDED_FROM_BLANK_LEARNING: MutableList<String> = mutableListOf()
+    val ALL_MOVES_EXCLUDED_FROM_TMTR_LEARNING: MutableList<String> = mutableListOf()
+
 
     // List of all TM and TR items
     val TM_ITEMS = mutableListOf<RegistrySupplier<MoveLearnItem>>()
@@ -180,7 +184,8 @@ object SimpleTMsItems {
 
 
     // Excluded moves
-    private fun loadExcludedMovesFromConfig(excludedMovesFile: File, isDrops: Boolean) {
+    private fun loadExcludedMovesFromConfig(excludedMovesFile: File, excludedMoveList: MutableList<String>) {
+
         excludedMovesFile.parentFile.mkdirs()
 
         if (excludedMovesFile.exists()) {
@@ -189,14 +194,9 @@ object SimpleTMsItems {
             // Read Json file moveFile
             val jsonContent = FileReader(excludedMovesFile).use { it.readText() }
             val moveDefinitions = Json.decodeFromString<List<MoveLearnItemDefinition>>(jsonContent)
-            ALL_MOVES_EXCLUDED_FROM_POKEMON_DROPS.clear()
-            ALL_MOVES_EXCLUDED_FROM_BLANK_LEARNING.clear()
+            excludedMoveList.clear()
             for (moveDefinition in moveDefinitions) {
-                if (isDrops) {
-                    ALL_MOVES_EXCLUDED_FROM_POKEMON_DROPS.add(moveDefinition.moveName)
-                } else {
-                    ALL_MOVES_EXCLUDED_FROM_BLANK_LEARNING.add(moveDefinition.moveName)
-                }
+                excludedMoveList.add(moveDefinition.moveName)
             }
         } else {
             // if files not found, create empty files in their place (just [] in the file)
@@ -238,8 +238,9 @@ object SimpleTMsItems {
 
         // Load excluded moves
         LOGGER.info("Loading excluded moves from config")
-        loadExcludedMovesFromConfig(movesExcludedFromPokemonDropsFile, true)
-        loadExcludedMovesFromConfig(moveExcludedFromBlankLearningFile, false)
+        loadExcludedMovesFromConfig(movesExcludedFromPokemonDropsFile, ALL_MOVES_EXCLUDED_FROM_POKEMON_DROPS)
+        loadExcludedMovesFromConfig(moveExcludedFromBlankLearningFile, ALL_MOVES_EXCLUDED_FROM_BLANK_LEARNING)
+        loadExcludedMovesFromConfig(movesExcludedFromTMTRLearningFile, ALL_MOVES_EXCLUDED_FROM_TMTR_LEARNING)
     }
 
     // ------------------------------------------------------------
@@ -276,3 +277,5 @@ object SimpleTMsItems {
     }
 
 }
+
+
