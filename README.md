@@ -160,7 +160,7 @@ There is also a support channel on the Cobblemon discord, where you can ask for 
 
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Future development
-- Nothing planned right now. Ideas are always welcome!
+- Update japanese lang file to newest version provided by Nyankoro
 
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Known Issues 
