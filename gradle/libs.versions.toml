@@ -13,7 +13,7 @@ fabric_kotlin = "1.12.0+kotlin.2.0.10"
 neoforge_loader = "21.1.66"
 neoforge_kotlin = "5.5.0"
 
-cobblemon = "1.6.0+1.21.1"
+cobblemon = "1.6.1+1.21.1"
 
 junit = "5.10.2"
 mockk = "1.13.8"
@@ -37,7 +37,7 @@ architectury = { module = "dev.architectury:architectury", version.ref = "archit
 architectury_fabric = { module = "dev.architectury:architectury-fabric", version.ref = "architectury" }
 fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
 fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
-fabric_apiDeprecated = { module = "net.fabricmc.fabric-api:fabric-api-deprecated", version.ref = "fabric_api" }
+#fabric_apiDeprecated = { module = "net.fabricmc.fabric-api:fabric-api-deprecated", version.ref = "fabric_api" }
 fabric_kotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "fabric_kotlin" }
 
 architectury_neoforge = { module = "dev.architectury:architectury-neoforge", version.ref = "architectury" }
@@ -54,9 +54,9 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 
 [plugins]
-kotlin_jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+#kotlin_jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin_serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
-architectury = { id = "architectury-plugin", version.ref = "architectury_gradle" }
-loom = { id = "dev.architectury.loom", version.ref = "architectury_loom" }
-shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+#architectury = { id = "architectury-plugin", version.ref = "architectury_gradle" }
+#loom = { id = "dev.architectury.loom", version.ref = "architectury_loom" }
+#shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
