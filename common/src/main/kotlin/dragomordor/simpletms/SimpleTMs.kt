@@ -16,7 +16,7 @@ import kotlin.reflect.jvm.javaField
 
 object SimpleTMs {
     const val MOD_ID = "simpletms"
-    const val VERSION = "2.0.0"
+    const val VERSION = "2.0.2-Backport"
     const val CONFIG_PATH = "config/$MOD_ID/main.json"
     @JvmField
     val LOGGER: Logger = getLogger()
