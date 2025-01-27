@@ -11,20 +11,21 @@ plugins {
 
 repositories {
     maven("https://maven.impactdev.net/repository/development/")
-    maven("https://maven.neoforged.net/releases")
+    // maven("https://maven.neoforged.net/releases")
+    maven("https://maven.minecraftforge.net/")
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
     withSourcesJar()
 }
 
 kotlin {
-    compilerOptions {
-        apiVersion.set(KotlinVersion.KOTLIN_2_0)
-        jvmTarget.set(JvmTarget.JVM_21)
-    }
+//    compilerOptions {
+//        apiVersion.set(KotlinVersion.KOTLIN_2_0)
+//        jvmTarget.set(JvmTarget.JVM_17)
+//    }
 }
 
 architectury {
@@ -44,9 +45,9 @@ dependencies {
     minecraft(libs.minecraft)
     mappings(loom.officialMojangMappings())
 
-    testRuntimeOnly(libs.junit.launcher)
-    testImplementation(libs.junit.engine)
-    testImplementation(libs.mockk)
+//    testRuntimeOnly(libs.junit.launcher)
+//    testImplementation(libs.junit.engine)
+//    testImplementation(libs.mockk)
 }
 
 tasks {
@@ -56,7 +57,7 @@ tasks {
     }
 
     withType<JavaCompile> {
-        options.release.set(21)
+        options.release.set(17)
     }
 
     withType<Jar> {

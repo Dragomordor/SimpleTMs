@@ -17,8 +17,11 @@ class SimpleTMs : ModInitializer {
         SimpleTMs.init()
         registerItemGroups()
         // Loot Tables
-        LootTableEvents.MODIFY.register { id, tableBuilder, source ->
-            LootInjector.attemptInjection(id.location(), tableBuilder::withPool)
+//        LootTableEvents.MODIFY.register { id, tableBuilder, source ->
+//            LootInjector.attemptInjection(id.location(), tableBuilder::withPool)
+//        }
+        LootTableEvents.MODIFY.register {_,_, id, tableBuilder, _ ->
+            LootInjector.attemptInjection(id, tableBuilder::withPool)
         }
     }
 

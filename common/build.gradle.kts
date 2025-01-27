@@ -4,7 +4,7 @@ plugins {
 }
 
 architectury {
-    common("fabric", "neoforge")
+    common("fabric", "forge")
 }
 
 dependencies {

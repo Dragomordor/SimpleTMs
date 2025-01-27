@@ -2,7 +2,6 @@ package dragomordor.simpletms
 
 import com.cobblemon.mod.common.api.moves.Move
 import com.cobblemon.mod.common.api.moves.MoveTemplate
-import com.cobblemon.mod.common.util.ifIsType
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
 import dragomordor.simpletms.SimpleTMs.LOGGER

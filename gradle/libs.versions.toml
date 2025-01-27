@@ -1,23 +1,24 @@
 [versions]
-kotlin = "2.0.10"
+kotlin = "1.8.20"
 
-minecraft = "1.21.1"
-architectury = "13.0.6"
+minecraft = "1.20.1"
+architectury = "9.2.14"
 architectury_loom = "1.7-SNAPSHOT"
 architectury_gradle = "3.4-SNAPSHOT"
 
-fabric_loader = "0.16.5"
-fabric_api = "0.104.0+1.21.1"
-fabric_kotlin = "1.12.0+kotlin.2.0.10"
+fabric_loader = "0.15.10"
+fabric_api = "0.89.0+1.20.1"
+fabric_kotlin = "1.9.3+kotlin.1.8.20"
 
-neoforge_loader = "21.1.66"
-neoforge_kotlin = "5.5.0"
+#neoforge_loader = "21.1.66"
+forge_loader = "1.20.1-47.2.0"
+#neoforge_kotlin = "5.5.0"
+kotlin-for-forge = "4.11.0"
 
-cobblemon = "1.6.1+1.21.1"
+cobblemon = "1.5.2+1.20.1"
 
-junit = "5.10.2"
-mockk = "1.13.8"
-
+#junit = "5.10.2"
+#mockk = "1.13.8"
 shadow = "8.1.1"
 
 
@@ -40,17 +41,22 @@ fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fab
 #fabric_apiDeprecated = { module = "net.fabricmc.fabric-api:fabric-api-deprecated", version.ref = "fabric_api" }
 fabric_kotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "fabric_kotlin" }
 
-architectury_neoforge = { module = "dev.architectury:architectury-neoforge", version.ref = "architectury" }
-neoforge_loader = { module = "net.neoforged:neoforge", version.ref = "neoforge_loader" }
-neoforge_kotlin = { module = "thedarkcolour:kotlinforforge-neoforge", version.ref = "neoforge_kotlin" }
+#architectury_neoforge = { module = "dev.architectury:architectury-neoforge", version.ref = "architectury" }
+#neoforge_loader = { module = "net.neoforged:neoforge", version.ref = "neoforge_loader" }
+#neoforge_kotlin = { module = "thedarkcolour:kotlinforforge-neoforge", version.ref = "neoforge_kotlin" }
+architectury_forge = { module = "dev.architectury:architectury-forge", version.ref = "architectury" }
+forge_loader = { module = "net.minecraftforge:forge", version.ref = "forge_loader" }
+forge_kotlin = { module = "thedarkcolour:kotlinforforge", version.ref = "kotlin-for-forge" }
 
 cobblemon_common = { module = "com.cobblemon:mod", version.ref = "cobblemon" }
 cobblemon_fabric = { module = "com.cobblemon:fabric", version.ref = "cobblemon" }
-cobblemon_neoforge = { module = "com.cobblemon:neoforge", version.ref = "cobblemon" }
+cobblemon_forge = { module = "com.cobblemon:forge", version.ref = "cobblemon" }
 
-junit_launcher = { module = "org.junit.platform:junit-platform-launcher" }
-junit_engine = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
-mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+#cobblemon_neoforge = { module = "com.cobblemon:neoforge", version.ref = "cobblemon" }
+
+#junit_launcher = { module = "org.junit.platform:junit-platform-launcher" }
+#junit_engine = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+#mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 
 [plugins]

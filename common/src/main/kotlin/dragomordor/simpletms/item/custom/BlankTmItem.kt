@@ -10,7 +10,9 @@ import dragomordor.simpletms.SimpleTMsItems.getTMorTRItemFromMove
 import dragomordor.simpletms.item.SimpleTMsItem
 import dragomordor.simpletms.item.api.PokemonAndMoveSelectingItemNonBattle
 import dragomordor.simpletms.util.fromLang
+import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.Style
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvents
@@ -23,6 +25,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 import java.awt.Color
+import java.util.function.Consumer
 
 class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(settings), PokemonAndMoveSelectingItemNonBattle {
 
@@ -69,7 +72,8 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
         player.playNotifySound(SoundEvents.NOTE_BLOCK_PLING.value(), SoundSource.PLAYERS, 1.0F, 1.0F)
         // Damage the stack if player is not in creative mode
         if (!player.isCreative) {
-            stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND)
+            // stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND)
+            stack.hurtAndBreak(1, player) { player.broadcastBreakEvent(EquipmentSlot.MAINHAND) }
         }
         // Put item on cooldown if applicable
         if (!player.isCreative && !isTR && stack.count > 0 && cooldownTicks > 0) {
@@ -148,9 +152,10 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
     // Hover text
     // ------------------------------------------------------------------
 
+
     override fun appendHoverText(
         itemStack: ItemStack,
-        tooltipContext: TooltipContext,
+        level: Level?,
         list: MutableList<Component>,
         tooltipFlag: TooltipFlag
     ) {
@@ -161,7 +166,9 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
         // Normal hover text
         // val blankItemDescription = ("An item that turns a Pokémon's known move into a $ to teach others.").text().withColor(baseGreyColor.rgb)
         // val blankItemDescription = ("Copies a Pokémon's move into a $itemType for teaching.").text().withColor(baseGreyColor.rgb)
-        val blankItemDescription = fromLang(SimpleTMs.MOD_ID, "item.tooltip.blank_item.description", itemType.text()).withColor(baseGreyColor.rgb)
+        // val blankItemDescription = fromLang(SimpleTMs.MOD_ID, "item.tooltip.blank_item.description", itemType.text()).withColor(baseGreyColor.rgb)
+        val blankItemDescription = fromLang(SimpleTMs.MOD_ID, "item.tooltip.blank_item.description", itemType.text()).withStyle(Style.EMPTY.withColor(baseGreyColor.rgb))
+
         list.add(blankItemDescription)
 
 //        if (Screen.hasControlDown()) {
@@ -173,7 +180,7 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
 //        }
 
         // Super call
-        super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag)
+        super.appendHoverText(itemStack, level, list, tooltipFlag)
     }
 
 }

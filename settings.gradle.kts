@@ -16,7 +16,7 @@ pluginManagement {
 
 listOf(
     "common",
-    "neoforge",
+    "forge",
     "fabric"
 ).forEach { setupProject(it, file(it)) }
 

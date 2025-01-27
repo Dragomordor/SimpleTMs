@@ -8,11 +8,13 @@ import dragomordor.simpletms.SimpleTMs
 import dragomordor.simpletms.SimpleTMsItems
 import kotlinx.serialization.Serializable
 import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.MutableComponent
 import net.minecraft.resources.ResourceLocation
 import java.awt.Color
 
 // Gets the item from the registry
-fun simpletmsResource(path: String) = ResourceLocation.fromNamespaceAndPath(SimpleTMs.MOD_ID, path)
+//fun simpletmsResource(path: String) = ResourceLocation.fromNamespaceAndPath(SimpleTMs.MOD_ID, path)
+fun simpletmsResource(path: String) = ResourceLocation(SimpleTMs.MOD_ID, path)
 
 // For move learn items registration from config
 @Serializable
@@ -21,11 +23,31 @@ data class MoveLearnItemDefinition(
 )
 
 // To get language translations
+//fun fromLang(
+//    prefixOrModid: String,
+//    subKey: String,
+//    vararg objects: Any
+//) = "$prefixOrModid.$subKey".asTranslated(*objects)
+
+
 fun fromLang(
     prefixOrModid: String,
     subKey: String,
     vararg objects: Any
 ) = "$prefixOrModid.$subKey".asTranslated(*objects)
+
+//fun fromLang(
+//    prefixOrModid: String,
+//    subKey: String,
+//    vararg objects: Any
+//) = Component.translatable("$prefixOrModid.$subKey", *objects)
+
+
+//fun fromLang(
+//    prefixOrModid: String,
+//    subKey: String,
+//    vararg objects: Any
+//): Com
 
 // To display failure messages
 class FailureMessage() {

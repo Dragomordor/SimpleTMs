@@ -9,18 +9,31 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 
 object ClientEventListeners: EventHandler {
     override fun registerListeners() {
-        ClientScreenInputEvent.MOUSE_SCROLLED_PRE.register(ClientEventListeners::onMouseScrolled)
+        // ClientScreenInputEvent.MOUSE_SCROLLED_PRE.register(ClientEventListeners::onMouseScrolled)
+        ClientScreenInputEvent.MOUSE_SCROLLED_PRE.register(ClientEventListeners::onMouseScrolledPre)
     }
 
-    private fun onMouseScrolled(minecraft: Minecraft?, screen: Screen?, d: Double, d1: Double, d2: Double, d3: Double): EventResult? {
-
+    private fun onMouseScrolledPre(minecraft: Minecraft?, screen: Screen?, d: Double, d1: Double, d2: Double): EventResult? {
         if (screen is AbstractContainerScreen<*> && screen.menu != null && minecraft != null) {
             // Allow scrolling of MoveLearnItem tooltip
-            scrollUpOrDownTooltip(d3)
+            scrollUpOrDownTooltip(d2)
         }
+
+
         // Normal event handling
         return EventResult.pass()
+
     }
+//
+//    private fun onMouseScrolled(minecraft: Minecraft?, screen: Screen?, d: Double, d1: Double, d2: Double, d3: Double): EventResult? {
+//
+//        if (screen is AbstractContainerScreen<*> && screen.menu != null && minecraft != null) {
+//            // Allow scrolling of MoveLearnItem tooltip
+//            scrollUpOrDownTooltip(d3)
+//        }
+//        // Normal event handling
+//        return EventResult.pass()
+//    }
 
 
     // ------------------------------------------------------

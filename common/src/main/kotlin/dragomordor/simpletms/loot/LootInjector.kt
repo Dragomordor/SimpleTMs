@@ -2,13 +2,13 @@ package dragomordor.simpletms.loot
 
 import dragomordor.simpletms.SimpleTMs
 import dragomordor.simpletms.util.simpletmsResource
-import net.minecraft.core.registries.Registries
-import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.storage.loot.BuiltInLootTables
 import net.minecraft.world.level.storage.loot.LootPool
-import net.minecraft.world.level.storage.loot.entries.NestedLootTable
+import net.minecraft.world.level.storage.loot.LootTable
+import net.minecraft.world.level.storage.loot.entries.LootTableReference
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
+
 
 // Based off of the Cobblemon mod's loot injector
 object LootInjector {
@@ -45,6 +45,7 @@ object LootInjector {
         BuiltInLootTables.VILLAGE_TAIGA_HOUSE,
         BuiltInLootTables.VILLAGE_TEMPLE,
         BuiltInLootTables.WOODLAND_MANSION,
+
 
         // Put all the loot tables here that are unused
 //        BuiltInLootTables.ARMORER_GIFT,
@@ -116,7 +117,8 @@ object LootInjector {
 
     )
 
-    private val injectionIds = injections.map {it.location()}.toSet()
+//    private val injectionIds = injections.map {it.location()}.toSet()
+    private val injectionIds = injections.map {it.path}.toSet()
 
     /**
      * Attempts to inject a SimpleTMs injection loot table to a loot table being loaded.
@@ -127,7 +129,7 @@ object LootInjector {
      * @return If the injection was made.
      */
     fun attemptInjection(id: ResourceLocation, provider: (LootPool.Builder) -> Unit): Boolean {
-        if (!this.injectionIds.contains(id)) {
+        if (!this.injections.contains(id)) {
             return false
         }
         val resulting = this.convertToPotentialInjected(id)
@@ -135,6 +137,7 @@ object LootInjector {
         provider(this.injectLootPool(resulting))
         return true
     }
+
 
     /**
      * Takes a source ID and converts it into the target injection.
@@ -152,14 +155,34 @@ object LootInjector {
      * @param resulting The [ResourceLocation] for our injection table.
      * @return A [LootPool.Builder] with the [resulting] table.
      */
+//    private fun injectLootPool(resulting: ResourceLocation): LootPool.Builder {
+//        return LootPool.lootPool()
+//            .add(
+//                LootTable.N
+//                    .lootTableReference(ResourceKey.create(Registries.LOOT_TABLE, resulting))
+//                    .setWeight(1)
+//            )
+//            .setBonusRolls(UniformGenerator.between(0F, 1F))
+//    }
+
+//    private fun injectLootPool(resulting: ResourceLocation): LootPool.Builder {
+//        return LootPool.lootPool()
+//            .add(
+//                NestedLootTable
+//                    .lootTableReference(ResourceKey.create(Registries.LOOT_TABLE, resulting))
+//                    .setWeight(1)
+//            )
+//            .setBonusRolls(UniformGenerator.between(0F, 1F))
+//    }
+
     private fun injectLootPool(resulting: ResourceLocation): LootPool.Builder {
         return LootPool.lootPool()
             .add(
-                NestedLootTable
-                    .lootTableReference(ResourceKey.create(Registries.LOOT_TABLE, resulting))
+                LootTableReference.lootTableReference(resulting)
                     .setWeight(1)
             )
             .setBonusRolls(UniformGenerator.between(0F, 1F))
     }
+
 
 }
