@@ -2,6 +2,7 @@ package dragomordor.simpletms
 
 import com.cobblemon.mod.common.api.moves.Move
 import com.cobblemon.mod.common.api.moves.MoveTemplate
+import com.cobblemon.mod.common.pokemon.Species
 import com.cobblemon.mod.common.util.ifIsType
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
@@ -9,6 +10,7 @@ import dragomordor.simpletms.SimpleTMs.LOGGER
 import dragomordor.simpletms.SimpleTMs.MOD_ID
 import dragomordor.simpletms.item.custom.BlankTmItem
 import dragomordor.simpletms.item.custom.MoveLearnItem
+import dragomordor.simpletms.util.MoveAssociations
 import dragomordor.simpletms.util.MoveLearnItemDefinition
 import dragomordor.simpletms.util.simpletmsResource
 import kotlinx.serialization.json.Json
@@ -28,18 +30,20 @@ object SimpleTMsItems {
 
     private val ITEMS: DeferredRegister<Item> = DeferredRegister.create(MOD_ID, Registries.ITEM)
     private const val DEFAULT_MOVE_JSON_PATH = "$MOD_ID/movelearnitems/default.json"
+    private const val MOVE_ASSOCIATION_PATH = "$MOD_ID/movelearnitems/move_associations.json"
     // private val defaultMoveInternalJsonFile = File(DEFAULT_MOVE_JSON_PATH)
     // TODO: Add custom moves path here
 
+
     private val defaultTMMoveConfigFile = File("config/$MOD_ID/moves/default_tm_moves.json")
     private val defaultTRMoveConfigFile = File("config/$MOD_ID/moves/default_tr_moves.json")
+
 
     private val movesExcludedFromPokemonDropsFile = File("config/$MOD_ID/moves/excluded_moves_from_pokemon_drops.json")
     private val moveExcludedFromBlankLearningFile = File("config/$MOD_ID/moves/excluded_moves_from_blank_learning.json")
     private val movesExcludedFromTMTRLearningFile = File("config/$MOD_ID/moves/excluded_moves_from_tmtr_learning.json")
 
     // Create empty list of all moves with items.
-    // val ALL_MOVE_NAMES_WITH_ITEMS: MutableList<String> = mutableListOf()
     val ALL_MOVE_NAMES_WITH_TM_ITEMS: MutableList<String> = mutableListOf()
     val ALL_MOVE_NAMES_WITH_TR_ITEMS: MutableList<String> = mutableListOf()
     val ALL_MOVE_TEMPLATES_WITH_ITEMS: List<MoveTemplate> = mutableListOf()
@@ -275,6 +279,10 @@ object SimpleTMsItems {
             ALL_MOVE_NAMES_WITH_TM_ITEMS.contains(move.name)
         }
     }
+
+    // ------------------------------------------------------------
+    // Tooltip move association functions
+    // ------------------------------------------------------------
 
 }
 

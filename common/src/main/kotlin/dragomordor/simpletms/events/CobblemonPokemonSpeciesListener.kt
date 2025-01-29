@@ -5,7 +5,9 @@ import com.cobblemon.mod.common.api.pokemon.PokemonSpecies
 import dragomordor.simpletms.SimpleTMs
 import dragomordor.simpletms.util.MoveAssociations
 
+
 object CobblemonPokemonSpeciesListener: EventHandler {
+
     override fun registerListeners() {
         SimpleTMsEvents.POKEMON_SPECIES_INITIALIZED.subscribe(Priority.NORMAL, this::onPokemonSpeciesInitialized)
     }

@@ -29,6 +29,7 @@ object SimpleTMs {
         if (FMLEnvironment.dist == Dist.CLIENT) {
             SimpleTMsClient.init()
         }
+
     }
 
     // ------------------------------------------------------------

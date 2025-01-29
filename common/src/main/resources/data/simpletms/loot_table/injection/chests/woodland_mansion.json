@@ -7,11 +7,6 @@
         "min": 1,
         "max": 2
       },
-      "bonus_rolls": {
-        "type": "minecraft:uniform",
-        "min": 1,
-        "max": 2
-      },
       "entries": [
         {
           "type": "minecraft:tag",
@@ -35,7 +30,7 @@
       "conditions": [
         {
           "condition": "minecraft:random_chance",
-          "chance": 0.4
+          "chance": 0.25
         }
       ]
     },
@@ -64,7 +59,7 @@
       "conditions": [
         {
           "condition": "minecraft:random_chance",
-          "chance": 0.10
+          "chance": 0.06
         }
       ]
     }
