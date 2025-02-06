@@ -119,8 +119,8 @@ class SimpleTMsConfig {
     @NodeCategory(Category.DropRate)
     var dropFromEggMoveList: Boolean = true
 
-    @NodeCategory(Category.Visual)
-    var showPokemonThatCanLearnMove: Boolean = true
+//    @NodeCategory(Category.Visual)
+//    var showPokemonThatCanLearnMove: Boolean = true
 
     @NodeCategory(Category.Visual)
     @EnumConstraint(enum = ["ALPHABETICAL_DESC", "ALPHABETICAL_ASC", "POKEMON_TYPE_DESC", "POKEMON_TYPE_ASC"])
