@@ -267,38 +267,37 @@ class MoveLearnItem(
         // N/A should be in blue
 
         // Get the colour for power, accuracy and crit
-        val movePowerColor = MoveAssociations.interpolateColor(movePower, powerRange.first, powerRange.second, powerColors.first, powerColors.second)
-        val moveAccuracyColor = MoveAssociations.interpolateColor(moveAccuracy, accuracyRange.first, accuracyRange.second, accuracyColors.first, accuracyColors.second)
-        val movePPColor = MoveAssociations.interpolateColor(movemaxPP.toDouble(), ppRange.first, ppRange.second, ppColors.first, ppColors.second)
-        val moveCritColor = MoveAssociations.interpolateColor(moveCritRatio, critRange.first, critRange.second, critColors.first, critColors.second)
+        val movePowerColor = interpolateColor(movePower, powerRange.first, powerRange.second, powerColors.first, powerColors.second)
+        val moveAccuracyColor = interpolateColor(moveAccuracy, accuracyRange.first, accuracyRange.second, accuracyColors.first, accuracyColors.second)
+        val movePPColor = interpolateColor(movemaxPP.toDouble(), ppRange.first, ppRange.second, ppColors.first, ppColors.second)
+        val moveCritColor = interpolateColor(moveCritRatio, critRange.first, critRange.second, critColors.first, critColors.second)
 
-        // Get colour for each way to learn the move
-        val levelUpColour = Color.YELLOW
-        val tmColour = Color.GREEN
-        val tutorColour = Color.CYAN
-        val eggColour = Color.MAGENTA
-
-        val anyMovesLearnable = SimpleTMs.config.anyMovesLearnable
-        val showPokemonThatCanLearnMove = SimpleTMs.config.showPokemonThatCanLearnMove
-        val serverSortOrder = SimpleTMs.config.pokemonSortOrder
+//        // Get colour for each way to learn the move
+//        val levelUpColour = Color.YELLOW
+//        val tmColour = Color.GREEN
+//        val tutorColour = Color.CYAN
+//        val eggColour = Color.MAGENTA
 
         // Normal hover text for item description
-        if (!Screen.hasShiftDown() && !Screen.hasAltDown()) {
+        if (!Screen.hasShiftDown()) {
             // item description
+            // val itemDescription = ("Teaches the move ").text().withColor(baseGreyColor.rgb).append(moveTranslatedName.withColor(moveColour)).append(" to any Pokémon able to learn it.".text().withColor(baseGreyColor.rgb))
             val itemDescription = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.description_start").withColor(baseGreyColor.rgb).append(moveTranslatedName.withColor(moveColour)).append(fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.description_end").withColor(baseGreyColor.rgb))
             list.add(itemDescription)
 
             // Hold shift for move info text
+            // val holdShiftText = ("Hold".text().withColor(baseGreyColor.rgb)).append(" §oSHIFT§r ".text().withColor(Color.ORANGE.rgb)).append("for move info.".text().withColor(baseGreyColor.rgb))
             val holdShiftText = fromLang(SimpleTMs.MOD_ID, "item.tooltip.move_learn_item.hold_start").withColor(baseGreyColor.rgb).append(
                 fromLang(SimpleTMs.MOD_ID, "item.tooltip.move_learn_item.hold_shift").withColor(Color.ORANGE.rgb)).append(fromLang(SimpleTMs.MOD_ID, "item.tooltip.move_learn_item.hold_shift_info").withColor(baseGreyColor.rgb))
             list.add(holdShiftText)
-
-            if (showPokemonThatCanLearnMove) {
-                // Hold alt for pokemon that can learn the move
-                val holdAltText = fromLang(SimpleTMs.MOD_ID, "item.tooltip.move_learn_item.hold_start").withColor(baseGreyColor.rgb).append(
-                    fromLang(SimpleTMs.MOD_ID, "item.tooltip.move_learn_item.hold_alt").withColor(Color.CYAN.rgb)).append(fromLang(SimpleTMs.MOD_ID, "item.tooltip.move_learn_item.hold_alt_info").withColor(baseGreyColor.rgb))
-                list.add(holdAltText)
-            }
+//
+//            if (SimpleTMs.config.showPokemonThatCanLearnMove) {
+//                // Hold alt for pokemon that can learn the move
+//                //val holdAltText = ("Hold".text().withColor(baseGreyColor.rgb)).append(" §oALT§r ".text().withColor(Color.CYAN.rgb)).append("to see Pokémon that can learn this move.".text().withColor(baseGreyColor.rgb))
+//                val holdAltText = fromLang(SimpleTMs.MOD_ID, "item.tooltip.move_learn_item.hold_start").withColor(baseGreyColor.rgb).append(
+//                    fromLang(SimpleTMs.MOD_ID, "item.tooltip.move_learn_item.hold_alt").withColor(Color.CYAN.rgb)).append(fromLang(SimpleTMs.MOD_ID, "item.tooltip.move_learn_item.hold_alt_info").withColor(baseGreyColor.rgb))
+//                list.add(holdAltText)
+//            }
         }
 
         // Hold shift for move info text
@@ -334,11 +333,13 @@ class MoveLearnItem(
                 }
             }
             // Category Text
+            //val moveCategoryBase = ("Category: ").text().withColor(baseGreyColor.rgb)
             val moveCategoryBase = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.move_category").withColor(baseGreyColor.rgb)
             val moveCategoryComponent = moveDamageCategory.displayName.copy().withColor(moveCategoryColour.rgb)
             list.add(moveCategoryBase.append(moveCategoryComponent))
 
             // Move Power
+            // val movePowerBase = ("Power: ").text().withColor(baseGreyColor.rgb)
             val movePowerBase = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.move_power").withColor(baseGreyColor.rgb)
             var movePowerComponent = movePower.toString().text().withColor(movePowerColor.rgb)
             if (movePower == 0.0) { // If power is 0, show N/A
@@ -347,6 +348,7 @@ class MoveLearnItem(
             list.add(movePowerBase.append(movePowerComponent))
 
             // Move Accuracy
+            // val moveAccuracyBase = ("Accuracy: ").text().withColor(baseGreyColor.rgb)
             val moveAccuracyBase = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.move_accuracy").withColor(baseGreyColor.rgb)
             var moveAccuracyComponent = moveAccuracy.toString().text().withColor(moveAccuracyColor.rgb)
             if (moveAccuracy == -1.0) { // If accuracy is -1, show N/A
@@ -358,110 +360,127 @@ class MoveLearnItem(
             // Show base and max PP:
             // Base PP: 10, Max PP: 12
 
+            // val movePPBase = ("Base PP: ").text().withColor(baseGreyColor.rgb)
             val movePPBase = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.move_pp").withColor(baseGreyColor.rgb)
             val movePPComponent = movebasePP.toString().text().withColor(movePPColor.rgb)
+            // val movePPMax = (", Max PP: ").text().withColor(baseGreyColor.rgb)
             val movePPMax = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.move_pp_max").withColor(baseGreyColor.rgb)
             val movePPMaxComponent = movemaxPP.toString().text().withColor(movePPColor.rgb)
             list.add(movePPBase.append(movePPComponent).append(movePPMax).append(movePPMaxComponent))
 
             // Move Crit Ratio
+            //val moveCritBase = ("Crit Ratio: ").text().withColor(baseGreyColor.rgb)
             val moveCritBase = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.move_crit_ratio").withColor(baseGreyColor.rgb)
             val moveCritComponent = moveCritRatio.toString().text().withColor(moveCritColor.rgb)
             list.add(moveCritBase.append(moveCritComponent))
         }
 
 
-        // Hold alt for pokemon that can learn the move
-        if (Screen.hasAltDown() && showPokemonThatCanLearnMove) {
-
-            // if all moves are learnable, don't show individual names, just say all can be learned
-            if (anyMovesLearnable) {
-                list.add(fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.all_pokemon_can_learn").withColor(Color.ORANGE.rgb))
-                // Stop here
-                return
-            }
-
-            // Page controls to make the list scrollable
-            val namesPerPage = 7 // Number of names to display per page
-            val pokemonList = MoveAssociations.getAssociationsForMove(moveName)
-            if (pokemonList.isNotEmpty()) {
-                // sort the list by pokemon name
-                val pokemonSortOrder = serverSortOrder
-                if (pokemonSortOrder=="ALPHABETICAL_ASC") {
-                    pokemonList.sortBy { it.first.translatedName.toString() }
-                }
-                if (pokemonSortOrder=="ALPHABETICAL_DESC") {
-                    pokemonList.sortByDescending { it.first.translatedName.toString() }
-                }
-                if (pokemonSortOrder=="POKEMON_TYPE_ASC") {
-                    pokemonList.sortBy { it.first.primaryType.name }
-                }
-                if (pokemonSortOrder=="POKEMON_TYPE_DESC") {
-                    pokemonList.sortByDescending { it.first.primaryType.name }
-                }
-                else{
-                    // Defaults to alphabetical ascending
-                    pokemonList.sortBy { it.first.translatedName.toString() }
-                }
-
-                val numberOfPokemonThatCanLearnMove = pokemonList.size
-
-                if (numberOfPokemonThatCanLearnMove == PokemonSpecies.species.size) {
-                    list.add("item.move_learn_item.all_pokemon_can_learn".text().withColor(Color.ORANGE.rgb))
-                    return
-                }
-
-                Pages.TOTAL_PAGES = (numberOfPokemonThatCanLearnMove + namesPerPage - 1) / namesPerPage // Total number of pages
-                Pages.CURRENT_PAGE = Pages.CURRENT_PAGE.coerceIn(0, Pages.TOTAL_PAGES - 1) // Clamp currentPage within bounds
-                val start = Pages.CURRENT_PAGE * namesPerPage
-                val end = (start + namesPerPage).coerceAtMost(numberOfPokemonThatCanLearnMove)
-                val visiblePokemon = pokemonList.subList(start, end)
-
-                val numberComponent = numberOfPokemonThatCanLearnMove.toString().text().withColor(Color.ORANGE.rgb)
-                //val canBeLearnedByBase = numberComponent.append((" Pokémon can learn this move, they are: ").text().withColor(baseGreyColor.rgb))
-                val canBeLearnedByBase = numberComponent.append(fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.can_learn_base").withColor(baseGreyColor.rgb))
-                // val pokemonWayBase = ("Pokemon  - Ways they can learn it").text().withColor(Color.GRAY.rgb)
-                val pokemonWayBase = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.pokemon_ways").withColor(Color.GRAY.rgb)
-                list.add(canBeLearnedByBase)
-                list.add(pokemonWayBase)
-
-                for (pokemon in visiblePokemon) {
-                    val pokemonSpecies = pokemon.first
-                    val waysToLearn = pokemon.second
-                    val pokemonName = pokemonSpecies.translatedName
-
-                    // Add the pokemon name and the ways they can learn to tooltip line
-                    val pokemonColour = pokemonSpecies.primaryType.hue
-                    val pokemonNameComponent = pokemonName.withColor(pokemonColour)
-                    val levelUpComponent = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.level_up").withColor(levelUpColour.rgb)
-                    val tmComponent = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.tm").withColor(tmColour.rgb)
-                    val tutorComponent = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.tutor").withColor(tutorColour.rgb)
-                    val eggComponent = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.egg").withColor(eggColour.rgb)
-                    val waysComponent = listOf(
-                        "Level Up" to levelUpComponent,
-                        "TM" to tmComponent,
-                        "Tutor" to tutorComponent,
-                        "Egg" to eggComponent
-                    ).filter { waysToLearn.contains(it.first) }
-                        .map { it.second }
-                        .reduceOrNull { acc, component -> acc.append(", ").append(component) }
-                    val pokemonComponent = pokemonNameComponent.append(" - ").append(waysComponent ?: "".text())
-                    list.add(pokemonComponent)
-                }
-
-                if ((Pages.TOTAL_PAGES > 1) && (Pages.CURRENT_PAGE < Pages.TOTAL_PAGES - 1)) {
-                    list.add("...".text().withColor(baseGreyColor.rgb))
-                    list.add(fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.scroll_wheel").withColor(Color.RED.rgb))
-                }
-
-                if (Pages.CURRENT_PAGE == Pages.TOTAL_PAGES - 1) {
-                    list.add(fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.end_of_list").withColor(Color.RED.rgb))
-                }
-            } else {
-                // If no pokemon can learn the move, show a message
-                list.add(fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.no_pokemon").withColor(Color.RED.rgb))
-            }
-        }
+//        // Hold alt for pokemon that can learn the move
+//        if (Screen.hasAltDown() && SimpleTMs.config.showPokemonThatCanLearnMove) {
+//
+//            // if all moves are learnable, don't show individual names, just say all can be learned
+//            if (SimpleTMs.config.anyMovesLearnable) {
+//                // list.add("item.move_learn_item.all_pokemon_can_learn".text().withColor(Color.ORANGE.rgb))
+//                list.add(fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.all_pokemon_can_learn").withColor(Color.ORANGE.rgb))
+//                // Stop here
+//                return
+//            }
+//
+//            // Page controls to make the list scrollable
+//            val namesPerPage = 7 // Number of names to display per page
+//
+//            //val pokemonList = getAllPokemonThatCanLearnThisMove(moveName)
+//            // val allPokemon = PokemonSpecies.species
+//            val pokemonList = MoveAssociations.getAssociationsForMove(moveName)
+//
+//            if (pokemonList.isNotEmpty()) {
+//                // sort the list by pokemon name
+//
+//
+//                // TODO: Custom sort from config
+//                if (SimpleTMs.config.pokemonSortOrder=="ALPHABETICAL_ASC") {
+//                    pokemonList.sortBy { it.first.translatedName.toString() }
+//                }
+//                if (SimpleTMs.config.pokemonSortOrder=="ALPHABETICAL_DESC") {
+//                    pokemonList.sortByDescending { it.first.translatedName.toString() }
+//                }
+//                if (SimpleTMs.config.pokemonSortOrder=="POKEMON_TYPE_ASC") {
+//                    pokemonList.sortBy { it.first.primaryType.name }
+//                }
+//                if (SimpleTMs.config.pokemonSortOrder=="POKEMON_TYPE_DESC") {
+//                    pokemonList.sortByDescending { it.first.primaryType.name }
+//                }
+//                else{
+//                    // Defaults to alphabetical ascending
+//                    pokemonList.sortBy { it.first.translatedName.toString() }
+//                }
+//
+//                val numberOfPokemonThatCanLearnMove = pokemonList.size
+//
+//                if (numberOfPokemonThatCanLearnMove == PokemonSpecies.species.size) {
+//                    list.add("item.move_learn_item.all_pokemon_can_learn".text().withColor(Color.ORANGE.rgb))
+//                    return
+//                }
+//
+//                Pages.TOTAL_PAGES = (numberOfPokemonThatCanLearnMove + namesPerPage - 1) / namesPerPage // Total number of pages
+//                Pages.CURRENT_PAGE = Pages.CURRENT_PAGE.coerceIn(0, Pages.TOTAL_PAGES - 1) // Clamp currentPage within bounds
+//                val start = Pages.CURRENT_PAGE * namesPerPage
+//                val end = (start + namesPerPage).coerceAtMost(numberOfPokemonThatCanLearnMove)
+//                val visiblePokemon = pokemonList.subList(start, end)
+//
+//                val numberComponent = numberOfPokemonThatCanLearnMove.toString().text().withColor(Color.ORANGE.rgb)
+//                //val canBeLearnedByBase = numberComponent.append((" Pokémon can learn this move, they are: ").text().withColor(baseGreyColor.rgb))
+//                val canBeLearnedByBase = numberComponent.append(fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.can_learn_base").withColor(baseGreyColor.rgb))
+//                // val pokemonWayBase = ("Pokemon  - Ways they can learn it").text().withColor(Color.GRAY.rgb)
+//                val pokemonWayBase = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.pokemon_ways").withColor(Color.GRAY.rgb)
+//                list.add(canBeLearnedByBase)
+//                list.add(pokemonWayBase)
+//
+//                for (pokemon in visiblePokemon) {
+//                    val pokemonSpecies = pokemon.first
+//                    val waysToLearn = pokemon.second
+//                    val pokemonName = pokemonSpecies.translatedName
+//
+//                    // Add the pokemon name and the ways they can learn to tooltip line
+//                    val pokemonColour = pokemonSpecies.primaryType.hue
+//                    val pokemonNameComponent = pokemonName.withColor(pokemonColour)
+//                    // val levelUpComponent = ("Level Up").text().withColor(levelUpColour.rgb)
+//                    val levelUpComponent = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.level_up").withColor(levelUpColour.rgb)
+//                    // val tmComponent = ("TM").text().withColor(tmColour.rgb)
+//                    val tmComponent = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.tm").withColor(tmColour.rgb)
+//                    // val tutorComponent = ("Tutor").text().withColor(tutorColour.rgb)
+//                    val tutorComponent = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.tutor").withColor(tutorColour.rgb)
+//                    // val eggComponent = ("Egg").text().withColor(eggColour.rgb)
+//                    val eggComponent = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.egg").withColor(eggColour.rgb)
+//                    val waysComponent = listOf(
+//                        "Level Up" to levelUpComponent,
+//                        "TM" to tmComponent,
+//                        "Tutor" to tutorComponent,
+//                        "Egg" to eggComponent
+//                    ).filter { waysToLearn.contains(it.first) }
+//                        .map { it.second }
+//                        .reduceOrNull { acc, component -> acc.append(", ").append(component) }
+//                    val pokemonComponent = pokemonNameComponent.append(" - ").append(waysComponent ?: "".text())
+//                    list.add(pokemonComponent)
+//                }
+//
+//                if ((Pages.TOTAL_PAGES > 1) && (Pages.CURRENT_PAGE < Pages.TOTAL_PAGES - 1)) {
+//                    list.add("...".text().withColor(baseGreyColor.rgb))
+//                    // list.add("Use Mouse Scroll Wheel to navigate.".text().withColor(Color.RED.rgb))
+//                    list.add(fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.scroll_wheel").withColor(Color.RED.rgb))
+//                }
+//
+//                if (Pages.CURRENT_PAGE == Pages.TOTAL_PAGES - 1) {
+//                    // list.add("End of list".text().withColor(Color.RED.rgb))
+//                    list.add(fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.end_of_list").withColor(Color.RED.rgb))
+//                }
+//            } else {
+//                // If no pokemon can learn the move, show a message
+//                // list.add("No Pokémon can learn this move.".text().withColor(Color.RED.rgb))
+//                list.add(fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.no_pokemon").withColor(Color.RED.rgb))
+//            }
+//        }
 
         // Super call
         super.appendHoverText(itemStack, tooltipContext, list, tooltipFlag)
