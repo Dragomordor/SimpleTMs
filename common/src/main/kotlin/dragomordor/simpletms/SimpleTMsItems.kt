@@ -12,11 +12,13 @@ import dragomordor.simpletms.item.custom.BlankTmItem
 import dragomordor.simpletms.item.custom.MoveLearnItem
 import dragomordor.simpletms.util.MoveAssociations
 import dragomordor.simpletms.util.MoveLearnItemDefinition
+import dragomordor.simpletms.util.fromLang
 import dragomordor.simpletms.util.simpletmsResource
 import kotlinx.serialization.json.Json
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.item.Item
 import net.minecraft.core.registries.Registries
+import net.minecraft.network.chat.MutableComponent
 import net.minecraft.world.item.Item.Properties
 import net.minecraft.world.item.ItemStack
 import java.io.File
@@ -91,23 +93,17 @@ object SimpleTMsItems {
     }
 
     private fun registerMoveLearnItem(name: String, moveName: String, isTR: Boolean): RegistrySupplier<MoveLearnItem> {
-       val item : RegistrySupplier<MoveLearnItem>
+        val itemKey = if (isTR) "tr_$moveName" else "tm_$moveName"
 
+        val item: RegistrySupplier<MoveLearnItem> = ITEMS.register(itemKey) {
+            MoveLearnItem(moveName, isTR, Properties().stacksTo(if (isTR) SimpleTMs.config.trStackSize else 1))
+        }
+
+        // Store in appropriate lists
         if (isTR) {
-            val settings: Properties = Properties().stacksTo(SimpleTMs.config.trStackSize)
-            item = ITEMS.register(name) {
-                MoveLearnItem(moveName, isTR, settings)
-            }
             TR_ITEMS.add(item)
             ALL_MOVE_NAMES_WITH_TR_ITEMS.add(moveName)
         } else {
-            val settings: Properties = Properties().stacksTo(1)
-            if (SimpleTMs.config.tmBaseDurability > 0) {
-                settings.durability(SimpleTMs.config.tmBaseDurability)
-            }
-            item = ITEMS.register(name) {
-                MoveLearnItem(moveName, isTR, settings)
-            }
             TM_ITEMS.add(item)
             ALL_MOVE_NAMES_WITH_TM_ITEMS.add(moveName)
         }
@@ -279,10 +275,6 @@ object SimpleTMsItems {
             ALL_MOVE_NAMES_WITH_TM_ITEMS.contains(move.name)
         }
     }
-
-    // ------------------------------------------------------------
-    // Tooltip move association functions
-    // ------------------------------------------------------------
 
 }
 
