@@ -27,7 +27,10 @@ class SimpleTMsConfig {
     var levelMovesLearnable: Boolean = false
 
     @NodeCategory(Category.Learnable)
-    var anyMovesLearnable: Boolean = false
+    var anyMovesLearnableTMs: Boolean = false
+
+    @NodeCategory(Category.Learnable)
+    var anyMovesLearnableTRs: Boolean = false
 
     @NodeCategory(Category.Usable)
     var blankTMsUsable: Boolean = true

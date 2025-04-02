@@ -201,7 +201,8 @@ class MoveLearnItem(
         val eggMovesLearnable = SimpleTMs.config.eggMovesLearnable
         val tutorMovesLearnable = SimpleTMs.config.tutorMovesLearnable
         val levelMovesLearnable = SimpleTMs.config.levelMovesLearnable
-        val anyMoveLearnable = SimpleTMs.config.anyMovesLearnable
+        val anyMoveLearnableTMs = SimpleTMs.config.anyMovesLearnableTMs
+        val anyMoveLearnableTRs = SimpleTMs.config.anyMovesLearnableTRs
         val excludedMoveNames = SimpleTMsItems.ALL_MOVES_EXCLUDED_FROM_TMTR_LEARNING
 
         // (3.2) Check if the move is already in the move set or benched moves
@@ -213,7 +214,7 @@ class MoveLearnItem(
         }
 
         // (3.3) Check if any move is learnable
-        if (anyMoveLearnable) {
+        if ( (anyMoveLearnableTMs && !isTR) || (anyMoveLearnableTRs && isTR) ) {
             return true
         }
 
