@@ -27,6 +27,12 @@ class SimpleTMsConfig {
     var levelMovesLearnable: Boolean = false
 
     @NodeCategory(Category.Learnable)
+    var primaryTypeMovesLearnable = false
+
+    @NodeCategory(Category.Learnable)
+    var secondaryTypeMovesLearnable = false
+
+    @NodeCategory(Category.Learnable)
     var anyMovesLearnableTMs: Boolean = false
 
     @NodeCategory(Category.Learnable)

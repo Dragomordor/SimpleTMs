@@ -201,6 +201,10 @@ class MoveLearnItem(
         val eggMovesLearnable = SimpleTMs.config.eggMovesLearnable
         val tutorMovesLearnable = SimpleTMs.config.tutorMovesLearnable
         val levelMovesLearnable = SimpleTMs.config.levelMovesLearnable
+
+        val primaryTypeMovesLearnable = SimpleTMs.config.primaryTypeMovesLearnable
+        val secondaryTypeMovesLearnable = SimpleTMs.config.secondaryTypeMovesLearnable
+
         val anyMoveLearnableTMs = SimpleTMs.config.anyMovesLearnableTMs
         val anyMoveLearnableTRs = SimpleTMs.config.anyMovesLearnableTRs
         val excludedMoveNames = SimpleTMsItems.ALL_MOVES_EXCLUDED_FROM_TMTR_LEARNING
@@ -246,6 +250,21 @@ class MoveLearnItem(
         // Level Moves
         if (levelMovesLearnable) {
             learnableMoves.addAll(pokemon.form.moves.getLevelUpMovesUpTo(Cobblemon.config.maxPokemonLevel))
+        }
+
+        // Type Moves
+        if (primaryTypeMovesLearnable || secondaryTypeMovesLearnable) {
+            val pokemonPrimaryType = pokemon.primaryType
+            val pokemonSecondaryType = pokemon.secondaryType
+            val allmoves = Moves.all()
+            for (move in allmoves) {
+                if (primaryTypeMovesLearnable && move.elementalType == pokemonPrimaryType) {
+                    learnableMoves.add(move)
+                }
+                if (secondaryTypeMovesLearnable && move.elementalType == pokemonSecondaryType) {
+                    learnableMoves.add(move)
+                }
+            }
         }
 
         // Remove duplicates
