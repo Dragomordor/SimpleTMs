@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "cobblemon:upgrade"
+  },
+  "base": {
+    "item": "simpletms:tr_blank"
+  },
+  "addition": {
+    "item": "minecraft:echo_shard"
+  },
+  "result": {
+    "id": "simpletms:tm_blank"
+  }
+}
