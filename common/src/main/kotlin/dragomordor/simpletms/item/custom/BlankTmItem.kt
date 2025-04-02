@@ -1,5 +1,6 @@
 package dragomordor.simpletms.item.custom
 
+import com.cobblemon.mod.common.Cobblemon
 import com.cobblemon.mod.common.api.moves.Move
 import com.cobblemon.mod.common.api.text.text
 import com.cobblemon.mod.common.pokemon.Pokemon
@@ -25,6 +26,21 @@ import net.minecraft.world.level.Level
 import java.awt.Color
 
 class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(settings), PokemonAndMoveSelectingItemNonBattle {
+
+
+    // ------------------------------------------------------------------
+    // Override methods from Item
+    // ------------------------------------------------------------------
+
+//    // Enchantable
+//    override fun isEnchantable(stack: ItemStack): Boolean {
+//        return true
+//    }
+//
+//    override fun getEnchantmentValue(): Int {
+//        return 10
+//    }
+
 
     // ------------------------------------------------------------------
     // Override methods from PokemonAndMoveSelectingItemNonBattle

@@ -7,7 +7,7 @@
     "item": "simpletms:tr_blank"
   },
   "addition": {
-    "item": "minecraft:echo_shard"
+    "item": "minecraft:netherite_block"
   },
   "result": {
     "id": "simpletms:tm_blank"

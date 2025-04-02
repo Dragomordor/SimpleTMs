@@ -15,12 +15,14 @@ import dragomordor.simpletms.util.MoveLearnItemDefinition
 import dragomordor.simpletms.util.fromLang
 import dragomordor.simpletms.util.simpletmsResource
 import kotlinx.serialization.json.Json
+import net.minecraft.client.renderer.item.ItemProperties
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.item.Item
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.world.item.Item.Properties
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.component.ItemAttributeModifiers
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
@@ -75,28 +77,24 @@ object SimpleTMsItems {
 
     private fun registerBlankTmItem(name: String, isTR: Boolean): RegistrySupplier<BlankTmItem> {
 
-        val settings: Properties
-
-        if (isTR) {
-            settings = Properties().stacksTo(SimpleTMs.config.trStackSize)
-            if (SimpleTMs.config.blankTRBaseDurability > 0) {
-                settings.durability(SimpleTMs.config.blankTRBaseDurability)
-            }
-        } else {
-            settings = Properties().stacksTo(1)
-            if (SimpleTMs.config.blankTMBaseDurability > 0) {
-                settings.durability(SimpleTMs.config.blankTMBaseDurability)
-            }
+        val item: RegistrySupplier<BlankTmItem> = ITEMS.register(name) {
+            val itemProperties = Properties()
+                .stacksTo(if (isTR) SimpleTMs.config.trStackSize else SimpleTMs.config.tmStackSize)
+                .durability(if (isTR) SimpleTMs.config.blankTRBaseDurability else SimpleTMs.config.blankTMBaseDurability)
+            BlankTmItem(isTR, itemProperties)
         }
-        val item = ITEMS.register(name) { BlankTmItem(isTR, settings) }
+
         return item
     }
 
-    private fun registerMoveLearnItem(name: String, moveName: String, isTR: Boolean): RegistrySupplier<MoveLearnItem> {
+    private fun registerMoveLearnItem(moveName: String, isTR: Boolean): RegistrySupplier<MoveLearnItem> {
         val itemKey = if (isTR) "tr_$moveName" else "tm_$moveName"
 
         val item: RegistrySupplier<MoveLearnItem> = ITEMS.register(itemKey) {
-            MoveLearnItem(moveName, isTR, Properties().stacksTo(if (isTR) SimpleTMs.config.trStackSize else 1))
+            val itemProperties = Properties()
+                .stacksTo(if (isTR) SimpleTMs.config.trStackSize else SimpleTMs.config.tmStackSize)
+                .durability(if (isTR) 1 else SimpleTMs.config.tmBaseDurability)
+            MoveLearnItem(moveName, isTR, itemProperties)
         }
 
         // Store in appropriate lists
@@ -118,7 +116,6 @@ object SimpleTMsItems {
         val prefixString = if (isTR) "tr_" else "tm_"
         for (itemDefinition in itemDefinitions) {
             registerMoveLearnItem(
-                name = prefixString + itemDefinition.moveName,
                 moveName = itemDefinition.moveName,
                 isTR = isTR
             )
@@ -131,7 +128,6 @@ object SimpleTMsItems {
         // Register TMs
         for (itemDefinition in itemDefinitions) {
             registerMoveLearnItem(
-                name = "tm_" + itemDefinition.moveName,
                 moveName = itemDefinition.moveName,
                 isTR = false
             )
@@ -139,7 +135,6 @@ object SimpleTMsItems {
         // Register TRs
         for (itemDefinition in itemDefinitions) {
             registerMoveLearnItem(
-                name = "tr_" + itemDefinition.moveName,
                 moveName = itemDefinition.moveName,
                 isTR = true
             )
