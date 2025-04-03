@@ -1,0 +1,30 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tr_causticbreath",
+        "simpletms:tr_chomper",
+        "simpletms:tr_dracoblitz",
+        "simpletms:tr_dracojet",
+        "simpletms:tr_dragonbeat",
+        "simpletms:tr_dragonforce",
+        "simpletms:tr_dragonendurance",
+        "simpletms:tr_dragonhide",
+        "simpletms:tr_dragonimpact",
+        "simpletms:tr_dragonpledge",
+        "simpletms:tr_dragonicbloom",
+        "simpletms:tr_dragonicflare",
+        "simpletms:tr_dragonicglow",
+        "simpletms:tr_dragonicstrike",
+        "simpletms:tr_dragonicwave",
+        "simpletms:tr_dragonify",
+        "simpletms:tr_drajectile",
+        "simpletms:tr_drakonvoice",
+        "simpletms:tr_drakonvoicesound",
+        "simpletms:tr_quickturn",
+        "simpletms:tr_royalbreath",
+        "simpletms:tr_saurtooth",
+        "simpletms:tr_tidaldragoon",
+        "simpletms:tr_velvetscales",
+        "simpletms:tr_zenithbreak"
+    ]
+}

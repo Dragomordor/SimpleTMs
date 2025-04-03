@@ -1,0 +1,27 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tm_achillesheel",
+        "simpletms:tm_impulse",
+        "simpletms:tm_atomsplit",
+        "simpletms:tm_boombubble",
+        "simpletms:tm_brace",
+        "simpletms:tm_charmingtweety",
+        "simpletms:tm_deepyawn",
+        "simpletms:tm_eevoboost",
+        "simpletms:tm_fiesta",
+        "simpletms:tm_foghorn",
+        "simpletms:tm_groomguard",
+        "simpletms:tm_heavypunch",
+        "simpletms:tm_lasso",
+        "simpletms:tm_mindcharge",
+        "simpletms:tm_miresurge",
+        "simpletms:tm_nailflick",
+        "simpletms:tm_omnihowl",
+        "simpletms:tm_perfectglare",
+        "simpletms:tm_puffup",
+        "simpletms:tm_pursuant",
+        "simpletms:tm_twirlenade",
+        "simpletms:tm_wildroar"
+    ]
+}

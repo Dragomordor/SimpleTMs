@@ -1,0 +1,23 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tm_aircannon",
+        "simpletms:tm_airslam",
+        "simpletms:tm_cloudburst",
+        "simpletms:tm_evilwing",
+        "simpletms:tm_galerush",
+        "simpletms:tm_glide",
+        "simpletms:tm_glorywing",
+        "simpletms:tm_hairpinturn",
+        "simpletms:tm_jetshoot",
+        "simpletms:tm_jetstrike",
+        "simpletms:tm_overheadstrike",
+        "simpletms:tm_skyfall",
+        "simpletms:tm_talongash",
+        "simpletms:tm_tempest",
+        "simpletms:tm_turbofalata",
+        "simpletms:tm_typhoon",
+        "simpletms:tm_warble",
+        "simpletms:tm_windshear"
+    ]
+}

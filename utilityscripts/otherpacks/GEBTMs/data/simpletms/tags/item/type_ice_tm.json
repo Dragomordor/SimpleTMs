@@ -1,0 +1,29 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tm_blueblaster",
+        "simpletms:tm_bufu",
+        "simpletms:tm_bufula",
+        "simpletms:tm_bufudyne",
+        "simpletms:tm_clamhammer",
+        "simpletms:tm_condensate",
+        "simpletms:tm_creamwhip",
+        "simpletms:tm_dryice",
+        "simpletms:tm_frostclaw",
+        "simpletms:tm_frostslash",
+        "simpletms:tm_frostbite",
+        "simpletms:tm_garurukick",
+        "simpletms:tm_glaciercrash",
+        "simpletms:tm_iceblast",
+        "simpletms:tm_iceentomb",
+        "simpletms:tm_iceslash",
+        "simpletms:tm_icewall",
+        "simpletms:tm_icewolfclaw",
+        "simpletms:tm_iceweave",
+        "simpletms:tm_niflheim",
+        "simpletms:tm_solidificate",
+        "simpletms:tm_stingfreeze",
+        "simpletms:tm_supremecannon",
+        "simpletms:tm_taiga"
+    ]
+}

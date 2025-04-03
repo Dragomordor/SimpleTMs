@@ -1,0 +1,23 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tr_aromawind",
+        "simpletms:tr_cactussmash",
+        "simpletms:tr_dryneedles",
+        "simpletms:tr_flowerpower",
+        "simpletms:tr_guardianleaf",
+        "simpletms:tr_hawthorns",
+        "simpletms:tr_hotchilipepper",
+        "simpletms:tr_leafdarts",
+        "simpletms:tr_leafshield",
+        "simpletms:tr_leekcutter",
+        "simpletms:tr_parasiticfungi",
+        "simpletms:tr_pollinate",
+        "simpletms:tr_rapidgrowth",
+        "simpletms:tr_ripen",
+        "simpletms:tr_seedyrecede",
+        "simpletms:tr_thicketslip",
+        "simpletms:tr_thornwhip",
+        "simpletms:tr_tikitorch"
+    ]
+}

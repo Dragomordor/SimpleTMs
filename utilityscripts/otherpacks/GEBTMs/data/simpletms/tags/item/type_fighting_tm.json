@@ -1,0 +1,18 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tm_audacity",
+        "simpletms:tm_auraprojection",
+        "simpletms:tm_bramblebash",
+        "simpletms:tm_chairdrop",
+        "simpletms:tm_dinokick",
+        "simpletms:tm_doubleshop",
+        "simpletms:tm_goldenfist",
+        "simpletms:tm_hystericalslap",
+        "simpletms:tm_magnumpunch",
+        "simpletms:tm_pummel",
+        "simpletms:tm_saltcrash",
+        "simpletms:tm_stretch",
+        "simpletms:tm_tagout"
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tm_aerobuster",
+        "simpletms:tm_cloudburstwind",
+        "simpletms:tm_cyclonebeatdown",
+        "simpletms:tm_ozonebeam",
+        "simpletms:tm_secondwind",
+        "simpletms:tm_squallstrike",
+        "simpletms:tm_stormbomb",
+        "simpletms:tm_tornado"
+    ]
+}

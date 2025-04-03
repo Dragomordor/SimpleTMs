@@ -1,0 +1,32 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tr_actionsword",
+        "simpletms:tr_blockblitz",
+        "simpletms:tr_bricktrap",
+        "simpletms:tr_brickwall",
+        "simpletms:tr_buildup",
+        "simpletms:tr_clockworkmouse",
+        "simpletms:tr_compoundbrick",
+        "simpletms:tr_constructionblocks",
+        "simpletms:tr_elasticwave",
+        "simpletms:tr_foamarrows",
+        "simpletms:tr_foambullets",
+        "simpletms:tr_foamdarts",
+        "simpletms:tr_massproduction",
+        "simpletms:tr_moltenplasticblast",
+        "simpletms:tr_planepound",
+        "simpletms:tr_plasticblade",
+        "simpletms:tr_plasticexplosive",
+        "simpletms:tr_plasticrings",
+        "simpletms:tr_plasticseal",
+        "simpletms:tr_plasticstorm",
+        "simpletms:tr_polyblast",
+        "simpletms:tr_polymercannon",
+        "simpletms:tr_polymerpelt",
+        "simpletms:tr_syntheticsurge",
+        "simpletms:tr_toycarcrash",
+        "simpletms:tr_toyhammer",
+        "simpletms:tr_undegradeable"
+    ]
+}

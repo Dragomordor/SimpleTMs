@@ -1,0 +1,31 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tm_aurorawave",
+        "simpletms:tm_blindingflash",
+        "simpletms:tm_brightbreak",
+        "simpletms:tm_flashbang",
+        "simpletms:tm_flashpulse",
+        "simpletms:tm_focalforce",
+        "simpletms:tm_gatlinglaser",
+        "simpletms:tm_glisteningstrike",
+        "simpletms:tm_glowingorb",
+        "simpletms:tm_glowwhack",
+        "simpletms:tm_lightcharge",
+        "simpletms:tm_lighttouch",
+        "simpletms:tm_photonblitz",
+        "simpletms:tm_prismarush",
+        "simpletms:tm_prismpunch",
+        "simpletms:tm_radiantblade",
+        "simpletms:tm_rainbowpunch",
+        "simpletms:tm_reflectivecloak",
+        "simpletms:tm_shimmershotlight",
+        "simpletms:tm_shine",
+        "simpletms:tm_shininglaser",
+        "simpletms:tm_solarpunch",
+        "simpletms:tm_solarspear",
+        "simpletms:tm_sunbath",
+        "simpletms:tm_superluminalstrike",
+        "simpletms:tm_uvray"
+    ]
+}

@@ -1,0 +1,650 @@
+﻿Internal Name,Type,Category,Move
+achillesheel,Normal,Special,Achilles Heel
+impulse,Normal,Special,Allure
+atomsplit,Normal,Special,Atom Split
+boombubble,Normal,Physical,Boom Bubble
+brace,Normal,Status,Brace
+charmingtweety,Normal,Status,Charming Tweety
+deepyawn,Normal,Status,Deep Yawn
+eevoboost,Normal,Status,Eevoboost
+fiesta,Normal,Status,Fiesta
+foghorn,Normal,Status,Foghorn
+groomguard,Normal,Status,Groom Guard
+heavypunch,Normal,Physical,Heavy Punch
+lasso,Normal,Status,Lasso
+mindcharge,Normal,Status,Mind Charge
+miresurge,Normal,Special,Mire Surge
+nailflick,Normal,Physical,Nail Flick
+omnihowl,Normal,Special,Omni Howl
+perfectglare,Normal,Status,Perfect Glare
+puffup,Normal,Special,Puff Up
+pursuant,Normal,Physical,Pursuant
+twirlenade,Normal,Status,Twirlenade
+wildroar,Normal,Special,Wild Roar
+blazinghoof,Fire,Physical,Blazing Hoof
+boldblaze,Fire,Physical,Bold Blaze
+cinderbreath,Fire,Special,Cinder Breath
+devildarts,Fire,Physical,Devil Darts
+evaporate,Fire,Status,Evaporate
+firekunai,Fire,Physical,Fire Kunai
+firecracker,Fire,Physical,Firecracker
+fiatopirotecnico,Fire,Special,Firework Breath
+fireworks,Fire,Special,Fireworks
+flameimpact,Fire,Physical,Flame Impact
+flamejet,Fire,Physical,Flame Jet
+flamingfists,Fire,Physical,Flaming Fists
+gigadestroyer,Fire,Special,Giga Destroyer
+infernalblade,Fire,Physical,Infernal Blade
+kindleseed,Fire,Special,Kindleseed
+magmablade,Fire,Physical,Magma Blade
+magmaring,Fire,Special,Magma Ring
+melt,Fire,Status,Melt
+mightykick,Fire,Physical,Mighty Kick
+napalmshells,Fire,Physical,Napalm Shells
+nostrilflare,Fire,Special,Nostril Flare
+novablast,Fire,Special,Nova Blast
+pepperbreath,Fire,Special,Pepper Breath
+ragingflame,Fire,Physical,Raging Flame
+scorchedashes,Fire,Status,Scorched Ashes
+searingslash,Fire,Physical,Searing Slash
+sizzlebeak,Fire,Physical,Sizzle Beak
+sizzleslam,Fire,Physical,Sizzle Slam
+terraforce,Fire,Special,Terra Force
+aquaimpact,Water,Physical,Aqua Impact
+aquaslam,Water,Physical,Aqua Slam
+coralbreak,Water,Special,Coral Break
+depthcharge,Water,Special,Depth Charge
+fincutter,Water,Physical,Fin Cutter
+finsmack,Water,Physical,Fin Smack
+flashflood,Water,Special,Flash Flood
+foggystrike,Water,Physical,Foggy Strike
+knucklefins,Water,Physical,Knucklefins
+megalofang,Water,Physical,Megalo Fang
+nimbusfist,Water,Physical,Nimbus Fist
+oceanswrath,Water,Special,Ocean's Wrath
+ragingwaves,Water,Special,Raging Waves
+remoraidcannon,Water,Special,Remoraid Cannon
+ripplewave,Water,Special,Ripple Wave
+toxibolle,Water,Special,Toxic Bubbles
+weepywail,Water,Special,Weepy Wail
+ampclaw,Electric,Physical,Amp Claw
+boltblitz,Electric,Special,Bolt Blitz
+crackleslam,Electric,Physical,Crackle Slam
+electrobash,Electric,Physical,Electrobash
+electroburst,Electric,Special,Electroburst
+empblast,Electric,Special,EMP Blast
+flashinglightning,Electric,Physical,Flashing Lightning
+infinityarrow,Electric,Special,Infinity Arrow
+lightningstrike,Electric,Special,Lightning Strike
+lusterbloom,Electric,Special,Luster Bloom
+omniblast,Electric,Special,Omni Blast
+stormforecast,Electric,Special,Storm Forecast
+superembomber,Electric,Special,Super EM Bomber
+thundercrush,Electric,Physical,Thunder Crush
+thunderslash,Electric,Physical,Thunder Slash
+thunderclap,Electric,Physical,Thunderclap
+thunderstorm,Electric,Status,Thunderstorm
+thunderstruck,Electric,Physical,Thunderstruck
+aromawind,Grass,Special,Aroma Wind
+cactussmash,Grass,Physical,Cactus Smash
+dryneedles,Grass,Physical,Dry Needles
+flowerpower,Grass,Physical,Flower Power
+guardianleaf,Grass,Physical,Guardian Leaf
+hawthorns,Grass,Status,Hawthorns
+hotchilipepper,Grass,Physical,Hot Chili Pepper
+leafdarts,Grass,Physical,Leaf Darts
+leafshield,Grass,Status,Leaf Shield
+leekcutter,Grass,Physical,Leek Cutter
+parasiticfungi,Grass,Physical,Parasitic Fungi
+pollinate,Grass,Status,Pollinate
+rapidgrowth,Grass,Special,Rapid Growth
+ripen,Grass,Status,Ripen
+seedyrecede,Grass,Physical,Seedy Recede
+thicketslip,Grass,Status,Thicket Slip
+thornwhip,Grass,Physical,Thorn Whip
+tikitorch,Grass,Special,Tiki Torch
+blueblaster,Ice,Physical,Blue Blaster
+bufu,Ice,Special,Bufu
+bufula,Ice,Special,Bufula
+bufudyne,Ice,Special,Bufudyne
+clamhammer,Ice,Physical,Clamhammer
+condensate,Ice,Status,Condensate
+creamwhip,Ice,Physical,Cream Whip
+dryice,Ice,Special,Dry Ice
+frostclaw,Ice,Physical,Frost Claw
+frostslash,Ice,Physical,Frost Slash
+frostbite,Ice,Special,Frostbite
+garurukick,Ice,Physical,Garuru-Kick
+glaciercrash,Ice,Physical,Glacier Crash
+iceblast,Ice,Special,Ice Blast
+iceentomb,Ice,Status,Ice Entomb
+iceslash,Ice,Physical,Ice Slash
+icewall,Ice,Special,Ice Wall
+icewolfclaw,Ice,Special,Ice Wolf Claw
+iceweave,Ice,Status,Ice Weave
+niflheim,Ice,Special,Niflheim
+solidificate,Ice,Status,Solidificate
+stingfreeze,Ice,Physical,Sting Freeze
+supremecannon,Ice,Special,Supreme Cannon
+taiga,Ice,Physical,Taiga
+audacity,Fighting,Status,Audacity
+auraprojection,Fighting,Status,Aura Projection
+bramblebash,Fighting,Physical,Bramble Bash
+chairdrop,Fighting,Physical,Chair Drop
+dinokick,Fighting,Physical,Dino Kick
+doubleshop,Fighting,Special,Double Shot
+goldenfist,Fighting,Physical,Golden Fist
+hystericalslap,Fighting,Physical,Hysterical Slap
+magnumpunch,Fighting,Special,Magnum Punch
+pummel,Fighting,Physical,Pummel
+saltcrash,Fighting,Physical,Salt Crash
+stretch,Fighting,Status,Stretch
+tagout,Fighting,Status,Tag Out
+acidrain,Poison,Status,Acid Rain
+barbedtackle,Poison,Physical,Barbed tackle
+bugblaster,Poison,Special,Bug Blaster
+cablecrusher,Poison,Physical,Cable Crusher
+compostbomber,Poison,Special,Compost Bomber
+corrode,Poison,Special,Corrode
+corrupt,Poison,Status,Corrupt
+detox,Poison,Special,Detox
+fangbarrage,Poison,Physical,Fang Barrage
+fever,Poison,Special,Fever
+grimebuster,Poison,Physical,Grimebuster
+hedriumsludge,Poison,Special,Hedrium Sludge
+hedriumray,Poison,Special,Hedrium Ray
+hyperstinkshot,Poison,Special,Hyper-Stink-Shot
+meltdown,Poison,Special,Meltdown
+mesmersmoke,Poison,Status,Mesmer Smoke
+pagefault,Poison,Physical,Page Fault
+pesticide,Poison,Special,Pesticide
+poisonbubbles,Poison,Special,Poison Bubbles
+poisonleaf,Poison,Physical,Poison Leaf
+sluggishbrew,Poison,Status,Sluggish Brew
+smogdiffusion,Poison,Special,Smog Diffusion
+smogscreen,Poison,Special,Smogscreen
+smogspread,Poison,Status,Smog Spread
+sulfuricspray,Poison,Special,Sulfuric Spray
+toxifume,Poison,Special,Toxifume
+venomswipe,Poison,Physical,Venom Swipe
+virugait,Poison,Physical,Virugait
+virusskater,Poison,Physical,Virus Skater
+anvilsmash,Ground,Physical,Anvil Smash
+bonesweep,Ground,Physical,Bone Sweep
+cavein,Ground,Physical,Cave In
+dustdevil,Ground,Special,Dust Devil
+duststorm,Ground,Status,Dust Storm
+dustydash,Ground,Special,Dusty Dash
+gaiasfury,Ground,Physical,Gaia's Fury
+geosphere,Ground,Special,Geo-Sphere
+landsliderush,Ground,Physical,Landslide Rush
+mudslide,Ground,Special,Mudslide
+quicksand,Ground,Special,Quicksand
+regalfang,Ground,Physical,Regal Fang
+trematerra,Ground,Special,Rumbling Ground
+terrafirm,Ground,Status,Terrafirm
+upheaval,Ground,Special,Upheaval
+aircannon,Flying,Special,Air Cannon
+airslam,Flying,Physical,Air Slam
+cloudburst,Flying,Special,Cloudburst
+evilwing,Flying,Physical,Evil Wing
+galerush,Flying,Physical,Gale Rush
+glide,Flying,Physical,Glide
+glorywing,Flying,Special,Glory Wing
+hairpinturn,Flying,Status,Hairpin Turn
+jetshoot,Flying,Physical,Jet Shoot
+jetstrike,Flying,Physical,Jet Strike
+overheadstrike,Flying,Physical,Overhead Strike
+skyfall,Flying,Special,Sky Fall
+talongash,Flying,Physical,Talon Gash
+tempest,Flying,Special,Tempest
+turbofalata,Flying,Special,Turbo Gust
+typhoon,Flying,Special,Typhoon
+warble,Flying,Status,Warble
+windshear,Flying,Special,Wind Shear
+astroforce,Psychic,Special,Astroforce
+brainfreeze,Psychic,Special,Brain Freeze
+brainstorm,Psychic,Special,Brain Storm
+cosmicrays,Psychic,Status,Cosmic Rays
+dejavu,Psychic,Special,Deja-Vu
+focused ram,Psychic,Physical,Focused Ram
+gravitywave,Psychic,Special,Gravity Wave
+hypnopulse,Psychic,Special,Hypnopulse
+instancrush,Psychic,Special,Instant Crush
+latentpower,Psychic,Special,Latent Power
+mindblast,Psychic,Special,Mind Blast
+miraclewill,Psychic,Special,Miracle Will
+necromagic,Psychic,Special,Necro Magic
+perplex,Psychic,Special,Perplex
+psybolt,Psychic,Special,Psybolt
+psyburn,Psychic,Special,Psyburn
+psylight,Psychic,Special,Psylight
+replicate,Psychic,Status,Replicate
+wormhole,Psychic,Special,Wormhole
+bugbomb,Bug,Special,Bug Bomb
+buggnaw,Bug,Physical,Bug Gnaw
+bugnoise,Bug,Special,Bug Noise
+bugout,Bug,Physical,Bug Out
+decapattack,Bug,Physical,Decap Attack
+engorge,Bug,Special,Engorge
+hivemind,Bug,Special,Hivemind
+hornbuster,Bug,Physical,Horn Buster
+piercepincer,Bug,Physical,Pierce Pincer
+plague,Bug,Status,Plague
+probepunch,Bug,Physical,Probe Punch
+reprisal,Bug,Special,Reprisal
+riderkick,Bug,Physical,Rider Kick
+siphonbite,Bug,Physical,Siphon Bite
+swarmsignal,Bug,Status,Swarm Signal
+webball,Bug,Special,Web Ball
+ancientroar,Rock,Special,Ancient Roar
+ancientroarsound,Rock,Special,Ancient Roar (Sound)
+asteroidbelt,Rock,Status,Asteroid Belt
+asteroidshot,Rock,Special,Asteroid Shot
+basilisksglare,Rock,Status,Basilisk's Glare
+batteringram,Rock,Physical,Battering Ram
+crystalize,Rock,Special,Crystalize
+diamondclaw,Rock,Physical,Diamond Claw
+gemstoneglimmer,Rock,Special,Gemstone Glimmer
+geodecannon,Rock,Special,Geode Cannon
+geosplinter,Rock,Status,Geosplinter
+hardknock,Rock,Physical,Hard Knock
+jewelflash,Rock,Special,Jewel Flash
+movemountains,Rock,Physical,Move Mountains
+pressurize,Rock,Status,Pressurize
+rubblerush,Rock,Physical,Rubble Rush
+salttherapy,Rock,Status,Salt Therapy
+speedmite,Rock,Physical,Speedmite
+fakemonstonesurge,Rock,Physical,Stone Surge
+tartantrum,Rock,Physical,Tar-Tantrum
+vulcanshammer,Rock,Physical,Vulcan's Hammer
+abyssallure,Ghost,Physical,Abyssal Lure
+blackout,Ghost,Physical,Blackout
+channel,Ghost,Status,Channel
+cursedwrath,Ghost,Special,Cursed Wrath
+engulf,Ghost,Special,Engulf
+ghastlywail,Ghost,Special,Ghastly Wail
+haunt,Ghost,Status,Haunt
+phantomgrip,Ghost,Physical,Phantom Grip
+possession,Ghost,Special,Possession
+shadowclamp,Ghost,Physical,Shadow Clamp
+shadowfin,Ghost,Physical,Shadow Fin
+shadowsplit,Ghost,Physical,Shadow Split
+siphon,Ghost,Special,Siphon
+souldevour,Ghost,Physical,Soul Devour
+soulshock,Ghost,Physical,Soulshock
+spectralsap,Ghost,Physical,Spectral Sap
+spookysound,Ghost,Status,Spooky Sound
+terrorize,Ghost,Special,Terrorize
+vanish,Ghost,Status,Vanish
+zombiestrike,Ghost,Physical,Zombie Strike
+causticbreath,Dragon,Special,Caustic Breath
+chomper,Dragon,Physical,Chomp
+dracoblitz,Dragon,Physical,Draco Blitz
+dracojet,Dragon,Physical,Draco Jet
+dragonbeat,Dragon,Special,Dragon Beat
+dragonforce,Dragon,Status,Dragon Force
+dragonendurance,Dragon,Status,Dragon Endurance
+dragonhide,Dragon,Status,Dragon Hide
+dragonimpact,Dragon,Physical,Dragon Impact
+dragonpledge,Dragon,Special,Dragon Pledge
+dragonicbloom,Dragon,Physical,Dragonic Bloom
+dragonicflare,Dragon,Special,Dragonic Flare
+dragonicglow,Dragon,Physical,Dragonic Glow
+dragonicstrike,Dragon,Special,Dragonic Strike
+dragonicwave,Dragon,Special,Dragonic Wave
+dragonify,Dragon,Status,Dragonify
+drajectile,Dragon,Physical,Drajectile
+drakonvoice,Dragon,Special,Drakon Voice
+drakonvoicesound,Dragon,Special,Drakon Voice (Sound)
+quickturn,Dragon,Physical,Quick Turn
+royalbreath,Dragon,Special,Royal Breath
+saurtooth,Dragon,Physical,Saurtooth
+tidaldragoon,Dragon,Special,Tidal Dragoon
+velvetscales,Dragon,Status,Velvet Scales
+zenithbreak,Dragon,Physical,Zenith Break
+blackhole,Dark,Special,Black Hole
+bloodytriggers,Dark,Physical,Bloody Triggers
+cataclysm,Dark,Special,Cataclysm
+cheapshot,Dark,Physical,Cheap Shot
+concertcrush,Dark,Status,Concert Crush
+darkbargain,Dark,Status,Dark Bargain
+darkmatter,Dark,Special,Dark Matter
+darknetwork,Dark,Special,Dark Network
+darkroar,Dark,Special,Dark Roar
+darkroarsound,Dark,Special,Dark Roar (Sound)
+darkshot,Dark,Special,Dark Shot
+darkeningbolt,Dark,Special,Darkening Bolt
+deathnail,Dark,Physical,Death Nail
+demoralize,Dark,Status,Demoralize
+devastate,Dark,Physical,Devastate
+devilsdeed,Dark,Status,Devil's Deed
+devilswrath,Dark,Physical,Devil's Wrath
+drainlife,Dark,Physical,Drain Life
+exsanguinate,Dark,Special,Exsanguinate
+hitandrun,Dark,Physical,Hit and Run
+lunarcannon,Dark,Special,Lunar Cannon
+mowdown,Dark,Physical,Mow Down
+newmoon,Dark,Special,New Moon
+pokeburststream,Dark,Physical,Pokeburst Stream
+shadetrance,Dark,Status,Shade Trance
+standoff,Dark,Status,Standoff
+suddenstrike,Dark,Physical,Sudden Strike
+swindle,Dark,Physical,Swindle
+veiledsky,Dark,Status,Veiled Sky
+webwrecker,Dark,Special,Web Wrecker
+wickedlash,Dark,Physical,Wicked Lash
+yuckytongue,Dark,Physical,Yucky Tongue
+astrallance,Steel,Special,Astral Lance
+blastcannon,Steel,Physical,Blast Cannon
+blitzcannon,Steel,Special,Blitz Cannon
+carbonize,Steel,Special,Carbonize
+chromeball,Steel,Special,Chrome Ball
+duoscissorclaw,Steel,Physical,Duo Scissor Claw
+earthmover,Steel,Physical,Earthmover
+emperorsedge,Steel,Special,Emperor's Edge
+geoimpact,Steel,Special,Geo Impact
+ironsphere,Steel,Physical,Iron Sphere
+lionsword,Steel,Physical,Lion Sword
+magnetforce,Steel,Special,Magnet Force
+magnetize,Steel,Status,Magnetize
+magnetpulse,Steel,Special,Magnet Pulse
+metalcruncher,Steel,Physical,Metal Cruncher
+metalwhip,Steel,Physical,Metal Whip
+mugencannon,Steel,Special,Mugen Cannon
+nailcrusher,Steel,Physical,Nail Crusher
+nanorepair,Steel,Status,Nanorepair
+razorblade,Steel,Physical,Razor Blade
+risingimpact,Steel,Physical,Rising Impact
+rocketdrive,Steel,Physical,Rocket Drive
+shieldbash,Steel,Physical,Shield Bash
+stardust,Steel,Special,Stardust
+titanichorn,Steel,Physical,Titanic Horn
+acesplay,Fairy,Special,Ace's Play
+beampulser,Fairy,Special,Beam Pulser
+beamshield,Fairy,Physical,Beam Shield
+beguile,Fairy,Physical,Beguile
+charminggnash,Fairy,Physical,Charming Gnash
+cryforpeace,Fairy,Special,Cry for Peace
+dazzledust,Fairy,Special,Dazzle Dust
+excalibur,Fairy,Physical,Excalibur
+faengrush,Fairy,Physical,Faeng Rush
+fairypledge,Fairy,Special,Fairy Pledge
+fairyrush,Fairy,Physical,Fairy Rush
+feralclutch,Fairy,Physical,Feral Clutch
+feyhammer,Fairy,Physical,Fey Hammer
+flavortest,Fairy,Physical,Flavor Test
+heavensknuckle,Fairy,Physical,Heaven's Knuckle
+knightsvow,Fairy,Status,Knight's Vow
+magicwall,Fairy,Status,Magic Wall
+moonimpact,Fairy,Physical,Moon Impact
+moonrazer,Fairy,Special,Moonrazer
+mysticchant,Fairy,Special,Mystic Chant
+pillowpummel,Fairy,Physical,Pillow Pummel
+somnismog,Fairy,Status,Somnismog
+spiritaway,Fairy,Physical,Spirit Away
+fairydust,Fairy,Status,Sprinkle
+squeezehug,Fairy,Physical,Squeeze Hug
+starstorm,Fairy,Special,Starstorm
+sugarrush,Fairy,Physical,Sugar Rush
+trickshot,Fairy,Special,Trick Shot
+shadowblast,Shadow,Special,Shadow Blast
+shadowblitz,Shadow,Physical,Shadow Blitz
+shadowbolt,Shadow,Special,Shadow Bolt
+shadowbreak,Shadow,Physical,Shadow Break
+shadowchill,Shadow,Special,Shadow Chill
+shadowdown,Shadow,Status,Shadow Down
+shadowend,Shadow,Physical,Shadow End
+shadowfire,Shadow,Special,Shadow Fire
+shadowhalf,Shadow,Status,Shadow Half
+shadowhold,Shadow,Status,Shadow Hold
+shadowmist,Shadow,Status,Shadow Mist
+shadowpanic,Shadow,Status,Shadow Panic
+shadowrave,Shadow,Special,Shadow Rave
+shadowrush,Shadow,Physical,Shadow Rush
+shadowshed,Shadow,Status,Shadow Shed
+shadowsky,Shadow,Status,Shadow Sky
+shadowstorm,Shadow,Special,Shadow Storm
+shadowwave,Shadow,Special,Shadow Wave
+exploitsion,Unknown,Physical,Exploitsion
+h4k41,Unknown,Special,H4K41
+glitch,Unknown,Special,Glitch
+integeroverflow,Unknown,Special,Integer Overflow
+shimmershot,Unknown,Special,Shimmer Shot
+simulateddread,Unknown,Special,Simulated Dread
+sssslash,Unknown,Physical,S-S-S-Slash
+asteroidfist,Cosmic,Physical,Asteroid Fist
+astralshot,Cosmic,Special,Astral Shot
+astroforcecosmic,Cosmic,Special,Astroforce (Cosmic)
+bigbang,Cosmic,Physical,Big Bang
+cometcrash,Cosmic,Physical,Comet Crash
+cometshower,Cosmic,Physical,Comet Shower
+cosmichorror,Cosmic,Status,Cosmic Horror
+cosmicray,Cosmic,Special,Cosmic Ray
+divinecall,Cosmic,Status,Divine Call
+eventhorizon,Cosmic,Special,Event Horizon
+galaxyslash,Cosmic,Physical,Galaxy Slash
+giantstep,Cosmic,Physical,Giant Step
+giganumecluster,Cosmic,Special,Giganume Cluster
+gravitybeam,Cosmic,Special,Gravity Beam
+gravitywavecosmic,Cosmic,Special,Gravity Wave (Cosmic)
+hammerclaw,Cosmic,Physical,Hammerclaw
+liftoff,Cosmic,Physical,Lift Off
+meteorblitz,Cosmic,Physical,Meteor Blitz
+meteorstormpunisher,Cosmic,Physical,Meteor Storm Punisher
+meteorstrike,Cosmic,Physical,Meteor Strike
+rocketdrillkick,Cosmic,Physical,Rocket Drill Kick
+shootingstar,Cosmic,Special,Shooting Star
+solarflare,Cosmic,Special,Solar Flare
+spaceslam,Cosmic,Physical,Space Slam
+spaciumbeam,Cosmic,Special,Spacium Beam
+spaghettification,Cosmic,Physical,Spaghettification
+starshot,Cosmic,Special,Star Shot
+stardustcosmic,Cosmic,Special,Stardust (Cosmic)
+starlightshower,Cosmic,Special,Starlight Shower
+starstormcosmic,Cosmic,Special,Starstorm (Cosmic)
+suitup,Cosmic,Status,Suit Up
+supernova,Cosmic,Physical,Supernova
+universalcutter,Cosmic,Physical,Universal Cutter
+wormholecosmic,Cosmic,Special,Wormhole (Cosmic)
+amethystassault,Crystal,Special,Amethyst Assault
+clustercrash,Crystal,Physical,Cluster Crash
+crystaldance,Crystal,Status,Crystal Dance
+crystalrush,Crystal,Physical,Crystal Rush
+crystalizecrystal,Crystal,Special,Crystalize (Crystal)
+crystallization,Crystal,Status,Crystallization
+diamondaxe,Crystal,Physical,Diamond Axe
+diamondclawcrystal,Crystal,Physical,Diamond Claw (Crystal)
+diamonddrop,Crystal,Physical,Diamond Drop
+diamonddust,Crystal,Special,DIamond Dust
+diamondsword,Crystal,Physical,Diamond Sword
+garnetbeam,Crystal,Special,Garnet Beam
+gemstoneglimmercrystal,Crystal,Special,Gemstone Glimmer (Crystal)
+gemstoneimpact,Crystal,Physical,Gemstone Impact
+geodecannoncrystal,Crystal,Special,Geode Cannon (Crystal)
+jewelflashcrystal,Crystal,Special,Jewel Flash (Crystal)
+jewelshards,Crystal,Special,Jewel Shards
+shatterfist,Crystal,Physical,Shatterfist
+altf4,Digital,Status,Alt+F4
+antivirusnet,Digital,Physical,Antivirus Net
+banhammer,Digital,Physical,Ban Hammer
+copypaste,Digital,Status,Copy-Paste
+clonestamp,Digital,Status,Clone Stamp
+criticalstrike,Digital,Physical,Critical Strike
+cyberfist,Digital,Physical,Cyber Fist
+datadrill,Digital,Physical,Data Drill
+dataoverflow,Digital,Special,Data Overflow
+datatransfer,Digital,Special,Data Transfer
+ddosattack,Digital,Special,DDOS Attack
+ddrkicks,Digital,Physical,DDR Kicks
+decode,Digital,Special,Decode
+defragmentation,Digital,Status,Defragmentation
+denialofservice,Digital,Status,Denial of Service
+digibeam,Digital,Special,Digibeam
+disceject,Digital,Special,Disc Eject
+discrot,Digital,Special,Disc Rot
+doomscrolling,Digital,Special,Doom Scrolling
+excitebike,Digital,Physical,Excite Bike
+fatalexception,Digital,Physical,Fatal Exception
+firewall,Digital,Status,Firewall
+fullbattery,Digital,Status,Full Battery
+gigabyte,Digital,Physical,Giga Byte
+groundpound,Digital,Physical,Ground Pound
+hololaser,Digital,Special,Holo Laser
+increasedram,Digital,Status,Increased Ram
+infobeam,Digital,Special,Info Beam
+kylobyte,Digital,Physical,Kilo Byte
+megabyte,Digital,Physical,Mega Byte
+minmax,Digital,Status,MinMax
+networking,Digital,Status,Networking
+overclock,Digital,Status,Overclock
+pacstrike,Digital,Physical,Pac Strike
+polygonalsword,Digital,Physical,Polygonal Sword
+reformat,Digital,Status,Reformat
+remotecontrol,Digital,Physical,Remote Control
+smartstrike,Digital,Physical,Smart Punch
+spam,Digital,Special,Spam
+superstar,Digital,Physical,Superstar
+spindash,Digital,Physical,Spin Dash
+trojanhorse,Digital,Physical,Trojan Horse
+upgrade,Digital,Status,Upgrade
+usbwhip,Digital,Physical,USB Whip
+virusskaterdigital,Digital,Physical,Virus Skater (Digital)
+wavedash,Digital,Status,Wavedash
+aurorawave,Light,Special,Aurora Wave
+blindingflash,Light,Special,Blinding Flash
+brightbreak,Light,Physical,Bright Break
+flashbang,Light,Special,Flashbang
+flashpulse,Light,Special,Flash Pulse
+focalforce,Light,Physical,Focal Force
+gatlinglaser,Light,Special,Gatling Laser
+glisteningstrike,Light,Physical,Glistening Strike
+glowingorb,Light,Special,Glowing Orb
+glowwhack,Light,Physical,Glow Whack
+lightcharge,Light,Physical,Light Charge
+lighttouch,Light,Physical,Light Touch
+photonblitz,Light,Physical,Photon Blitz
+prismarush,Light,Physical,Prisma Rush
+prismpunch,Light,Physical,Prism Punch
+radiantblade,Light,Physical,Radiant Blade
+rainbowpunch,Light,Physical,Rainbow Punch
+reflectivecloak,Light,Status,Reflective Cloak
+shimmershotlight,Light,Special,Shimmer Shot (Light)
+shine,Light,Special,Shine
+shininglaser,Light,Special,Shining Laser
+solarpunch,Light,Physical,Solar Punch
+solarspear,Light,Physical,Solar Spear
+sunbath,Light,Status,Sun Bath
+superluminalstrike,Light,Physical,Superluminal Strike
+uvray,Light,Special,UV Ray
+atomsplitnuclear,Nuclear,Special,Atom Split (Nuclear)
+atomicbreath,Nuclear,Special,Atomic Breath
+atomicpunch,Nuclear,Physical,Atomic Punch
+expunge,Nuclear,Special,Expunge
+fallout,Nuclear,Status,Fallout
+fissionburst,Nuclear,Physical,Fission Burst
+gammaray,Nuclear,Special,Gamma Ray
+halflife,Nuclear,Special,Half-Life
+meltdownnuclear,Nuclear,Special,Meltdown (Nuclear)
+nuclearpulse,Nuclear,Special,Nuclear Pulse
+nuclearslash,Nuclear,Physical,Nuclear Slash
+nuclearwaste,Nuclear,Status,Nuclear Waste
+protonbeam,Nuclear,Special,Proton Beam
+quantumleap,Nuclear,Physical,Quantum Leap
+radioacid,Nuclear,Special,Radioacid
+spiralheatray,Nuclear,Special,Spiral Heat Ray
+uraniumheatbeam,Nuclear,Special,Uranium Heat Beam
+actionsword,Plastic,Physical,Action Sword
+blockblitz,Plastic,Physical,Block Blitz
+bricktrap,Plastic,Physical,Brick Trap
+brickwall,Plastic,Status,Brick Wall
+buildup,Plastic,Status,Build-Up
+clockworkmouse,Plastic,Special,Clockwork Mouse
+compoundbrick,Plastic,Physical,Compound Brick
+constructionblocks,Plastic,Status,Construction Blocks
+elasticwave,Plastic,Special,Elastic Wave
+foamarrows,Plastic,Physical,Foam Arrows
+foambullets,Plastic,Physical,Foam Bullets
+foamdarts,Plastic,Physical,Foam Darts
+massproduction,Plastic,Status,Mass Production
+moltenplasticblast,Plastic,Special,Molten Plastic Blast
+planepound,Plastic,Physical,Plane Pound
+plasticblade,Plastic,Physical,Plastic Blade
+plasticexplosive,Plastic,Special,Plastic Explosive
+plasticrings,Plastic,Physical,Plastic Rings
+plasticseal,Plastic,Status,Plastic Seal
+plasticstorm,Plastic,Special,Plastic Storm
+polyblast,Plastic,Special,Polyblast
+polymercannon,Plastic,Special,Polymer Cannon
+polymerpelt,Plastic,Special,Polymer Pelt
+syntheticsurge,Plastic,Special,Synthetic Surge
+toycarcrash,Plastic,Physical,Toy-Car Crash
+toyhammer,Plastic,Physical,Toy Hammer
+undegradeable,Plastic,Status,Undegradeable
+amoebahammer,Slime,Physical,Amoeba Hammer
+flop,Slime,Physical,Flop
+flubberfang,Slime,Physical,Flubber Fang
+gelatinousdoom,Slime,Physical,Gelatinous Doom
+glorp,Slime,Physical,Glorp
+gooeystrike,Slime,Physical,Gooey Strike
+goopelt,Slime,Special,Goo Pelt
+jellybounce,Slime,Physical,Jelly Bounce
+miresurgeslime,Slime,Special,Mire Surge (Slime)
+protectivelayer,Slime,Status,Protective Layer
+slimeball,Slime,Special,Slimeball
+slimecannon,Slime,Special,Slime Cannon
+slimetrail,Slime,Status,Slime Trail
+slimeyslam,Slime,Physical,Slimey Slam
+slimyspit,Slime,Special,Slimy Spit
+tendril,Slime,Physical,Tendril
+viscosityslam,Slime,Physical,Viscosity Slam
+babble,Sound,Special,Babble
+bansheesscream,Sound,Special,Banshee's Scream
+bluenote,Sound,Status,Blue Note
+cacophony,Sound,Special,Cacophony
+charmingtweetysound,Sound,Status,Charming Tweety (Sound)
+cymbalcrash,Sound,Physical,Cymbal Crash
+deafeningnoise,Sound,Special,Deafening Noise
+discofever,Sound,Status,Disco Fever
+echoingblow,Sound,Physical,Echoing Blow
+electroswing,Sound,Status,Electro Swing
+giggle,Sound,Status,Giggle
+hiss,Sound,Status,Hiss
+noiseburst,Sound,Special,Noise Burst
+omnihowlsound,Sound,Special,Omni Howl (Sound)
+pentascale,Sound,Special,Penta Scale
+primalscream,Sound,Special,Primal Scream
+revup,Sound,Physical,Rev Up
+rhythmstrike,Sound,Physical,Rhythm Strike
+soundbarrier,Sound,Status,Sound Barrier
+soundpledge,Sound,Special,Sound Pledge
+soundpound,Sound,Physical,Sound Pound
+subwoofer,Sound,Physical,Subwoofer
+warblesound,Sound,Status,Warble (Sound)
+wilddance,Sound,Physical,Wild Dance
+wildroarsound,Sound,Special,Wild Roar (Sound)
+yoink,Sound,Physical,Yoink
+aerobuster,Wind,Special,Aerobuster
+cloudburstwind,Wind,Special,Cloudburst (Wind)
+cyclonebeatdown,Wind,Physical,Cyclone Beatdown
+ozonebeam,Wind,Special,Ozone Beam
+secondwind,Wind,Status,Second Wind
+squallstrike,Wind,Physical,Squall Strike
+stormbomb,Wind,Special,Storm Bomb
+tornado,Wind,Special,Tornado
+arceanbanish,Eldritch,Special,Arcean Banish
+banishingfist,Eldritch,Physical,Banishing Fist
+darkwhispers,Eldritch,Special,Dark Whispers
+devillishfavor,Eldritch,Status,Devillish Favor
+eldritchblast,Eldritch,Special,Eldritch Blast
+eldritchinvocation,Eldritch,Special,Eldritch Invocation
+eternalhex,Eldritch,Physical,Eternal Hex
+giraternalgrip,Eldritch,Physical,Giraternal Grip
+lovecraftianmaw,Eldritch,Physical,Lovecraftian Maw
+mentalanguish,Eldritch,Special,Mental Anguish
+necromagiceldritch,Eldritch,Special,Necro Magic (Eldritch)
+necroticpunch,Eldritch,Special,Necrotic Punch
+otherworldlytentacles,Eldritch,Physical,Otherworldly Tentacles
+rottingsparks,Eldritch,Special,Rotting Sparks
+sacrificialpact,Eldritch,Special,Sacrificial Pact
+,,,

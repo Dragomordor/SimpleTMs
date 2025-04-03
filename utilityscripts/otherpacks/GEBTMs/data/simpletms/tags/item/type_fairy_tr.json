@@ -1,0 +1,33 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tr_acesplay",
+        "simpletms:tr_beampulser",
+        "simpletms:tr_beamshield",
+        "simpletms:tr_beguile",
+        "simpletms:tr_charminggnash",
+        "simpletms:tr_cryforpeace",
+        "simpletms:tr_dazzledust",
+        "simpletms:tr_excalibur",
+        "simpletms:tr_faengrush",
+        "simpletms:tr_fairypledge",
+        "simpletms:tr_fairyrush",
+        "simpletms:tr_feralclutch",
+        "simpletms:tr_feyhammer",
+        "simpletms:tr_flavortest",
+        "simpletms:tr_heavensknuckle",
+        "simpletms:tr_knightsvow",
+        "simpletms:tr_magicwall",
+        "simpletms:tr_moonimpact",
+        "simpletms:tr_moonrazer",
+        "simpletms:tr_mysticchant",
+        "simpletms:tr_pillowpummel",
+        "simpletms:tr_somnismog",
+        "simpletms:tr_spiritaway",
+        "simpletms:tr_fairydust",
+        "simpletms:tr_squeezehug",
+        "simpletms:tr_starstorm",
+        "simpletms:tr_sugarrush",
+        "simpletms:tr_trickshot"
+    ]
+}

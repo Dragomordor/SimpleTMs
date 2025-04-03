@@ -1,0 +1,23 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tm_amethystassault",
+        "simpletms:tm_clustercrash",
+        "simpletms:tm_crystaldance",
+        "simpletms:tm_crystalrush",
+        "simpletms:tm_crystalizecrystal",
+        "simpletms:tm_crystallization",
+        "simpletms:tm_diamondaxe",
+        "simpletms:tm_diamondclawcrystal",
+        "simpletms:tm_diamonddrop",
+        "simpletms:tm_diamonddust",
+        "simpletms:tm_diamondsword",
+        "simpletms:tm_garnetbeam",
+        "simpletms:tm_gemstoneglimmercrystal",
+        "simpletms:tm_gemstoneimpact",
+        "simpletms:tm_geodecannoncrystal",
+        "simpletms:tm_jewelflashcrystal",
+        "simpletms:tm_jewelshards",
+        "simpletms:tm_shatterfist"
+    ]
+}

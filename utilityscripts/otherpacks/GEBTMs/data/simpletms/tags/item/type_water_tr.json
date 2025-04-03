@@ -1,0 +1,22 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tr_aquaimpact",
+        "simpletms:tr_aquaslam",
+        "simpletms:tr_coralbreak",
+        "simpletms:tr_depthcharge",
+        "simpletms:tr_fincutter",
+        "simpletms:tr_finsmack",
+        "simpletms:tr_flashflood",
+        "simpletms:tr_foggystrike",
+        "simpletms:tr_knucklefins",
+        "simpletms:tr_megalofang",
+        "simpletms:tr_nimbusfist",
+        "simpletms:tr_oceanswrath",
+        "simpletms:tr_ragingwaves",
+        "simpletms:tr_remoraidcannon",
+        "simpletms:tr_ripplewave",
+        "simpletms:tr_toxibolle",
+        "simpletms:tr_weepywail"
+    ]
+}

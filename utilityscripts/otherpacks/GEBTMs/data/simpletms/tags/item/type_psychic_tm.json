@@ -1,0 +1,24 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tm_astroforce",
+        "simpletms:tm_brainfreeze",
+        "simpletms:tm_brainstorm",
+        "simpletms:tm_cosmicrays",
+        "simpletms:tm_dejavu",
+        "simpletms:tm_focused ram",
+        "simpletms:tm_gravitywave",
+        "simpletms:tm_hypnopulse",
+        "simpletms:tm_instancrush",
+        "simpletms:tm_latentpower",
+        "simpletms:tm_mindblast",
+        "simpletms:tm_miraclewill",
+        "simpletms:tm_necromagic",
+        "simpletms:tm_perplex",
+        "simpletms:tm_psybolt",
+        "simpletms:tm_psyburn",
+        "simpletms:tm_psylight",
+        "simpletms:tm_replicate",
+        "simpletms:tm_wormhole"
+    ]
+}

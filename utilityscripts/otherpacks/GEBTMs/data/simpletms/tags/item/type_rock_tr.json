@@ -1,0 +1,26 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tr_ancientroar",
+        "simpletms:tr_ancientroarsound",
+        "simpletms:tr_asteroidbelt",
+        "simpletms:tr_asteroidshot",
+        "simpletms:tr_basilisksglare",
+        "simpletms:tr_batteringram",
+        "simpletms:tr_crystalize",
+        "simpletms:tr_diamondclaw",
+        "simpletms:tr_gemstoneglimmer",
+        "simpletms:tr_geodecannon",
+        "simpletms:tr_geosplinter",
+        "simpletms:tr_hardknock",
+        "simpletms:tr_jewelflash",
+        "simpletms:tr_movemountains",
+        "simpletms:tr_pressurize",
+        "simpletms:tr_rubblerush",
+        "simpletms:tr_salttherapy",
+        "simpletms:tr_speedmite",
+        "simpletms:tr_fakemonstonesurge",
+        "simpletms:tr_tartantrum",
+        "simpletms:tr_vulcanshammer"
+    ]
+}

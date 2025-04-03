@@ -1,0 +1,21 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tm_bugbomb",
+        "simpletms:tm_buggnaw",
+        "simpletms:tm_bugnoise",
+        "simpletms:tm_bugout",
+        "simpletms:tm_decapattack",
+        "simpletms:tm_engorge",
+        "simpletms:tm_hivemind",
+        "simpletms:tm_hornbuster",
+        "simpletms:tm_piercepincer",
+        "simpletms:tm_plague",
+        "simpletms:tm_probepunch",
+        "simpletms:tm_reprisal",
+        "simpletms:tm_riderkick",
+        "simpletms:tm_siphonbite",
+        "simpletms:tm_swarmsignal",
+        "simpletms:tm_webball"
+    ]
+}

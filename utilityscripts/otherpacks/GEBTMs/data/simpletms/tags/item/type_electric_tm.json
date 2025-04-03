@@ -1,0 +1,23 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tm_ampclaw",
+        "simpletms:tm_boltblitz",
+        "simpletms:tm_crackleslam",
+        "simpletms:tm_electrobash",
+        "simpletms:tm_electroburst",
+        "simpletms:tm_empblast",
+        "simpletms:tm_flashinglightning",
+        "simpletms:tm_infinityarrow",
+        "simpletms:tm_lightningstrike",
+        "simpletms:tm_lusterbloom",
+        "simpletms:tm_omniblast",
+        "simpletms:tm_stormforecast",
+        "simpletms:tm_superembomber",
+        "simpletms:tm_thundercrush",
+        "simpletms:tm_thunderslash",
+        "simpletms:tm_thunderclap",
+        "simpletms:tm_thunderstorm",
+        "simpletms:tm_thunderstruck"
+    ]
+}

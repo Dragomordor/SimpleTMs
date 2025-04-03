@@ -1,0 +1,23 @@
+{
+    "replace": false,
+    "values": [
+        "simpletms:tr_shadowblast",
+        "simpletms:tr_shadowblitz",
+        "simpletms:tr_shadowbolt",
+        "simpletms:tr_shadowbreak",
+        "simpletms:tr_shadowchill",
+        "simpletms:tr_shadowdown",
+        "simpletms:tr_shadowend",
+        "simpletms:tr_shadowfire",
+        "simpletms:tr_shadowhalf",
+        "simpletms:tr_shadowhold",
+        "simpletms:tr_shadowmist",
+        "simpletms:tr_shadowpanic",
+        "simpletms:tr_shadowrave",
+        "simpletms:tr_shadowrush",
+        "simpletms:tr_shadowshed",
+        "simpletms:tr_shadowsky",
+        "simpletms:tr_shadowstorm",
+        "simpletms:tr_shadowwave"
+    ]
+}
