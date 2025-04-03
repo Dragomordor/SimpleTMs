@@ -207,7 +207,7 @@ brainfreeze,Psychic,Special,Brain Freeze
 brainstorm,Psychic,Special,Brain Storm
 cosmicrays,Psychic,Status,Cosmic Rays
 dejavu,Psychic,Special,Deja-Vu
-focused ram,Psychic,Physical,Focused Ram
+focusedram,Psychic,Physical,Focused Ram
 gravitywave,Psychic,Special,Gravity Wave
 hypnopulse,Psychic,Special,Hypnopulse
 instancrush,Psychic,Special,Instant Crush
@@ -647,4 +647,3 @@ necroticpunch,Eldritch,Special,Necrotic Punch
 otherworldlytentacles,Eldritch,Physical,Otherworldly Tentacles
 rottingsparks,Eldritch,Special,Rotting Sparks
 sacrificialpact,Eldritch,Special,Sacrificial Pact
-,,,

@@ -155,9 +155,6 @@ enum class Category {
     Cooldown,
     ItemProperties,
     Experimental,
-    Visual,
 }
 
 annotation class DoubleConstraint(val min: Double, val max: Double)
-
-annotation class EnumConstraint(val enum: Array<String>)

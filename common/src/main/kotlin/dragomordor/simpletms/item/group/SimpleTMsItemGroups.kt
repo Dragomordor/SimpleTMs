@@ -18,7 +18,7 @@ import kotlin.reflect.KFunction2
 
 object SimpleTMsItemGroups {
 
-    private const val GEB_CUSTOM_MOVE_JSON_PATH = "$MOD_ID/movelearnitems/geb_custom_moves.json"
+    private const val GEB_CUSTOM_MOVE_JSON_PATH = "config/$MOD_ID/custom/geb_custom_moves.json"
 
      //------------------------------------------------------------
      // Key for all item groups

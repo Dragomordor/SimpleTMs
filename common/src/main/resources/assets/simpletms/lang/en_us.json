@@ -40,6 +40,8 @@
 
     "itemGroup.simpletms.tm_items": "TM's",
     "itemGroup.simpletms.tr_items": "TR's",
+    "itemGroup.simpletms.custom_tm_items": "TM's - Custom",
+    "itemGroup.simpletms.custom_tr_items": "TR's - Custom",
 
     "item.simpletms.tm_blank": "Blank TM",
     "item.simpletms.tr_blank": "Blank TR",

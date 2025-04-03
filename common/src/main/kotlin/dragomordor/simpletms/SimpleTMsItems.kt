@@ -36,9 +36,9 @@ object SimpleTMsItems {
     private const val DEFAULT_MOVE_JSON_PATH = "$MOD_ID/movelearnitems/default.json"
     // TODO: Add custom moves path here
         // Regular Custom move path
-    private const val CUSTOM_MOVE_JSON_PATH = "$MOD_ID/movelearnitems/custom_move.json"
+    private const val CUSTOM_MOVE_JSON_PATH = "config/$MOD_ID/custom/custom_moves.json"
         // GEB custom moves
-    private const val GEB_CUSTOM_MOVE_JSON_PATH = "$MOD_ID/movelearnitems/geb_custom_moves.json"
+    private const val GEB_CUSTOM_MOVE_JSON_PATH = "config/$MOD_ID/custom/geb_custom_moves.json"
 
 
     private val defaultTMMoveConfigFile = File("config/$MOD_ID/moves/default_tm_moves.json")
@@ -104,25 +104,6 @@ object SimpleTMsItems {
             MoveLearnItem(moveName, isTR, isCustom, itemProperties)
         }
 
-//        // Store in appropriate lists
-////        if (isTR) {
-////            if (!isCustom) {
-////                TR_ITEMS.add(item)
-////            } else {
-////                CUSTOM_TR_ITEMS.add(item)
-////            }
-////            ALL_MOVE_NAMES_WITH_TR_ITEMS.add(moveName)
-////
-////        } else {
-////
-////            if (!isCustom) {
-////                TM_ITEMS.add(item)
-////            } else {
-////                CUSTOM_TM_ITEMS.add(item)
-////            }
-////            ALL_MOVE_NAMES_WITH_TM_ITEMS.add(moveName)
-////        }
-
         // Determine the appropriate lists
         val (itemList, customItemList, moveList) = if (isTR) {
             Triple(TR_ITEMS, CUSTOM_TR_ITEMS, ALL_MOVE_NAMES_WITH_TR_ITEMS)
@@ -137,16 +118,25 @@ object SimpleTMsItems {
         return item
     }
 
-    private fun registerMoveLearnItemsFromConfig(moveFile: File, isTR: Boolean, isCustom: Boolean) {
+    private fun registerMoveLearnItemsFromConfig(moveFile: File, isCustom: Boolean) {
         // Read Json file moveFile
         val jsonContent = FileReader(moveFile).use { it.readText() }
         val itemDefinitions = Json.decodeFromString<List<MoveLearnItemDefinition>>(jsonContent)
         // Register TMs
-        val prefixString = if (isTR) "tr_" else "tm_"
         for (itemDefinition in itemDefinitions) {
+            // TMs
+//            if (isCustom) {
+//                LOGGER.info("Trying to register custom move:" + itemDefinition.moveName)
+//            }
             registerMoveLearnItem(
                 moveName = itemDefinition.moveName,
-                isTR = isTR,
+                isTR = true,
+                isCustom = isCustom
+            )
+            // TRs
+            registerMoveLearnItem(
+                moveName = itemDefinition.moveName,
+                isTR = false,
                 isCustom = isCustom
             )
         }
@@ -155,22 +145,25 @@ object SimpleTMsItems {
     private fun registerMoveLearnItemsFromResourceJSON(jsonFilePath: String, isCustom: Boolean) {
         // Load JSON file from resource directory
         val itemDefinitions = loadMoveLearnItemsFromJson(jsonFilePath)
-        // Register TMs
+
         for (itemDefinition in itemDefinitions) {
+//            if (isCustom) {
+//                LOGGER.info("Trying to register custom move:" + itemDefinition.moveName)
+//            }
+            // Register TMs
             registerMoveLearnItem(
                 moveName = itemDefinition.moveName,
                 isTR = false,
                 isCustom = isCustom
             )
-        }
-        // Register TRs
-        for (itemDefinition in itemDefinitions) {
+            // Register TRs
             registerMoveLearnItem(
                 moveName = itemDefinition.moveName,
                 isTR = true,
                 isCustom = isCustom
             )
         }
+
     }
 
     private fun loadMoveLearnItemsFromJson(jsonFilePath: String): List<MoveLearnItemDefinition> {
@@ -258,18 +251,18 @@ object SimpleTMsItems {
         LOGGER.info("Registering default move TMs and TRs")
         // If the config allows move removal, then register from configs. Otherwise, register from default internal json
         if (SimpleTMs.config.allowItemRemovalATOWNRISK) {
-            registerMoveLearnItemsFromConfig(defaultTMMoveConfigFile, false, false)
-            registerMoveLearnItemsFromConfig(defaultTRMoveConfigFile, true, false)
+            registerMoveLearnItemsFromConfig(defaultTMMoveConfigFile, false)
         } else {
             registerMoveLearnItemsFromResourceJSON(DEFAULT_MOVE_JSON_PATH, false)
         }
         // TODO: Custom moves
             // GEB Custom Moves
+        LOGGER.info("Registering custom TMs and TRs if present")
         loadGEBCustomMoves(GEB_CUSTOM_MOVE_JSON_PATH)
             // Other custom moves
         loadCustomMoves(CUSTOM_MOVE_JSON_PATH)
 
-
+        // Register all items
         ITEMS.register()
 
         // Load excluded moves
@@ -287,14 +280,14 @@ object SimpleTMsItems {
         // Check if geb file exists
         if (File(gebJsonFilePath).exists()) {
             // Register TMs adn TRs from json
-            registerMoveLearnItemsFromResourceJSON(gebJsonFilePath, true)
+            registerMoveLearnItemsFromConfig(File(gebJsonFilePath), true)
         }
     }
 
     private fun loadCustomMoves(customJsonFilePath: String) {
         if (SimpleTMs.config.allowCustomMoves) {
             // Register TMs adn TRs from json
-            registerMoveLearnItemsFromResourceJSON(customJsonFilePath, true)
+            registerMoveLearnItemsFromConfig(File(customJsonFilePath), true)
         }
     }
 

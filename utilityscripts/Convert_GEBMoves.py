@@ -28,12 +28,14 @@ move_name_data = data[['Internal Name', 'Move']]
 # ----------------------------------------------------------
 
 # Ensure the directory exists
-os.makedirs(f"resources/{modid}/movelearnitems", exist_ok=True)
+os.makedirs(f"resources/config/{modid}/custom", exist_ok=True)
 
 # Create a JSON file movelearnitems/geb_custom_moves.json
-default_json_path = f"resources/{modid}/movelearnitems/geb_custom_moves.json"
+default_json_path = f"resources/config/{modid}/custom/geb_custom_moves.json"
+# Rename 'Internal Name' to 'moveName' in the DataFrame
+move_data_renamed = move_data.rename(columns={'Internal Name': 'moveName'})
 with open(default_json_path, 'w') as json_file:
-    json.dump(move_data.to_dict(orient='records'), json_file, indent=4)
+    json.dump(move_data_renamed.to_dict(orient='records'), json_file, indent=4)
 
 print("SUCCESS: (1/5) MoveLearnItems geb_custom_moves.json JSON file created successfully!")
 
@@ -53,8 +55,8 @@ lang_file_path = f"resources/assets/{modid}/lang/en_us.json"
 
 # Populate the lang file with move names
 for index, row in move_name_data.iterrows():
-    lang_data[f"{modid}.item.tm_{row['Internal Name']}"] = f"TM: {row['Move']}"
-    lang_data[f"{modid}.item.tr_{row['Internal Name']}"] = f"TR: {row['Move']}"
+    lang_data[f"item.{modid}.tm_{row['Internal Name']}"] = f"TM: {row['Move']}"
+    lang_data[f"item.{modid}.tr_{row['Internal Name']}"] = f"TR: {row['Move']}"
 
 # Write the lang file
 with open(lang_file_path, 'w') as lang_file:
