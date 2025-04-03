@@ -89,6 +89,10 @@ max_type_moves = [
     "Max Wyrmwind",
 ]
 
+# Signature moves
+
+
+
 # Remove the Z-type moves from the data
 data = data[~data['Name'].isin(z_type_moves)]
 # Remove the Max-type moves from the data
@@ -127,82 +131,6 @@ with open(default_json_path, 'w') as json_file:
 
 print("SUCCESS: (1/5) MoveLearnItems default.json JSON file created successfully!")
 
-##### lang file
-# --------------------------------
-
-# Create a JSON file lang/en_us.json
-    # Create a dictionary to store the data
-lang_data = {}
-
-# Add Standard keys to top of the file
-# --------------------------------
-    # Display messages
-lang_data[f"{modid}.success.learned"] = "%1$s learned %2$s!"
-lang_data[f"{modid}.error.not_learnable.not_valid_move"] = "Not a valid move -- move does not exist!"
-lang_data[f"{modid}.error.not_learnable.already_knows_move"] = "%1$s already knows %2$s"
-lang_data[f"{modid}.error.not_learnable.not_in_learnable_moves"] = "%1$s can't learn %2$s"
-lang_data[f"{modid}.error.not_usable.tms_disabled"] = "TM's have been disabled in this world"
-lang_data[f"{modid}.error.not_usable.trs_disabled"] = "TR's have been disabled in this world"
-lang_data[f"{modid}.error.not_usable.blank_trs_disabled"] = "Blank TR's have been disabled in this world"
-lang_data[f"{modid}.error.not_usable.blank_tms_disabled"] = "Blank TM's have been disabled in this world"
-lang_data[f"{modid}.error.not_learnable.on_cooldown"] = "%1$s is on cooldown for %2$s"
-lang_data[f"{modid}.error.no_moves_to_drop"] = "%1$s has no moves to drop"
-lang_data[f"{modid}.message.select_move_to_drop"] = "%1$s has dropped a TM/TR. Select a move from the list to gain it's item!"
-lang_data[f"{modid}.item.tooltip.blank_item.description"] = "Copies a Pokémon's move into a $1$s"
-lang_data[f"{modid}.item.tooltip.uses_left"] = "Uses Left: "
-lang_data[f"{modid}.item.move_learn_item.description_start"] = "Teaches the move "
-lang_data[f"{modid}.item.move_learn_item.description_end"] = " to a Pokémon that can learn it"
-lang_data[f"{modid}.item.tooltip.move_learn_item.hold_start"] = "Hold"
-lang_data[f"{modid}.item.tooltip.move_learn_item.hold_shift"] = " §oSHIFT§r "
-lang_data[f"{modid}.item.tooltip.move_learn_item.hold_alt"] = " §oALT§r "
-lang_data[f"{modid}.item.tooltip.move_learn_item.hold_shift_info"] = "for move info"
-lang_data[f"{modid}.item.tooltip.move_learn_item.hold_alt_info"] = "to see Pokémon that can learn this move"
-
-
-lang_data[f"{modid}.item.move_learn_item.move_type"] = "Type: "
-lang_data[f"{modid}.item.move_learn_item.move_category"] = "Category: "
-lang_data[f"{modid}.item.move_learn_item.move_power"] = "Power: "
-lang_data[f"{modid}.item.move_learn_item.move_accuracy"] = "Accuracy: "
-lang_data[f"{modid}.item.move_learn_item.move_pp"] = "PP: "
-lang_data[f"{modid}.item.move_learn_item.move_pp_max"] = ", Max PP: "
-lang_data[f"{modid}.item.move_learn_item.move_crit_ratio"] = "Crit Ratio: "
-
-lang_data[f"{modid}.item.move_learn_item.all_pokemon_can_learn"] = "All Pokémon can learn this move"
-lang_data[f"{modid}.item.move_learn_item.not_activated"] = "This item must first be used while sneaking to see move list!"
-lang_data[f"{modid}.item.move_learn_item.can_learn_base"] = " Pokémon can learn this move, they are: "
-lang_data[f"{modid}.item.move_learn_item.pokemon_ways"] = "Pokemon  - Ways they can learn it"
-lang_data[f"{modid}.item.move_learn_item.level_up"] = "Level Up"
-lang_data[f"{modid}.item.move_learn_item.tm"] = "TM"
-lang_data[f"{modid}.item.move_learn_item.tutor"] = "Tutor"
-lang_data[f"{modid}.item.move_learn_item.egg"] = "Egg"
-lang_data[f"{modid}.item.move_learn_item.scroll_wheel"] = "Use the scroll wheel to navigate the list"
-lang_data[f"{modid}.item.move_learn_item.end_of_list"] = "End of list"
-lang_data[f"{modid}.item.move_learn_item.no_pokemon"] = "No Pokémon can learn this move"
-lang_data[f"{modid}.item.move_learn_item.activated"] = "The move list of this item has been updated"
-
-# blank TM and TR
-lang_data[f"item.{modid}.tm_blank"] = "Blank TM"
-lang_data[f"item.{modid}.tr_blank"] = "Blank TR"
-# item groups
-lang_data[f"itemGroup.{modid}.tm_items"] = "TM's"
-lang_data[f"itemGroup.{modid}.tr_items"] = "TR's"
-
-# Add the move display names
-# --------------------------------
-for index, row in data.iterrows():
-    lang_data[f"item.{modid}.tm_{row['moveName']}"] = f"TM: {row['Name']}"
-    lang_data[f"item.{modid}.tr_{row['moveName']}"] = f"TR: {row['Name']}"
-
-# Create the json file
-# --------------------------------
-
-# Create a JSON file lang/en_us.json
-os.makedirs(f"resources/assets/{modid}/lang", exist_ok=True)
-lang_json_path = f"resources/assets/{modid}/lang/en_us.json"
-with open(lang_json_path, 'w') as json_file:
-    json.dump(lang_data, json_file, indent=4)
-
-print("SUCCESS: (2/5) lang/en_us.json JSON file created successfully!")
 
 ##### models/item json files
 # --------------------------------

@@ -36,6 +36,7 @@ import java.awt.Color
 class MoveLearnItem(
     private val moveName: String,
     private val isTR: Boolean,
+    private val isCustomMove: Boolean,
     settings: Properties
 ) : SimpleTMsItem(settings), PokemonSelectingItemNonBattle {
 
@@ -45,16 +46,20 @@ class MoveLearnItem(
 
     // Change name to translated name from cobblemon lang files
     override fun getName(itemStack: ItemStack): Component {
-        // Get move name such as "Acid Armour" in current language
-        val localizedMoveName = fromLang(Cobblemon.MODID, "move.$moveName")
-        // Use localizedMoveName to add name of item to the item
-        val itemNameComponent = if (isTR) {
-            fromLang(SimpleTMs.MOD_ID, "item.tr_move", localizedMoveName)
-        } else {
-            fromLang(SimpleTMs.MOD_ID, "item.tm_move", localizedMoveName)
+
+        if (!isCustomMove) {
+            // Get move name such as "Acid Armour" in current language from cobblemon files
+            val localizedMoveName = fromLang(Cobblemon.MODID, "move.$moveName")
+            // Use localizedMoveName to add name of item to the item
+            val itemNameComponent = if (isTR) {
+                fromLang(SimpleTMs.MOD_ID, "item.tr_move", localizedMoveName)
+            } else {
+                fromLang(SimpleTMs.MOD_ID, "item.tm_move", localizedMoveName)
+            }
+            return itemNameComponent
         }
-        return itemNameComponent
-        // return super.getName(itemStack)
+        // Custom moves get names from lang file
+        return super.getName(itemStack)
     }
 
 //    // Enchantable

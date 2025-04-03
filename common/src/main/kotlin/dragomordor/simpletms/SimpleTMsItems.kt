@@ -34,9 +34,11 @@ object SimpleTMsItems {
 
     private val ITEMS: DeferredRegister<Item> = DeferredRegister.create(MOD_ID, Registries.ITEM)
     private const val DEFAULT_MOVE_JSON_PATH = "$MOD_ID/movelearnitems/default.json"
-    private const val MOVE_ASSOCIATION_PATH = "$MOD_ID/movelearnitems/move_associations.json"
-    // private val defaultMoveInternalJsonFile = File(DEFAULT_MOVE_JSON_PATH)
     // TODO: Add custom moves path here
+        // Regular Custom move path
+    private const val CUSTOM_MOVE_JSON_PATH = "$MOD_ID/movelearnitems/custom_move.json"
+        // GEB custom moves
+    private const val GEB_CUSTOM_MOVE_JSON_PATH = "$MOD_ID/movelearnitems/geb_custom_moves.json"
 
 
     private val defaultTMMoveConfigFile = File("config/$MOD_ID/moves/default_tm_moves.json")
@@ -63,6 +65,11 @@ object SimpleTMsItems {
     // List of all TM and TR items
     val TM_ITEMS = mutableListOf<RegistrySupplier<MoveLearnItem>>()
     val TR_ITEMS = mutableListOf<RegistrySupplier<MoveLearnItem>>()
+        // Custom
+    val CUSTOM_TR_ITEMS = mutableListOf<RegistrySupplier<MoveLearnItem>>()
+    val CUSTOM_TM_ITEMS = mutableListOf<RegistrySupplier<MoveLearnItem>>()
+
+
 
     // ------------------------------------------------------------
     // Register Items From Non-Config
@@ -87,28 +94,50 @@ object SimpleTMsItems {
         return item
     }
 
-    private fun registerMoveLearnItem(moveName: String, isTR: Boolean): RegistrySupplier<MoveLearnItem> {
+    private fun registerMoveLearnItem(moveName: String, isTR: Boolean, isCustom: Boolean): RegistrySupplier<MoveLearnItem> {
         val itemKey = if (isTR) "tr_$moveName" else "tm_$moveName"
 
         val item: RegistrySupplier<MoveLearnItem> = ITEMS.register(itemKey) {
             val itemProperties = Properties()
                 .stacksTo(if (isTR) SimpleTMs.config.trStackSize else SimpleTMs.config.tmStackSize)
                 .durability(if (isTR) 1 else SimpleTMs.config.tmBaseDurability)
-            MoveLearnItem(moveName, isTR, itemProperties)
+            MoveLearnItem(moveName, isTR, isCustom, itemProperties)
         }
 
-        // Store in appropriate lists
-        if (isTR) {
-            TR_ITEMS.add(item)
-            ALL_MOVE_NAMES_WITH_TR_ITEMS.add(moveName)
+//        // Store in appropriate lists
+////        if (isTR) {
+////            if (!isCustom) {
+////                TR_ITEMS.add(item)
+////            } else {
+////                CUSTOM_TR_ITEMS.add(item)
+////            }
+////            ALL_MOVE_NAMES_WITH_TR_ITEMS.add(moveName)
+////
+////        } else {
+////
+////            if (!isCustom) {
+////                TM_ITEMS.add(item)
+////            } else {
+////                CUSTOM_TM_ITEMS.add(item)
+////            }
+////            ALL_MOVE_NAMES_WITH_TM_ITEMS.add(moveName)
+////        }
+
+        // Determine the appropriate lists
+        val (itemList, customItemList, moveList) = if (isTR) {
+            Triple(TR_ITEMS, CUSTOM_TR_ITEMS, ALL_MOVE_NAMES_WITH_TR_ITEMS)
         } else {
-            TM_ITEMS.add(item)
-            ALL_MOVE_NAMES_WITH_TM_ITEMS.add(moveName)
+            Triple(TM_ITEMS, CUSTOM_TM_ITEMS, ALL_MOVE_NAMES_WITH_TM_ITEMS)
         }
+
+        // Store in the correct list
+        (if (isCustom) customItemList else itemList).add(item)
+        moveList.add(moveName)
+
         return item
     }
 
-    private fun registerMoveLearnItemsFromConfig(moveFile: File, isTR: Boolean) {
+    private fun registerMoveLearnItemsFromConfig(moveFile: File, isTR: Boolean, isCustom: Boolean) {
         // Read Json file moveFile
         val jsonContent = FileReader(moveFile).use { it.readText() }
         val itemDefinitions = Json.decodeFromString<List<MoveLearnItemDefinition>>(jsonContent)
@@ -117,26 +146,29 @@ object SimpleTMsItems {
         for (itemDefinition in itemDefinitions) {
             registerMoveLearnItem(
                 moveName = itemDefinition.moveName,
-                isTR = isTR
+                isTR = isTR,
+                isCustom = isCustom
             )
         }
     }
 
-        private fun registerMoveLearnItemsFromResourceJSON(jsonFilePath: String) {
+    private fun registerMoveLearnItemsFromResourceJSON(jsonFilePath: String, isCustom: Boolean) {
         // Load JSON file from resource directory
         val itemDefinitions = loadMoveLearnItemsFromJson(jsonFilePath)
         // Register TMs
         for (itemDefinition in itemDefinitions) {
             registerMoveLearnItem(
                 moveName = itemDefinition.moveName,
-                isTR = false
+                isTR = false,
+                isCustom = isCustom
             )
         }
         // Register TRs
         for (itemDefinition in itemDefinitions) {
             registerMoveLearnItem(
                 moveName = itemDefinition.moveName,
-                isTR = true
+                isTR = true,
+                isCustom = isCustom
             )
         }
     }
@@ -176,6 +208,9 @@ object SimpleTMsItems {
             }
         }
     }
+
+
+
 
 
     // Excluded moves
@@ -223,12 +258,18 @@ object SimpleTMsItems {
         LOGGER.info("Registering default move TMs and TRs")
         // If the config allows move removal, then register from configs. Otherwise, register from default internal json
         if (SimpleTMs.config.allowItemRemovalATOWNRISK) {
-            registerMoveLearnItemsFromConfig(defaultTMMoveConfigFile, false)
-            registerMoveLearnItemsFromConfig(defaultTRMoveConfigFile, true)
+            registerMoveLearnItemsFromConfig(defaultTMMoveConfigFile, false, false)
+            registerMoveLearnItemsFromConfig(defaultTRMoveConfigFile, true, false)
         } else {
-            registerMoveLearnItemsFromResourceJSON(DEFAULT_MOVE_JSON_PATH)
+            registerMoveLearnItemsFromResourceJSON(DEFAULT_MOVE_JSON_PATH, false)
         }
         // TODO: Custom moves
+            // GEB Custom Moves
+        loadGEBCustomMoves(GEB_CUSTOM_MOVE_JSON_PATH)
+            // Other custom moves
+        loadCustomMoves(CUSTOM_MOVE_JSON_PATH)
+
+
         ITEMS.register()
 
         // Load excluded moves
@@ -236,6 +277,25 @@ object SimpleTMsItems {
         loadExcludedMovesFromConfig(movesExcludedFromPokemonDropsFile, ALL_MOVES_EXCLUDED_FROM_POKEMON_DROPS)
         loadExcludedMovesFromConfig(moveExcludedFromBlankLearningFile, ALL_MOVES_EXCLUDED_FROM_BLANK_LEARNING)
         loadExcludedMovesFromConfig(movesExcludedFromTMTRLearningFile, ALL_MOVES_EXCLUDED_FROM_TMTR_LEARNING)
+    }
+
+    // ------------------------------------------------------------
+    // Custom Moves
+    // ------------------------------------------------------------
+
+    private fun loadGEBCustomMoves(gebJsonFilePath: String) {
+        // Check if geb file exists
+        if (File(gebJsonFilePath).exists()) {
+            // Register TMs adn TRs from json
+            registerMoveLearnItemsFromResourceJSON(gebJsonFilePath, true)
+        }
+    }
+
+    private fun loadCustomMoves(customJsonFilePath: String) {
+        if (SimpleTMs.config.allowCustomMoves) {
+            // Register TMs adn TRs from json
+            registerMoveLearnItemsFromResourceJSON(customJsonFilePath, true)
+        }
     }
 
     // ------------------------------------------------------------

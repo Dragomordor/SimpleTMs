@@ -13,7 +13,6 @@ dependencies {
     implementation(libs.kotlin.json)
 
     modApi(libs.architectury)
-
     modImplementation(libs.fabric.loader)
 
     modImplementation(libs.cobblemon.common)
