@@ -1,0 +1,1946 @@
+[
+    {
+        "moveName": "achillesheel"
+    },
+    {
+        "moveName": "impulse"
+    },
+    {
+        "moveName": "atomsplit"
+    },
+    {
+        "moveName": "boombubble"
+    },
+    {
+        "moveName": "brace"
+    },
+    {
+        "moveName": "charmingtweety"
+    },
+    {
+        "moveName": "deepyawn"
+    },
+    {
+        "moveName": "eevoboost"
+    },
+    {
+        "moveName": "fiesta"
+    },
+    {
+        "moveName": "foghorn"
+    },
+    {
+        "moveName": "groomguard"
+    },
+    {
+        "moveName": "heavypunch"
+    },
+    {
+        "moveName": "lasso"
+    },
+    {
+        "moveName": "mindcharge"
+    },
+    {
+        "moveName": "miresurge"
+    },
+    {
+        "moveName": "nailflick"
+    },
+    {
+        "moveName": "omnihowl"
+    },
+    {
+        "moveName": "perfectglare"
+    },
+    {
+        "moveName": "puffup"
+    },
+    {
+        "moveName": "pursuant"
+    },
+    {
+        "moveName": "twirlenade"
+    },
+    {
+        "moveName": "wildroar"
+    },
+    {
+        "moveName": "blazinghoof"
+    },
+    {
+        "moveName": "boldblaze"
+    },
+    {
+        "moveName": "cinderbreath"
+    },
+    {
+        "moveName": "devildarts"
+    },
+    {
+        "moveName": "evaporate"
+    },
+    {
+        "moveName": "firekunai"
+    },
+    {
+        "moveName": "firecracker"
+    },
+    {
+        "moveName": "fiatopirotecnico"
+    },
+    {
+        "moveName": "fireworks"
+    },
+    {
+        "moveName": "flameimpact"
+    },
+    {
+        "moveName": "flamejet"
+    },
+    {
+        "moveName": "flamingfists"
+    },
+    {
+        "moveName": "gigadestroyer"
+    },
+    {
+        "moveName": "infernalblade"
+    },
+    {
+        "moveName": "kindleseed"
+    },
+    {
+        "moveName": "magmablade"
+    },
+    {
+        "moveName": "magmaring"
+    },
+    {
+        "moveName": "melt"
+    },
+    {
+        "moveName": "mightykick"
+    },
+    {
+        "moveName": "napalmshells"
+    },
+    {
+        "moveName": "nostrilflare"
+    },
+    {
+        "moveName": "novablast"
+    },
+    {
+        "moveName": "pepperbreath"
+    },
+    {
+        "moveName": "ragingflame"
+    },
+    {
+        "moveName": "scorchedashes"
+    },
+    {
+        "moveName": "searingslash"
+    },
+    {
+        "moveName": "sizzlebeak"
+    },
+    {
+        "moveName": "sizzleslam"
+    },
+    {
+        "moveName": "terraforce"
+    },
+    {
+        "moveName": "aquaimpact"
+    },
+    {
+        "moveName": "aquaslam"
+    },
+    {
+        "moveName": "coralbreak"
+    },
+    {
+        "moveName": "depthcharge"
+    },
+    {
+        "moveName": "fincutter"
+    },
+    {
+        "moveName": "finsmack"
+    },
+    {
+        "moveName": "flashflood"
+    },
+    {
+        "moveName": "foggystrike"
+    },
+    {
+        "moveName": "knucklefins"
+    },
+    {
+        "moveName": "megalofang"
+    },
+    {
+        "moveName": "nimbusfist"
+    },
+    {
+        "moveName": "oceanswrath"
+    },
+    {
+        "moveName": "ragingwaves"
+    },
+    {
+        "moveName": "remoraidcannon"
+    },
+    {
+        "moveName": "ripplewave"
+    },
+    {
+        "moveName": "toxibolle"
+    },
+    {
+        "moveName": "weepywail"
+    },
+    {
+        "moveName": "ampclaw"
+    },
+    {
+        "moveName": "boltblitz"
+    },
+    {
+        "moveName": "crackleslam"
+    },
+    {
+        "moveName": "electrobash"
+    },
+    {
+        "moveName": "electroburst"
+    },
+    {
+        "moveName": "empblast"
+    },
+    {
+        "moveName": "flashinglightning"
+    },
+    {
+        "moveName": "infinityarrow"
+    },
+    {
+        "moveName": "lightningstrike"
+    },
+    {
+        "moveName": "lusterbloom"
+    },
+    {
+        "moveName": "omniblast"
+    },
+    {
+        "moveName": "stormforecast"
+    },
+    {
+        "moveName": "superembomber"
+    },
+    {
+        "moveName": "thundercrush"
+    },
+    {
+        "moveName": "thunderslash"
+    },
+    {
+        "moveName": "thunderclap"
+    },
+    {
+        "moveName": "thunderstorm"
+    },
+    {
+        "moveName": "thunderstruck"
+    },
+    {
+        "moveName": "aromawind"
+    },
+    {
+        "moveName": "cactussmash"
+    },
+    {
+        "moveName": "dryneedles"
+    },
+    {
+        "moveName": "flowerpower"
+    },
+    {
+        "moveName": "guardianleaf"
+    },
+    {
+        "moveName": "hawthorns"
+    },
+    {
+        "moveName": "hotchilipepper"
+    },
+    {
+        "moveName": "leafdarts"
+    },
+    {
+        "moveName": "leafshield"
+    },
+    {
+        "moveName": "leekcutter"
+    },
+    {
+        "moveName": "parasiticfungi"
+    },
+    {
+        "moveName": "pollinate"
+    },
+    {
+        "moveName": "rapidgrowth"
+    },
+    {
+        "moveName": "ripen"
+    },
+    {
+        "moveName": "seedyrecede"
+    },
+    {
+        "moveName": "thicketslip"
+    },
+    {
+        "moveName": "thornwhip"
+    },
+    {
+        "moveName": "tikitorch"
+    },
+    {
+        "moveName": "blueblaster"
+    },
+    {
+        "moveName": "bufu"
+    },
+    {
+        "moveName": "bufula"
+    },
+    {
+        "moveName": "bufudyne"
+    },
+    {
+        "moveName": "clamhammer"
+    },
+    {
+        "moveName": "condensate"
+    },
+    {
+        "moveName": "creamwhip"
+    },
+    {
+        "moveName": "dryice"
+    },
+    {
+        "moveName": "frostclaw"
+    },
+    {
+        "moveName": "frostslash"
+    },
+    {
+        "moveName": "frostbite"
+    },
+    {
+        "moveName": "garurukick"
+    },
+    {
+        "moveName": "glaciercrash"
+    },
+    {
+        "moveName": "iceblast"
+    },
+    {
+        "moveName": "iceentomb"
+    },
+    {
+        "moveName": "iceslash"
+    },
+    {
+        "moveName": "icewall"
+    },
+    {
+        "moveName": "icewolfclaw"
+    },
+    {
+        "moveName": "iceweave"
+    },
+    {
+        "moveName": "niflheim"
+    },
+    {
+        "moveName": "solidificate"
+    },
+    {
+        "moveName": "stingfreeze"
+    },
+    {
+        "moveName": "supremecannon"
+    },
+    {
+        "moveName": "taiga"
+    },
+    {
+        "moveName": "audacity"
+    },
+    {
+        "moveName": "auraprojection"
+    },
+    {
+        "moveName": "bramblebash"
+    },
+    {
+        "moveName": "chairdrop"
+    },
+    {
+        "moveName": "dinokick"
+    },
+    {
+        "moveName": "doubleshop"
+    },
+    {
+        "moveName": "goldenfist"
+    },
+    {
+        "moveName": "hystericalslap"
+    },
+    {
+        "moveName": "magnumpunch"
+    },
+    {
+        "moveName": "pummel"
+    },
+    {
+        "moveName": "saltcrash"
+    },
+    {
+        "moveName": "stretch"
+    },
+    {
+        "moveName": "tagout"
+    },
+    {
+        "moveName": "acidrain"
+    },
+    {
+        "moveName": "barbedtackle"
+    },
+    {
+        "moveName": "bugblaster"
+    },
+    {
+        "moveName": "cablecrusher"
+    },
+    {
+        "moveName": "compostbomber"
+    },
+    {
+        "moveName": "corrode"
+    },
+    {
+        "moveName": "corrupt"
+    },
+    {
+        "moveName": "detox"
+    },
+    {
+        "moveName": "fangbarrage"
+    },
+    {
+        "moveName": "fever"
+    },
+    {
+        "moveName": "grimebuster"
+    },
+    {
+        "moveName": "hedriumsludge"
+    },
+    {
+        "moveName": "hedriumray"
+    },
+    {
+        "moveName": "hyperstinkshot"
+    },
+    {
+        "moveName": "meltdown"
+    },
+    {
+        "moveName": "mesmersmoke"
+    },
+    {
+        "moveName": "pagefault"
+    },
+    {
+        "moveName": "pesticide"
+    },
+    {
+        "moveName": "poisonbubbles"
+    },
+    {
+        "moveName": "poisonleaf"
+    },
+    {
+        "moveName": "sluggishbrew"
+    },
+    {
+        "moveName": "smogdiffusion"
+    },
+    {
+        "moveName": "smogscreen"
+    },
+    {
+        "moveName": "smogspread"
+    },
+    {
+        "moveName": "sulfuricspray"
+    },
+    {
+        "moveName": "toxifume"
+    },
+    {
+        "moveName": "venomswipe"
+    },
+    {
+        "moveName": "virugait"
+    },
+    {
+        "moveName": "virusskater"
+    },
+    {
+        "moveName": "anvilsmash"
+    },
+    {
+        "moveName": "bonesweep"
+    },
+    {
+        "moveName": "cavein"
+    },
+    {
+        "moveName": "dustdevil"
+    },
+    {
+        "moveName": "duststorm"
+    },
+    {
+        "moveName": "dustydash"
+    },
+    {
+        "moveName": "gaiasfury"
+    },
+    {
+        "moveName": "geosphere"
+    },
+    {
+        "moveName": "landsliderush"
+    },
+    {
+        "moveName": "mudslide"
+    },
+    {
+        "moveName": "quicksand"
+    },
+    {
+        "moveName": "regalfang"
+    },
+    {
+        "moveName": "trematerra"
+    },
+    {
+        "moveName": "terrafirm"
+    },
+    {
+        "moveName": "upheaval"
+    },
+    {
+        "moveName": "aircannon"
+    },
+    {
+        "moveName": "airslam"
+    },
+    {
+        "moveName": "cloudburst"
+    },
+    {
+        "moveName": "evilwing"
+    },
+    {
+        "moveName": "galerush"
+    },
+    {
+        "moveName": "glide"
+    },
+    {
+        "moveName": "glorywing"
+    },
+    {
+        "moveName": "hairpinturn"
+    },
+    {
+        "moveName": "jetshoot"
+    },
+    {
+        "moveName": "jetstrike"
+    },
+    {
+        "moveName": "overheadstrike"
+    },
+    {
+        "moveName": "skyfall"
+    },
+    {
+        "moveName": "talongash"
+    },
+    {
+        "moveName": "tempest"
+    },
+    {
+        "moveName": "turbofalata"
+    },
+    {
+        "moveName": "typhoon"
+    },
+    {
+        "moveName": "warble"
+    },
+    {
+        "moveName": "windshear"
+    },
+    {
+        "moveName": "astroforce"
+    },
+    {
+        "moveName": "brainfreeze"
+    },
+    {
+        "moveName": "brainstorm"
+    },
+    {
+        "moveName": "cosmicrays"
+    },
+    {
+        "moveName": "dejavu"
+    },
+    {
+        "moveName": "focusedram"
+    },
+    {
+        "moveName": "gravitywave"
+    },
+    {
+        "moveName": "hypnopulse"
+    },
+    {
+        "moveName": "instancrush"
+    },
+    {
+        "moveName": "latentpower"
+    },
+    {
+        "moveName": "mindblast"
+    },
+    {
+        "moveName": "miraclewill"
+    },
+    {
+        "moveName": "necromagic"
+    },
+    {
+        "moveName": "perplex"
+    },
+    {
+        "moveName": "psybolt"
+    },
+    {
+        "moveName": "psyburn"
+    },
+    {
+        "moveName": "psylight"
+    },
+    {
+        "moveName": "replicate"
+    },
+    {
+        "moveName": "wormhole"
+    },
+    {
+        "moveName": "bugbomb"
+    },
+    {
+        "moveName": "buggnaw"
+    },
+    {
+        "moveName": "bugnoise"
+    },
+    {
+        "moveName": "bugout"
+    },
+    {
+        "moveName": "decapattack"
+    },
+    {
+        "moveName": "engorge"
+    },
+    {
+        "moveName": "hivemind"
+    },
+    {
+        "moveName": "hornbuster"
+    },
+    {
+        "moveName": "piercepincer"
+    },
+    {
+        "moveName": "plague"
+    },
+    {
+        "moveName": "probepunch"
+    },
+    {
+        "moveName": "reprisal"
+    },
+    {
+        "moveName": "riderkick"
+    },
+    {
+        "moveName": "siphonbite"
+    },
+    {
+        "moveName": "swarmsignal"
+    },
+    {
+        "moveName": "webball"
+    },
+    {
+        "moveName": "ancientroar"
+    },
+    {
+        "moveName": "ancientroarsound"
+    },
+    {
+        "moveName": "asteroidbelt"
+    },
+    {
+        "moveName": "asteroidshot"
+    },
+    {
+        "moveName": "basilisksglare"
+    },
+    {
+        "moveName": "batteringram"
+    },
+    {
+        "moveName": "crystalize"
+    },
+    {
+        "moveName": "diamondclaw"
+    },
+    {
+        "moveName": "gemstoneglimmer"
+    },
+    {
+        "moveName": "geodecannon"
+    },
+    {
+        "moveName": "geosplinter"
+    },
+    {
+        "moveName": "hardknock"
+    },
+    {
+        "moveName": "jewelflash"
+    },
+    {
+        "moveName": "movemountains"
+    },
+    {
+        "moveName": "pressurize"
+    },
+    {
+        "moveName": "rubblerush"
+    },
+    {
+        "moveName": "salttherapy"
+    },
+    {
+        "moveName": "speedmite"
+    },
+    {
+        "moveName": "fakemonstonesurge"
+    },
+    {
+        "moveName": "tartantrum"
+    },
+    {
+        "moveName": "vulcanshammer"
+    },
+    {
+        "moveName": "abyssallure"
+    },
+    {
+        "moveName": "blackout"
+    },
+    {
+        "moveName": "channel"
+    },
+    {
+        "moveName": "cursedwrath"
+    },
+    {
+        "moveName": "engulf"
+    },
+    {
+        "moveName": "ghastlywail"
+    },
+    {
+        "moveName": "haunt"
+    },
+    {
+        "moveName": "phantomgrip"
+    },
+    {
+        "moveName": "possession"
+    },
+    {
+        "moveName": "shadowclamp"
+    },
+    {
+        "moveName": "shadowfin"
+    },
+    {
+        "moveName": "shadowsplit"
+    },
+    {
+        "moveName": "siphon"
+    },
+    {
+        "moveName": "souldevour"
+    },
+    {
+        "moveName": "soulshock"
+    },
+    {
+        "moveName": "spectralsap"
+    },
+    {
+        "moveName": "spookysound"
+    },
+    {
+        "moveName": "terrorize"
+    },
+    {
+        "moveName": "vanish"
+    },
+    {
+        "moveName": "zombiestrike"
+    },
+    {
+        "moveName": "causticbreath"
+    },
+    {
+        "moveName": "chomper"
+    },
+    {
+        "moveName": "dracoblitz"
+    },
+    {
+        "moveName": "dracojet"
+    },
+    {
+        "moveName": "dragonbeat"
+    },
+    {
+        "moveName": "dragonforce"
+    },
+    {
+        "moveName": "dragonendurance"
+    },
+    {
+        "moveName": "dragonhide"
+    },
+    {
+        "moveName": "dragonimpact"
+    },
+    {
+        "moveName": "dragonpledge"
+    },
+    {
+        "moveName": "dragonicbloom"
+    },
+    {
+        "moveName": "dragonicflare"
+    },
+    {
+        "moveName": "dragonicglow"
+    },
+    {
+        "moveName": "dragonicstrike"
+    },
+    {
+        "moveName": "dragonicwave"
+    },
+    {
+        "moveName": "dragonify"
+    },
+    {
+        "moveName": "drajectile"
+    },
+    {
+        "moveName": "drakonvoice"
+    },
+    {
+        "moveName": "drakonvoicesound"
+    },
+    {
+        "moveName": "quickturn"
+    },
+    {
+        "moveName": "royalbreath"
+    },
+    {
+        "moveName": "saurtooth"
+    },
+    {
+        "moveName": "tidaldragoon"
+    },
+    {
+        "moveName": "velvetscales"
+    },
+    {
+        "moveName": "zenithbreak"
+    },
+    {
+        "moveName": "blackhole"
+    },
+    {
+        "moveName": "bloodytriggers"
+    },
+    {
+        "moveName": "cataclysm"
+    },
+    {
+        "moveName": "cheapshot"
+    },
+    {
+        "moveName": "concertcrush"
+    },
+    {
+        "moveName": "darkbargain"
+    },
+    {
+        "moveName": "darkmatter"
+    },
+    {
+        "moveName": "darknetwork"
+    },
+    {
+        "moveName": "darkroar"
+    },
+    {
+        "moveName": "darkroarsound"
+    },
+    {
+        "moveName": "darkshot"
+    },
+    {
+        "moveName": "darkeningbolt"
+    },
+    {
+        "moveName": "deathnail"
+    },
+    {
+        "moveName": "demoralize"
+    },
+    {
+        "moveName": "devastate"
+    },
+    {
+        "moveName": "devilsdeed"
+    },
+    {
+        "moveName": "devilswrath"
+    },
+    {
+        "moveName": "drainlife"
+    },
+    {
+        "moveName": "exsanguinate"
+    },
+    {
+        "moveName": "hitandrun"
+    },
+    {
+        "moveName": "lunarcannon"
+    },
+    {
+        "moveName": "mowdown"
+    },
+    {
+        "moveName": "newmoon"
+    },
+    {
+        "moveName": "pokeburststream"
+    },
+    {
+        "moveName": "shadetrance"
+    },
+    {
+        "moveName": "standoff"
+    },
+    {
+        "moveName": "suddenstrike"
+    },
+    {
+        "moveName": "swindle"
+    },
+    {
+        "moveName": "veiledsky"
+    },
+    {
+        "moveName": "webwrecker"
+    },
+    {
+        "moveName": "wickedlash"
+    },
+    {
+        "moveName": "yuckytongue"
+    },
+    {
+        "moveName": "astrallance"
+    },
+    {
+        "moveName": "blastcannon"
+    },
+    {
+        "moveName": "blitzcannon"
+    },
+    {
+        "moveName": "carbonize"
+    },
+    {
+        "moveName": "chromeball"
+    },
+    {
+        "moveName": "duoscissorclaw"
+    },
+    {
+        "moveName": "earthmover"
+    },
+    {
+        "moveName": "emperorsedge"
+    },
+    {
+        "moveName": "geoimpact"
+    },
+    {
+        "moveName": "ironsphere"
+    },
+    {
+        "moveName": "lionsword"
+    },
+    {
+        "moveName": "magnetforce"
+    },
+    {
+        "moveName": "magnetize"
+    },
+    {
+        "moveName": "magnetpulse"
+    },
+    {
+        "moveName": "metalcruncher"
+    },
+    {
+        "moveName": "metalwhip"
+    },
+    {
+        "moveName": "mugencannon"
+    },
+    {
+        "moveName": "nailcrusher"
+    },
+    {
+        "moveName": "nanorepair"
+    },
+    {
+        "moveName": "razorblade"
+    },
+    {
+        "moveName": "risingimpact"
+    },
+    {
+        "moveName": "rocketdrive"
+    },
+    {
+        "moveName": "shieldbash"
+    },
+    {
+        "moveName": "stardust"
+    },
+    {
+        "moveName": "titanichorn"
+    },
+    {
+        "moveName": "acesplay"
+    },
+    {
+        "moveName": "beampulser"
+    },
+    {
+        "moveName": "beamshield"
+    },
+    {
+        "moveName": "beguile"
+    },
+    {
+        "moveName": "charminggnash"
+    },
+    {
+        "moveName": "cryforpeace"
+    },
+    {
+        "moveName": "dazzledust"
+    },
+    {
+        "moveName": "excalibur"
+    },
+    {
+        "moveName": "faengrush"
+    },
+    {
+        "moveName": "fairypledge"
+    },
+    {
+        "moveName": "fairyrush"
+    },
+    {
+        "moveName": "feralclutch"
+    },
+    {
+        "moveName": "feyhammer"
+    },
+    {
+        "moveName": "flavortest"
+    },
+    {
+        "moveName": "heavensknuckle"
+    },
+    {
+        "moveName": "knightsvow"
+    },
+    {
+        "moveName": "magicwall"
+    },
+    {
+        "moveName": "moonimpact"
+    },
+    {
+        "moveName": "moonrazer"
+    },
+    {
+        "moveName": "mysticchant"
+    },
+    {
+        "moveName": "pillowpummel"
+    },
+    {
+        "moveName": "somnismog"
+    },
+    {
+        "moveName": "spiritaway"
+    },
+    {
+        "moveName": "fairydust"
+    },
+    {
+        "moveName": "squeezehug"
+    },
+    {
+        "moveName": "starstorm"
+    },
+    {
+        "moveName": "sugarrush"
+    },
+    {
+        "moveName": "trickshot"
+    },
+    {
+        "moveName": "shadowblast"
+    },
+    {
+        "moveName": "shadowblitz"
+    },
+    {
+        "moveName": "shadowbolt"
+    },
+    {
+        "moveName": "shadowbreak"
+    },
+    {
+        "moveName": "shadowchill"
+    },
+    {
+        "moveName": "shadowdown"
+    },
+    {
+        "moveName": "shadowend"
+    },
+    {
+        "moveName": "shadowfire"
+    },
+    {
+        "moveName": "shadowhalf"
+    },
+    {
+        "moveName": "shadowhold"
+    },
+    {
+        "moveName": "shadowmist"
+    },
+    {
+        "moveName": "shadowpanic"
+    },
+    {
+        "moveName": "shadowrave"
+    },
+    {
+        "moveName": "shadowrush"
+    },
+    {
+        "moveName": "shadowshed"
+    },
+    {
+        "moveName": "shadowsky"
+    },
+    {
+        "moveName": "shadowstorm"
+    },
+    {
+        "moveName": "shadowwave"
+    },
+    {
+        "moveName": "exploitsion"
+    },
+    {
+        "moveName": "h4k41"
+    },
+    {
+        "moveName": "glitch"
+    },
+    {
+        "moveName": "integeroverflow"
+    },
+    {
+        "moveName": "shimmershot"
+    },
+    {
+        "moveName": "simulateddread"
+    },
+    {
+        "moveName": "sssslash"
+    },
+    {
+        "moveName": "asteroidfist"
+    },
+    {
+        "moveName": "astralshot"
+    },
+    {
+        "moveName": "astroforcecosmic"
+    },
+    {
+        "moveName": "bigbang"
+    },
+    {
+        "moveName": "cometcrash"
+    },
+    {
+        "moveName": "cometshower"
+    },
+    {
+        "moveName": "cosmichorror"
+    },
+    {
+        "moveName": "cosmicray"
+    },
+    {
+        "moveName": "divinecall"
+    },
+    {
+        "moveName": "eventhorizon"
+    },
+    {
+        "moveName": "galaxyslash"
+    },
+    {
+        "moveName": "giantstep"
+    },
+    {
+        "moveName": "giganumecluster"
+    },
+    {
+        "moveName": "gravitybeam"
+    },
+    {
+        "moveName": "gravitywavecosmic"
+    },
+    {
+        "moveName": "hammerclaw"
+    },
+    {
+        "moveName": "liftoff"
+    },
+    {
+        "moveName": "meteorblitz"
+    },
+    {
+        "moveName": "meteorstormpunisher"
+    },
+    {
+        "moveName": "meteorstrike"
+    },
+    {
+        "moveName": "rocketdrillkick"
+    },
+    {
+        "moveName": "shootingstar"
+    },
+    {
+        "moveName": "solarflare"
+    },
+    {
+        "moveName": "spaceslam"
+    },
+    {
+        "moveName": "spaciumbeam"
+    },
+    {
+        "moveName": "spaghettification"
+    },
+    {
+        "moveName": "starshot"
+    },
+    {
+        "moveName": "stardustcosmic"
+    },
+    {
+        "moveName": "starlightshower"
+    },
+    {
+        "moveName": "starstormcosmic"
+    },
+    {
+        "moveName": "suitup"
+    },
+    {
+        "moveName": "supernova"
+    },
+    {
+        "moveName": "universalcutter"
+    },
+    {
+        "moveName": "wormholecosmic"
+    },
+    {
+        "moveName": "amethystassault"
+    },
+    {
+        "moveName": "clustercrash"
+    },
+    {
+        "moveName": "crystaldance"
+    },
+    {
+        "moveName": "crystalrush"
+    },
+    {
+        "moveName": "crystalizecrystal"
+    },
+    {
+        "moveName": "crystallization"
+    },
+    {
+        "moveName": "diamondaxe"
+    },
+    {
+        "moveName": "diamondclawcrystal"
+    },
+    {
+        "moveName": "diamonddrop"
+    },
+    {
+        "moveName": "diamonddust"
+    },
+    {
+        "moveName": "diamondsword"
+    },
+    {
+        "moveName": "garnetbeam"
+    },
+    {
+        "moveName": "gemstoneglimmercrystal"
+    },
+    {
+        "moveName": "gemstoneimpact"
+    },
+    {
+        "moveName": "geodecannoncrystal"
+    },
+    {
+        "moveName": "jewelflashcrystal"
+    },
+    {
+        "moveName": "jewelshards"
+    },
+    {
+        "moveName": "shatterfist"
+    },
+    {
+        "moveName": "altf4"
+    },
+    {
+        "moveName": "antivirusnet"
+    },
+    {
+        "moveName": "banhammer"
+    },
+    {
+        "moveName": "copypaste"
+    },
+    {
+        "moveName": "clonestamp"
+    },
+    {
+        "moveName": "criticalstrike"
+    },
+    {
+        "moveName": "cyberfist"
+    },
+    {
+        "moveName": "datadrill"
+    },
+    {
+        "moveName": "dataoverflow"
+    },
+    {
+        "moveName": "datatransfer"
+    },
+    {
+        "moveName": "ddosattack"
+    },
+    {
+        "moveName": "ddrkicks"
+    },
+    {
+        "moveName": "decode"
+    },
+    {
+        "moveName": "defragmentation"
+    },
+    {
+        "moveName": "denialofservice"
+    },
+    {
+        "moveName": "digibeam"
+    },
+    {
+        "moveName": "disceject"
+    },
+    {
+        "moveName": "discrot"
+    },
+    {
+        "moveName": "doomscrolling"
+    },
+    {
+        "moveName": "excitebike"
+    },
+    {
+        "moveName": "fatalexception"
+    },
+    {
+        "moveName": "firewall"
+    },
+    {
+        "moveName": "fullbattery"
+    },
+    {
+        "moveName": "gigabyte"
+    },
+    {
+        "moveName": "groundpound"
+    },
+    {
+        "moveName": "hololaser"
+    },
+    {
+        "moveName": "increasedram"
+    },
+    {
+        "moveName": "infobeam"
+    },
+    {
+        "moveName": "kylobyte"
+    },
+    {
+        "moveName": "megabyte"
+    },
+    {
+        "moveName": "minmax"
+    },
+    {
+        "moveName": "networking"
+    },
+    {
+        "moveName": "overclock"
+    },
+    {
+        "moveName": "pacstrike"
+    },
+    {
+        "moveName": "polygonalsword"
+    },
+    {
+        "moveName": "reformat"
+    },
+    {
+        "moveName": "remotecontrol"
+    },
+    {
+        "moveName": "smartstrike"
+    },
+    {
+        "moveName": "spam"
+    },
+    {
+        "moveName": "superstar"
+    },
+    {
+        "moveName": "spindash"
+    },
+    {
+        "moveName": "trojanhorse"
+    },
+    {
+        "moveName": "upgrade"
+    },
+    {
+        "moveName": "usbwhip"
+    },
+    {
+        "moveName": "virusskaterdigital"
+    },
+    {
+        "moveName": "wavedash"
+    },
+    {
+        "moveName": "aurorawave"
+    },
+    {
+        "moveName": "blindingflash"
+    },
+    {
+        "moveName": "brightbreak"
+    },
+    {
+        "moveName": "flashbang"
+    },
+    {
+        "moveName": "flashpulse"
+    },
+    {
+        "moveName": "focalforce"
+    },
+    {
+        "moveName": "gatlinglaser"
+    },
+    {
+        "moveName": "glisteningstrike"
+    },
+    {
+        "moveName": "glowingorb"
+    },
+    {
+        "moveName": "glowwhack"
+    },
+    {
+        "moveName": "lightcharge"
+    },
+    {
+        "moveName": "lighttouch"
+    },
+    {
+        "moveName": "photonblitz"
+    },
+    {
+        "moveName": "prismarush"
+    },
+    {
+        "moveName": "prismpunch"
+    },
+    {
+        "moveName": "radiantblade"
+    },
+    {
+        "moveName": "rainbowpunch"
+    },
+    {
+        "moveName": "reflectivecloak"
+    },
+    {
+        "moveName": "shimmershotlight"
+    },
+    {
+        "moveName": "shine"
+    },
+    {
+        "moveName": "shininglaser"
+    },
+    {
+        "moveName": "solarpunch"
+    },
+    {
+        "moveName": "solarspear"
+    },
+    {
+        "moveName": "sunbath"
+    },
+    {
+        "moveName": "superluminalstrike"
+    },
+    {
+        "moveName": "uvray"
+    },
+    {
+        "moveName": "atomsplitnuclear"
+    },
+    {
+        "moveName": "atomicbreath"
+    },
+    {
+        "moveName": "atomicpunch"
+    },
+    {
+        "moveName": "expunge"
+    },
+    {
+        "moveName": "fallout"
+    },
+    {
+        "moveName": "fissionburst"
+    },
+    {
+        "moveName": "gammaray"
+    },
+    {
+        "moveName": "halflife"
+    },
+    {
+        "moveName": "meltdownnuclear"
+    },
+    {
+        "moveName": "nuclearpulse"
+    },
+    {
+        "moveName": "nuclearslash"
+    },
+    {
+        "moveName": "nuclearwaste"
+    },
+    {
+        "moveName": "protonbeam"
+    },
+    {
+        "moveName": "quantumleap"
+    },
+    {
+        "moveName": "radioacid"
+    },
+    {
+        "moveName": "spiralheatray"
+    },
+    {
+        "moveName": "uraniumheatbeam"
+    },
+    {
+        "moveName": "actionsword"
+    },
+    {
+        "moveName": "blockblitz"
+    },
+    {
+        "moveName": "bricktrap"
+    },
+    {
+        "moveName": "brickwall"
+    },
+    {
+        "moveName": "buildup"
+    },
+    {
+        "moveName": "clockworkmouse"
+    },
+    {
+        "moveName": "compoundbrick"
+    },
+    {
+        "moveName": "constructionblocks"
+    },
+    {
+        "moveName": "elasticwave"
+    },
+    {
+        "moveName": "foamarrows"
+    },
+    {
+        "moveName": "foambullets"
+    },
+    {
+        "moveName": "foamdarts"
+    },
+    {
+        "moveName": "massproduction"
+    },
+    {
+        "moveName": "moltenplasticblast"
+    },
+    {
+        "moveName": "planepound"
+    },
+    {
+        "moveName": "plasticblade"
+    },
+    {
+        "moveName": "plasticexplosive"
+    },
+    {
+        "moveName": "plasticrings"
+    },
+    {
+        "moveName": "plasticseal"
+    },
+    {
+        "moveName": "plasticstorm"
+    },
+    {
+        "moveName": "polyblast"
+    },
+    {
+        "moveName": "polymercannon"
+    },
+    {
+        "moveName": "polymerpelt"
+    },
+    {
+        "moveName": "syntheticsurge"
+    },
+    {
+        "moveName": "toycarcrash"
+    },
+    {
+        "moveName": "toyhammer"
+    },
+    {
+        "moveName": "undegradeable"
+    },
+    {
+        "moveName": "amoebahammer"
+    },
+    {
+        "moveName": "flop"
+    },
+    {
+        "moveName": "flubberfang"
+    },
+    {
+        "moveName": "gelatinousdoom"
+    },
+    {
+        "moveName": "glorp"
+    },
+    {
+        "moveName": "gooeystrike"
+    },
+    {
+        "moveName": "goopelt"
+    },
+    {
+        "moveName": "jellybounce"
+    },
+    {
+        "moveName": "miresurgeslime"
+    },
+    {
+        "moveName": "protectivelayer"
+    },
+    {
+        "moveName": "slimeball"
+    },
+    {
+        "moveName": "slimecannon"
+    },
+    {
+        "moveName": "slimetrail"
+    },
+    {
+        "moveName": "slimeyslam"
+    },
+    {
+        "moveName": "slimyspit"
+    },
+    {
+        "moveName": "tendril"
+    },
+    {
+        "moveName": "viscosityslam"
+    },
+    {
+        "moveName": "babble"
+    },
+    {
+        "moveName": "bansheesscream"
+    },
+    {
+        "moveName": "bluenote"
+    },
+    {
+        "moveName": "cacophony"
+    },
+    {
+        "moveName": "charmingtweetysound"
+    },
+    {
+        "moveName": "cymbalcrash"
+    },
+    {
+        "moveName": "deafeningnoise"
+    },
+    {
+        "moveName": "discofever"
+    },
+    {
+        "moveName": "echoingblow"
+    },
+    {
+        "moveName": "electroswing"
+    },
+    {
+        "moveName": "giggle"
+    },
+    {
+        "moveName": "hiss"
+    },
+    {
+        "moveName": "noiseburst"
+    },
+    {
+        "moveName": "omnihowlsound"
+    },
+    {
+        "moveName": "pentascale"
+    },
+    {
+        "moveName": "primalscream"
+    },
+    {
+        "moveName": "revup"
+    },
+    {
+        "moveName": "rhythmstrike"
+    },
+    {
+        "moveName": "soundbarrier"
+    },
+    {
+        "moveName": "soundpledge"
+    },
+    {
+        "moveName": "soundpound"
+    },
+    {
+        "moveName": "subwoofer"
+    },
+    {
+        "moveName": "warblesound"
+    },
+    {
+        "moveName": "wilddance"
+    },
+    {
+        "moveName": "wildroarsound"
+    },
+    {
+        "moveName": "yoink"
+    },
+    {
+        "moveName": "aerobuster"
+    },
+    {
+        "moveName": "cloudburstwind"
+    },
+    {
+        "moveName": "cyclonebeatdown"
+    },
+    {
+        "moveName": "ozonebeam"
+    },
+    {
+        "moveName": "secondwind"
+    },
+    {
+        "moveName": "squallstrike"
+    },
+    {
+        "moveName": "stormbomb"
+    },
+    {
+        "moveName": "tornado"
+    },
+    {
+        "moveName": "arceanbanish"
+    },
+    {
+        "moveName": "banishingfist"
+    },
+    {
+        "moveName": "darkwhispers"
+    },
+    {
+        "moveName": "devillishfavor"
+    },
+    {
+        "moveName": "eldritchblast"
+    },
+    {
+        "moveName": "eldritchinvocation"
+    },
+    {
+        "moveName": "eternalhex"
+    },
+    {
+        "moveName": "giraternalgrip"
+    },
+    {
+        "moveName": "lovecraftianmaw"
+    },
+    {
+        "moveName": "mentalanguish"
+    },
+    {
+        "moveName": "necromagiceldritch"
+    },
+    {
+        "moveName": "necroticpunch"
+    },
+    {
+        "moveName": "otherworldlytentacles"
+    },
+    {
+        "moveName": "rottingsparks"
+    },
+    {
+        "moveName": "sacrificialpact"
+    }
+]

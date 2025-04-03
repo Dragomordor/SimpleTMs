@@ -209,7 +209,7 @@
         "simpletms:tr_brainstorm",
         "simpletms:tr_cosmicrays",
         "simpletms:tr_dejavu",
-        "simpletms:tr_focused ram",
+        "simpletms:tr_focusedram",
         "simpletms:tr_gravitywave",
         "simpletms:tr_hypnopulse",
         "simpletms:tr_instancrush",
@@ -648,7 +648,6 @@
         "simpletms:tr_necroticpunch",
         "simpletms:tr_otherworldlytentacles",
         "simpletms:tr_rottingsparks",
-        "simpletms:tr_sacrificialpact",
-        "simpletms:tr_nan"
+        "simpletms:tr_sacrificialpact"
     ]
 }
