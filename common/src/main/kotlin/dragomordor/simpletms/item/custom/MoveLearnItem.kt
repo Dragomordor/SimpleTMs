@@ -83,19 +83,6 @@ class MoveLearnItem(
         return super.isValidRepairItem(itemStack, itemStack2)
     }
 
-
-//    // Just  listed here for future reference for the TM disc case?
-//    override fun overrideOtherStackedOnMe(
-//        itemStack: ItemStack,
-//        itemStack2: ItemStack,
-//        slot: Slot,
-//        clickAction: ClickAction,
-//        player: Player,
-//        slotAccess: SlotAccess
-//    ): Boolean {
-//        return super.overrideOtherStackedOnMe(itemStack, itemStack2, slot, clickAction, player, slotAccess)
-//    }
-
     // ------------------------------------------------------------------
     // Override methods from PokemonSelectingItemNonBattle
     // ------------------------------------------------------------------

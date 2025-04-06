@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#simpletms:tm_items",
-    "#simpletms:tr_items",
-    "simpletms:tr_blank",
-    "simpletms:tm_blank"
-  ]
-}

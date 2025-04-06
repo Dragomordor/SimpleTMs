@@ -1,7 +1,10 @@
 package dragomordor.simpletms.util
 
+import dragomordor.simpletms.SimpleTMs
+import dragomordor.simpletms.SimpleTMs.MOD_ID
 import net.minecraft.core.registries.Registries
 import net.minecraft.tags.TagKey
+import java.io.File
 
 @Suppress("unused")
 object SimpleTMsTags {
@@ -47,6 +50,28 @@ object SimpleTMsTags {
     @JvmField val TYPE_FAIRY_TM = create("type_fairy_tm")
     @JvmField val TYPE_FAIRY_TR = create("type_fairy_tr")
     // TODO: Custom types for GEB here
+    @JvmField val TYPE_COSMIC_TM = create("type_cosmic_tm")
+    @JvmField val TYPE_COSMIC_TR = create("type_cosmic_tr")
+    @JvmField val TYPE_CRYSTAL_TM = create("type_crystal_tm")
+    @JvmField val TYPE_CRYSTAL_TR = create("type_crystal_tr")
+    @JvmField val TYPE_DIGITAL_TM = create("type_digital_tm")
+    @JvmField val TYPE_DIGITAL_TR = create("type_digital_tr")
+    @JvmField val TYPE_LIGHT_TM = create("type_light_tm")
+    @JvmField val TYPE_LIGHT_TR = create("type_light_tr")
+    @JvmField val TYPE_NUCLEAR_TM = create("type_nuclear_tm")
+    @JvmField val TYPE_NUCLEAR_TR = create("type_nuclear_tr")
+    @JvmField val TYPE_PLASTIC_TM = create("type_plastic_tm")
+    @JvmField val TYPE_PLASTIC_TR = create("type_plastic_tr")
+    @JvmField val TYPE_UNKNOWN_TM = create("type_unknown_tm")
+    @JvmField val TYPE_UNKNOWN_TR = create("type_unknown_tr")
+    @JvmField val TYPE_SHADOW_TM = create("type_shadow_tm")
+    @JvmField val TYPE_SHADOW_TR = create("type_shadow_tr")
+    @JvmField val TYPE_SLIME_TM = create("type_slime_tm")
+    @JvmField val TYPE_SLIME_TR = create("type_slime_tr")
+    @JvmField val TYPE_SOUND_TM = create("type_sound_tm")
+    @JvmField val TYPE_SOUND_TR = create("type_sound_tr")
+    @JvmField val TYPE_WIND_TM = create("type_wind_tm")
+    @JvmField val TYPE_WIND_TR = create("type_wind_tr")
 
     // For move categories
     @JvmField val CATEGORY_PHYSICAL_TM = create("category_physical_tm")
@@ -58,4 +83,5 @@ object SimpleTMsTags {
 
     // Helper function to create a tag key
     private fun create(path: String) = TagKey.create(Registries.ITEM, simpletmsResource(path))
+
 }

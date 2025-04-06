@@ -173,7 +173,6 @@ object MoveLearnItemDropEventListeners : EventHandler {
         if (DropAny) {
             // Remove moves that do not have a TM or TR
             val movesWithItems = (allMoves.filter { SimpleTMsItems.hasItemForMove(it, isTR) }).toMutableList()
-            // TODO: Exclude moves based on config options
             val excludedMoves = SimpleTMsItems.ALL_MOVES_EXCLUDED_FROM_POKEMON_DROPS
             movesWithItems.removeIf({ move -> excludedMoves.contains(move.name) })
             val applicableMoves = movesWithItems.toList()
@@ -218,8 +217,6 @@ object MoveLearnItemDropEventListeners : EventHandler {
 
         // Remove moves that do not have a TM or TR
         applicableMoves.removeIf { move -> !SimpleTMsItems.hasItemForMove(move, isTR) }
-
-        // TODO: Exclude moves based on config options
         val excludedMoves = SimpleTMsItems.ALL_MOVES_EXCLUDED_FROM_POKEMON_DROPS
         applicableMoves.removeIf({ move -> excludedMoves.contains(move.name) })
 

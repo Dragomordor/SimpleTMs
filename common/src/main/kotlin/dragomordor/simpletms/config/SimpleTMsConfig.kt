@@ -136,10 +136,7 @@ class SimpleTMsConfig {
     var dropFromEggMoveList: Boolean = true
 
     @NodeCategory(Category.Experimental)
-    var allowItemRemovalATOWNRISK: Boolean = false
-
-    @NodeCategory(Category.Experimental)
-    var allowCustomMoves: Boolean = false
+    var allowCustomMovesAndEditing: Boolean = false
 }
 
 @Target(AnnotationTarget.FIELD)

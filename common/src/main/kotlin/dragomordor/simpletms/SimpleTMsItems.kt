@@ -2,27 +2,20 @@ package dragomordor.simpletms
 
 import com.cobblemon.mod.common.api.moves.Move
 import com.cobblemon.mod.common.api.moves.MoveTemplate
-import com.cobblemon.mod.common.pokemon.Species
-import com.cobblemon.mod.common.util.ifIsType
 import dev.architectury.registry.registries.DeferredRegister
 import dev.architectury.registry.registries.RegistrySupplier
 import dragomordor.simpletms.SimpleTMs.LOGGER
 import dragomordor.simpletms.SimpleTMs.MOD_ID
 import dragomordor.simpletms.item.custom.BlankTmItem
 import dragomordor.simpletms.item.custom.MoveLearnItem
-import dragomordor.simpletms.util.MoveAssociations
 import dragomordor.simpletms.util.MoveLearnItemDefinition
-import dragomordor.simpletms.util.fromLang
 import dragomordor.simpletms.util.simpletmsResource
 import kotlinx.serialization.json.Json
-import net.minecraft.client.renderer.item.ItemProperties
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.item.Item
 import net.minecraft.core.registries.Registries
-import net.minecraft.network.chat.MutableComponent
 import net.minecraft.world.item.Item.Properties
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.component.ItemAttributeModifiers
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
@@ -250,7 +243,7 @@ object SimpleTMsItems {
         // Default moves
         LOGGER.info("Registering default move TMs and TRs")
         // If the config allows move removal, then register from configs. Otherwise, register from default internal json
-        if (SimpleTMs.config.allowItemRemovalATOWNRISK) {
+        if (SimpleTMs.config.allowCustomMovesAndEditing) {
             registerMoveLearnItemsFromConfig(defaultTMMoveConfigFile, false)
         } else {
             registerMoveLearnItemsFromResourceJSON(DEFAULT_MOVE_JSON_PATH, false)
@@ -285,7 +278,7 @@ object SimpleTMsItems {
     }
 
     private fun loadCustomMoves(customJsonFilePath: String) {
-        if (SimpleTMs.config.allowCustomMoves) {
+        if (SimpleTMs.config.allowCustomMovesAndEditing) {
             // Register TMs adn TRs from json
             registerMoveLearnItemsFromConfig(File(customJsonFilePath), true)
         }

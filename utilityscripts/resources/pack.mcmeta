@@ -1,7 +1,0 @@
-{
-  "pack": {
-    "pack_format": 15,
-    "supported_formats": [15, 99],
-    "description": "Gravel's Extended Battles Compatability for Simple TMs."
-  }
-}

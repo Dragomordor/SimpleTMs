@@ -9,14 +9,12 @@ SimpleTMs allows players to teach moves to their Pokémon in Cobblemon using TMs
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Features
 
 ### TM and TR Usage
-- **TMs:** Teach a specific move to a Pokémon. By default, TMs have **32 uses** and can optionally be enchanted with **Unbreaking** and **Mending** using an anvil.
+- **TMs:** Teach a specific move to a Pokémon. By default, TMs have **32 uses**. They can also be repaired using diamond blocks in an anvil.
 - **TRs:** Function similarly but break after a **single use**.
 - TMs and TRs with assigned moves (not blank ones) are used like most Cobblemon items. A screen will appear, allowing the player to choose a Pokémon from their party if it can learn the move.
 - TMs and TRs display **tooltips** with move details, including description, type, and more.
-- Tooltips also list all Pokémon that can learn the move, scrollable while hovering over the item.
 - By default, Pokémon can learn moves from their **TM**, **Tutor**, and **Egg** Move groups.
   - Check [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Main_Page) for a detailed list of what moves a Pokémon can learn.
-
 
 ##### Usage Preview
 
@@ -77,9 +75,9 @@ SimpleTMs allows players to teach moves to their Pokémon in Cobblemon using TMs
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Requirements
 
 #### For NeoForge and Fabric
-- **Minecraft 1.21.1** is required for SimpleTMs v2.0.0.
-- **Cobblemon v1.6** ([Curseforge](https://www.curseforge.com/minecraft/mc-mods/cobblemon) & [Modrinth](https://modrinth.com/mod/cobblemon)) is required to use SimpleTMs v2.0.0.
-- **Architectury API v13.0.6 or higher** ([Curseforge](https://www.curseforge.com/minecraft/mc-mods/architectury-api) & [Modrinth](https://modrinth.com/mod/architectury-api)) is required for SimpleTMs v2.0.0.
+- **Minecraft 1.21.1** is required for SimpleTMs v2.1.0.
+- **Cobblemon v1.6.1** ([Curseforge](https://www.curseforge.com/minecraft/mc-mods/cobblemon) & [Modrinth](https://modrinth.com/mod/cobblemon)) is required to use SimpleTMs v2.1.0.
+- **Architectury API v13.0.6 or higher** ([Curseforge](https://www.curseforge.com/minecraft/mc-mods/architectury-api) & [Modrinth](https://modrinth.com/mod/architectury-api)) is required for SimpleTMs v2.1.0.
 #### For Fabric Only
 - **Fabric API for Minecraft 1.21.1** ([Curseforge](https://www.curseforge.com/minecraft/mc-mods/fabric-api) & [Modrinth](https://modrinth.com/mod/fabric-api)).
 #### NeoForge Only
@@ -89,60 +87,12 @@ SimpleTMs allows players to teach moves to their Pokémon in Cobblemon using TMs
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Configuration
 
-The `main.json` configuration file is located in the `config/simpletms/` folder. Below is a list of key options available for customization:
+Check the `CONFIG.md` file on the [github repository](link) for information on the configuration options available in SimpleTMs.
 
-The `main.json` configuration file defines various settings for TMs and TRs. Below is a list of key options available for customization:
+### Gravel's Extended Battles Compatibility
 
-| Option                                   | Description                                                                               | Default Value      | Range/Notes                                                                     |
-|------------------------------------------|-------------------------------------------------------------------------------------------|--------------------|---------------------------------------------------------------------------------|
-| `tmMovesLearnable`                       | Allows Pokémon to learn moves from their TM move learnset.                                | true               | true/false                                                                      |
-| `eggMovesLearnable`                      | Allows Pokémon to learn moves from their egg move learnset.                               | true               | true/false                                                                      |
-| `tutorMovesLearnable`                    | Allows Pokémon to learn moves from their tutor move learnset.                             | true               | true/false                                                                      |
-| `levelMovesLearnable`                    | Makes Pokémon able to learn moves gained from leveling up early using TMs.                | false              | true/false                                                                      |
-| `anyMovesLearnable`                      | Allows any Pokémon to learn any move.                                                     | false              | true/false                                                                      |
-| `blankTMsUsable`                         | Allows blank TMs to be used.                                                              | true               | true/false                                                                      |
-| `blankTRsUsable`                         | Allows blank TRs to be used.                                                              | true               | true/false                                                                      |
-| `tmsUsable`                              | Allows TMs to be used  (doesn't affect Blank TMs)                                         | true               | true/false                                                                      |
-| `trsUsable`                              | Allows TRs to be used  (doesn't affect Blank TRs)                                         | true               | true/false                                                                      |
-| `tmCoolDownTicks`                        | The number of Minecraft ticks the TM will be on cooldown after use.                       | 0                  | Integer (0 to 51840000) - 30 days max                                           |
-| `blankTMCoolDownTicks`                   | The number of Minecraft ticks the blank TM will be on cooldown after use.                 | 0                  | Integer (0 to 51840000) - 30 days max                                           |
-| `tmBaseDurability`                       | Specifies the durability (uses) for TMs based on Minecraft's base durability.             | 32                 | Integer (1 to 1024)                                                             |
-| `blankTMBaseDurability`                  | Specifies the durability (uses) for blank TMs based on Minecraft's base durability.       | 1                  | Integer (1 to 1024)                                                             |
-| `blankTRBaseDurability`                  | Specifies the durability (uses) for blank TRs based on Minecraft's base durability.       | 1                  | Integer (1 to 1024)                                                             |
-| `trStackSize`                            | The stack size for TRs and blank TRs.                                                     | 16                 | Integer (1 to 64)                                                               |
-| `dropOutsideOfBattle`                    | Allows Pokémon to drop TMs and TRs when defeated outside of battle.                       | true               | true/false                                                                      |
-| `dropInBattle`                           | Allows Pokémon to drop TMs and TRs when defeated in battle.                               | true               | true/false                                                                      |
-| `dropRateInBattle`                       | The drop rate (%) of TMs and TRs in battle (0.1 = 10%).                                   | 0.1                | 0.0-1.0 (Percentage as decimal)                                                 |
-| `dropRateOutsideOfBattle`                | The drop rate (%) of TMs and TRs outside of battle.                                       | 0.1                | 0.0-1.0 (Percentage as decimal)                                                 |
-| `dropRateTMFractionInBattle`             | The fraction of drops that are TMs instead of TRs in battle. (0.1 = 10%)                  | 0.1                | 0.0-1.0 (Percentage as decimal)                                                 |
-| `dropRateTMFractionOutsideOfBattle`      | The fraction of drops that are TMs instead of TRs outside of battle.                      | 0.1                | 0.0-1.0 (Percentage as decimal)                                                 |
-| `numberOfMovesToChooseFromInBattle`      | Number of random moves to choose from after defeating Pokémon in battle.                  | 4                  | Integer (1-4)                                                                   |
-| `numberOfMovesToChooseFromOutsideBattle` | Number of random moves to choose from after defeating Pokémon outside of battle.          | 1                  | Integer (1-4)                                                                   |
-| `dropAnyMove`                            | Pokémon can drop any move as a TM or TR, regardless of the Pokémon.                       | false              | true/false                                                                      |
-| `dropPrimaryType`                        | Pokémon can drop moves from their primary elemental type (e.g. Fire type).                | false              | true/false                                                                      |
-| `dropSecondaryType`                      | Pokémon can drop moves from their secondary elemental type (e.g. Flying).                 | false              | true/false                                                                      |
-| `dropFromLevelList`                      | Pokémon drop moves they learn from leveling up (only up to their current level).          | true               | true/false                                                                      |
-| `dropAnyLevelMoveFromLevelList`          | Pokémon can drop any move from their level-up list, even moves learned at a higher level. | false              | true/false                                                                      |
-| `dropFromTmMoveList`                     | Pokémon drop moves from their TM move learnset.                                           | true               | true/false                                                                      |
-| `dropFromEggMoveList`                    | Pokémon drop moves from their egg move learnset.                                          | true               | true/false                                                                      |
-| `dropFromTutorMoveList`                  | Pokémon drop moves from their tutor move learnset.                                        | true               | true/false                                                                      |
-| `showPokemonThatCanLearnMove`            | Show a scrollable tooltip on TMs and TRs with all Pokémon that can learn the move.        | true               | true/false                                                                      |
-| `pokemonSortOrder`                       | The order to sort Pokémon in the tooltip for TMs and TRs.                                 | "ALPHABETICAL_ASC" | "ALPHABETICAL_DESC", "ALPHABETICAL_ASC", POKEMON_TYPE_DESC", "POKEMON_TYPE_ASC" |
- | `allowItemRemovalATOWNRISK`              | Allows players to remove TMs and TRs from the game. See *Note                             | false              | true/false                                                                      |
-* *Note: This option is not encouraged. To remove TM and TR items, set this to true and remove entries from the `config/simpletms/moves/default_tr_moves.json` and `config/simpletms/moves/default_tm_moves.json` files. This will prevent the items from being added to the game, but it will not remove existing items from the world or player inventories.This also prevents you from accessing servers with those items. For servers that remove entries, be aware tha players can still see the items in jei if they did not remove it from their configs. THey cannot get these items however, so it is purely visual*
-
-### Excluding Moves
-
-To exclude moves from either Pokémon drops, Blank TMs, or TM Learning, add the move to the relevant excluded moves json file located in the `config/simpletms/moves/` folder. This file contains a list of moves to exclude from the mod's functionality.
-For example, to exclude the move Ember from pokemon drops, add the following to the `excluded_moves_from_pokemon_drops.json` file:
-
-```json
-[
-  {
-    "moveName": "ember"
-  }
-]
-```
+Update 2.1.0 of SimpleTMs introduced compatibility with [Gravel's Extended Battles](link) mod using a data/resource pack, adding TMs and TRs for the new moves and types added. 
+For information on how to use this, check the `CONFIG.md` file in the [github repository](link). You can find the pack there, or on [CurseForge](link) / [Modrinth](link)
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Support and Feedback
 If you encounter any issues or have suggestions for improvement, feel free to create an issue on the GitHub repository.
@@ -160,25 +110,21 @@ There is also a support channel on the Cobblemon discord, where you can ask for 
 
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Future development
-- Update japanese lang file to newest version provided by Nyankoro
-
+- Check the milestones page on the github for future ideas.
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Known Issues 
-- Nothing so far :)
+- Check the github Issues Tab :). You can also submit issues there yourself!
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) License
 This mod is licensed under the Mozilla Public License Version 2.0 license. Refer to the LICENSE file on the Github for more information.
 
-
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Credits
 
 - SimpleTMs mod was developed by Dragomordor (me)
-- Huge thanks to Dogto Bloo for allowing me to use his retextures of the original v1 of this mod, as they were a much better replacement to the initial textures I made.
+- Huge thanks to Dogtor Bloo for allowing me to use his retextures of the original v1 of this mod, as they were a much better replacement to the initial textures I made.
 - Big thanks to the Cobblemon discord for always having people on that help with testing, ideas and banter.
-- Nyankoro for providing a japanese translation for the before release.
 - Anyone and everyone that support me through kind words of how they enjoyed the original mod so much. That motivated me a lot to rework and modernize it.
 - Anyone who supports me financially using my Kofi link. This is 100% not needed by anyone, and yet some people still want to give back. HUGE props to them for making my side hobby able to make me buy pizza every now and then.
-
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Support Me
 
