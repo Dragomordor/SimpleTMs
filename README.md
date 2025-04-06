@@ -6,6 +6,8 @@
 
 SimpleTMs allows players to teach moves to their Pokémon in Cobblemon using TMs and TRs.
 
+## Disclaimer : Version 2.0.0 is for Cobblemon 1.6; Version 2.1.0 is for Cobblemon 1.6.1. Make sure you install the correct version. There is a backport available for Cobblemon 1.5.2 as well
+
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Features
 
 ### TM and TR Usage
