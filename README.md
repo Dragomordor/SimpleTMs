@@ -6,7 +6,7 @@
 
 SimpleTMs allows players to teach moves to their Pokémon in Cobblemon using TMs and TRs.
 
-## Disclaimer : Version 2.0.0 is for Cobblemon 1.6; Version 2.1.0 is for Cobblemon 1.6.1. Make sure you install the correct version. There is a backport available for Cobblemon 1.5.2 as well
+## Disclaimer : Version 2.0.0 is for Cobblemon 1.6; Version >2.0.2 is for Cobblemon 1.6.1. Make sure you install the correct version. There is a backport available for Cobblemon 1.5.2 as well
 
 ## ![](https://gitlab.com/cable-mc/cobblemon-assets/-/raw/master/graphics/cobblemon_icon.png?ref_type=heads) Features
 
@@ -125,6 +125,7 @@ This mod is licensed under the Mozilla Public License Version 2.0 license. Refer
 - SimpleTMs mod was developed by Dragomordor (me)
 - Huge thanks to Dogtor Bloo for allowing me to use his retextures of the original v1 of this mod, as they were a much better replacement to the initial textures I made.
 - Big thanks to the Cobblemon discord for always having people on that help with testing, ideas and banter.
+- For players who submitted Japanese and Spanish translations!
 - Anyone and everyone that support me through kind words of how they enjoyed the original mod so much. That motivated me a lot to rework and modernize it.
 - Anyone who supports me financially using my Kofi link. This is 100% not needed by anyone, and yet some people still want to give back. HUGE props to them for making my side hobby able to make me buy pizza every now and then.
 

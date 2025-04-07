@@ -32,7 +32,6 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
     // Override methods from Item
     // ------------------------------------------------------------------
 
-
     // ------------------------------------------------------------------
     // Override methods from PokemonAndMoveSelectingItemNonBattle
     // ------------------------------------------------------------------

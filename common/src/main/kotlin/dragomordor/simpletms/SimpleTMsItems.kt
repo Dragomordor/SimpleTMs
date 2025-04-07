@@ -76,12 +76,13 @@ object SimpleTMsItems {
     // ------------------------------------------------------------
 
     private fun registerBlankTmItem(name: String, isTR: Boolean): RegistrySupplier<BlankTmItem> {
-
-        val item: RegistrySupplier<BlankTmItem> = ITEMS.register(name) {
-            val itemProperties = Properties()
-                .stacksTo(if (isTR) SimpleTMs.config.trStackSize else SimpleTMs.config.tmStackSize)
-                .durability(if (isTR) SimpleTMs.config.blankTRBaseDurability else SimpleTMs.config.blankTMBaseDurability)
-            BlankTmItem(isTR, itemProperties)
+        val item : RegistrySupplier<BlankTmItem>
+        if (isTR) {
+            val settings: Properties = Properties().stacksTo(SimpleTMs.config.trStackSize)
+            item = ITEMS.register(name) { BlankTmItem(isTR, settings) }
+        } else {
+            val settings: Properties = Properties().durability(if((SimpleTMs.config.blankTMBaseDurability)>0) SimpleTMs.config.blankTMBaseDurability else 1)
+            item = ITEMS.register(name) { BlankTmItem(isTR, settings) }
         }
 
         return item
@@ -89,25 +90,23 @@ object SimpleTMsItems {
 
     private fun registerMoveLearnItem(moveName: String, isTR: Boolean, isCustom: Boolean): RegistrySupplier<MoveLearnItem> {
         val itemKey = if (isTR) "tr_$moveName" else "tm_$moveName"
-
-        val item: RegistrySupplier<MoveLearnItem> = ITEMS.register(itemKey) {
-            val itemProperties = Properties()
-                .stacksTo(if (isTR) SimpleTMs.config.trStackSize else SimpleTMs.config.tmStackSize)
-                .durability(if (isTR) 1 else SimpleTMs.config.tmBaseDurability)
-            MoveLearnItem(moveName, isTR, isCustom, itemProperties)
+        val item : RegistrySupplier<MoveLearnItem>
+        if (isTR) {
+            val settings: Properties = Properties().stacksTo(SimpleTMs.config.trStackSize)
+            item = ITEMS.register(itemKey) { MoveLearnItem(moveName, isTR, isCustom, settings) }
+        } else {
+            val settings: Properties = Properties().durability(if((SimpleTMs.config.tmBaseDurability)>0) SimpleTMs.config.tmBaseDurability else 1)
+            item = ITEMS.register(itemKey) { MoveLearnItem(moveName, isTR, isCustom, settings) }
         }
-
         // Determine the appropriate lists
         val (itemList, customItemList, moveList) = if (isTR) {
             Triple(TR_ITEMS, CUSTOM_TR_ITEMS, ALL_MOVE_NAMES_WITH_TR_ITEMS)
         } else {
             Triple(TM_ITEMS, CUSTOM_TM_ITEMS, ALL_MOVE_NAMES_WITH_TM_ITEMS)
         }
-
         // Store in the correct list
         (if (isCustom) customItemList else itemList).add(item)
         moveList.add(moveName)
-
         return item
     }
 

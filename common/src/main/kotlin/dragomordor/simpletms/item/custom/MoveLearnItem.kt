@@ -94,7 +94,7 @@ class MoveLearnItem(
     // Once the TM can be used on the Pokémon, apply the move to the Pokémon
     override fun applyToPokemon(
         player: ServerPlayer,
-        stack: ItemStack,
+        `stack`: ItemStack,
         pokemon: Pokemon) : InteractionResultHolder<ItemStack> {
 
         // (0) Get the move properties
