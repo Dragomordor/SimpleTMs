@@ -75,7 +75,8 @@ class BlankTmItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(setti
         player.playNotifySound(SoundEvents.NOTE_BLOCK_PLING.value(), SoundSource.PLAYERS, 1.0F, 1.0F)
         // Damage the stack if player is not in creative mode
         if (!player.isCreative) {
-            stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND)
+            // stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND)
+            stack.shrink(1)
         }
         // Put item on cooldown if applicable
         if (!player.isCreative && !isTR && stack.count > 0 && cooldownTicks > 0) {

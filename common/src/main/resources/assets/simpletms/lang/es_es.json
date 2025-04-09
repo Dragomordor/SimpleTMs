@@ -44,7 +44,7 @@
   "item.simpletms.tm_blank": "MT en blanco",
   "item.simpletms.tr_blank": "DT en blanco",
 
-  "simpletms.item.tr_move": "MT: %1$s",
-  "simpletms.item.tm_move": "DT: %1$s"
+  "simpletms.item.tr_move": "DT: %1$s",
+  "simpletms.item.tm_move": "MT: %1$s"
 
 }
