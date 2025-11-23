@@ -42,11 +42,11 @@ tasks {
         filesMatching("META-INF/neoforge.mods.toml") {
             expand(
                 "version" to rootProject.version,
-                "architectury_version" to architecturyVersion,
-                "forge_kotlin_version" to forgeKotlinVersion,
-                "loader_version" to neoforgeVersion,
-                "minecraft_version" to libs.minecraft.get().version,
-                "cobblemon_version" to cobblemonVersion,
+                "architectury_version" to architecturyVersion as Any,
+                "forge_kotlin_version" to forgeKotlinVersion as Any,
+                "loader_version" to neoforgeVersion as Any,
+                "minecraft_version" to libs.minecraft.get().version as Any,
+                "cobblemon_version" to cobblemonVersion as Any,
             )
         }
     }

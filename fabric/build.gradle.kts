@@ -44,10 +44,10 @@ tasks {
         filesMatching("fabric.mod.json") {
             expand(
                 "version" to rootProject.version,
-                "architectury_version" to architecturyVersion,
-                "loader_version" to libs.fabric.loader.get().version,
-                "minecraft_version" to libs.minecraft.get().version,
-                "cobblemon_version" to cobblemonVersion,
+                "architectury_version" to architecturyVersion as Any,
+                "loader_version" to libs.fabric.loader.get().version as Any,
+                "minecraft_version" to libs.minecraft.get().version as Any,
+                "cobblemon_version" to cobblemonVersion as Any,
             )
         }
     }

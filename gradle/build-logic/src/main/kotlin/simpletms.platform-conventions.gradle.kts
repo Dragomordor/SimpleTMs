@@ -1,6 +1,6 @@
 plugins {
     id("simpletms.base-conventions")
-    id("com.github.johnrengelman.shadow")
+    id("com.gradleup.shadow")
 }
 
 val bundle: Configuration by configurations.creating {
