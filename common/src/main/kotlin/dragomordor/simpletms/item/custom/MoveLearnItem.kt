@@ -3,6 +3,8 @@ package dragomordor.simpletms.item.custom
 import com.cobblemon.mod.common.Cobblemon
 import com.cobblemon.mod.common.api.moves.*
 import com.cobblemon.mod.common.api.moves.categories.DamageCategories
+import com.cobblemon.mod.common.api.pokemon.moves.Learnset
+import com.cobblemon.mod.common.api.pokemon.moves.LearnsetQuery
 import com.cobblemon.mod.common.api.text.text
 import com.cobblemon.mod.common.pokemon.Pokemon
 import dragomordor.simpletms.SimpleTMs
@@ -10,6 +12,7 @@ import dragomordor.simpletms.SimpleTMsItems
 import dragomordor.simpletms.item.SimpleTMsItem
 import dragomordor.simpletms.item.api.PokemonSelectingItemNonBattle
 import dragomordor.simpletms.util.*
+import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
@@ -94,7 +97,7 @@ class MoveLearnItem(
     // Once the TM can be used on the Pokémon, apply the move to the Pokémon
     override fun applyToPokemon(
         player: ServerPlayer,
-        `stack`: ItemStack,
+        stack: ItemStack,
         pokemon: Pokemon) : InteractionResultHolder<ItemStack> {
 
         // (0) Get the move properties
@@ -156,6 +159,7 @@ class MoveLearnItem(
                 if (isTR) {
                     stack.shrink(1)
                 } else {
+                    // stack.shrink(1)
                     stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND)
                 }
             }
@@ -181,98 +185,233 @@ class MoveLearnItem(
     // Custom Functions
     // ------------------------------------------------------------------
 
+//    private fun canPokemonLearnMove(pokemon: Pokemon, moveToTeach: MoveTemplate): Boolean {
+//
+//        // (3.1) Get current move set and benched moves of the pokemon
+//        val currentMoves = pokemon.moveSet
+//        val benchedMoves = pokemon.benchedMoves
+//        val pokemonTranslateName = pokemon.species.translatedName
+//        val moveTranslatedName = moveToTeach.displayName
+//
+//        val TMMovesLearnable = SimpleTMs.config.tmMovesLearnable
+//        val eggMovesLearnable = SimpleTMs.config.eggMovesLearnable
+//        val tutorMovesLearnable = SimpleTMs.config.tutorMovesLearnable
+//        val levelMovesLearnable = SimpleTMs.config.levelMovesLearnable
+//
+//        val primaryTypeMovesLearnable = SimpleTMs.config.primaryTypeMovesLearnable
+//        val secondaryTypeMovesLearnable = SimpleTMs.config.secondaryTypeMovesLearnable
+//
+//        val anyMoveLearnableTMs = SimpleTMs.config.anyMovesLearnableTMs
+//        val anyMoveLearnableTRs = SimpleTMs.config.anyMovesLearnableTRs
+//        val excludedMoveNames = SimpleTMsItems.ALL_MOVES_EXCLUDED_FROM_TMTR_LEARNING
+//
+//        // (3.2) Check if the move is already in the move set or benched moves
+//        if ((currentMoves.getMoves().stream().anyMatch { it.name == moveToTeach.name }) ||
+//            // (benchedMoveContainsMove(benchedMoves, moveToTeach)))
+//            benchedMoves.any { it.moveTemplate == moveToTeach } ) {
+//            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_learnable.already_knows_move", pokemonTranslateName, moveTranslatedName))
+//            return false
+//        }
+//
+//        // (3.3) Check if any move is learnable
+//        if ( (anyMoveLearnableTMs && !isTR) || (anyMoveLearnableTRs && isTR) ) {
+//            return true
+//        }
+//
+//        // (3.3) Add all list of learnable moves to a list and check if the move is in the list, otherwise return false
+//        val learnableMoves = mutableListOf<MoveTemplate>()
+//
+//        // TM Moves
+//        if (TMMovesLearnable) {
+//            learnableMoves.addAll(pokemon.form.moves.tmMoves)
+//
+//        }
+//        // Tutor Moves
+//        if (tutorMovesLearnable) {
+//            learnableMoves.addAll(pokemon.form.moves.tutorMoves)
+//        }
+//        // Egg Moves
+//        if (eggMovesLearnable) {
+//            learnableMoves.addAll(pokemon.form.moves.eggMoves)
+//            // Check if the move is in the egg moves any pre-evolution
+//            var preEvolution = pokemon.form.preEvolution
+//            for (i in 0 until 4) {
+//                if (preEvolution?.species == null) {
+//                    break
+//                }
+//                learnableMoves.addAll(preEvolution.form.moves.eggMoves)
+//                preEvolution = preEvolution.form.preEvolution
+//            }
+//        }
+//        // Level Moves
+//        if (levelMovesLearnable) {
+//            learnableMoves.addAll(pokemon.form.moves.getLevelUpMovesUpTo(Cobblemon.config.maxPokemonLevel))
+//        }
+//
+//        // Type Moves
+//        if (primaryTypeMovesLearnable || secondaryTypeMovesLearnable) {
+//            val pokemonPrimaryType = pokemon.primaryType
+//            val pokemonSecondaryType = pokemon.secondaryType
+//            val allmoves = Moves.all()
+//            for (move in allmoves) {
+//                if (primaryTypeMovesLearnable && move.elementalType == pokemonPrimaryType) {
+//                    learnableMoves.add(move)
+//                }
+//                if (secondaryTypeMovesLearnable && move.elementalType == pokemonSecondaryType) {
+//                    learnableMoves.add(move)
+//                }
+//            }
+//        }
+//
+//        // Remove duplicates
+//        learnableMoves.distinct()
+//
+//        // Remove excluded moves
+//        learnableMoves.removeIf { excludedMoveNames.contains(it.name) }
+//
+//        // Check if the move is in the learnable moves list
+//        if (!learnableMoves.contains(moveToTeach)) {
+//            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_learnable.not_in_learnable_moves", pokemonTranslateName, moveTranslatedName))
+//            return false
+//        } else {
+//            return true
+//        }
+//    }
+
+
+    // updated Method using internal LearnsetQuery Method
     private fun canPokemonLearnMove(pokemon: Pokemon, moveToTeach: MoveTemplate): Boolean {
 
-        // (3.1) Get current move set and benched moves of the pokemon
         val currentMoves = pokemon.moveSet
         val benchedMoves = pokemon.benchedMoves
-        val pokemonTranslateName = pokemon.species.translatedName
-        val moveTranslatedName = moveToTeach.displayName
+        val translatedName = pokemon.species.translatedName
+        val moveTranslated = moveToTeach.displayName
 
-        val TMMovesLearnable = SimpleTMs.config.tmMovesLearnable
-        val eggMovesLearnable = SimpleTMs.config.eggMovesLearnable
-        val tutorMovesLearnable = SimpleTMs.config.tutorMovesLearnable
-        val levelMovesLearnable = SimpleTMs.config.levelMovesLearnable
+        val cfg = SimpleTMs.config
 
-        val primaryTypeMovesLearnable = SimpleTMs.config.primaryTypeMovesLearnable
-        val secondaryTypeMovesLearnable = SimpleTMs.config.secondaryTypeMovesLearnable
-
-        val anyMoveLearnableTMs = SimpleTMs.config.anyMovesLearnableTMs
-        val anyMoveLearnableTRs = SimpleTMs.config.anyMovesLearnableTRs
-        val excludedMoveNames = SimpleTMsItems.ALL_MOVES_EXCLUDED_FROM_TMTR_LEARNING
-
-        // (3.2) Check if the move is already in the move set or benched moves
-        if ((currentMoves.getMoves().stream().anyMatch { it.name == moveToTeach.name }) ||
-            // (benchedMoveContainsMove(benchedMoves, moveToTeach)))
-            benchedMoves.any { it.moveTemplate == moveToTeach } ) {
-            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_learnable.already_knows_move", pokemonTranslateName, moveTranslatedName))
+        // Already knows the move
+        if (currentMoves.getMoves().any { it.name == moveToTeach.name } ||
+            benchedMoves.any { it.moveTemplate == moveToTeach }
+        ) {
+            FailureMessage.setFailureMessage(
+                fromLang(SimpleTMs.MOD_ID, "error.not_learnable.already_knows_move",
+                    translatedName, moveTranslated)
+            )
             return false
         }
 
-        // (3.3) Check if any move is learnable
-        if ( (anyMoveLearnableTMs && !isTR) || (anyMoveLearnableTRs && isTR) ) {
+        // Any-move overrides
+        if ((cfg.anyMovesLearnableTMs && !isTR) ||
+            (cfg.anyMovesLearnableTRs && isTR)
+        ) {
             return true
         }
 
-        // (3.3) Add all list of learnable moves to a list and check if the move is in the list, otherwise return false
-        val learnableMoves = mutableListOf<MoveTemplate>()
-
-        // TM Moves
-        if (TMMovesLearnable) {
-            learnableMoves.addAll(pokemon.form.moves.tmMoves)
-
-        }
-        // Tutor Moves
-        if (tutorMovesLearnable) {
-            learnableMoves.addAll(pokemon.form.moves.tutorMoves)
-        }
-        // Egg Moves
-        if (eggMovesLearnable) {
-            learnableMoves.addAll(pokemon.form.moves.eggMoves)
-            // Check if the move is in the egg moves any pre-evolution
-            var preEvolution = pokemon.form.preEvolution
-            for (i in 0 until 4) {
-                if (preEvolution?.species == null) {
-                    break
-                }
-                learnableMoves.addAll(preEvolution.form.moves.eggMoves)
-                preEvolution = preEvolution.form.preEvolution
-            }
-        }
-        // Level Moves
-        if (levelMovesLearnable) {
-            learnableMoves.addAll(pokemon.form.moves.getLevelUpMovesUpTo(Cobblemon.config.maxPokemonLevel))
-        }
-
-        // Type Moves
-        if (primaryTypeMovesLearnable || secondaryTypeMovesLearnable) {
-            val pokemonPrimaryType = pokemon.primaryType
-            val pokemonSecondaryType = pokemon.secondaryType
-            val allmoves = Moves.all()
-            for (move in allmoves) {
-                if (primaryTypeMovesLearnable && move.elementalType == pokemonPrimaryType) {
-                    learnableMoves.add(move)
-                }
-                if (secondaryTypeMovesLearnable && move.elementalType == pokemonSecondaryType) {
-                    learnableMoves.add(move)
-                }
-            }
-        }
-
-        // Remove duplicates
-        learnableMoves.distinct()
-
-        // Remove excluded moves
-        learnableMoves.removeIf { excludedMoveNames.contains(it.name) }
-
-        // Check if the move is in the learnable moves list
-        if (!learnableMoves.contains(moveToTeach)) {
-            FailureMessage.setFailureMessage(fromLang(SimpleTMs.MOD_ID,"error.not_learnable.not_in_learnable_moves", pokemonTranslateName, moveTranslatedName))
+        // Move excluded override
+        if (SimpleTMsItems.ALL_MOVES_EXCLUDED_FROM_TMTR_LEARNING.contains(moveToTeach.name)) {
+            FailureMessage.setFailureMessage(
+                fromLang(SimpleTMs.MOD_ID, "error.not_learnable.not_in_learnable_moves",
+                    translatedName, moveTranslated)
+            )
             return false
-        } else {
+        }
+
+        // ==========================================
+        // Generalized learnset checking helper
+        // ==========================================
+        fun canLearnFromLearnset(learnset: Learnset): Boolean {
+
+            // STEP 1 — Is the move included anywhere in LearnsetQuery.ANY?
+            if (!LearnsetQuery.ANY.canLearn(moveToTeach, learnset)) {
+                return false
+            }
+
+            // STEP 2 — Now filter by config toggles.
+            // The move is teachable if ANY enabled category matches.
+
+            // TM
+            if (cfg.tmMovesLearnable &&
+                LearnsetQuery.TM_MOVE.canLearn(moveToTeach, learnset)
+            ) return true
+
+            // Tutor
+            if (cfg.tutorMovesLearnable &&
+                LearnsetQuery.TUTOR_MOVES.canLearn(moveToTeach, learnset)
+            ) return true
+
+            // Egg
+            if (cfg.eggMovesLearnable &&
+                LearnsetQuery.EGG_MOVE.canLearn(moveToTeach, learnset)
+            ) return true
+
+            // Level-up
+            if (cfg.levelMovesLearnable &&
+                LearnsetQuery.ANY_LEVEL.canLearn(moveToTeach, learnset)
+            ) return true
+
+            // Legacy
+            if (cfg.legacyMovesLearnable &&
+                LearnsetQuery.LEGACY_MOVES.canLearn(moveToTeach, learnset)
+            ) return true
+
+            // Special (NEW CONFIG)
+            if (cfg.specialMovesLearnable &&
+                LearnsetQuery.SPECIAL_MOVES.canLearn(moveToTeach, learnset)
+            ) return true
+
+            // Otherwise the move is technically learnable but disabled by configs
+            return false
+        }
+
+        // ==========================================
+        // Check current form first
+        // ==========================================
+        if (canLearnFromLearnset(pokemon.form.moves)) {
             return true
         }
+
+        // ==========================================
+        // If the current form fails, check all the OTHER forms of the same species
+        // ==========================================
+        val species = pokemon.species
+
+        for (form in species.forms) {
+            if (form == pokemon.form) continue
+            if (canLearnFromLearnset(form.moves)) {
+                return true
+            }
+        }
+
+        // ==========================================
+        // Type-based fallback learning
+        // ==========================================
+        if (cfg.primaryTypeMovesLearnable ||
+            cfg.secondaryTypeMovesLearnable
+        ) {
+            val primary = pokemon.primaryType
+            val secondary = pokemon.secondaryType
+
+            if (cfg.primaryTypeMovesLearnable &&
+                moveToTeach.elementalType == primary
+            ) return true
+
+            if (cfg.secondaryTypeMovesLearnable &&
+                moveToTeach.elementalType == secondary
+            ) return true
+        }
+
+        // ==========================================
+        // Nothing matched
+        // ==========================================
+        FailureMessage.setFailureMessage(
+            fromLang(SimpleTMs.MOD_ID,
+                "error.not_learnable.not_in_learnable_moves",
+                translatedName, moveTranslated)
+        )
+        return false
     }
+
+
 
     // Wrapper for canPokemonLearnMove with only pokemon as input
     private fun canPokemonLearnMove(pokemon: Pokemon): Boolean {
@@ -361,10 +500,43 @@ class MoveLearnItem(
         if (Screen.hasShiftDown()) {
             // Show move info
             // Move Description
-            val moveDescription = move.description
+
+            // val moveDescription = move.description
             // Make the description
-            val moveDescriptionComponent = moveDescription.withColor(baseGreyColor.rgb)
-            list.add(moveDescriptionComponent)
+            //  val moveDescriptionComponent = moveDescription.withColor(baseGreyColor.rgb)
+            //  list.add(moveDescriptionComponent)
+
+
+            // v 2.2.0 wrapping of description text
+            // ----------------
+            // Wrap move description to fit the screen
+                val rawDescription = move.description.string
+
+                val maxLineLength = 60 // characters per line, tweak to taste
+                val words = rawDescription.split(" ")
+                val currentLine = StringBuilder()
+                val wrappedLines = mutableListOf<String>()
+
+                for (word in words) {
+                    if (currentLine.isEmpty()) {
+                        currentLine.append(word)
+                    } else if (currentLine.length + 1 + word.length <= maxLineLength) {
+                        currentLine.append(" ").append(word)
+                    } else {
+                        wrappedLines.add(currentLine.toString())
+                        currentLine.setLength(0)
+                        currentLine.append(word)
+                    }
+                }
+                if (currentLine.isNotEmpty()) {
+                    wrappedLines.add(currentLine.toString())
+                }
+
+                // Add each wrapped line as its own Component
+                for (line in wrappedLines) {
+                    list.add(Component.literal(line).withColor(baseGreyColor.rgb))
+                }
+            // ----------------
 
             // Move Type
             // val moveTypeBase = ("Type: ").text().withColor(baseGreyColor.rgb)
@@ -394,6 +566,8 @@ class MoveLearnItem(
             val moveCategoryBase = fromLang(SimpleTMs.MOD_ID, "item.move_learn_item.move_category").withColor(baseGreyColor.rgb)
             val moveCategoryComponent = moveDamageCategory.displayName.copy().withColor(moveCategoryColour.rgb)
             list.add(moveCategoryBase.append(moveCategoryComponent))
+
+
 
             // Move Power
             // val movePowerBase = ("Power: ").text().withColor(baseGreyColor.rgb)

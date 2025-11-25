@@ -147,7 +147,11 @@ object MoveLearnItemDropEventListeners : EventHandler {
 
 
 
-    private fun getRandomApplicableMoveTemplates(pokemon: Pokemon, numberOfMovesToChooseFrom: Int, isTR: Boolean): List<MoveTemplate> {
+    private fun getRandomApplicableMoveTemplates(
+        pokemon: Pokemon,
+        numberOfMovesToChooseFrom: Int,
+        isTR: Boolean
+    ): List<MoveTemplate> {
         // Get all move information from pokemon
         val allMoves = Moves.all()
         val pokemonPrimaryType = pokemon.primaryType
@@ -158,6 +162,9 @@ object MoveLearnItemDropEventListeners : EventHandler {
         val tmMoves = learnset.tmMoves
         val tutorMoves = learnset.tutorMoves
         val eggMoves = learnset.eggMoves
+        val legacyMoves = learnset.legacyMoves
+        val specialMoves = learnset.specialMoves
+        learnset.formChangeMoves
 
         // Get config options
         val DropAny = SimpleTMs.config.dropAnyMove
@@ -168,59 +175,74 @@ object MoveLearnItemDropEventListeners : EventHandler {
         val DropTMs = SimpleTMs.config.dropFromTmMoveList
         val DropTutors = SimpleTMs.config.dropFromTutorMoveList
         val DropEggMoves = SimpleTMs.config.dropFromEggMoveList
+        val DropLegacyMoves = SimpleTMs.config.dropFromLegacyMoveList
+        val DropSpecialMoves = SimpleTMs.config.dropFromSpecialMoveList
 
         // If any move can be dropped, return a random move from all moves
         if (DropAny) {
-            // Remove moves that do not have a TM or TR
-            val movesWithItems = (allMoves.filter { SimpleTMsItems.hasItemForMove(it, isTR) }).toMutableList()
+            val movesWithItems = allMoves
+                .filter { SimpleTMsItems.hasItemForMove(it, isTR) }
+                .toMutableList()
+
             val excludedMoves = SimpleTMsItems.ALL_MOVES_EXCLUDED_FROM_POKEMON_DROPS
-            movesWithItems.removeIf({ move -> excludedMoves.contains(move.name) })
-            val applicableMoves = movesWithItems.toList()
-            return applicableMoves.shuffled().take(numberOfMovesToChooseFrom)
+            movesWithItems.removeIf { move -> excludedMoves.contains(move.name) }
+
+            return movesWithItems.shuffled().take(numberOfMovesToChooseFrom)
         }
+
         // The rest of the checks will append to a list of applicable moves
         val applicableMoves = mutableListOf<MoveTemplate>()
 
-        // (1) Check if primary or secondary type moves can be dropped
+        // (1) Primary / secondary type moves
         if (DropPrimaryType) {
-            val primaryTypeMoves = Moves.all().filter { it.elementalType == pokemonPrimaryType }
+            val primaryTypeMoves = allMoves.filter { it.elementalType == pokemonPrimaryType }
             applicableMoves.addAll(primaryTypeMoves)
         }
         if (DropSecondaryType) {
-            val secondaryTypeMoves = Moves.all().filter { it.elementalType == pokemonSecondaryType }
+            val secondaryTypeMoves = allMoves.filter { it.elementalType == pokemonSecondaryType }
             applicableMoves.addAll(secondaryTypeMoves)
         }
 
-        // (2) Check if moves from level list can be dropped
-            // if DropAnyLevel is true, add all level moves to applicableMoves
-            // if DropLevelList is false, add all level moves up to pokemons current level to applicableMoves
+        // (2) Level-up moves
         if (DropAnyLevel) {
             applicableMoves.addAll(levelUpMoves)
         } else if (DropLevelList) {
             applicableMoves.addAll(levelUpMovesUpToPokemonLevel)
         }
 
-        // (3) Check if TM moves can be dropped
+        // (3) TM moves
         if (DropTMs) {
             applicableMoves.addAll(tmMoves)
         }
 
-        // (4) Check if tutor moves can be dropped
+        // (4) Tutor moves
         if (DropTutors) {
             applicableMoves.addAll(tutorMoves)
         }
 
-        // (5) Check if egg moves can be dropped
+        // (5) Egg moves
         if (DropEggMoves) {
             applicableMoves.addAll(eggMoves)
         }
 
-        // Remove moves that do not have a TM or TR
-        applicableMoves.removeIf { move -> !SimpleTMsItems.hasItemForMove(move, isTR) }
-        val excludedMoves = SimpleTMsItems.ALL_MOVES_EXCLUDED_FROM_POKEMON_DROPS
-        applicableMoves.removeIf({ move -> excludedMoves.contains(move.name) })
+        // (6) Legacy moves - 1.7 Cobblemon
+        if (DropLegacyMoves) {
+            applicableMoves.addAll(legacyMoves)
+        }
 
-        // Return numberOfMovesToChooseFrom random moves from applicableMoves
+        // (7) Special moves - 1.7 Cobblemon
+        if (DropSpecialMoves) {
+            applicableMoves.addAll(specialMoves)
+        }
+
+        // Filter to moves that actually have a TM/TR item
+        applicableMoves.removeIf { move -> !SimpleTMsItems.hasItemForMove(move, isTR) }
+
+        // Remove globally excluded moves
+        val excludedMoves = SimpleTMsItems.ALL_MOVES_EXCLUDED_FROM_POKEMON_DROPS
+        applicableMoves.removeIf { move -> excludedMoves.contains(move.name) }
+
+        // Return a random subset
         return applicableMoves.shuffled().take(numberOfMovesToChooseFrom)
     }
 

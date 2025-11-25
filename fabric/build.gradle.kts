@@ -32,6 +32,8 @@ dependencies {
 
 tasks {
     processResources {
+        val minecraftVersion = libs.minecraft.get().version.toString()
+        val loaderVersion = libs.fabric.loader.get().version.toString()
         val architecturyVersion = libs.architectury.fabric.get().version?.split('.')?.get(0)
         val cobblemonVersion = libs.cobblemon.fabric.get().version?.split('+')?.get(0)
 
@@ -43,11 +45,13 @@ tasks {
 
         filesMatching("fabric.mod.json") {
             expand(
-                "version" to rootProject.version,
-                "architectury_version" to architecturyVersion,
-                "loader_version" to libs.fabric.loader.get().version,
-                "minecraft_version" to libs.minecraft.get().version,
-                "cobblemon_version" to cobblemonVersion,
+                mapOf(
+                    "version" to rootProject.version.toString(),
+                    "architectury_version" to architecturyVersion,
+                    "loader_version" to loaderVersion,
+                    "minecraft_version" to minecraftVersion,
+                    "cobblemon_version" to cobblemonVersion,
+                )
             )
         }
     }

@@ -33,6 +33,12 @@ class SimpleTMsConfig {
     var secondaryTypeMovesLearnable = false
 
     @NodeCategory(Category.Learnable)
+    var legacyMovesLearnable = false
+
+    @NodeCategory(Category.Learnable)
+    var specialMovesLearnable = false
+
+    @NodeCategory(Category.Learnable)
     var anyMovesLearnableTMs: Boolean = false
 
     @NodeCategory(Category.Learnable)
@@ -127,8 +133,16 @@ class SimpleTMsConfig {
     @NodeCategory(Category.DropRate)
     var dropFromEggMoveList: Boolean = true
 
+    @NodeCategory(Category.DropRate)
+    var dropFromLegacyMoveList: Boolean = false
+
+    @NodeCategory(Category.DropRate)
+    var dropFromSpecialMoveList: Boolean = false
+
     @NodeCategory(Category.Experimental)
     var allowCustomMovesAndEditing: Boolean = false
+
+
 }
 
 @Target(AnnotationTarget.FIELD)

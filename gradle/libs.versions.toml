@@ -1,35 +1,35 @@
 [versions]
-kotlin = "2.0.10"
+kotlin = "2.2.0"
 
 minecraft = "1.21.1"
-architectury = "13.0.6"
-architectury_loom = "1.7-SNAPSHOT"
+architectury = "13.0.8"
+architectury_loom = "1.13-SNAPSHOT"
 architectury_gradle = "3.4-SNAPSHOT"
 
-fabric_loader = "0.16.5"
-fabric_api = "0.104.0+1.21.1"
-fabric_kotlin = "1.12.0+kotlin.2.0.10"
+fabric_loader = "0.18.1"
+fabric_api = "0.116.7+1.21.1"
+fabric_kotlin = "1.13.7+kotlin.2.2.21"
 
-neoforge_loader = "21.1.66"
-neoforge_kotlin = "5.5.0"
+neoforge_loader = "21.1.215"
+neoforge_kotlin = "5.7.0"
 
-cobblemon = "1.6.1+1.21.1"
+cobblemon = "1.7.0+1.21.1"
 
 junit = "5.10.2"
 mockk = "1.13.8"
 
-shadow = "8.1.1"
+shadow = "9.2.2"
 
 
 [libraries]
 gradle_kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 gradle_architectury = { module = "architectury-plugin:architectury-plugin.gradle.plugin", version.ref = "architectury_gradle" }
 gradle_loom = { module = "dev.architectury:architectury-loom", version.ref = "architectury_loom" }
-gradle_shadow = { module = "com.github.johnrengelman:shadow", version.ref = "shadow"}
+gradle_shadow = { module = "com.gradleup.shadow:com.gradleup.shadow.gradle.plugin", version.ref = "shadow"}
 
 kotlin_stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlin_reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
-kotlin_json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.5.1" }
+kotlin_json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.9.0" }
 
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 architectury = { module = "dev.architectury:architectury", version.ref = "architectury" }
