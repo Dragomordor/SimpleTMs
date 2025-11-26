@@ -161,6 +161,7 @@ signature_moves = [
     "Flying Press",
     "Forest's Curse",
     "Freeze Shock",
+    "Freezing Glare",
     "Freezy Frost",
     "Fusion Bolt",
     "Fusion Flare",
