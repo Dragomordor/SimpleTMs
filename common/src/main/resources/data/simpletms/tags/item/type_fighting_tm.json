@@ -10,7 +10,6 @@
         "simpletms:tm_circlethrow",
         "simpletms:tm_closecombat",
         "simpletms:tm_coaching",
-        "simpletms:tm_combattorque",
         "simpletms:tm_counter",
         "simpletms:tm_crosschop",
         "simpletms:tm_detect",
@@ -45,7 +44,6 @@
         "simpletms:tm_triplekick",
         "simpletms:tm_upperhand",
         "simpletms:tm_vacuumwave",
-        "simpletms:tm_victorydance",
         "simpletms:tm_vitalthrow",
         "simpletms:tm_wakeupslap"
     ]

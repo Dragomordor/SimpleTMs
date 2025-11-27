@@ -132,16 +132,10 @@
         "moveName": "blazekick"
     },
     {
-        "moveName": "blazingtorque"
-    },
-    {
         "moveName": "blizzard"
     },
     {
         "moveName": "block"
-    },
-    {
-        "moveName": "bloodmoon"
     },
     {
         "moveName": "bodypress"
@@ -150,19 +144,10 @@
         "moveName": "bodyslam"
     },
     {
-        "moveName": "boltbeak"
-    },
-    {
-        "moveName": "bonerush"
-    },
-    {
         "moveName": "boomburst"
     },
     {
         "moveName": "bounce"
-    },
-    {
-        "moveName": "branchpoke"
     },
     {
         "moveName": "bravebird"
@@ -255,9 +240,6 @@
         "moveName": "coil"
     },
     {
-        "moveName": "combattorque"
-    },
-    {
         "moveName": "cometpunch"
     },
     {
@@ -321,6 +303,9 @@
         "moveName": "cut"
     },
     {
+        "moveName": "darkestlariat"
+    },
+    {
         "moveName": "darkpulse"
     },
     {
@@ -355,9 +340,6 @@
     },
     {
         "moveName": "dizzypunch"
-    },
-    {
-        "moveName": "doodle"
     },
     {
         "moveName": "doubleedge"
@@ -546,9 +528,6 @@
         "moveName": "firstimpression"
     },
     {
-        "moveName": "fishiousrend"
-    },
-    {
         "moveName": "fissure"
     },
     {
@@ -615,9 +594,6 @@
         "moveName": "freezedry"
     },
     {
-        "moveName": "freezingglare"
-    },
-    {
         "moveName": "frenzyplant"
     },
     {
@@ -640,9 +616,6 @@
     },
     {
         "moveName": "gastroacid"
-    },
-    {
-        "moveName": "gearup"
     },
     {
         "moveName": "gigadrain"
@@ -867,12 +840,6 @@
         "moveName": "irontail"
     },
     {
-        "moveName": "jawlock"
-    },
-    {
-        "moveName": "jetpunch"
-    },
-    {
         "moveName": "jumpkick"
     },
     {
@@ -951,9 +918,6 @@
         "moveName": "magicalleaf"
     },
     {
-        "moveName": "magicaltorque"
-    },
-    {
         "moveName": "magiccoat"
     },
     {
@@ -973,9 +937,6 @@
     },
     {
         "moveName": "matblock"
-    },
-    {
-        "moveName": "matchagotcha"
     },
     {
         "moveName": "meanlook"
@@ -1062,9 +1023,6 @@
         "moveName": "morningsun"
     },
     {
-        "moveName": "mortalspin"
-    },
-    {
         "moveName": "mudbomb"
     },
     {
@@ -1108,9 +1066,6 @@
     },
     {
         "moveName": "nobleroar"
-    },
-    {
-        "moveName": "noxioustorque"
     },
     {
         "moveName": "nuzzle"
@@ -1293,9 +1248,6 @@
         "moveName": "ragepowder"
     },
     {
-        "moveName": "ragingbull"
-    },
-    {
         "moveName": "ragingfury"
     },
     {
@@ -1342,9 +1294,6 @@
     },
     {
         "moveName": "reversal"
-    },
-    {
-        "moveName": "revivalblessing"
     },
     {
         "moveName": "risingvoltage"
@@ -1402,9 +1351,6 @@
     },
     {
         "moveName": "safeguard"
-    },
-    {
-        "moveName": "saltcure"
     },
     {
         "moveName": "sandattack"
@@ -1537,6 +1483,9 @@
     },
     {
         "moveName": "smartstrike"
+    },
+    {
+        "moveName": "smellingsalts"
     },
     {
         "moveName": "smog"
@@ -1689,9 +1638,6 @@
         "moveName": "surf"
     },
     {
-        "moveName": "surgingstrikes"
-    },
-    {
         "moveName": "swagger"
     },
     {
@@ -1723,9 +1669,6 @@
     },
     {
         "moveName": "tackle"
-    },
-    {
-        "moveName": "tailglow"
     },
     {
         "moveName": "tailslap"
@@ -1800,9 +1743,6 @@
         "moveName": "tidyup"
     },
     {
-        "moveName": "topsyturvy"
-    },
-    {
         "moveName": "torment"
     },
     {
@@ -1836,9 +1776,6 @@
         "moveName": "trumpcard"
     },
     {
-        "moveName": "twinbeam"
-    },
-    {
         "moveName": "twineedle"
     },
     {
@@ -1864,9 +1801,6 @@
     },
     {
         "moveName": "venoshock"
-    },
-    {
-        "moveName": "victorydance"
     },
     {
         "moveName": "vinewhip"
@@ -1912,12 +1846,6 @@
     },
     {
         "moveName": "whirlwind"
-    },
-    {
-        "moveName": "wickedblow"
-    },
-    {
-        "moveName": "wickedtorque"
     },
     {
         "moveName": "wideguard"

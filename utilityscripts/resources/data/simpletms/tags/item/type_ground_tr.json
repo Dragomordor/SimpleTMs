@@ -1,7 +1,6 @@
 {
     "replace": false,
     "values": [
-        "simpletms:tr_bonerush",
         "simpletms:tr_bulldoze",
         "simpletms:tr_dig",
         "simpletms:tr_drillrun",

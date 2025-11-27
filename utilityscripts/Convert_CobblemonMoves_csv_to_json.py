@@ -131,7 +131,6 @@ signature_moves = [
     "Court Change",
     "Crush Grip",
     "Dark Void",
-    "Darkest Lariat",
     "Decorate",
     "Defend Order",
     "Diamond Storm",
@@ -250,7 +249,6 @@ signature_moves = [
     "Silk Trap",
     "Sizzly Slide",
     "Sketch",
-    "Smelling Salts",
     "Snap Trap",
     "Snipe Shot",
     "Soft-Boiled",
@@ -290,14 +288,46 @@ signature_moves = [
     "Zippy Zap",
 ]
 
-
+# Extra moves to exclude from the TM/TR pool
+tm_removed_moves = [
+    # TMs to remove (signature / edge-case / very limited level-up)
+    "Wicked Torque",
+    "Blazing Torque",
+    "Noxious Torque",
+    "Magical Torque",
+    "Combat Torque",
+    "Freezing Glare",
+    "Blood Moon",
+    "Matcha Gotcha",
+    "Raging Bull",
+    "Mortal Spin",
+    "Revival Blessing",
+    "Jet Punch",
+    "V-Create",
+    "Salt Cure",
+    "Twin Beam",
+    "Victory Dance",
+    "Branch Poke",
+    "Bone Rush",
+    "Doodle",
+    "Gear Up",
+    "Jaw Lock",
+    "Surging Strikes",
+    "Tail Glow",
+    "Topsy-Turvy",
+    "Wicked Blow",
+    "Bolt Beak",
+    "Fishious Rend",
+]
 
 # Remove the Z-type moves from the data
-data = data[~data['Name'].isin(z_type_moves)]
+data = data[~data["Name"].isin(z_type_moves)]
 # Remove the Max-type moves from the data
-data = data[~data['Name'].isin(max_type_moves)]
+data = data[~data["Name"].isin(max_type_moves)]
 # Remove the signature moves from the data
 data = data[~data["Name"].isin(signature_moves)]
+# Remove the additional edge-case TM-removed moves from the data
+data = data[~data["Name"].isin(tm_removed_moves)]
 
 # ----------------------------------------------------------
 ## Modify data to add new columns

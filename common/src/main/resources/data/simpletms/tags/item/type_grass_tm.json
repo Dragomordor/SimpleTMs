@@ -3,7 +3,6 @@
     "values": [
         "simpletms:tm_absorb",
         "simpletms:tm_aromatherapy",
-        "simpletms:tm_branchpoke",
         "simpletms:tm_bulletseed",
         "simpletms:tm_cottonguard",
         "simpletms:tm_cottonspore",
@@ -23,7 +22,6 @@
         "simpletms:tm_leaftornado",
         "simpletms:tm_leechseed",
         "simpletms:tm_magicalleaf",
-        "simpletms:tm_matchagotcha",
         "simpletms:tm_megadrain",
         "simpletms:tm_needlearm",
         "simpletms:tm_petalblizzard",

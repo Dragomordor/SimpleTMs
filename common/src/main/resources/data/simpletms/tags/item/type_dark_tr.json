@@ -7,6 +7,7 @@
         "simpletms:tr_brutalswing",
         "simpletms:tr_comeuppance",
         "simpletms:tr_crunch",
+        "simpletms:tr_darkestlariat",
         "simpletms:tr_darkpulse",
         "simpletms:tr_embargo",
         "simpletms:tr_faketears",
@@ -16,7 +17,6 @@
         "simpletms:tr_fling",
         "simpletms:tr_foulplay",
         "simpletms:tr_honeclaws",
-        "simpletms:tr_jawlock",
         "simpletms:tr_knockoff",
         "simpletms:tr_lashout",
         "simpletms:tr_memento",
@@ -36,9 +36,6 @@
         "simpletms:tr_taunt",
         "simpletms:tr_thief",
         "simpletms:tr_throatchop",
-        "simpletms:tr_topsyturvy",
-        "simpletms:tr_torment",
-        "simpletms:tr_wickedblow",
-        "simpletms:tr_wickedtorque"
+        "simpletms:tr_torment"
     ]
 }

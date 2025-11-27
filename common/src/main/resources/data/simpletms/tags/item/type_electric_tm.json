@@ -1,7 +1,6 @@
 {
     "replace": false,
     "values": [
-        "simpletms:tm_boltbeak",
         "simpletms:tm_charge",
         "simpletms:tm_chargebeam",
         "simpletms:tm_discharge",
