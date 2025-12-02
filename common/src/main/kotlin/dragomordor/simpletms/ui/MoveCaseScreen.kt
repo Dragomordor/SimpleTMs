@@ -134,15 +134,19 @@ class MoveCaseScreen(
                 if (moveIndex >= filteredMoves.size) continue
 
                 val moveName = filteredMoves[moveIndex]
-                val isStored = menu.isMoveStored(moveName)
+                val quantity = menu.getMoveQuantity(moveName)
                 val slotX = x + CASE_SLOTS_X + col * SLOT_SIZE + 1
                 val slotY = y + CASE_SLOTS_Y + row * SLOT_SIZE + 1
                 val itemStack = getItemStackForMove(moveName)
 
-                if (isStored) {
+                if (quantity > 0) {
+                    // Set the stack count for proper rendering
+                    itemStack.count = quantity
                     guiGraphics.renderItem(itemStack, slotX, slotY)
+                    // Render item count decoration (shows count if > 1)
                     guiGraphics.renderItemDecorations(font, itemStack, slotX, slotY)
                 } else {
+                    // Ghost item (not stored)
                     renderGhostItem(guiGraphics, itemStack, slotX, slotY)
                 }
             }
@@ -216,6 +220,10 @@ class MoveCaseScreen(
                 val moveName = menu.getMoveNameForVisibleSlot(visibleIndex)
                 if (moveName != null) {
                     val itemStack = getItemStackForMove(moveName)
+                    val quantity = menu.getMoveQuantity(moveName)
+                    if (quantity > 0) {
+                        itemStack.count = quantity
+                    }
                     if (!itemStack.isEmpty) {
                         guiGraphics.renderTooltip(font, itemStack, mouseX, mouseY)
                     }
@@ -279,15 +287,19 @@ class MoveCaseScreen(
             if (slotPos != null) {
                 val (row, col) = slotPos
                 val visibleIndex = row * COLUMNS + col
-                val isShiftClick = hasShiftDown()
+                val moveName = menu.getMoveNameForVisibleSlot(visibleIndex)
 
-                // Send packet to server
-                SimpleTMsNetwork.sendCaseSlotClick(visibleIndex, isShiftClick)
+                if (moveName != null) {
+                    val isShiftClick = hasShiftDown()
 
-                // Also handle locally for immediate feedback
-                menu.handleCaseSlotClick(visibleIndex, isShiftClick)
+                    // Send packet to server with MOVE NAME (not index)
+                    SimpleTMsNetwork.sendCaseSlotClick(moveName, isShiftClick)
 
-                return true
+                    // Also handle locally for immediate feedback
+                    menu.handleCaseSlotClickByName(moveName, isShiftClick)
+
+                    return true
+                }
             }
         }
 

@@ -36,7 +36,8 @@ class MoveCaseItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(sett
 
     private fun openMenu(player: ServerPlayer) {
         val storage = MoveCaseStorage.get(player)
-        val storedMoves = storage.getStoredMoves(player.uuid, isTR)
+        // Get quantities map instead of just set of names
+        val storedMoves = storage.getStoredQuantities(player.uuid, isTR)
 
         val menuProvider = object : MenuProvider {
             override fun getDisplayName(): Component {
@@ -58,9 +59,11 @@ class MoveCaseItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(sett
 
         MenuRegistry.openExtendedMenu(player, menuProvider) { buf ->
             buf.writeBoolean(isTR)
+            // Write stored moves with quantities
             buf.writeVarInt(storedMoves.size)
-            for (moveName in storedMoves) {
+            for ((moveName, quantity) in storedMoves) {
                 buf.writeUtf(moveName)
+                buf.writeVarInt(quantity)
             }
         }
     }

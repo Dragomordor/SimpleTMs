@@ -12,9 +12,10 @@ import net.minecraft.server.level.ServerPlayer
 
 /**
  * Packet sent from client to server when clicking on a case slot.
+ * Uses move name instead of index to handle filter/search state differences.
  */
 data class CaseSlotClickPacket(
-    val visibleIndex: Int,
+    val moveName: String,
     val isShiftClick: Boolean
 ) : CustomPacketPayload {
 
@@ -26,7 +27,7 @@ data class CaseSlotClickPacket(
         val TYPE: CustomPacketPayload.Type<CaseSlotClickPacket> = CustomPacketPayload.Type(ID)
 
         val STREAM_CODEC: StreamCodec<FriendlyByteBuf, CaseSlotClickPacket> = StreamCodec.composite(
-            ByteBufCodecs.VAR_INT, CaseSlotClickPacket::visibleIndex,
+            ByteBufCodecs.STRING_UTF8, CaseSlotClickPacket::moveName,
             ByteBufCodecs.BOOL, CaseSlotClickPacket::isShiftClick,
             ::CaseSlotClickPacket
         )
@@ -54,8 +55,8 @@ object SimpleTMsNetwork {
                 val player = context.player as? ServerPlayer ?: return@queue
                 val menu = player.containerMenu as? MoveCaseMenu ?: return@queue
 
-                SimpleTMs.LOGGER.debug("Received case slot click: index=${packet.visibleIndex}, shift=${packet.isShiftClick}")
-                menu.handleCaseSlotClick(packet.visibleIndex, packet.isShiftClick)
+                SimpleTMs.LOGGER.debug("Received case slot click: move=${packet.moveName}, shift=${packet.isShiftClick}")
+                menu.handleCaseSlotClickByName(packet.moveName, packet.isShiftClick)
             }
         }
 
@@ -65,7 +66,7 @@ object SimpleTMsNetwork {
     /**
      * Send a case slot click to the server.
      */
-    fun sendCaseSlotClick(visibleIndex: Int, isShiftClick: Boolean) {
-        NetworkManager.sendToServer(CaseSlotClickPacket(visibleIndex, isShiftClick))
+    fun sendCaseSlotClick(moveName: String, isShiftClick: Boolean) {
+        NetworkManager.sendToServer(CaseSlotClickPacket(moveName, isShiftClick))
     }
 }

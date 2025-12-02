@@ -11,7 +11,6 @@ import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.ClickType
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 import java.util.UUID
@@ -20,22 +19,22 @@ import java.util.UUID
  * Filter mode for displaying moves in the case.
  */
 enum class FilterMode {
-    ALL,           // Show all moves
-    OWNED_ONLY,    // Show only stored moves
-    MISSING_ONLY   // Show only moves not yet stored
+    ALL,
+    OWNED_ONLY,
+    MISSING_ONLY
 }
 
 /**
  * Menu/Container for the TM/TR Case.
  *
- * This menu displays a scrollable grid of slots, each representing a specific TM or TR.
- * Empty slots show a ghost/preview of the item, while filled slots show the actual item.
+ * TMs can only store 1 per move (they have durability).
+ * TRs can store up to their stack size per move.
  */
 class MoveCaseMenu(
     containerId: Int,
     private val playerInventory: Inventory,
     val isTR: Boolean,
-    initialStoredMoves: Set<String> = emptySet()
+    initialStoredMoves: Map<String, Int> = emptyMap()
 ) : AbstractContainerMenu(SimpleTMsMenuTypes.MOVE_CASE_MENU.get(), containerId) {
 
     val player: Player = playerInventory.player
@@ -44,7 +43,8 @@ class MoveCaseMenu(
     private val storage: MoveCaseStorage?
         get() = if (player is ServerPlayer) MoveCaseStorage.get(player) else null
 
-    private val clientStoredMoves: MutableSet<String> = initialStoredMoves.toMutableSet()
+    // Client-side cache: move name -> quantity
+    private val clientStoredMoves: MutableMap<String, Int> = initialStoredMoves.toMutableMap()
 
     companion object {
         const val COLUMNS = 9
@@ -71,6 +71,9 @@ class MoveCaseMenu(
     val playerInvEnd: Int
     val hotbarStart: Int
     val hotbarEnd: Int
+
+    // Max stack size for this case type
+    val maxStackSize: Int get() = if (isTR) SimpleTMs.config.trStackSize else 1
 
     init {
         playerInvStart = 0
@@ -109,10 +112,15 @@ class MoveCaseMenu(
         }
         result = when (filterMode) {
             FilterMode.ALL -> result
-            FilterMode.OWNED_ONLY -> result.filter { isMoveStored(it) }
-            FilterMode.MISSING_ONLY -> result.filter { !isMoveStored(it) }
+            FilterMode.OWNED_ONLY -> result.filter { getMoveQuantity(it) > 0 }
+            FilterMode.MISSING_ONLY -> result.filter { getMoveQuantity(it) == 0 }
         }
         filteredMoves = result
+
+        // Adjust scroll if we're now past the end
+        if (scrollRow > getMaxScrollRow()) {
+            scrollRow = getMaxScrollRow()
+        }
     }
 
     private fun matchesSearch(moveName: String, query: String): Boolean {
@@ -181,34 +189,77 @@ class MoveCaseMenu(
         return if (actualIndex in filteredMoves.indices) filteredMoves[actualIndex] else null
     }
 
-    // Storage
+    // Storage - now with quantities
+
+    /**
+     * Check if a move is stored (has quantity > 0)
+     */
     fun isMoveStored(moveName: String): Boolean {
-        storage?.let { return it.hasMove(playerUUID, moveName, isTR) }
-        return clientStoredMoves.contains(moveName)
+        return getMoveQuantity(moveName) > 0
+    }
+
+    /**
+     * Get quantity of a move stored
+     */
+    fun getMoveQuantity(moveName: String): Int {
+        storage?.let { return it.getMoveQuantity(playerUUID, moveName, isTR) }
+        return clientStoredMoves[moveName] ?: 0
+    }
+
+    /**
+     * Check if more of this move can be added
+     */
+    fun canAddMore(moveName: String): Boolean {
+        return getMoveQuantity(moveName) < maxStackSize
     }
 
     fun getStoredCount(): Int = allMoves.count { isMoveStored(it) }
     fun getTotalCount(): Int = allMoves.size
 
-    private fun addToStorage(moveName: String) {
-        if (player is ServerPlayer) {
-            storage?.addMove(playerUUID, moveName, isTR)
-        }
-        clientStoredMoves.add(moveName)
-        if (filterMode != FilterMode.ALL) updateFilteredMoves()
+    /**
+     * Get total items stored (sum of all quantities)
+     */
+    fun getTotalItemsStored(): Int {
+        return allMoves.sumOf { getMoveQuantity(it) }
     }
 
-    private fun removeFromStorage(moveName: String) {
-        if (player is ServerPlayer) {
-            storage?.removeMove(playerUUID, moveName, isTR)
+    private fun addToStorage(moveName: String, amount: Int = 1): Int {
+        val currentQty = getMoveQuantity(moveName)
+        val canAdd = (maxStackSize - currentQty).coerceAtLeast(0)
+        val toAdd = amount.coerceAtMost(canAdd)
+
+        if (toAdd > 0) {
+            if (player is ServerPlayer) {
+                storage?.addMove(playerUUID, moveName, isTR, toAdd)
+            }
+            clientStoredMoves[moveName] = currentQty + toAdd
+            if (filterMode != FilterMode.ALL) updateFilteredMoves()
         }
-        clientStoredMoves.remove(moveName)
-        if (filterMode != FilterMode.ALL) updateFilteredMoves()
+        return toAdd
+    }
+
+    private fun removeFromStorage(moveName: String, amount: Int = 1): Int {
+        val currentQty = getMoveQuantity(moveName)
+        val toRemove = amount.coerceAtMost(currentQty)
+
+        if (toRemove > 0) {
+            if (player is ServerPlayer) {
+                storage?.removeMove(playerUUID, moveName, isTR, toRemove)
+            }
+            val newQty = currentQty - toRemove
+            if (newQty <= 0) {
+                clientStoredMoves.remove(moveName)
+            } else {
+                clientStoredMoves[moveName] = newQty
+            }
+            if (filterMode != FilterMode.ALL) updateFilteredMoves()
+        }
+        return toRemove
     }
 
     override fun stillValid(player: Player): Boolean = true
 
-    // Shift-click from player inventory
+    // Shift-click from player inventory - deposit as many as possible
     override fun quickMoveStack(player: Player, slotIndex: Int): ItemStack {
         val slot = slots.getOrNull(slotIndex) ?: return ItemStack.EMPTY
         if (!slot.hasItem()) return ItemStack.EMPTY
@@ -220,11 +271,13 @@ class MoveCaseMenu(
         if (item is MoveLearnItem && item.isTR == isTR) {
             val moveName = item.moveName
             val moveIndex = MoveCaseHelper.getSlotIndexForMove(moveName, isTR)
-            if (moveIndex >= 0 && !isMoveStored(moveName)) {
-                addToStorage(moveName)
-                stack.shrink(1)
-                slot.setChanged()
-                return stackCopy.copy().also { it.count = 1 }
+            if (moveIndex >= 0 && canAddMore(moveName)) {
+                val added = addToStorage(moveName, stack.count)
+                if (added > 0) {
+                    stack.shrink(added)
+                    slot.setChanged()
+                    return stackCopy.copy().also { it.count = added }
+                }
             }
         }
 
@@ -239,40 +292,76 @@ class MoveCaseMenu(
     }
 
     /**
-     * Handle case slot click - called from screen on client, runs on both sides.
+     * Handle case slot click by move name.
+     * Called from network packet on server - uses move name to avoid filter/scroll sync issues.
      */
-    fun handleCaseSlotClick(visibleIndex: Int, isShiftClick: Boolean): Boolean {
-        val moveName = getMoveNameForVisibleSlot(visibleIndex) ?: return false
-        val isStored = isMoveStored(moveName)
+    fun handleCaseSlotClickByName(moveName: String, isShiftClick: Boolean): Boolean {
+        // Validate the move exists
+        if (!allMoves.contains(moveName)) return false
+
+        val storedQty = getMoveQuantity(moveName)
         val carriedItem = carried
 
         if (isShiftClick) {
-            if (isStored) {
+            // Shift-click: withdraw all to inventory
+            if (storedQty > 0) {
                 val prefix = if (isTR) "tr_" else "tm_"
                 val itemToGive = SimpleTMsItems.getItemStackFromName(prefix + moveName)
+                itemToGive.count = storedQty
+
+                val originalCount = itemToGive.count
                 if (moveItemStackTo(itemToGive, playerInvStart, hotbarEnd, true)) {
-                    removeFromStorage(moveName)
+                    val added = originalCount - itemToGive.count
+                    if (added > 0) {
+                        removeFromStorage(moveName, added)
+                    }
+                    if (!itemToGive.isEmpty) {
+                        if (moveItemStackTo(itemToGive, playerInvStart, hotbarEnd, false)) {
+                            val moreAdded = storedQty - added - itemToGive.count
+                            if (moreAdded > 0) {
+                                removeFromStorage(moveName, moreAdded)
+                            }
+                        }
+                    }
                     return true
                 }
             }
         } else {
+            // Normal click
             if (carriedItem.isEmpty) {
-                if (isStored) {
-                    removeFromStorage(moveName)
+                // Pick up stored items
+                if (storedQty > 0) {
+                    val pickupAmount = storedQty.coerceAtMost(64)
+                    removeFromStorage(moveName, pickupAmount)
                     val prefix = if (isTR) "tr_" else "tm_"
-                    setCarried(SimpleTMsItems.getItemStackFromName(prefix + moveName))
+                    val pickedUp = SimpleTMsItems.getItemStackFromName(prefix + moveName)
+                    pickedUp.count = pickupAmount
+                    setCarried(pickedUp)
                     return true
                 }
             } else {
+                // Deposit carried items
                 val item = carriedItem.item
-                if (item is MoveLearnItem && item.moveName == moveName && item.isTR == isTR && !isStored) {
-                    addToStorage(moveName)
-                    carriedItem.shrink(1)
-                    return true
+                if (item is MoveLearnItem && item.moveName == moveName && item.isTR == isTR) {
+                    if (canAddMore(moveName)) {
+                        val added = addToStorage(moveName, carriedItem.count)
+                        if (added > 0) {
+                            carriedItem.shrink(added)
+                            return true
+                        }
+                    }
                 }
             }
         }
         return false
+    }
+
+    /**
+     * Handle case slot click by visible index (for client-side immediate feedback).
+     */
+    fun handleCaseSlotClick(visibleIndex: Int, isShiftClick: Boolean): Boolean {
+        val moveName = getMoveNameForVisibleSlot(visibleIndex) ?: return false
+        return handleCaseSlotClickByName(moveName, isShiftClick)
     }
 
     fun getCaseSlotAt(relativeX: Int, relativeY: Int): Pair<Int, Int>? {

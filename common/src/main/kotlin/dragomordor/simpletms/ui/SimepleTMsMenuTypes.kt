@@ -16,16 +16,18 @@ object SimpleTMsMenuTypes {
 
     /**
      * Menu type for the TM/TR Case.
-     * Uses extended menu to pass the isTR flag and stored moves from server to client.
+     * Uses extended menu to pass the isTR flag and stored moves with quantities from server to client.
      */
     val MOVE_CASE_MENU: RegistrySupplier<MenuType<MoveCaseMenu>> = MENUS.register("move_case_menu") {
         MenuRegistry.ofExtended { containerId, inventory, buf ->
             val isTR = buf.readBoolean()
-            // Read stored moves
+            // Read stored moves with quantities
             val storedMovesCount = buf.readVarInt()
-            val storedMoves = mutableSetOf<String>()
+            val storedMoves = mutableMapOf<String, Int>()
             repeat(storedMovesCount) {
-                storedMoves.add(buf.readUtf())
+                val moveName = buf.readUtf()
+                val quantity = buf.readVarInt()
+                storedMoves[moveName] = quantity
             }
             MoveCaseMenu(containerId, inventory, isTR, storedMoves)
         }
