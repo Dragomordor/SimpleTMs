@@ -303,7 +303,8 @@ tm_removed_moves = [
     "Mortal Spin",
     "Revival Blessing",
     "Jet Punch",
-    "V-Create",
+    "V-create",
+    "V-Create", # account for different hyphenation
     "Salt Cure",
     "Twin Beam",
     "Victory Dance",
@@ -318,6 +319,7 @@ tm_removed_moves = [
     "Wicked Blow",
     "Bolt Beak",
     "Fishious Rend",
+    "Night Daze",
 ]
 
 # Remove the Z-type moves from the data

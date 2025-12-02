@@ -45,8 +45,20 @@
 
     "item.simpletms.tm_blank": "Blank TM",
     "item.simpletms.tr_blank": "Blank TR",
-
     "simpletms.item.tr_move": "TR: %1$s",
-    "simpletms.item.tm_move": "TM: %1$s"
+    "simpletms.item.tm_move": "TM: %1$s",
+
+    "item.simpletms.case_tm": "TM Case",
+    "item.simpletms.case_tr": "TR Case",
+    "container.simpletms.tm_case": "TM Case",
+    "container.simpletms.tr_case": "TR Case",
+    "gui.simpletms.search": "Search",
+    "gui.simpletms.search.hint": "Search...",
+    "gui.simpletms.filter.all": "Filter: All",
+    "gui.simpletms.filter.owned": "Filter: Owned Only",
+    "gui.simpletms.filter.missing": "Filter: Missing Only",
+    "tooltip.simpletms.case.storage": "Stored: %d/%d (%d%%)",
+    "tooltip.simpletms.case.capacity": "Capacity: %d",
+    "tooltip.simpletms.case.complete": "Complete!"
 
 }

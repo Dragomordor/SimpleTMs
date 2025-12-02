@@ -6,6 +6,7 @@ import dragomordor.simpletms.config.DoubleConstraint
 import dragomordor.simpletms.config.SimpleTMsConfig
 import dragomordor.simpletms.events.MoveLearnItemDropEventListeners
 import dragomordor.simpletms.events.CobblemonPokemonSpeciesListener
+import dragomordor.simpletms.ui.SimpleTMsMenuTypes
 import net.fabricmc.loader.api.FabricLoader
 import org.slf4j.Logger
 import java.io.File
@@ -34,6 +35,8 @@ object SimpleTMs {
         // Event listeners
         MoveLearnItemDropEventListeners.registerListeners()
         CobblemonPokemonSpeciesListener.registerListeners()
+        // Menu
+        SimpleTMsMenuTypes.register()
     }
 
 

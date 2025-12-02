@@ -56,6 +56,8 @@ object SimpleTMsItemGroups {
 
     // TM Items
     private fun tmItemEntries(displayContext: ItemDisplayParameters, entries: Output) {
+        // Add case item
+        entries.accept(SimpleTMsItems.MOVE_TM_CASE.get())
         // Add all tm items here
         entries.accept(SimpleTMsItems.BLANK_TM.get())
         for (item in SimpleTMsItems.TM_ITEMS) {
@@ -65,6 +67,8 @@ object SimpleTMsItemGroups {
 
     // TR Items
     private fun trItemEntries(displayContext: ItemDisplayParameters, entries: Output) {
+        // Add case item
+        entries.accept(SimpleTMsItems.MOVE_TR_CASE.get())
         // Add all tr items here
         entries.accept(SimpleTMsItems.BLANK_TR.get())
         for (item in SimpleTMsItems.TR_ITEMS) {

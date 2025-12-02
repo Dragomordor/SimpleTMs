@@ -1053,9 +1053,6 @@
         "moveName": "needlearm"
     },
     {
-        "moveName": "nightdaze"
-    },
-    {
         "moveName": "nightmare"
     },
     {
@@ -1792,9 +1789,6 @@
     },
     {
         "moveName": "vacuumwave"
-    },
-    {
-        "moveName": "vcreate"
     },
     {
         "moveName": "venomdrench"
