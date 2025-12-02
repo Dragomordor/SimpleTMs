@@ -17,6 +17,7 @@ import java.util.UUID
  *
  * TMs are stored as a set (only 1 per move, since they have durability).
  * TRs are stored with quantities (up to stack size per move).
+ * Also stores the last selected Pokémon for filtering (per case type).
  */
 class MoveCaseStorage private constructor() : SavedData() {
 
@@ -25,6 +26,22 @@ class MoveCaseStorage private constructor() : SavedData() {
 
     // TRs: player UUID -> Map of move name -> quantity
     private val trStorage: MutableMap<UUID, MutableMap<String, Int>> = mutableMapOf()
+
+    // Last selected Pokémon for TM case filter: player UUID -> PokemonFilterInfo
+    private val tmSelectedPokemon: MutableMap<UUID, SelectedPokemonInfo> = mutableMapOf()
+
+    // Last selected Pokémon for TR case filter: player UUID -> PokemonFilterInfo
+    private val trSelectedPokemon: MutableMap<UUID, SelectedPokemonInfo> = mutableMapOf()
+
+    /**
+     * Data class to store selected Pokémon info for persistence
+     */
+    data class SelectedPokemonInfo(
+        val speciesId: String,
+        val formName: String,
+        val displayName: String,
+        val learnableMoves: Set<String>
+    )
 
     // ========================================
     // TM Storage Methods (unchanged - still 1 per move)
@@ -187,6 +204,37 @@ class MoveCaseStorage private constructor() : SavedData() {
     }
 
     // ========================================
+    // Selected Pokémon Methods
+    // ========================================
+
+    /**
+     * Get the last selected Pokémon for filtering
+     */
+    fun getSelectedPokemon(playerUUID: UUID, isTR: Boolean): SelectedPokemonInfo? {
+        return if (isTR) trSelectedPokemon[playerUUID] else tmSelectedPokemon[playerUUID]
+    }
+
+    /**
+     * Set the selected Pokémon for filtering
+     */
+    fun setSelectedPokemon(playerUUID: UUID, isTR: Boolean, info: SelectedPokemonInfo?) {
+        val storage = if (isTR) trSelectedPokemon else tmSelectedPokemon
+        if (info != null) {
+            storage[playerUUID] = info
+        } else {
+            storage.remove(playerUUID)
+        }
+        setDirty()
+    }
+
+    /**
+     * Clear the selected Pokémon for filtering
+     */
+    fun clearSelectedPokemon(playerUUID: UUID, isTR: Boolean) {
+        setSelectedPokemon(playerUUID, isTR, null)
+    }
+
+    // ========================================
     // NBT Serialization
     // ========================================
 
@@ -213,6 +261,38 @@ class MoveCaseStorage private constructor() : SavedData() {
         }
         tag.put(TR_STORAGE_KEY, trCompound)
 
+        // Save selected Pokémon for TM case
+        val tmPokemonCompound = CompoundTag()
+        for ((uuid, info) in tmSelectedPokemon) {
+            val pokemonTag = CompoundTag()
+            pokemonTag.putString("speciesId", info.speciesId)
+            pokemonTag.putString("formName", info.formName)
+            pokemonTag.putString("displayName", info.displayName)
+            val movesTag = ListTag()
+            for (move in info.learnableMoves) {
+                movesTag.add(StringTag.valueOf(move))
+            }
+            pokemonTag.put("learnableMoves", movesTag)
+            tmPokemonCompound.put(uuid.toString(), pokemonTag)
+        }
+        tag.put(TM_SELECTED_POKEMON_KEY, tmPokemonCompound)
+
+        // Save selected Pokémon for TR case
+        val trPokemonCompound = CompoundTag()
+        for ((uuid, info) in trSelectedPokemon) {
+            val pokemonTag = CompoundTag()
+            pokemonTag.putString("speciesId", info.speciesId)
+            pokemonTag.putString("formName", info.formName)
+            pokemonTag.putString("displayName", info.displayName)
+            val movesTag = ListTag()
+            for (move in info.learnableMoves) {
+                movesTag.add(StringTag.valueOf(move))
+            }
+            pokemonTag.put("learnableMoves", movesTag)
+            trPokemonCompound.put(uuid.toString(), pokemonTag)
+        }
+        tag.put(TR_SELECTED_POKEMON_KEY, trPokemonCompound)
+
         return tag
     }
 
@@ -220,6 +300,8 @@ class MoveCaseStorage private constructor() : SavedData() {
         private const val DATA_NAME = "simpletms_move_case_storage"
         private const val TM_STORAGE_KEY = "tm_storage"
         private const val TR_STORAGE_KEY = "tr_storage"
+        private const val TM_SELECTED_POKEMON_KEY = "tm_selected_pokemon"
+        private const val TR_SELECTED_POKEMON_KEY = "tr_selected_pokemon"
 
         private val factory = Factory(
             { MoveCaseStorage() },
@@ -284,7 +366,56 @@ class MoveCaseStorage private constructor() : SavedData() {
                 }
             }
 
+            // Load selected Pokémon for TM case
+            if (tag.contains(TM_SELECTED_POKEMON_KEY, Tag.TAG_COMPOUND.toInt())) {
+                val tmPokemonCompound = tag.getCompound(TM_SELECTED_POKEMON_KEY)
+                for (key in tmPokemonCompound.allKeys) {
+                    try {
+                        val uuid = UUID.fromString(key)
+                        val pokemonTag = tmPokemonCompound.getCompound(key)
+                        val info = loadSelectedPokemonInfo(pokemonTag)
+                        if (info != null) {
+                            storage.tmSelectedPokemon[uuid] = info
+                        }
+                    } catch (e: IllegalArgumentException) {
+                        // Invalid UUID, skip
+                    }
+                }
+            }
+
+            // Load selected Pokémon for TR case
+            if (tag.contains(TR_SELECTED_POKEMON_KEY, Tag.TAG_COMPOUND.toInt())) {
+                val trPokemonCompound = tag.getCompound(TR_SELECTED_POKEMON_KEY)
+                for (key in trPokemonCompound.allKeys) {
+                    try {
+                        val uuid = UUID.fromString(key)
+                        val pokemonTag = trPokemonCompound.getCompound(key)
+                        val info = loadSelectedPokemonInfo(pokemonTag)
+                        if (info != null) {
+                            storage.trSelectedPokemon[uuid] = info
+                        }
+                    } catch (e: IllegalArgumentException) {
+                        // Invalid UUID, skip
+                    }
+                }
+            }
+
             return storage
+        }
+
+        private fun loadSelectedPokemonInfo(tag: CompoundTag): SelectedPokemonInfo? {
+            val speciesId = tag.getString("speciesId")
+            if (speciesId.isEmpty()) return null
+
+            val formName = tag.getString("formName")
+            val displayName = tag.getString("displayName")
+            val movesTag = tag.getList("learnableMoves", Tag.TAG_STRING.toInt())
+            val learnableMoves = mutableSetOf<String>()
+            for (i in 0 until movesTag.size) {
+                learnableMoves.add(movesTag.getString(i))
+            }
+
+            return SelectedPokemonInfo(speciesId, formName, displayName, learnableMoves)
         }
 
         fun get(server: MinecraftServer): MoveCaseStorage {

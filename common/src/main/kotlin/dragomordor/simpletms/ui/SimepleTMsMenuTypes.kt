@@ -16,11 +16,16 @@ object SimpleTMsMenuTypes {
 
     /**
      * Menu type for the TM/TR Case.
-     * Uses extended menu to pass the isTR flag and stored moves with quantities from server to client.
+     * Uses extended menu to pass:
+     * - isTR flag
+     * - stored moves with quantities
+     * - optional Pokémon filter data
+     * - whether to auto-enable the filter
      */
     val MOVE_CASE_MENU: RegistrySupplier<MenuType<MoveCaseMenu>> = MENUS.register("move_case_menu") {
         MenuRegistry.ofExtended { containerId, inventory, buf ->
             val isTR = buf.readBoolean()
+
             // Read stored moves with quantities
             val storedMovesCount = buf.readVarInt()
             val storedMoves = mutableMapOf<String, Int>()
@@ -29,7 +34,34 @@ object SimpleTMsMenuTypes {
                 val quantity = buf.readVarInt()
                 storedMoves[moveName] = quantity
             }
-            MoveCaseMenu(containerId, inventory, isTR, storedMoves)
+
+            // Read Pokémon filter data
+            val hasPokemon = buf.readBoolean()
+            val pokemonFilterData: PokemonFilterData?
+            val autoEnableFilter: Boolean
+
+            if (hasPokemon) {
+                val speciesId = buf.readUtf()
+                val formName = buf.readUtf()
+                val displayName = buf.readUtf()
+
+                // Read pre-calculated learnable moves
+                val learnableCount = buf.readVarInt()
+                val learnableMoves = mutableSetOf<String>()
+                repeat(learnableCount) {
+                    learnableMoves.add(buf.readUtf())
+                }
+
+                // Read whether to auto-enable the filter
+                autoEnableFilter = buf.readBoolean()
+
+                pokemonFilterData = PokemonFilterData(speciesId, formName, displayName, learnableMoves)
+            } else {
+                pokemonFilterData = null
+                autoEnableFilter = false
+            }
+
+            MoveCaseMenu(containerId, inventory, isTR, storedMoves, null, pokemonFilterData, autoEnableFilter)
         }
     }
 
@@ -40,3 +72,13 @@ object SimpleTMsMenuTypes {
         MENUS.register()
     }
 }
+
+/**
+ * Data class holding Pokémon filter information for client-side display.
+ */
+data class PokemonFilterData(
+    val speciesId: String,
+    val formName: String,
+    val displayName: String,
+    val learnableMoves: Set<String>
+)

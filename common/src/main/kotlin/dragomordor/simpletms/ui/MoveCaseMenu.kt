@@ -2,10 +2,12 @@ package dragomordor.simpletms.ui
 
 import com.cobblemon.mod.common.api.moves.MoveTemplate
 import com.cobblemon.mod.common.api.moves.Moves
+import com.cobblemon.mod.common.pokemon.Pokemon
 import dragomordor.simpletms.SimpleTMs
 import dragomordor.simpletms.SimpleTMsItems
 import dragomordor.simpletms.api.MoveCaseHelper
 import dragomordor.simpletms.api.MoveCaseStorage
+import dragomordor.simpletms.item.custom.MoveCaseItem
 import dragomordor.simpletms.item.custom.MoveLearnItem
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.player.Inventory
@@ -16,7 +18,7 @@ import net.minecraft.world.item.ItemStack
 import java.util.UUID
 
 /**
- * Filter mode for displaying moves in the case.
+ * Filter mode for displaying moves based on ownership.
  */
 enum class FilterMode {
     ALL,
@@ -29,12 +31,20 @@ enum class FilterMode {
  *
  * TMs can only store 1 per move (they have durability).
  * TRs can store up to their stack size per move.
+ *
+ * Supports filtering by:
+ * - Ownership (all/owned/missing)
+ * - Search query
+ * - Pokémon learnset (optional)
  */
 class MoveCaseMenu(
     containerId: Int,
     private val playerInventory: Inventory,
     val isTR: Boolean,
-    initialStoredMoves: Map<String, Int> = emptyMap()
+    initialStoredMoves: Map<String, Int> = emptyMap(),
+    serverPokemon: Pokemon? = null,
+    clientPokemonData: PokemonFilterData? = null,
+    autoEnableFilter: Boolean = true // Only auto-enable when freshly selected
 ) : AbstractContainerMenu(SimpleTMsMenuTypes.MOVE_CASE_MENU.get(), containerId) {
 
     val player: Player = playerInventory.player
@@ -61,6 +71,25 @@ class MoveCaseMenu(
     private var filteredMoves: List<String> = allMoves
     private var searchQuery: String = ""
     private var filterMode: FilterMode = FilterMode.ALL
+
+    // Pokémon filter
+    private var pokemonFilterEnabled: Boolean = false
+    private val serverPokemonRef: Pokemon? = serverPokemon
+    val pokemonFilterData: PokemonFilterData? = clientPokemonData ?: serverPokemon?.let {
+        PokemonFilterData(
+            it.species.resourceIdentifier.toString(),
+            it.form.name,
+            it.species.translatedName.string,
+            MoveCaseItem.getLearnableMoves(it, isTR)
+        )
+    }
+
+    // Only auto-enable filter if this was a fresh selection
+    init {
+        if (pokemonFilterData != null && autoEnableFilter) {
+            pokemonFilterEnabled = true
+        }
+    }
 
     val totalMoveSlots: Int get() = filteredMoves.size
     val totalRows: Int get() = (totalMoveSlots + COLUMNS - 1) / COLUMNS
@@ -92,9 +121,15 @@ class MoveCaseMenu(
             addSlot(Slot(playerInventory, col, x, PLAYER_HOTBAR_Y))
         }
         hotbarEnd = hotbarStart + 9
+
+        // Apply initial filter
+        updateFilteredMoves()
     }
 
+    // ========================================
     // Search
+    // ========================================
+
     fun setSearchQuery(query: String) {
         val normalizedQuery = query.lowercase().trim()
         if (normalizedQuery == searchQuery) return
@@ -107,14 +142,24 @@ class MoveCaseMenu(
 
     private fun updateFilteredMoves() {
         var result = allMoves
+
+        // Apply search filter
         if (searchQuery.isNotEmpty()) {
             result = result.filter { matchesSearch(it, searchQuery) }
         }
+
+        // Apply ownership filter
         result = when (filterMode) {
             FilterMode.ALL -> result
             FilterMode.OWNED_ONLY -> result.filter { getMoveQuantity(it) > 0 }
             FilterMode.MISSING_ONLY -> result.filter { getMoveQuantity(it) == 0 }
         }
+
+        // Apply Pokémon learnset filter
+        if (pokemonFilterEnabled && pokemonFilterData != null) {
+            result = result.filter { pokemonFilterData.learnableMoves.contains(it) }
+        }
+
         filteredMoves = result
 
         // Adjust scroll if we're now past the end
@@ -165,7 +210,10 @@ class MoveCaseMenu(
 
     fun getFilteredMoves(): List<String> = filteredMoves
 
-    // Filter
+    // ========================================
+    // Ownership Filter
+    // ========================================
+
     fun getFilterMode(): FilterMode = filterMode
 
     fun cycleFilterMode() {
@@ -178,7 +226,35 @@ class MoveCaseMenu(
         scrollRow = 0
     }
 
+    // ========================================
+    // Pokémon Filter
+    // ========================================
+
+    fun hasPokemonFilter(): Boolean = pokemonFilterData != null
+
+    fun isPokemonFilterEnabled(): Boolean = pokemonFilterEnabled
+
+    fun togglePokemonFilter() {
+        if (pokemonFilterData != null) {
+            pokemonFilterEnabled = !pokemonFilterEnabled
+            updateFilteredMoves()
+            scrollRow = 0
+        }
+    }
+
+    fun getPokemonDisplayName(): String? = pokemonFilterData?.displayName
+
+    /**
+     * Get count of moves the Pokémon can learn from the case
+     */
+    fun getPokemonLearnableCount(): Int {
+        return pokemonFilterData?.learnableMoves?.size ?: 0
+    }
+
+    // ========================================
     // Scroll
+    // ========================================
+
     fun getScrollRow(): Int = scrollRow
     fun getMaxScrollRow(): Int = maxOf(0, totalRows - VISIBLE_ROWS)
     fun setScrollRow(row: Int) { scrollRow = row.coerceIn(0, getMaxScrollRow()) }
@@ -189,26 +265,19 @@ class MoveCaseMenu(
         return if (actualIndex in filteredMoves.indices) filteredMoves[actualIndex] else null
     }
 
-    // Storage - now with quantities
+    // ========================================
+    // Storage - with quantities
+    // ========================================
 
-    /**
-     * Check if a move is stored (has quantity > 0)
-     */
     fun isMoveStored(moveName: String): Boolean {
         return getMoveQuantity(moveName) > 0
     }
 
-    /**
-     * Get quantity of a move stored
-     */
     fun getMoveQuantity(moveName: String): Int {
         storage?.let { return it.getMoveQuantity(playerUUID, moveName, isTR) }
         return clientStoredMoves[moveName] ?: 0
     }
 
-    /**
-     * Check if more of this move can be added
-     */
     fun canAddMore(moveName: String): Boolean {
         return getMoveQuantity(moveName) < maxStackSize
     }
@@ -216,9 +285,6 @@ class MoveCaseMenu(
     fun getStoredCount(): Int = allMoves.count { isMoveStored(it) }
     fun getTotalCount(): Int = allMoves.size
 
-    /**
-     * Get total items stored (sum of all quantities)
-     */
     fun getTotalItemsStored(): Int {
         return allMoves.sumOf { getMoveQuantity(it) }
     }
@@ -259,7 +325,7 @@ class MoveCaseMenu(
 
     override fun stillValid(player: Player): Boolean = true
 
-    // Shift-click from player inventory - deposit as many as possible
+    // Shift-click from player inventory
     override fun quickMoveStack(player: Player, slotIndex: Int): ItemStack {
         val slot = slots.getOrNull(slotIndex) ?: return ItemStack.EMPTY
         if (!slot.hasItem()) return ItemStack.EMPTY
@@ -293,17 +359,14 @@ class MoveCaseMenu(
 
     /**
      * Handle case slot click by move name.
-     * Called from network packet on server - uses move name to avoid filter/scroll sync issues.
      */
     fun handleCaseSlotClickByName(moveName: String, isShiftClick: Boolean): Boolean {
-        // Validate the move exists
         if (!allMoves.contains(moveName)) return false
 
         val storedQty = getMoveQuantity(moveName)
         val carriedItem = carried
 
         if (isShiftClick) {
-            // Shift-click: withdraw all to inventory
             if (storedQty > 0) {
                 val prefix = if (isTR) "tr_" else "tm_"
                 val itemToGive = SimpleTMsItems.getItemStackFromName(prefix + moveName)
@@ -327,9 +390,7 @@ class MoveCaseMenu(
                 }
             }
         } else {
-            // Normal click
             if (carriedItem.isEmpty) {
-                // Pick up stored items
                 if (storedQty > 0) {
                     val pickupAmount = storedQty.coerceAtMost(64)
                     removeFromStorage(moveName, pickupAmount)
@@ -340,7 +401,6 @@ class MoveCaseMenu(
                     return true
                 }
             } else {
-                // Deposit carried items
                 val item = carriedItem.item
                 if (item is MoveLearnItem && item.moveName == moveName && item.isTR == isTR) {
                     if (canAddMore(moveName)) {
@@ -356,9 +416,6 @@ class MoveCaseMenu(
         return false
     }
 
-    /**
-     * Handle case slot click by visible index (for client-side immediate feedback).
-     */
     fun handleCaseSlotClick(visibleIndex: Int, isShiftClick: Boolean): Boolean {
         val moveName = getMoveNameForVisibleSlot(visibleIndex) ?: return false
         return handleCaseSlotClickByName(moveName, isShiftClick)
