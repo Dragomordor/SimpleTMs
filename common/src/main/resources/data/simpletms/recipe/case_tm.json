@@ -8,7 +8,7 @@
   ],
   "key": {
     "x": {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:diamond"
     },
     "L": {
       "item": "minecraft:leather"
@@ -18,7 +18,7 @@
     }
   },
   "result": {
-    "id": "simpletms:case_tr",
+    "id": "simpletms:case_tm",
     "count": 1
   }
 }
