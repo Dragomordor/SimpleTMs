@@ -6,6 +6,7 @@ import dragomordor.simpletms.config.DoubleConstraint
 import dragomordor.simpletms.config.SimpleTMsConfig
 import dragomordor.simpletms.events.MoveLearnItemDropEventListeners
 import dragomordor.simpletms.events.CobblemonPokemonSpeciesListener
+import dragomordor.simpletms.network.SimpleTMsNetwork
 import dragomordor.simpletms.ui.SimpleTMsMenuTypes
 import net.fabricmc.loader.api.FabricLoader
 import org.slf4j.Logger
@@ -37,6 +38,8 @@ object SimpleTMs {
         CobblemonPokemonSpeciesListener.registerListeners()
         // Menu
         SimpleTMsMenuTypes.register()
+        // Network
+        SimpleTMsNetwork.register()
     }
 
 
