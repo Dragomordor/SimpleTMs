@@ -2,6 +2,9 @@ package dragomordor.simpletms
 
 import com.cobblemon.mod.common.config.constraint.IntConstraint
 import com.mojang.logging.LogUtils.getLogger
+import dragomordor.simpletms.block.SimpleTMsBlockItems
+import dragomordor.simpletms.block.SimpleTMsBlocks
+import dragomordor.simpletms.block.entity.SimpleTMsBlockEntities
 import dragomordor.simpletms.config.DoubleConstraint
 import dragomordor.simpletms.config.SimpleTMsConfig
 import dragomordor.simpletms.events.MoveLearnItemDropEventListeners
@@ -32,7 +35,14 @@ object SimpleTMs {
 
     fun init() {
         LOGGER.info("Using SimpleTMs ($VERSION)")
+        // Register items
         SimpleTMsItems.registerModItems()
+        // Register blocks (must be before block items and block entities)
+        SimpleTMsBlocks.register()
+        // Register block items (after blocks)
+        SimpleTMsBlockItems.register()
+        // Register block entities (after blocks)
+        SimpleTMsBlockEntities.register()
         // Event listeners
         MoveLearnItemDropEventListeners.registerListeners()
         CobblemonPokemonSpeciesListener.registerListeners()
@@ -112,4 +122,3 @@ object SimpleTMs {
     }
 
 }
-

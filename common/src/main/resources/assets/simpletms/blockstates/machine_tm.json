@@ -1,0 +1,31 @@
+{
+    "variants": {
+        "facing=north,half=lower": {
+            "model": "simpletms:block/machine_tm"
+        },
+        "facing=south,half=lower": {
+            "model": "simpletms:block/machine_tm",
+            "y": 180
+        },
+        "facing=west,half=lower": {
+            "model": "simpletms:block/machine_tm",
+            "y": 270
+        },
+        "facing=east,half=lower": {
+            "model": "simpletms:block/machine_tm",
+            "y": 90
+        },
+        "facing=north,half=upper": {
+            "model": "simpletms:block/machine_tm_upper"
+        },
+        "facing=south,half=upper": {
+            "model": "simpletms:block/machine_tm_upper"
+        },
+        "facing=west,half=upper": {
+            "model": "simpletms:block/machine_tm_upper"
+        },
+        "facing=east,half=upper": {
+            "model": "simpletms:block/machine_tm_upper"
+        }
+    }
+}

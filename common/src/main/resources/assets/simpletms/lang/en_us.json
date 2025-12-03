@@ -64,6 +64,21 @@
     "gui.simpletms.filter.pokemon": "Filter: %s",
     "gui.simpletms.filter.pokemon.learnable": "Can learn %d moves",
     "gui.simpletms.filter.pokemon.enabled": "Click to disable filter",
-    "gui.simpletms.filter.pokemon.disabled": "Click to enable filter"
+    "gui.simpletms.filter.pokemon.disabled": "Click to enable filter",
 
+    "block.simpletms.machine_tm": "TM Machine",
+    "container.simpletms.tm_machine": "TM Machine",
+    "gui.simpletms.machine.filter.all": "Show All (TMs & TRs)",
+    "gui.simpletms.machine.filter.tm": "Show TMs Only",
+    "gui.simpletms.machine.filter.tr": "Show TRs Only",
+    "gui.simpletms.machine.ownership.all": "Show All Moves",
+    "gui.simpletms.machine.ownership.owned": "Show Stored Only",
+    "gui.simpletms.machine.ownership.missing": "Show Missing Only",
+    "gui.simpletms.machine.pokemon_filter.none": "No Pokémon Filter",
+    "gui.simpletms.machine.pokemon_filter.active": "Filtering by: %s",
+    "gui.simpletms.machine.pokemon_filter.inactive": "Filter disabled: %s",
+    "gui.simpletms.machine.pokemon_filter.shift_hint": "Shift-click to select Pokémon",
+    "gui.simpletms.machine.stored": "Stored: %d",
+    "gui.simpletms.machine.tm_count": "TMs: %d",
+    "gui.simpletms.machine.tr_count": "TRs: %d"
 }
