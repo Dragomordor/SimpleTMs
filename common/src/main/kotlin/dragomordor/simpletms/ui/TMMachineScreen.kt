@@ -616,16 +616,10 @@ class TMMachineScreen(
                 val isShiftClick = hasShiftDown()
 
                 if (typeFilter == MoveTypeFilter.ALL) {
-                    // In ALL mode with flat list, get the display item at this slot
                     val displayItem = getDisplayItemAtSlot(row, col)
                     if (displayItem != null && displayItem.count > 0) {
-                        // Find the move entry and its visible index for the network packet
-                        val filteredMoves = menu.getFilteredMoves()
-                        val moveIndex = filteredMoves.indexOfFirst { it.moveName == displayItem.moveName }
-                        if (moveIndex >= 0) {
-                            SimpleTMsNetwork.sendMachineSlotClick(moveIndex, displayItem.isTR, isShiftClick)
-                            return true
-                        }
+                        SimpleTMsNetwork.sendMachineSlotClick(displayItem.moveName, displayItem.isTR, isShiftClick)
+                        return true
                     }
                 } else {
                     // In single mode - calculate absolute move index with scroll
@@ -646,7 +640,7 @@ class TMMachineScreen(
 
                             val hasItem = if (clickTR) entry.trCount > 0 else entry.tmCount > 0
                             if (hasItem) {
-                                SimpleTMsNetwork.sendMachineSlotClick(moveIndex, clickTR, isShiftClick)
+                                SimpleTMsNetwork.sendMachineSlotClick(entry.moveName, clickTR, isShiftClick)
                                 return true
                             }
                         }

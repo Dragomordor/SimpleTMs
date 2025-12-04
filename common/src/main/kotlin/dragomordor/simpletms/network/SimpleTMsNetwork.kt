@@ -45,7 +45,7 @@ object SimpleTMsNetwork {
      * Supports both normal click (pick up to cursor) and shift-click (transfer to inventory)
      */
     data class MachineSlotClickPacket(
-        val visibleSlotIndex: Int,
+        val moveName: String,
         val isTR: Boolean,
         val isShiftClick: Boolean
     ) : CustomPacketPayload {
@@ -55,12 +55,12 @@ object SimpleTMsNetwork {
             val TYPE = CustomPacketPayload.Type<MachineSlotClickPacket>(MACHINE_WITHDRAW_ID)
             val CODEC: StreamCodec<FriendlyByteBuf, MachineSlotClickPacket> = StreamCodec.of(
                 { buf, packet ->
-                    buf.writeVarInt(packet.visibleSlotIndex)
+                    buf.writeUtf(packet.moveName)
                     buf.writeBoolean(packet.isTR)
                     buf.writeBoolean(packet.isShiftClick)
                 },
                 { buf ->
-                    MachineSlotClickPacket(buf.readVarInt(), buf.readBoolean(), buf.readBoolean())
+                    MachineSlotClickPacket(buf.readUtf(), buf.readBoolean(), buf.readBoolean())
                 }
             )
         }
@@ -339,9 +339,11 @@ object SimpleTMsNetwork {
             val player = context.player as? ServerPlayer ?: return@queue
             val menu = player.containerMenu as? TMMachineMenu ?: return@queue
 
-            menu.handleSlotClick(packet.visibleSlotIndex, packet.isTR, packet.isShiftClick)
+            menu.handleSlotClickByName(packet.moveName, packet.isTR, packet.isShiftClick)
         }
     }
+
+
 
     private fun handleRequestPartySelection(packet: RequestPartySelectionPacket, context: NetworkManager.PacketContext) {
         context.queue {
@@ -594,10 +596,9 @@ object SimpleTMsNetwork {
      * @param isTR Whether clicking on TR slot (vs TM)
      * @param isShiftClick Whether shift is held (transfer vs pick up)
      */
-    fun sendMachineSlotClick(visibleSlotIndex: Int, isTR: Boolean, isShiftClick: Boolean) {
-        NetworkManager.sendToServer(MachineSlotClickPacket(visibleSlotIndex, isTR, isShiftClick))
+    fun sendMachineSlotClick(moveName: String, isTR: Boolean, isShiftClick: Boolean) {
+        NetworkManager.sendToServer(MachineSlotClickPacket(moveName, isTR, isShiftClick))
     }
-
     /**
      * Request party selection for Pokémon filter
      */

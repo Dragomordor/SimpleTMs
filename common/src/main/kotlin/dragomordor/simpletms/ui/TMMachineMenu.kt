@@ -527,6 +527,51 @@ class TMMachineMenu(
         return true
     }
 
+    /**
+     * Handle clicking on a slot by move name.
+     * Called on server via network packet.
+     */
+    fun handleSlotClickByName(moveName: String, isTR: Boolean, isShiftClick: Boolean): Boolean {
+        if (player !is ServerPlayer) return false
+        val blockEntity = this.blockEntity ?: return false
+
+        val hasItem = if (isTR) getTRCount(moveName) > 0 else getTMCount(moveName) > 0
+        if (!hasItem) return false
+
+        // Create the item stack
+        val prefix = if (isTR) "tr_" else "tm_"
+        val stack = SimpleTMsItems.getItemStackFromName(prefix + moveName)
+        if (stack.isEmpty) return false
+
+        if (isShiftClick) {
+            // Shift-click: Transfer directly to player's inventory
+            if (!player.inventory.add(stack)) {
+                // Inventory full, drop at player's feet
+                player.drop(stack, false)
+            }
+        } else {
+            // Normal click: Pick up to cursor (carried item)
+            val currentCarried = carried
+            if (currentCarried.isEmpty) {
+                // Cursor is empty, pick up the item
+                setCarried(stack)
+            } else if (ItemStack.isSameItemSameComponents(currentCarried, stack) &&
+                currentCarried.count < currentCarried.maxStackSize) {
+                // Same item type on cursor, add to it if possible
+                currentCarried.grow(1)
+                setCarried(currentCarried)
+            } else {
+                // Different item on cursor or cursor stack is full, can't pick up
+                return false
+            }
+        }
+
+        // Remove from storage
+        blockEntity.removeMove(moveName, isTR, 1)
+        isDirty = true
+        return true
+    }
+
     // ========================================
     // Menu Validation
     // ========================================
