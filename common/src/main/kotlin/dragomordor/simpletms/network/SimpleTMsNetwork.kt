@@ -4,7 +4,9 @@ import com.cobblemon.mod.common.Cobblemon
 import dev.architectury.networking.NetworkManager
 import dragomordor.simpletms.SimpleTMs
 import dragomordor.simpletms.block.entity.TMMachineBlockEntity
+import dragomordor.simpletms.item.custom.MoveCaseItem
 import dragomordor.simpletms.ui.MoveCaseMenu
+import dragomordor.simpletms.ui.MoveCaseScreen
 import dragomordor.simpletms.ui.PokemonFilterData
 import dragomordor.simpletms.ui.TMMachineMenu
 import dragomordor.simpletms.ui.TMMachineScreen
@@ -31,6 +33,8 @@ object SimpleTMsNetwork {
     private val MACHINE_SYNC_ID = ResourceLocation.fromNamespaceAndPath(SimpleTMs.MOD_ID, "machine_sync")
     private val CASE_SLOT_CLICK_ID = ResourceLocation.fromNamespaceAndPath(SimpleTMs.MOD_ID, "case_slot_click")
     private val MACHINE_PARTY_SELECT_ID = ResourceLocation.fromNamespaceAndPath(SimpleTMs.MOD_ID, "machine_party_select")
+    private val CASE_PARTY_SELECT_ID = ResourceLocation.fromNamespaceAndPath(SimpleTMs.MOD_ID, "case_party_select")
+    private val CASE_POKEMON_FILTER_ID = ResourceLocation.fromNamespaceAndPath(SimpleTMs.MOD_ID, "case_pokemon_filter")
 
     // ========================================
     // Packet Payloads
@@ -202,6 +206,60 @@ object SimpleTMsNetwork {
         }
     }
 
+    /**
+     * Client -> Server: Request party selection for Move Case Pokémon filter
+     */
+    data class CasePartySelectPacket(
+        val isTR: Boolean
+    ) : CustomPacketPayload {
+        override fun type(): CustomPacketPayload.Type<CasePartySelectPacket> = TYPE
+
+        companion object {
+            val TYPE = CustomPacketPayload.Type<CasePartySelectPacket>(CASE_PARTY_SELECT_ID)
+            val CODEC: StreamCodec<FriendlyByteBuf, CasePartySelectPacket> = StreamCodec.of(
+                { buf, packet -> buf.writeBoolean(packet.isTR) },
+                { buf -> CasePartySelectPacket(buf.readBoolean()) }
+            )
+        }
+    }
+
+    /**
+     * Server -> Client: Send Pokémon filter data for Move Case after party selection
+     */
+    data class CasePokemonFilterPacket(
+        val isTR: Boolean,
+        val speciesId: String,
+        val formName: String,
+        val displayName: String,
+        val learnableMoves: Set<String>
+    ) : CustomPacketPayload {
+        override fun type(): CustomPacketPayload.Type<CasePokemonFilterPacket> = TYPE
+
+        companion object {
+            val TYPE = CustomPacketPayload.Type<CasePokemonFilterPacket>(CASE_POKEMON_FILTER_ID)
+            val CODEC: StreamCodec<FriendlyByteBuf, CasePokemonFilterPacket> = StreamCodec.of(
+                { buf, packet ->
+                    buf.writeBoolean(packet.isTR)
+                    buf.writeUtf(packet.speciesId)
+                    buf.writeUtf(packet.formName)
+                    buf.writeUtf(packet.displayName)
+                    buf.writeVarInt(packet.learnableMoves.size)
+                    packet.learnableMoves.forEach { buf.writeUtf(it) }
+                },
+                { buf ->
+                    val isTR = buf.readBoolean()
+                    val speciesId = buf.readUtf()
+                    val formName = buf.readUtf()
+                    val displayName = buf.readUtf()
+                    val moveCount = buf.readVarInt()
+                    val moves = mutableSetOf<String>()
+                    repeat(moveCount) { moves.add(buf.readUtf()) }
+                    CasePokemonFilterPacket(isTR, speciesId, formName, displayName, moves)
+                }
+            )
+        }
+    }
+
     // ========================================
     // Registration
     // ========================================
@@ -255,6 +313,20 @@ object SimpleTMsNetwork {
             MachinePartySelectPacket.TYPE,
             MachinePartySelectPacket.CODEC,
             ::handleMachinePartySelect
+        )
+
+        NetworkManager.registerReceiver(
+            NetworkManager.Side.C2S,
+            CasePartySelectPacket.TYPE,
+            CasePartySelectPacket.CODEC,
+            ::handleCasePartySelect
+        )
+
+        NetworkManager.registerReceiver(
+            NetworkManager.Side.S2C,
+            CasePokemonFilterPacket.TYPE,
+            CasePokemonFilterPacket.CODEC,
+            ::handleCasePokemonFilter
         )
     }
 
@@ -369,12 +441,73 @@ object SimpleTMsNetwork {
         }
     }
 
+    private fun handleCasePartySelect(packet: CasePartySelectPacket, context: NetworkManager.PacketContext) {
+        context.queue {
+            val player = context.player as? ServerPlayer ?: return@queue
+
+            // Verify player has Move Case menu open
+            val menu = player.containerMenu as? MoveCaseMenu ?: return@queue
+            val isTR = packet.isTR
+
+            val party = Cobblemon.storage.getParty(player)
+            val partyList = party.toList()
+
+            if (partyList.isEmpty()) return@queue
+
+            // Store the item stack reference to reopen the case after selection
+            // We need to find which hand has the case item
+            val mainHandStack = player.mainHandItem
+            val offHandStack = player.offhandItem
+
+            val (caseStack, hand) = when {
+                mainHandStack.item is MoveCaseItem && (mainHandStack.item as MoveCaseItem).isTR == isTR ->
+                    mainHandStack to net.minecraft.world.InteractionHand.MAIN_HAND
+                offHandStack.item is MoveCaseItem && (offHandStack.item as MoveCaseItem).isTR == isTR ->
+                    offHandStack to net.minecraft.world.InteractionHand.OFF_HAND
+                else -> return@queue // Case not found in hand
+            }
+
+            // Open party selection GUI using Cobblemon's callback system
+            com.cobblemon.mod.common.api.callback.PartySelectCallbacks.createFromPokemon(
+                player = player,
+                pokemon = partyList,
+                canSelect = { true },
+                handler = { pokemon ->
+                    // When Pokémon is selected, calculate filter data
+                    val speciesId = pokemon.species.resourceIdentifier.toString()
+                    val formName = pokemon.form.name
+                    val displayName = pokemon.getDisplayName().string
+
+                    // Calculate learnable moves for this case type only
+                    val learnableMoves = MoveCaseItem.getLearnableMoves(pokemon, isTR)
+
+                    // Send filter data packet first (this will be stored as pending on client)
+                    val responsePacket = CasePokemonFilterPacket(isTR, speciesId, formName, displayName, learnableMoves)
+                    NetworkManager.sendToPlayer(player, responsePacket)
+
+                    // Reopen the case menu - use the item in the player's hand
+                    val currentStack = if (hand == net.minecraft.world.InteractionHand.MAIN_HAND)
+                        player.mainHandItem else player.offhandItem
+
+                    if (currentStack.item is MoveCaseItem) {
+                        // Trigger the item use to reopen the menu
+                        (currentStack.item as MoveCaseItem).use(player.level(), player, hand)
+                    }
+                }
+            )
+        }
+    }
+
     // ========================================
     // Client-Side Handlers
     // ========================================
 
     // Pending filter data for when the TM Machine menu reopens after party selection
     private var pendingPokemonFilter: PokemonFilterData? = null
+
+    // Pending filter data for Move Case (separate for TM and TR cases)
+    private var pendingCasePokemonFilter: PokemonFilterData? = null
+    private var pendingCaseIsTR: Boolean = false
 
     /**
      * Get and clear the pending Pokémon filter (called when menu opens)
@@ -383,6 +516,18 @@ object SimpleTMsNetwork {
         val filter = pendingPokemonFilter
         pendingPokemonFilter = null
         return filter
+    }
+
+    /**
+     * Get and clear the pending Case Pokémon filter
+     */
+    fun consumePendingCasePokemonFilter(isTR: Boolean): PokemonFilterData? {
+        if (pendingCasePokemonFilter != null && pendingCaseIsTR == isTR) {
+            val filter = pendingCasePokemonFilter
+            pendingCasePokemonFilter = null
+            return filter
+        }
+        return null
     }
 
     private fun handlePokemonFilterData(packet: PokemonFilterDataPacket, context: NetworkManager.PacketContext) {
@@ -416,6 +561,26 @@ object SimpleTMsNetwork {
 
             menu.updateClientCache(packet.storedMoves)
             menu.markDirty()
+        }
+    }
+
+    private fun handleCasePokemonFilter(packet: CasePokemonFilterPacket, context: NetworkManager.PacketContext) {
+        context.queue {
+            val filterData = PokemonFilterData(
+                packet.speciesId,
+                packet.formName,
+                packet.displayName,
+                packet.learnableMoves
+            )
+
+            // Store for potential use
+            pendingCasePokemonFilter = filterData
+            pendingCaseIsTR = packet.isTR
+
+            // Try to apply directly if the case screen is still open
+            val minecraft = Minecraft.getInstance()
+            val screen = minecraft.screen as? MoveCaseScreen
+            screen?.onPokemonSelected(filterData)
         }
     }
 
@@ -459,6 +624,13 @@ object SimpleTMsNetwork {
      */
     fun sendMachinePartySelectRequest() {
         NetworkManager.sendToServer(MachinePartySelectPacket())
+    }
+
+    /**
+     * Request party selection for Move Case Pokémon filter
+     */
+    fun sendCasePartySelectRequest(isTR: Boolean) {
+        NetworkManager.sendToServer(CasePartySelectPacket(isTR))
     }
 
     // ========================================
