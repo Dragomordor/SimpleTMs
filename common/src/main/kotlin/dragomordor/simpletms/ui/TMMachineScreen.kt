@@ -23,6 +23,7 @@ import net.minecraft.world.item.ItemStack
  * - Normal container click behavior (click to pick up, shift-click to transfer)
  * - Shows quantities for stored items
  * - Ghost items for moves not in storage (unless ownership filter is active)
+ * - Filter state persists between screen openings
  */
 class TMMachineScreen(
     menu: TMMachineMenu,
@@ -88,7 +89,7 @@ class TMMachineScreen(
         val searchX = leftPos + imageWidth - SEARCH_BOX_WIDTH - 6
 
         // Position buttons from left to right after title
-        typeFilterButtonX = leftPos + 65
+        typeFilterButtonX = leftPos + 71
         typeFilterButtonY = buttonY
 
         ownershipFilterButtonX = typeFilterButtonX + BUTTON_SIZE + BUTTON_SPACING
@@ -107,6 +108,8 @@ class TMMachineScreen(
         searchBox.setTextColor(0xFFFFFF)
         searchBox.setHint(Component.translatable("gui.simpletms.search.hint"))
         searchBox.setResponder { menu.setSearchQuery(it) }
+
+        // Initialize search box with the loaded search query from menu (which loads from ClientFilterStorage)
         searchBox.value = menu.getSearchQuery()
 
         addRenderableWidget(searchBox)
@@ -269,61 +272,100 @@ class TMMachineScreen(
         val filteredMoves = menu.getFilteredMoves()
         val typeFilter = menu.getTypeFilter()
         val ownershipFilter = menu.getOwnershipFilter()
-        val effectiveColumns = menu.getEffectiveColumns()
 
         // Determine if we should show ghost items
         val showGhosts = ownershipFilter == OwnershipFilter.ALL || ownershipFilter == OwnershipFilter.MISSING_ONLY
 
-        for (row in 0 until VISIBLE_ROWS) {
-            for (col in 0 until effectiveColumns) {
-                val moveIndex = (scrollRow + row) * effectiveColumns + col
-                if (moveIndex >= filteredMoves.size) continue
+        if (typeFilter == MoveTypeFilter.ALL) {
+            // In ALL mode, build a flat list of displayable items (TM and TR separately)
+            // This ensures no gaps - items are shown consecutively
+            val displayItems = mutableListOf<DisplayItem>()
+
+            for (entry in filteredMoves) {
+                // Add TM if valid and (has count OR showing ghosts)
+                if (entry.isValidTM && (entry.tmCount > 0 || showGhosts)) {
+                    displayItems.add(DisplayItem(entry.moveName, false, entry.tmCount))
+                }
+                // Add TR if valid and (has count OR showing ghosts)
+                if (entry.isValidTR && (entry.trCount > 0 || showGhosts)) {
+                    displayItems.add(DisplayItem(entry.moveName, true, entry.trCount))
+                }
+            }
+
+            // Now render the flat list with 9 columns
+            val startIndex = scrollRow * COLUMNS
+            for (i in 0 until VISIBLE_ROWS * COLUMNS) {
+                val itemIndex = startIndex + i
+                if (itemIndex >= displayItems.size) break
+
+                val item = displayItems[itemIndex]
+                val col = i % COLUMNS
+                val row = i / COLUMNS
+
+                val slotX = x + CASE_SLOTS_X + col * SLOT_SIZE + 1
+                val slotY = y + CASE_SLOTS_Y + row * SLOT_SIZE + 1
+
+                val prefix = if (item.isTR) "tr_" else "tm_"
+                val itemStack = SimpleTMsItems.getItemStackFromName(prefix + item.moveName)
+
+                if (item.count > 0) {
+                    renderItemWithCount(guiGraphics, itemStack, slotX, slotY, item.count)
+                } else {
+                    renderGhostItem(guiGraphics, itemStack, slotX, slotY)
+                }
+            }
+        } else {
+            // In TM_ONLY or TR_ONLY mode, show single item per slot
+            val startIndex = scrollRow * COLUMNS
+            for (i in 0 until VISIBLE_ROWS * COLUMNS) {
+                val moveIndex = startIndex + i
+                if (moveIndex >= filteredMoves.size) break
 
                 val entry = filteredMoves[moveIndex]
+                val col = i % COLUMNS
+                val row = i / COLUMNS
 
-                if (typeFilter == MoveTypeFilter.ALL) {
-                    // In ALL mode, show TM and TR side by side
-                    // TM on left, TR on right
-                    val tmSlotX = x + CASE_SLOTS_X + col * 2 * SLOT_SIZE + 1
-                    val trSlotX = tmSlotX + SLOT_SIZE
-                    val slotY = y + CASE_SLOTS_Y + row * SLOT_SIZE + 1
+                val slotX = x + CASE_SLOTS_X + col * SLOT_SIZE + 1
+                val slotY = y + CASE_SLOTS_Y + row * SLOT_SIZE + 1
 
-                    // Render TM slot - only if valid and (has count OR showing ghosts)
-                    if (entry.isValidTM) {
-                        if (entry.tmCount > 0) {
-                            val tmStack = SimpleTMsItems.getItemStackFromName("tm_${entry.moveName}")
-                            renderItemWithCount(guiGraphics, tmStack, tmSlotX, slotY, entry.tmCount)
-                        } else if (showGhosts) {
-                            val tmStack = SimpleTMsItems.getItemStackFromName("tm_${entry.moveName}")
-                            renderGhostItem(guiGraphics, tmStack, tmSlotX, slotY)
-                        }
-                    }
+                val (itemStack, count) = getDisplayItemForEntry(entry, typeFilter)
 
-                    // Render TR slot - only if valid and (has count OR showing ghosts)
-                    if (entry.isValidTR) {
-                        if (entry.trCount > 0) {
-                            val trStack = SimpleTMsItems.getItemStackFromName("tr_${entry.moveName}")
-                            renderItemWithCount(guiGraphics, trStack, trSlotX, slotY, entry.trCount)
-                        } else if (showGhosts) {
-                            val trStack = SimpleTMsItems.getItemStackFromName("tr_${entry.moveName}")
-                            renderGhostItem(guiGraphics, trStack, trSlotX, slotY)
-                        }
-                    }
-                } else {
-                    // In TM_ONLY or TR_ONLY mode, show single item per slot
-                    val slotX = x + CASE_SLOTS_X + col * SLOT_SIZE + 1
-                    val slotY = y + CASE_SLOTS_Y + row * SLOT_SIZE + 1
-
-                    val (itemStack, count) = getDisplayItemForEntry(entry, typeFilter)
-
-                    if (count > 0) {
-                        renderItemWithCount(guiGraphics, itemStack, slotX, slotY, count)
-                    } else if (showGhosts) {
-                        renderGhostItem(guiGraphics, itemStack, slotX, slotY)
-                    }
+                if (count > 0) {
+                    renderItemWithCount(guiGraphics, itemStack, slotX, slotY, count)
+                } else if (showGhosts) {
+                    renderGhostItem(guiGraphics, itemStack, slotX, slotY)
                 }
             }
         }
+    }
+
+    /**
+     * Helper data class for flat display list in ALL mode
+     */
+    private data class DisplayItem(val moveName: String, val isTR: Boolean, val count: Int)
+
+    /**
+     * Get the display item at a given visible slot position in ALL mode
+     */
+    private fun getDisplayItemAtSlot(row: Int, col: Int): DisplayItem? {
+        val filteredMoves = menu.getFilteredMoves()
+        val ownershipFilter = menu.getOwnershipFilter()
+        val showGhosts = ownershipFilter == OwnershipFilter.ALL || ownershipFilter == OwnershipFilter.MISSING_ONLY
+
+        // Build flat list (same logic as renderCaseSlotItems)
+        val displayItems = mutableListOf<DisplayItem>()
+        for (entry in filteredMoves) {
+            if (entry.isValidTM && (entry.tmCount > 0 || showGhosts)) {
+                displayItems.add(DisplayItem(entry.moveName, false, entry.tmCount))
+            }
+            if (entry.isValidTR && (entry.trCount > 0 || showGhosts)) {
+                displayItems.add(DisplayItem(entry.moveName, true, entry.trCount))
+            }
+        }
+
+        val scrollRow = menu.getScrollRow()
+        val slotIndex = (scrollRow + row) * COLUMNS + col
+        return displayItems.getOrNull(slotIndex)
     }
 
     /**
@@ -412,7 +454,6 @@ class TMMachineScreen(
     }
 
     override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        // Draw shorter title to leave room for buttons
         guiGraphics.drawString(font, title, titleLabelX, titleLabelY, 0x404040, false)
         guiGraphics.drawString(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, 0x404040, false)
     }
@@ -463,29 +504,22 @@ class TMMachineScreen(
         val typeFilter = menu.getTypeFilter()
 
         if (typeFilter == MoveTypeFilter.ALL) {
-            // In ALL mode, determine if hovering over TM or TR slot
-            val effectiveColumns = menu.getEffectiveColumns()
-            val moveCol = col / 2
-            val isTRSlot = col % 2 == 1
+            // In ALL mode with flat list, get the display item at this slot
+            val displayItem = getDisplayItemAtSlot(row, col) ?: return
 
-            val visibleIndex = row * effectiveColumns + moveCol
-            val entry = menu.getEntryForVisibleSlot(visibleIndex) ?: return
-
-            // Only show tooltip if there's actually something to show
-            val count = if (isTRSlot) entry.trCount else entry.tmCount
-            val isValid = if (isTRSlot) entry.isValidTR else entry.isValidTM
-            if (!isValid) return
-
-            val prefix = if (isTRSlot) "tr_" else "tm_"
-            val itemStack = SimpleTMsItems.getItemStackFromName(prefix + entry.moveName)
+            val prefix = if (displayItem.isTR) "tr_" else "tm_"
+            val itemStack = SimpleTMsItems.getItemStackFromName(prefix + displayItem.moveName)
             if (itemStack.isEmpty) return
 
-            // Just show the item's normal tooltip, no extra "Stored" line
             guiGraphics.renderTooltip(font, getTooltipFromItem(minecraft!!, itemStack), java.util.Optional.empty(), mouseX, mouseY)
         } else {
-            // In single mode
-            val visibleIndex = row * COLUMNS + col
-            val entry = menu.getEntryForVisibleSlot(visibleIndex) ?: return
+            // In single mode - calculate absolute move index with scroll
+            val slotIndex = row * COLUMNS + col
+            val moveIndex = menu.getScrollRow() * COLUMNS + slotIndex
+            val filteredMoves = menu.getFilteredMoves()
+
+            if (moveIndex !in filteredMoves.indices) return
+            val entry = filteredMoves[moveIndex]
 
             val (itemStack, _) = getDisplayItemForEntry(entry, typeFilter)
             if (itemStack.isEmpty) return
@@ -582,38 +616,39 @@ class TMMachineScreen(
                 val isShiftClick = hasShiftDown()
 
                 if (typeFilter == MoveTypeFilter.ALL) {
-                    // In ALL mode, clicking on left half = TM, right half = TR
-                    val effectiveColumns = menu.getEffectiveColumns()
-                    val moveCol = col / 2
-                    val isTRSlot = col % 2 == 1
-
-                    val visibleIndex = row * effectiveColumns + moveCol
-                    val entry = menu.getEntryForVisibleSlot(visibleIndex)
-
-                    if (entry != null) {
-                        val hasItem = if (isTRSlot) entry.trCount > 0 else entry.tmCount > 0
-                        if (hasItem) {
-                            SimpleTMsNetwork.sendMachineSlotClick(visibleIndex, isTRSlot, isShiftClick)
+                    // In ALL mode with flat list, get the display item at this slot
+                    val displayItem = getDisplayItemAtSlot(row, col)
+                    if (displayItem != null && displayItem.count > 0) {
+                        // Find the move entry and its visible index for the network packet
+                        val filteredMoves = menu.getFilteredMoves()
+                        val moveIndex = filteredMoves.indexOfFirst { it.moveName == displayItem.moveName }
+                        if (moveIndex >= 0) {
+                            SimpleTMsNetwork.sendMachineSlotClick(moveIndex, displayItem.isTR, isShiftClick)
                             return true
                         }
                     }
                 } else {
-                    // In single mode
-                    val visibleIndex = row * COLUMNS + col
-                    val entry = menu.getEntryForVisibleSlot(visibleIndex)
+                    // In single mode - calculate absolute move index with scroll
+                    val slotIndex = row * COLUMNS + col
+                    val moveIndex = menu.getScrollRow() * COLUMNS + slotIndex
+                    val filteredMoves = menu.getFilteredMoves()
 
-                    if (entry != null && entry.hasAny()) {
-                        val clickTR = when {
-                            typeFilter == MoveTypeFilter.TM_ONLY -> false
-                            typeFilter == MoveTypeFilter.TR_ONLY -> true
-                            button == 1 -> true // Right-click = TR
-                            else -> entry.tmCount <= 0 // Left-click = TM if available, else TR
-                        }
+                    if (moveIndex in filteredMoves.indices) {
+                        val entry = filteredMoves[moveIndex]
 
-                        val hasItem = if (clickTR) entry.trCount > 0 else entry.tmCount > 0
-                        if (hasItem) {
-                            SimpleTMsNetwork.sendMachineSlotClick(visibleIndex, clickTR, isShiftClick)
-                            return true
+                        if (entry.hasAny()) {
+                            val clickTR = when {
+                                typeFilter == MoveTypeFilter.TM_ONLY -> false
+                                typeFilter == MoveTypeFilter.TR_ONLY -> true
+                                button == 1 -> true // Right-click = TR
+                                else -> entry.tmCount <= 0 // Left-click = TM if available, else TR
+                            }
+
+                            val hasItem = if (clickTR) entry.trCount > 0 else entry.tmCount > 0
+                            if (hasItem) {
+                                SimpleTMsNetwork.sendMachineSlotClick(moveIndex, clickTR, isShiftClick)
+                                return true
+                            }
                         }
                     }
                 }

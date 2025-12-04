@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack
 
 /**
  * Client-side screen for the TM/TR Case.
+ * Filter state persists between screen openings via ClientFilterStorage.
  */
 class MoveCaseScreen(
     menu: MoveCaseMenu,
@@ -62,17 +63,19 @@ class MoveCaseScreen(
         titleLabelX = 8
         titleLabelY = 6
 
-        // Position filter buttons
-        // If we have a Pokémon filter, show both buttons side by side
-        if (menu.hasPokemonFilter()) {
-            pokemonButtonX = leftPos + 74
-            pokemonButtonY = topPos + 5
-            filterButtonX = pokemonButtonX + POKEMON_BUTTON_SIZE + 2
-            filterButtonY = topPos + 5
-        } else {
-            filterButtonX = leftPos + 82
-            filterButtonY = topPos + 5
+        // Check for pending Pokémon filter from party selection
+        // This should enable the filter since it's a fresh selection
+        val pendingFilter = SimpleTMsNetwork.consumePendingCasePokemonFilter(menu.isTR)
+        if (pendingFilter != null) {
+            menu.setPokemonFilter(pendingFilter) // This enables and saves
         }
+
+        // Position filter buttons
+        // Always show Pokémon filter button (even if no filter set yet, shift-click can set one)
+        pokemonButtonX = leftPos + 74
+        pokemonButtonY = topPos + 5
+        filterButtonX = pokemonButtonX + POKEMON_BUTTON_SIZE + 2
+        filterButtonY = topPos + 5
 
         val searchX = filterButtonX + FILTER_BUTTON_SIZE + 4
         val searchY = topPos + 4
@@ -87,9 +90,19 @@ class MoveCaseScreen(
         searchBox.setTextColor(0xFFFFFF)
         searchBox.setHint(Component.translatable("gui.simpletms.search.hint"))
         searchBox.setResponder { menu.setSearchQuery(it) }
+
+        // Initialize search box with the loaded search query from menu (which loads from ClientFilterStorage)
         searchBox.value = menu.getSearchQuery()
 
         addRenderableWidget(searchBox)
+    }
+
+    /**
+     * Called when a Pokémon is selected from the party.
+     * This is invoked from the network handler.
+     */
+    fun onPokemonSelected(filterData: PokemonFilterData) {
+        menu.setPokemonFilter(filterData)
     }
 
     override fun resize(minecraft: net.minecraft.client.Minecraft, width: Int, height: Int) {
@@ -106,10 +119,8 @@ class MoveCaseScreen(
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, VISIBLE_ROWS * SLOT_SIZE + CASE_SLOTS_Y + 1)
         guiGraphics.blit(TEXTURE, x, y + VISIBLE_ROWS * SLOT_SIZE + CASE_SLOTS_Y + 1, 0, 126, imageWidth, 96)
 
-        // Render Pokémon filter button (if available)
-        if (menu.hasPokemonFilter()) {
-            renderPokemonFilterButton(guiGraphics, mouseX, mouseY)
-        }
+        // Always render Pokémon filter button (shift-click can set a filter)
+        renderPokemonFilterButton(guiGraphics, mouseX, mouseY)
 
         // Render ownership filter button
         renderFilterButton(guiGraphics, mouseX, mouseY)
@@ -120,37 +131,45 @@ class MoveCaseScreen(
     }
 
     private fun renderPokemonFilterButton(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
+        val hasFilter = menu.hasPokemonFilter()
         val isEnabled = menu.isPokemonFilterEnabled()
         val isHovered = isOverPokemonButton(mouseX.toDouble(), mouseY.toDouble())
 
         // Background
         val bgColor = when {
-            isEnabled && isHovered -> 0xFF446644.toInt()
-            isEnabled -> 0xFF335533.toInt()
+            hasFilter && isEnabled && isHovered -> 0xFF446644.toInt()
+            hasFilter && isEnabled -> 0xFF335533.toInt()
             isHovered -> 0xFF555555.toInt()
             else -> 0xFF333333.toInt()
         }
         guiGraphics.fill(pokemonButtonX, pokemonButtonY, pokemonButtonX + POKEMON_BUTTON_SIZE, pokemonButtonY + POKEMON_BUTTON_SIZE, bgColor)
 
         // Border - green when enabled, gray otherwise
-        val borderColor = if (isEnabled) 0xFF55FF55.toInt() else 0xFF888888.toInt()
+        val borderColor = if (hasFilter && isEnabled) 0xFF55FF55.toInt() else 0xFF888888.toInt()
         guiGraphics.renderOutline(pokemonButtonX, pokemonButtonY, POKEMON_BUTTON_SIZE, POKEMON_BUTTON_SIZE, borderColor)
 
         // Inner indicator - Pokéball-like icon
         val innerMargin = 2
-        if (isEnabled) {
+        if (hasFilter && isEnabled) {
             // Show a filled indicator when enabled
             guiGraphics.fill(
                 pokemonButtonX + innerMargin, pokemonButtonY + innerMargin,
                 pokemonButtonX + POKEMON_BUTTON_SIZE - innerMargin, pokemonButtonY + POKEMON_BUTTON_SIZE - innerMargin,
                 0xFFFF5555.toInt() // Red like a Pokéball
             )
-        } else {
-            // Show an empty circle/square when disabled
+        } else if (hasFilter) {
+            // Has filter but disabled - show gray
             guiGraphics.fill(
                 pokemonButtonX + innerMargin, pokemonButtonY + innerMargin,
                 pokemonButtonX + POKEMON_BUTTON_SIZE - innerMargin, pokemonButtonY + POKEMON_BUTTON_SIZE - innerMargin,
                 0xFF666666.toInt()
+            )
+        } else {
+            // No filter set - show empty outline
+            guiGraphics.renderOutline(
+                pokemonButtonX + innerMargin, pokemonButtonY + innerMargin,
+                POKEMON_BUTTON_SIZE - innerMargin * 2, POKEMON_BUTTON_SIZE - innerMargin * 2,
+                0xFF555555.toInt()
             )
         }
     }
@@ -180,7 +199,6 @@ class MoveCaseScreen(
     }
 
     private fun isOverPokemonButton(mouseX: Double, mouseY: Double): Boolean {
-        if (!menu.hasPokemonFilter()) return false
         return mouseX >= pokemonButtonX && mouseX < pokemonButtonX + POKEMON_BUTTON_SIZE &&
                 mouseY >= pokemonButtonY && mouseY < pokemonButtonY + POKEMON_BUTTON_SIZE
     }
@@ -193,6 +211,10 @@ class MoveCaseScreen(
     private fun renderCaseSlotItems(guiGraphics: GuiGraphics, x: Int, y: Int) {
         val scrollRow = menu.getScrollRow()
         val filteredMoves = menu.getFilteredMoves()
+        val filterMode = menu.getFilterMode()
+
+        // Determine if we should show ghost items
+        val showGhosts = filterMode == FilterMode.ALL || filterMode == FilterMode.MISSING_ONLY
 
         for (row in 0 until VISIBLE_ROWS) {
             for (col in 0 until COLUMNS) {
@@ -201,18 +223,45 @@ class MoveCaseScreen(
 
                 val moveName = filteredMoves[moveIndex]
                 val quantity = menu.getMoveQuantity(moveName)
-                val slotX = x + CASE_SLOTS_X + col * SLOT_SIZE + 1
-                val slotY = y + CASE_SLOTS_Y + row * SLOT_SIZE + 1
                 val itemStack = getItemStackForMove(moveName)
 
+                val slotX = x + CASE_SLOTS_X + col * SLOT_SIZE + 1
+                val slotY = y + CASE_SLOTS_Y + row * SLOT_SIZE + 1
+
                 if (quantity > 0) {
-                    itemStack.count = quantity
-                    guiGraphics.renderItem(itemStack, slotX, slotY)
-                    guiGraphics.renderItemDecorations(font, itemStack, slotX, slotY)
-                } else {
+                    renderItemWithCount(guiGraphics, itemStack, slotX, slotY, quantity)
+                } else if (showGhosts) {
                     renderGhostItem(guiGraphics, itemStack, slotX, slotY)
                 }
             }
+        }
+    }
+
+    private fun getItemStackForMove(moveName: String): ItemStack {
+        val prefix = if (menu.isTR) "tr_" else "tm_"
+        return SimpleTMsItems.getItemStackFromName(prefix + moveName)
+    }
+
+    /**
+     * Render an item with its count overlay (count rendered AFTER item for proper z-order)
+     */
+    private fun renderItemWithCount(guiGraphics: GuiGraphics, stack: ItemStack, x: Int, y: Int, count: Int) {
+        if (stack.isEmpty) return
+
+        // Render the item first
+        guiGraphics.renderItem(stack, x, y)
+
+        // Then render the count on top (only if > 1)
+        if (count > 1) {
+            guiGraphics.pose().pushPose()
+            guiGraphics.pose().translate(0f, 0f, 200f) // Ensure count is on top
+
+            val countStr = if (count > 99) "99+" else count.toString()
+            val textX = x + 17 - font.width(countStr)
+            val textY = y + 9
+
+            guiGraphics.drawString(font, countStr, textX, textY, 0xFFFFFF, true)
+            guiGraphics.pose().popPose()
         }
     }
 
@@ -232,11 +281,6 @@ class MoveCaseScreen(
         val slotX = x + CASE_SLOTS_X + col * SLOT_SIZE
         val slotY = y + CASE_SLOTS_Y + row * SLOT_SIZE
         guiGraphics.fillGradient(slotX + 1, slotY + 1, slotX + 17, slotY + 17, 0x80FFFFFF.toInt(), 0x80FFFFFF.toInt())
-    }
-
-    private fun getItemStackForMove(moveName: String): ItemStack {
-        val prefix = if (menu.isTR) "tr_" else "tm_"
-        return SimpleTMsItems.getItemStackFromName(prefix + moveName)
     }
 
     private fun renderScrollbar(guiGraphics: GuiGraphics, x: Int, y: Int) {
@@ -270,20 +314,26 @@ class MoveCaseScreen(
 
         // Pokémon filter button tooltip
         if (isOverPokemonButton(mouseX.toDouble(), mouseY.toDouble())) {
-            val pokemonName = menu.getPokemonDisplayName() ?: "Unknown"
-            val learnableCount = menu.getPokemonLearnableCount()
-            val isEnabled = menu.isPokemonFilterEnabled()
-
             val tooltipLines = mutableListOf<Component>()
-            tooltipLines.add(Component.translatable("gui.simpletms.filter.pokemon", pokemonName))
-            tooltipLines.add(Component.translatable("gui.simpletms.filter.pokemon.learnable", learnableCount))
 
-            if (isEnabled) {
-                tooltipLines.add(Component.translatable("gui.simpletms.filter.pokemon.enabled"))
+            if (menu.hasPokemonFilter()) {
+                val pokemonName = menu.getPokemonDisplayName() ?: "Unknown"
+                val learnableCount = menu.getPokemonLearnableCount()
+                val isEnabled = menu.isPokemonFilterEnabled()
+
+                tooltipLines.add(Component.translatable("gui.simpletms.filter.pokemon", pokemonName))
+                tooltipLines.add(Component.translatable("gui.simpletms.filter.pokemon.learnable", learnableCount))
+
+                if (isEnabled) {
+                    tooltipLines.add(Component.translatable("gui.simpletms.filter.pokemon.enabled"))
+                } else {
+                    tooltipLines.add(Component.translatable("gui.simpletms.filter.pokemon.disabled"))
+                }
             } else {
-                tooltipLines.add(Component.translatable("gui.simpletms.filter.pokemon.disabled"))
+                tooltipLines.add(Component.translatable("gui.simpletms.filter.pokemon.none"))
             }
 
+            tooltipLines.add(Component.translatable("gui.simpletms.filter.pokemon.shift_hint"))
             guiGraphics.renderComponentTooltip(font, tooltipLines, mouseX, mouseY)
         }
         // Ownership filter button tooltip
@@ -344,7 +394,15 @@ class MoveCaseScreen(
     override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
         // Pokémon filter button
         if (button == 0 && isOverPokemonButton(mouseX, mouseY)) {
-            menu.togglePokemonFilter()
+            if (hasShiftDown()) {
+                // Shift-click: Open party selection on server
+                SimpleTMsNetwork.sendCasePartySelectRequest(menu.isTR)
+            } else {
+                // Normal click: Toggle existing filter (only if we have one)
+                if (menu.hasPokemonFilter()) {
+                    menu.togglePokemonFilter()
+                }
+            }
             return true
         }
 

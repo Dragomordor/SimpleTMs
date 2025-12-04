@@ -36,6 +36,8 @@ enum class FilterMode {
  * - Ownership (all/owned/missing)
  * - Search query
  * - Pokémon learnset (optional)
+ *
+ * Filter state persists between screen openings via ClientFilterStorage.
  */
 class MoveCaseMenu(
     containerId: Int,
@@ -74,22 +76,8 @@ class MoveCaseMenu(
 
     // Pokémon filter
     private var pokemonFilterEnabled: Boolean = false
+    private var pokemonFilterData: PokemonFilterData? = null
     private val serverPokemonRef: Pokemon? = serverPokemon
-    val pokemonFilterData: PokemonFilterData? = clientPokemonData ?: serverPokemon?.let {
-        PokemonFilterData(
-            it.species.resourceIdentifier.toString(),
-            it.form.name,
-            it.species.translatedName.string,
-            MoveCaseItem.getLearnableMoves(it, isTR)
-        )
-    }
-
-    // Only auto-enable filter if this was a fresh selection
-    init {
-        if (pokemonFilterData != null && autoEnableFilter) {
-            pokemonFilterEnabled = true
-        }
-    }
 
     val totalMoveSlots: Int get() = filteredMoves.size
     val totalRows: Int get() = (totalMoveSlots + COLUMNS - 1) / COLUMNS
@@ -122,8 +110,60 @@ class MoveCaseMenu(
         }
         hotbarEnd = hotbarStart + 9
 
+        // Load persisted filter state on client side
+        if (player.level().isClientSide) {
+            loadFilterState()
+        }
+
+        // Handle Pokémon filter initialization
+        // Priority: 1) Fresh selection from server, 2) Client param (only if no persisted data), 3) Persisted from ClientFilterStorage
+        if (serverPokemon != null) {
+            // Fresh selection from clicking on a Pokémon - create new filter data and enable
+            pokemonFilterData = PokemonFilterData(
+                serverPokemon.species.resourceIdentifier.toString(),
+                serverPokemon.form.name,
+                serverPokemon.species.translatedName.string,
+                MoveCaseItem.getLearnableMoves(serverPokemon, isTR)
+            )
+            if (autoEnableFilter) {
+                pokemonFilterEnabled = true
+            }
+            saveFilterState() // Persist the new Pokémon selection
+        } else if (clientPokemonData != null && pokemonFilterData == null) {
+            // Client data from network, but ONLY use if we don't already have persisted data
+            // This handles fresh menu opens but doesn't override persisted state
+            pokemonFilterData = clientPokemonData
+            if (autoEnableFilter) {
+                pokemonFilterEnabled = true
+            }
+            saveFilterState()
+        }
+        // If we already have pokemonFilterData from loadFilterState(), keep it with its persisted enabled state
+
         // Apply initial filter
         updateFilteredMoves()
+    }
+
+    /**
+     * Load filter state from ClientFilterStorage (client-side only)
+     */
+    private fun loadFilterState() {
+        filterMode = ClientFilterStorage.getCaseFilterMode(isTR)
+        searchQuery = ClientFilterStorage.getCaseSearchQuery(isTR)
+        pokemonFilterData = ClientFilterStorage.getCasePokemonFilter(isTR)
+        pokemonFilterEnabled = ClientFilterStorage.isCasePokemonFilterEnabled(isTR)
+    }
+
+    /**
+     * Save filter state to ClientFilterStorage (client-side only)
+     */
+    private fun saveFilterState() {
+        if (player.level().isClientSide) {
+            ClientFilterStorage.setCaseFilterMode(isTR, filterMode)
+            ClientFilterStorage.setCaseSearchQuery(isTR, searchQuery)
+            ClientFilterStorage.setCasePokemonFilter(isTR, pokemonFilterData)
+            ClientFilterStorage.setCasePokemonFilterEnabled(isTR, pokemonFilterEnabled)
+        }
     }
 
     // ========================================
@@ -136,6 +176,7 @@ class MoveCaseMenu(
         searchQuery = normalizedQuery
         updateFilteredMoves()
         scrollRow = 0
+        saveFilterState()
     }
 
     fun getSearchQuery(): String = searchQuery
@@ -156,8 +197,9 @@ class MoveCaseMenu(
         }
 
         // Apply Pokémon learnset filter
-        if (pokemonFilterEnabled && pokemonFilterData != null) {
-            result = result.filter { pokemonFilterData.learnableMoves.contains(it) }
+        val currentPokemonFilter = pokemonFilterData
+        if (pokemonFilterEnabled && currentPokemonFilter != null) {
+            result = result.filter { currentPokemonFilter.learnableMoves.contains(it) }
         }
 
         filteredMoves = result
@@ -224,6 +266,7 @@ class MoveCaseMenu(
         }
         updateFilteredMoves()
         scrollRow = 0
+        saveFilterState()
     }
 
     // ========================================
@@ -239,8 +282,36 @@ class MoveCaseMenu(
             pokemonFilterEnabled = !pokemonFilterEnabled
             updateFilteredMoves()
             scrollRow = 0
+            saveFilterState()
         }
     }
+
+    /**
+     * Set a new Pokémon filter (from party selection) - this enables the filter
+     */
+    fun setPokemonFilter(data: PokemonFilterData) {
+        pokemonFilterData = data
+        pokemonFilterEnabled = true
+        updateFilteredMoves()
+        scrollRow = 0
+        saveFilterState()
+    }
+
+    /**
+     * Update just the Pokémon filter data without changing enabled state.
+     * Used when restoring filter data without forcing it enabled.
+     */
+    fun updatePokemonFilterData(data: PokemonFilterData) {
+        pokemonFilterData = data
+        updateFilteredMoves()
+        scrollRow = 0
+        saveFilterState()
+    }
+
+    /**
+     * Get the current Pokémon filter data
+     */
+    fun getPokemonFilterData(): PokemonFilterData? = pokemonFilterData
 
     fun getPokemonDisplayName(): String? = pokemonFilterData?.displayName
 

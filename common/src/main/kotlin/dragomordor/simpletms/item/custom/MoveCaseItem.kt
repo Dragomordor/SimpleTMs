@@ -269,10 +269,10 @@ class MoveCaseItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(sett
         }
 
         // Add shift-click hint
-        tooltipComponents.add(
-            Component.translatable("tooltip.simpletms.case.shift_hint")
-                .withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC)
-        )
+//        tooltipComponents.add(
+//            Component.translatable("tooltip.simpletms.case.shift_hint")
+//                .withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC)
+//        )
     }
 
     private fun getStoredCountForTooltip(): Int {

@@ -55,7 +55,7 @@
     "gui.simpletms.search": "Search",
     "gui.simpletms.search.hint": "Search...",
     "gui.simpletms.filter.all": "Filter: All",
-    "gui.simpletms.filter.owned": "Filter: Owned Only",
+    "gui.simpletms.filter.owned": "Filter: Stored Only",
     "gui.simpletms.filter.missing": "Filter: Missing Only",
     "tooltip.simpletms.case.storage": "Stored: %d/%d (%d%%)",
     "tooltip.simpletms.case.capacity": "Capacity: %d",
@@ -65,6 +65,8 @@
     "gui.simpletms.filter.pokemon.learnable": "Can learn %d moves",
     "gui.simpletms.filter.pokemon.enabled": "Click to disable filter",
     "gui.simpletms.filter.pokemon.disabled": "Click to enable filter",
+    "gui.simpletms.filter.pokemon.none": "No Pokémon Filter",
+    "gui.simpletms.filter.pokemon.shift_hint": "Shift-click to select Pokémon",
 
     "block.simpletms.machine_tm": "TM Machine",
     "container.simpletms.tm_machine": "TM Machine",
@@ -80,5 +82,6 @@
     "gui.simpletms.machine.pokemon_filter.shift_hint": "Shift-click to select Pokémon",
     "gui.simpletms.machine.stored": "Stored: %d",
     "gui.simpletms.machine.tm_count": "TMs: %d",
-    "gui.simpletms.machine.tr_count": "TRs: %d"
+    "gui.simpletms.machine.tr_count": "TRs: %d",
+    "itemGroup.simpletms.tm_storage_items": "TM/TR Storage"
 }

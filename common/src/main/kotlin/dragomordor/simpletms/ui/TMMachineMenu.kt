@@ -39,6 +39,7 @@ enum class OwnershipFilter {
  * - Contains both TMs and TRs in one screen
  * - Per-player filtering (search, type filter, ownership filter, Pokémon filter)
  * - Multiple players can use simultaneously with independent filters
+ * - Filter state persists between screen openings via ClientFilterStorage
  */
 class TMMachineMenu(
     containerId: Int,
@@ -53,7 +54,7 @@ class TMMachineMenu(
     private val clientStoredMoves: MutableMap<String, TMMachineBlockEntity.StoredMoveData> =
         initialStoredMoves.toMutableMap()
 
-    // Per-player filter state (client-side only, not synced)
+    // Per-player filter state - initialized from ClientFilterStorage on client
     private var searchQuery: String = ""
     private var typeFilter: MoveTypeFilter = MoveTypeFilter.ALL
     private var ownershipFilter: OwnershipFilter = OwnershipFilter.ALL
@@ -135,8 +136,37 @@ class TMMachineMenu(
         }
         hotbarEnd = hotbarStart + 9
 
+        // Load persisted filter state on client side
+        if (player.level().isClientSide) {
+            loadFilterState()
+        }
+
         // Initial filter
         rebuildFilteredMoves()
+    }
+
+    /**
+     * Load filter state from ClientFilterStorage (client-side only)
+     */
+    private fun loadFilterState() {
+        typeFilter = ClientFilterStorage.getMachineTypeFilter()
+        ownershipFilter = ClientFilterStorage.getMachineOwnershipFilter()
+        searchQuery = ClientFilterStorage.getMachineSearchQuery()
+        pokemonFilterData = ClientFilterStorage.getMachinePokemonFilter()
+        isPokemonFilterEnabled = ClientFilterStorage.isMachinePokemonFilterEnabled()
+    }
+
+    /**
+     * Save filter state to ClientFilterStorage (client-side only)
+     */
+    private fun saveFilterState() {
+        if (player.level().isClientSide) {
+            ClientFilterStorage.setMachineTypeFilter(typeFilter)
+            ClientFilterStorage.setMachineOwnershipFilter(ownershipFilter)
+            ClientFilterStorage.setMachineSearchQuery(searchQuery)
+            ClientFilterStorage.setMachinePokemonFilter(pokemonFilterData)
+            ClientFilterStorage.setMachinePokemonFilterEnabled(isPokemonFilterEnabled)
+        }
     }
 
     // ========================================
@@ -144,9 +174,16 @@ class TMMachineMenu(
     // ========================================
 
     /**
-     * Get move data from block entity (server) or client cache
+     * Get move data from client cache (client) or block entity (server).
+     * On client side, we always use clientStoredMoves since it's synced via packets.
+     * On server side, we read directly from the block entity.
      */
     private fun getMoveData(moveName: String): TMMachineBlockEntity.StoredMoveData? {
+        // On client side, always use the synced cache for responsive updates
+        if (player.level().isClientSide) {
+            return clientStoredMoves[moveName]
+        }
+        // On server side, use the block entity directly
         blockEntity?.let {
             return it.getStoredQuantities()[moveName]
         }
@@ -186,6 +223,7 @@ class TMMachineMenu(
             searchQuery = query
             isDirty = true
             scrollRow = 0
+            saveFilterState()
         }
     }
 
@@ -199,6 +237,7 @@ class TMMachineMenu(
         }
         isDirty = true
         scrollRow = 0
+        saveFilterState()
     }
 
     fun setTypeFilter(filter: MoveTypeFilter) {
@@ -206,6 +245,7 @@ class TMMachineMenu(
             typeFilter = filter
             isDirty = true
             scrollRow = 0
+            saveFilterState()
         }
     }
 
@@ -219,6 +259,7 @@ class TMMachineMenu(
         }
         isDirty = true
         scrollRow = 0
+        saveFilterState()
     }
 
     fun setOwnershipFilter(filter: OwnershipFilter) {
@@ -226,20 +267,31 @@ class TMMachineMenu(
             ownershipFilter = filter
             isDirty = true
             scrollRow = 0
+            saveFilterState()
         }
     }
+
+    // ========================================
+    // Pokémon Filter
+    // ========================================
 
     fun getPokemonFilterData(): PokemonFilterData? = pokemonFilterData
 
     fun isPokemonFilterEnabled(): Boolean = isPokemonFilterEnabled
 
-    fun setPokemonFilter(data: PokemonFilterData?) {
+    fun setPokemonFilter(data: PokemonFilterData) {
         pokemonFilterData = data
-        if (data != null) {
-            isPokemonFilterEnabled = true
-        }
+        isPokemonFilterEnabled = true
         isDirty = true
         scrollRow = 0
+        saveFilterState()
+    }
+
+    fun clearPokemonFilter() {
+        pokemonFilterData = null
+        isPokemonFilterEnabled = false
+        isDirty = true
+        saveFilterState()
     }
 
     fun togglePokemonFilter() {
@@ -247,65 +299,52 @@ class TMMachineMenu(
             isPokemonFilterEnabled = !isPokemonFilterEnabled
             isDirty = true
             scrollRow = 0
+            saveFilterState()
         }
     }
 
-    fun clearPokemonFilter() {
-        pokemonFilterData = null
-        isPokemonFilterEnabled = false
-        isDirty = true
-        scrollRow = 0
-    }
-
-    /**
-     * Set Pokémon filter from a Pokémon instance.
-     * Calculates learnable moves on the server side.
-     */
-    fun setPokemonFilterFromPokemon(pokemon: Pokemon) {
-        val speciesId = pokemon.species.resourceIdentifier.toString()
-        val formName = pokemon.form.name
-        val displayName = pokemon.getDisplayName().string
-
-        // Calculate learnable moves
-        val learnableMoves = MoveHelper.getLearnableTMMoves(pokemon).map { it.lowercase() }.toMutableSet()
-        learnableMoves.addAll(MoveHelper.getLearnableTRMoves(pokemon).map { it.lowercase() })
-
-        pokemonFilterData = PokemonFilterData(speciesId, formName, displayName, learnableMoves)
-        isPokemonFilterEnabled = true
-        isDirty = true
-        scrollRow = 0
-    }
-
     // ========================================
-    // Scrolling
+    // Scroll
     // ========================================
 
     fun getScrollRow(): Int = scrollRow
 
+    fun getMaxScrollRow(): Int {
+        val itemCount = getDisplayItemCount()
+        val totalRows = (itemCount + COLUMNS - 1) / COLUMNS
+        return maxOf(0, totalRows - VISIBLE_ROWS)
+    }
+
     fun setScrollRow(row: Int) {
-        val maxRow = getMaxScrollRow()
-        scrollRow = row.coerceIn(0, maxRow)
+        scrollRow = row.coerceIn(0, getMaxScrollRow())
     }
 
     fun scroll(delta: Int) {
         setScrollRow(scrollRow + delta)
     }
 
-    fun getMaxScrollRow(): Int {
-        val effectiveColumns = getEffectiveColumns()
-        val totalRows = (getFilteredMoves().size + effectiveColumns - 1) / effectiveColumns
-        return (totalRows - VISIBLE_ROWS).coerceAtLeast(0)
-    }
+    /**
+     * Get effective number of columns based on type filter.
+     * Always 9 columns now - in ALL mode we show items flat, not side by side.
+     */
+    fun getEffectiveColumns(): Int = COLUMNS
 
     /**
-     * Get effective columns based on current type filter.
-     * In ALL mode, each move takes 2 slots (TM + TR side by side), so we have half the columns for moves.
+     * Get total display item count for ALL mode (TMs + TRs separately)
      */
-    fun getEffectiveColumns(): Int {
+    fun getDisplayItemCount(): Int {
+        val ownershipFilter = this.ownershipFilter
+        val showGhosts = ownershipFilter == OwnershipFilter.ALL || ownershipFilter == OwnershipFilter.MISSING_ONLY
+
         return if (typeFilter == MoveTypeFilter.ALL) {
-            COLUMNS / 2  // 4 moves per row (each takes 2 slots)
+            getFilteredMoves().sumOf { entry ->
+                var count = 0
+                if (entry.isValidTM && (entry.tmCount > 0 || showGhosts)) count++
+                if (entry.isValidTR && (entry.trCount > 0 || showGhosts)) count++
+                count
+            }
         } else {
-            COLUMNS  // 9 moves per row
+            getFilteredMoves().size
         }
     }
 
@@ -438,16 +477,19 @@ class TMMachineMenu(
      * Handle clicking on a case slot.
      * Called on server via network packet.
      *
-     * @param visibleIndex The slot index in the visible area
+     * @param index For ALL mode, this is the move index in filteredMoves. For single modes,
+     *              this is also the move index (visible slot offset by scroll).
      * @param isTR If true, clicking on TR slot; if false, clicking on TM slot
      * @param isShiftClick If true, transfer to inventory; if false, pick up to cursor
      * @return true if something happened
      */
-    fun handleSlotClick(visibleIndex: Int, isTR: Boolean, isShiftClick: Boolean): Boolean {
+    fun handleSlotClick(index: Int, isTR: Boolean, isShiftClick: Boolean): Boolean {
         if (player !is ServerPlayer) return false
         val blockEntity = this.blockEntity ?: return false
 
-        val moveName = getMoveNameForVisibleSlot(visibleIndex) ?: return false
+        // Get the move entry at the given index
+        val filtered = getFilteredMoves()
+        val moveName = if (index in filtered.indices) filtered[index].moveName else return false
         val hasItem = if (isTR) getTRCount(moveName) > 0 else getTMCount(moveName) > 0
         if (!hasItem) return false
 

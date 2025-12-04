@@ -1,26 +1,4 @@
 {
     "type": "minecraft:block",
-    "pools": [
-        {
-            "rolls": 1,
-            "entries": [
-                {
-                    "type": "minecraft:item",
-                    "name": "simpletms:machine_tm",
-                    "conditions": [
-                        {
-                            "condition": "minecraft:survives_explosion"
-                        },
-                        {
-                            "condition": "minecraft:block_state_property",
-                            "block": "simpletms:machine_tm",
-                            "properties": {
-                                "half": "lower"
-                            }
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
+    "pools": []
 }

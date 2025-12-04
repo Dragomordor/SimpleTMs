@@ -1,6 +1,7 @@
 package dragomordor.simpletms.block.custom
 
 import com.mojang.serialization.MapCodec
+import dragomordor.simpletms.block.SimpleTMsBlockItems
 import dragomordor.simpletms.block.entity.SimpleTMsBlockEntities
 import dragomordor.simpletms.block.entity.TMMachineBlockEntity
 import net.minecraft.core.BlockPos
@@ -130,58 +131,48 @@ class TMMachineBlock(properties: Properties) : BaseEntityBlock(properties) {
         return super.updateShape(state, direction, neighborState, level, pos, neighborPos)
     }
 
-//    override fun playerWillDestroy(level: Level, pos: BlockPos, state: BlockState, player: Player): BlockState {
-//        if (!level.isClientSide && player.isCreative) {
-//            val half = state.getValue(HALF)
-//
-//            val otherPos = if (half == DoubleBlockHalf.LOWER) pos.above() else pos.below()
-//            val otherState = level.getBlockState(otherPos)
-//
-//            if (otherState.`is`(this) && otherState.getValue(HALF) != half) {
-//                val lowerPos = if (half == DoubleBlockHalf.LOWER) pos else otherPos
-//                val be = level.getBlockEntity(lowerPos)
-//                if (be is TMMachineBlockEntity) {
-//                    be.markCreativeDestruction()
-//                }
-//
-//                level.setBlock(otherPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL or Block.UPDATE_SUPPRESS_DROPS)
-//                level.levelEvent(player, 2001, otherPos, getId(otherState))
-//            }
-//        }
-//        return super.playerWillDestroy(level, pos, state, player)
-//    }
-
-    override fun playerDestroy(
-        level: Level,
-        player: Player,
-        pos: BlockPos,
-        state: BlockState,
-        blockEntity: BlockEntity?,
-        itemStack: ItemStack
-    ) {
-        if (!level.isClientSide && player.isCreative) {
+    override fun playerWillDestroy(level: Level, pos: BlockPos, state: BlockState, player: Player): BlockState {
+        if (!level.isClientSide) {
             val half = state.getValue(HALF)
+            val lowerPos = if (half == DoubleBlockHalf.LOWER) pos else pos.below()
 
+            // Mark if this is creative destruction
+            val be = level.getBlockEntity(lowerPos) as? TMMachineBlockEntity
+            if (player.isCreative) {
+                be?.markCreativeDestruction()
+            }
+
+            // Handle the other half - remove it when either half is broken
             val otherPos = if (half == DoubleBlockHalf.LOWER) pos.above() else pos.below()
             val otherState = level.getBlockState(otherPos)
 
             if (otherState.`is`(this) && otherState.getValue(HALF) != half) {
-                val lowerPos = if (half == DoubleBlockHalf.LOWER) pos else otherPos
-                val be = level.getBlockEntity(lowerPos)
-                if (be is TMMachineBlockEntity) {
-                    be.markCreativeDestruction()
-                }
-
                 level.setBlock(otherPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL or Block.UPDATE_SUPPRESS_DROPS)
                 level.levelEvent(player, 2001, otherPos, getId(otherState))
             }
         }
-        super.playerDestroy(level, player, pos, state, blockEntity, itemStack)
+
+        return super.playerWillDestroy(level, pos, state, player)
     }
 
     override fun onRemove(state: BlockState, world: Level, pos: BlockPos, newState: BlockState, moved: Boolean) {
-        if (!state.`is`(newState.block)) super.onRemove(state, world, pos, newState, moved)
+        if (!state.`is`(newState.block)) {
+            if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
+                val blockEntity = world.getBlockEntity(pos) as? TMMachineBlockEntity
+                if (blockEntity != null) {
+                    // Always drop contents
+                    blockEntity.dropContents(world, pos)
+                    // Only drop block item if NOT creative
+                    if (!blockEntity.wasCreativeDestruction()) {
+                        val blockItem = SimpleTMsBlockItems.TM_MACHINE.get().defaultInstance
+                        Containers.dropItemStack(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), blockItem)
+                    }
+                }
+            }
+            super.onRemove(state, world, pos, newState, moved)
+        }
     }
+
 
     // ========================================
     // Block Entity

@@ -43,11 +43,11 @@ object SimpleTMs {
         SimpleTMsBlockItems.register()
         // Register block entities (after blocks)
         SimpleTMsBlockEntities.register()
+        // Register menu types (before screens, shared between client/server)
+        SimpleTMsMenuTypes.register()
         // Event listeners
         MoveLearnItemDropEventListeners.registerListeners()
         CobblemonPokemonSpeciesListener.registerListeners()
-        // Menu
-        SimpleTMsMenuTypes.register()
         // Network
         SimpleTMsNetwork.register()
     }

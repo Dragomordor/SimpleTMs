@@ -3,6 +3,7 @@ package dragomordor.simpletms.neoforge
 import dragomordor.simpletms.SimpleTMsClient
 import dragomordor.simpletms.ui.MoveCaseScreen
 import dragomordor.simpletms.ui.SimpleTMsMenuTypes
+import dragomordor.simpletms.ui.SimpleTMsScreens
 import dragomordor.simpletms.ui.TMMachineScreen
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent
@@ -18,6 +19,7 @@ object SimpleTMsClient {
         }
         with (NeoForge.EVENT_BUS) {
         }
+
     }
 
     private fun onClientSetup(event: FMLClientSetupEvent) {
