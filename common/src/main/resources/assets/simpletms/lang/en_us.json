@@ -60,7 +60,7 @@
     "tooltip.simpletms.case.storage": "Stored: %d/%d (%d%%)",
     "tooltip.simpletms.case.capacity": "Capacity: %d",
     "tooltip.simpletms.case.complete": "Complete!",
-    "tooltip.simpletms.case.shift_hint": "Shift+Use to select a Pokémon filter",
+    "tooltip.simpletms.case.shift_hint": "Shift+use to select Pokémon",
     "gui.simpletms.filter.pokemon": "Filter: %s",
     "gui.simpletms.filter.pokemon.learnable": "Can learn %d moves",
     "gui.simpletms.filter.pokemon.enabled": "Click to disable filter",
