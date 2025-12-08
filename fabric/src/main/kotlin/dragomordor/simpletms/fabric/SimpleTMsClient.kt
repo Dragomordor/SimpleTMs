@@ -4,6 +4,7 @@ import dev.architectury.registry.menu.MenuRegistry
 import dragomordor.simpletms.SimpleTMs
 import dragomordor.simpletms.SimpleTMsClient
 import dragomordor.simpletms.events.ClientEventListeners
+import dragomordor.simpletms.network.SimpleTMsNetwork
 import dragomordor.simpletms.ui.MoveCaseScreen
 import dragomordor.simpletms.ui.SimpleTMsMenuTypes
 import dragomordor.simpletms.ui.SimpleTMsScreens
@@ -13,6 +14,8 @@ import net.fabricmc.api.ClientModInitializer
 @Suppress("Unused")
 class SimpleTMsClient : ClientModInitializer {
     override fun onInitializeClient() {
+        // Register S2C packet receivers (client-side only)
+        SimpleTMsNetwork.registerClient()
         // Register event listeners from common
         ClientEventListeners.registerListeners()
 

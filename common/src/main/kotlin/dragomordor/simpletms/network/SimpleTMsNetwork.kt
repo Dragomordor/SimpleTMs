@@ -264,8 +264,11 @@ object SimpleTMsNetwork {
     // Registration
     // ========================================
 
+    /**
+     * Register C2S packets - call from common init (runs on both sides, server needs these)
+     */
     fun register() {
-        // Register packet types
+        // C2S: Client -> Server packets (server receives these)
         NetworkManager.registerReceiver(
             NetworkManager.Side.C2S,
             MachineSlotClickPacket.TYPE,
@@ -288,20 +291,6 @@ object SimpleTMsNetwork {
         )
 
         NetworkManager.registerReceiver(
-            NetworkManager.Side.S2C,
-            PokemonFilterDataPacket.TYPE,
-            PokemonFilterDataPacket.CODEC,
-            ::handlePokemonFilterData
-        )
-
-        NetworkManager.registerReceiver(
-            NetworkManager.Side.S2C,
-            MachineSyncPacket.TYPE,
-            MachineSyncPacket.CODEC,
-            ::handleMachineSync
-        )
-
-        NetworkManager.registerReceiver(
             NetworkManager.Side.C2S,
             CaseSlotClickPacket.TYPE,
             CaseSlotClickPacket.CODEC,
@@ -320,6 +309,26 @@ object SimpleTMsNetwork {
             CasePartySelectPacket.TYPE,
             CasePartySelectPacket.CODEC,
             ::handleCasePartySelect
+        )
+    }
+
+    /**
+     * Register S2C packets - call from CLIENT init only
+     */
+    fun registerClient() {
+        // S2C: Server -> Client packets (client receives these)
+        NetworkManager.registerReceiver(
+            NetworkManager.Side.S2C,
+            PokemonFilterDataPacket.TYPE,
+            PokemonFilterDataPacket.CODEC,
+            ::handlePokemonFilterData
+        )
+
+        NetworkManager.registerReceiver(
+            NetworkManager.Side.S2C,
+            MachineSyncPacket.TYPE,
+            MachineSyncPacket.CODEC,
+            ::handleMachineSync
         )
 
         NetworkManager.registerReceiver(

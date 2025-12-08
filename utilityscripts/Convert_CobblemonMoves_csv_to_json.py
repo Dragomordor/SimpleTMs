@@ -320,6 +320,7 @@ tm_removed_moves = [
     "Bolt Beak",
     "Fishious Rend",
     "Night Daze",
+    "Shed Tail"
 ]
 
 # Remove the Z-type moves from the data

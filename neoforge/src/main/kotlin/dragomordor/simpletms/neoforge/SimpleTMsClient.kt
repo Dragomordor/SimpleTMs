@@ -1,6 +1,7 @@
 package dragomordor.simpletms.neoforge
 
 import dragomordor.simpletms.SimpleTMsClient
+import dragomordor.simpletms.network.SimpleTMsNetwork
 import dragomordor.simpletms.ui.MoveCaseScreen
 import dragomordor.simpletms.ui.SimpleTMsMenuTypes
 import dragomordor.simpletms.ui.SimpleTMsScreens
@@ -24,6 +25,7 @@ object SimpleTMsClient {
 
     private fun onClientSetup(event: FMLClientSetupEvent) {
         event.enqueueWork {
+            SimpleTMsNetwork.registerClient()
             SimpleTMsClient.init()
         }
     }
