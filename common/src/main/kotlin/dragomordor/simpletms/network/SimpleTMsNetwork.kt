@@ -3,6 +3,7 @@ package dragomordor.simpletms.network
 import com.cobblemon.mod.common.Cobblemon
 import dev.architectury.networking.NetworkManager
 import dragomordor.simpletms.SimpleTMs
+import dragomordor.simpletms.api.MoveCaseStorage
 import dragomordor.simpletms.block.entity.TMMachineBlockEntity
 import dragomordor.simpletms.item.custom.MoveCaseItem
 import dragomordor.simpletms.ui.MoveCaseMenu
@@ -17,6 +18,8 @@ import net.minecraft.network.codec.StreamCodec
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.level.ServerPlayer
+import java.util.UUID
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * Network handler for SimpleTMs packets.
@@ -35,6 +38,28 @@ object SimpleTMsNetwork {
     private val MACHINE_PARTY_SELECT_ID = ResourceLocation.fromNamespaceAndPath(SimpleTMs.MOD_ID, "machine_party_select")
     private val CASE_PARTY_SELECT_ID = ResourceLocation.fromNamespaceAndPath(SimpleTMs.MOD_ID, "case_party_select")
     private val CASE_POKEMON_FILTER_ID = ResourceLocation.fromNamespaceAndPath(SimpleTMs.MOD_ID, "case_pokemon_filter")
+
+    // ========================================
+    // Server-Side Pending Filter Storage
+    // ========================================
+
+    // Server-side storage for pending TM Machine filters (per-player)
+    // This solves the race condition where the filter packet might arrive after the menu opens
+    private val pendingMachineFilters: ConcurrentHashMap<UUID, PokemonFilterData> = ConcurrentHashMap()
+
+    /**
+     * Store a pending filter for a player's TM Machine (server-side)
+     */
+    fun setPendingMachineFilter(playerUUID: UUID, filter: PokemonFilterData) {
+        pendingMachineFilters[playerUUID] = filter
+    }
+
+    /**
+     * Consume and return the pending filter for a player's TM Machine (server-side)
+     */
+    fun consumePendingMachineFilter(playerUUID: UUID): PokemonFilterData? {
+        return pendingMachineFilters.remove(playerUUID)
+    }
 
     // ========================================
     // Packet Payloads
@@ -352,51 +377,17 @@ object SimpleTMsNetwork {
         }
     }
 
-
-
     private fun handleRequestPartySelection(packet: RequestPartySelectionPacket, context: NetworkManager.PacketContext) {
         context.queue {
             val player = context.player as? ServerPlayer ?: return@queue
-
-            // For now, we'll send back the player's first Pokémon
-            // In a full implementation, you'd show a selection UI
-            val party = Cobblemon.storage.getParty(player)
-            val pokemon = party.firstOrNull() ?: return@queue
-
-            val speciesId = pokemon.species.resourceIdentifier.toString()
-            val formName = pokemon.form.name
-            val displayName = pokemon.getDisplayName().string
-
-            // Calculate learnable moves
-            val learnableMoves = mutableSetOf<String>()
-            learnableMoves.addAll(MoveHelper.getLearnableTMMoves(pokemon).map { it.lowercase() })
-            learnableMoves.addAll(MoveHelper.getLearnableTRMoves(pokemon).map { it.lowercase() })
-
-            val responsePacket = PokemonFilterDataPacket(speciesId, formName, displayName, learnableMoves)
-            NetworkManager.sendToPlayer(player, responsePacket)
+            // This packet type is no longer used but kept for backwards compatibility
         }
     }
 
     private fun handlePartySelectionResponse(packet: PartySelectionResponsePacket, context: NetworkManager.PacketContext) {
         context.queue {
             val player = context.player as? ServerPlayer ?: return@queue
-
-            if (packet.partySlot < 0 || packet.partySlot > 5) return@queue
-
-            val party = Cobblemon.storage.getParty(player)
-            val pokemon = party.get(packet.partySlot) ?: return@queue
-
-            val speciesId = pokemon.species.resourceIdentifier.toString()
-            val formName = pokemon.form.name
-            val displayName = pokemon.getDisplayName().string
-
-            // Calculate learnable moves
-            val learnableMoves = mutableSetOf<String>()
-            learnableMoves.addAll(MoveHelper.getLearnableTMMoves(pokemon).map { it.lowercase() })
-            learnableMoves.addAll(MoveHelper.getLearnableTRMoves(pokemon).map { it.lowercase() })
-
-            val responsePacket = PokemonFilterDataPacket(speciesId, formName, displayName, learnableMoves)
-            NetworkManager.sendToPlayer(player, responsePacket)
+            // This packet type is no longer used but kept for backwards compatibility
         }
     }
 
@@ -441,11 +432,12 @@ object SimpleTMsNetwork {
                     learnableMoves.addAll(MoveHelper.getLearnableTMMoves(pokemon).map { it.lowercase() })
                     learnableMoves.addAll(MoveHelper.getLearnableTRMoves(pokemon).map { it.lowercase() })
 
-                    // Send filter data packet first
-                    val responsePacket = PokemonFilterDataPacket(speciesId, formName, displayName, learnableMoves)
-                    NetworkManager.sendToPlayer(player, responsePacket)
+                    // Store the filter data server-side so it's included when menu reopens
+                    val filterData = PokemonFilterData(speciesId, formName, displayName, learnableMoves)
+                    setPendingMachineFilter(player.uuid, filterData)
 
                     // Reopen the TM Machine menu via the block entity
+                    // The openMenu method will check for pending filter and include it
                     blockEntity.openMenu(player)
                 }
             )
@@ -492,17 +484,23 @@ object SimpleTMsNetwork {
                     // Calculate learnable moves for this case type only
                     val learnableMoves = MoveCaseItem.getLearnableMoves(pokemon, isTR)
 
-                    // Send filter data packet first (this will be stored as pending on client)
-                    val responsePacket = CasePokemonFilterPacket(isTR, speciesId, formName, displayName, learnableMoves)
-                    NetworkManager.sendToPlayer(player, responsePacket)
+                    // Save the selected Pokémon to server-side storage
+                    // This way when the menu reopens, it will include this data in the packet
+                    val storage = MoveCaseStorage.get(player)
+                    storage.setSelectedPokemon(
+                        player.uuid,
+                        isTR,
+                        MoveCaseStorage.SelectedPokemonInfo(speciesId, formName, displayName, learnableMoves)
+                    )
 
                     // Reopen the case menu - use the item in the player's hand
+                    // Use openMenuWithFreshSelection to auto-enable the filter
                     val currentStack = if (hand == net.minecraft.world.InteractionHand.MAIN_HAND)
                         player.mainHandItem else player.offhandItem
 
                     if (currentStack.item is MoveCaseItem) {
-                        // Trigger the item use to reopen the menu
-                        (currentStack.item as MoveCaseItem).use(player.level(), player, hand)
+                        // Use the new method that marks this as a fresh selection
+                        (currentStack.item as MoveCaseItem).openMenuWithFreshSelection(player)
                     }
                 }
             )
@@ -514,9 +512,11 @@ object SimpleTMsNetwork {
     // ========================================
 
     // Pending filter data for when the TM Machine menu reopens after party selection
+    // Note: This is now mainly a fallback - the filter should come with the menu packet
     private var pendingPokemonFilter: PokemonFilterData? = null
 
     // Pending filter data for Move Case (separate for TM and TR cases)
+    // Note: This is now mainly a fallback - the filter should come with the menu packet
     private var pendingCasePokemonFilter: PokemonFilterData? = null
     private var pendingCaseIsTR: Boolean = false
 
@@ -550,7 +550,7 @@ object SimpleTMsNetwork {
                 packet.learnableMoves
             )
 
-            // Store for when menu reopens
+            // Store for when menu reopens (fallback)
             pendingPokemonFilter = filterData
 
             // Also try to apply directly if screen is still open
@@ -584,7 +584,7 @@ object SimpleTMsNetwork {
                 packet.learnableMoves
             )
 
-            // Store for potential use
+            // Store for potential use (fallback)
             pendingCasePokemonFilter = filterData
             pendingCaseIsTR = packet.isTR
 
@@ -601,13 +601,14 @@ object SimpleTMsNetwork {
 
     /**
      * Send a slot click to the TM Machine server
-     * @param visibleSlotIndex The slot index in the visible area
+     * @param moveName The name of the move
      * @param isTR Whether clicking on TR slot (vs TM)
      * @param isShiftClick Whether shift is held (transfer vs pick up)
      */
     fun sendMachineSlotClick(moveName: String, isTR: Boolean, isShiftClick: Boolean) {
         NetworkManager.sendToServer(MachineSlotClickPacket(moveName, isTR, isShiftClick))
     }
+
     /**
      * Request party selection for Pokémon filter
      */

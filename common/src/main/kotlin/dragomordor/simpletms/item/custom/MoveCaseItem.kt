@@ -127,7 +127,15 @@ class MoveCaseItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(sett
     // Menu opening
     // ========================================
 
-    private fun openMenu(player: ServerPlayer, pokemon: Pokemon?) {
+    /**
+     * Open the menu, optionally with a fresh Pokémon selection that should auto-enable the filter.
+     *
+     * @param player The server player
+     * @param pokemon A live Pokémon reference (from clicking on entity), or null
+     * @param isFreshSelection If true, treat the saved Pokémon in storage as a fresh selection
+     *                         (auto-enable filter). Used when reopening after party selection.
+     */
+    private fun openMenu(player: ServerPlayer, pokemon: Pokemon?, isFreshSelection: Boolean = false) {
         val storage = MoveCaseStorage.get(player)
         val storedMoves = storage.getStoredQuantities(player.uuid, isTR)
 
@@ -223,9 +231,18 @@ class MoveCaseItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(sett
                 }
 
                 // Write whether this was a fresh selection (auto-enable filter) or loaded (don't auto-enable)
-                buf.writeBoolean(filterPokemon != null)
+                // Fresh selection = live pokemon OR isFreshSelection flag is set
+                buf.writeBoolean(filterPokemon != null || isFreshSelection)
             }
         }
+    }
+
+    /**
+     * Open the menu after a fresh Pokémon selection from party selection.
+     * This will auto-enable the filter for the saved Pokémon.
+     */
+    fun openMenuWithFreshSelection(player: ServerPlayer) {
+        openMenu(player, null, isFreshSelection = true)
     }
 
     override fun appendHoverText(

@@ -2,6 +2,8 @@ package dragomordor.simpletms.block.entity
 
 import dragomordor.simpletms.SimpleTMs
 import dragomordor.simpletms.item.custom.MoveLearnItem
+import dragomordor.simpletms.network.SimpleTMsNetwork
+import dragomordor.simpletms.ui.PokemonFilterData
 import dragomordor.simpletms.ui.TMMachineMenu
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -220,7 +222,23 @@ class TMMachineBlockEntity(
     // Menu
     // ========================================
 
+    /**
+     * Open the TM Machine menu for a player.
+     * Checks for any pending Pokémon filter data from party selection.
+     */
     fun openMenu(player: ServerPlayer) {
+        // Check if there's a pending filter from party selection
+        val pendingFilter = SimpleTMsNetwork.consumePendingMachineFilter(player.uuid)
+        openMenuWithFilter(player, pendingFilter)
+    }
+
+    /**
+     * Open the TM Machine menu for a player with an optional Pokémon filter.
+     *
+     * @param player The player opening the menu
+     * @param pokemonFilter Optional Pokémon filter data to apply (auto-enables filter)
+     */
+    fun openMenuWithFilter(player: ServerPlayer, pokemonFilter: PokemonFilterData? = null) {
         val menuProvider = object : MenuProvider {
             override fun getDisplayName(): Component {
                 return Component.translatable("container.simpletms.tm_machine")
@@ -249,6 +267,20 @@ class TMMachineBlockEntity(
                 buf.writeUtf(moveName)
                 buf.writeVarInt(data.tmCount)
                 buf.writeVarInt(data.trCount)
+            }
+
+            // Write Pokémon filter data (if any)
+            val hasFilter = pokemonFilter != null
+            buf.writeBoolean(hasFilter)
+
+            if (hasFilter && pokemonFilter != null) {
+                buf.writeUtf(pokemonFilter.speciesId)
+                buf.writeUtf(pokemonFilter.formName)
+                buf.writeUtf(pokemonFilter.displayName)
+                buf.writeVarInt(pokemonFilter.learnableMoves.size)
+                for (moveName in pokemonFilter.learnableMoves) {
+                    buf.writeUtf(moveName)
+                }
             }
         }
     }
@@ -308,7 +340,7 @@ class TMMachineBlockEntity(
                 lvl.sendBlockUpdated(worldPosition, blockState, blockState, 3)
 
                 // Also sync via custom packets to all viewers
-                dragomordor.simpletms.network.SimpleTMsNetwork.syncMachineToViewers(this)
+                SimpleTMsNetwork.syncMachineToViewers(this)
             }
         }
     }

@@ -478,20 +478,27 @@ class TMMachineScreen(
             }
             guiGraphics.renderTooltip(font, Component.translatable(tooltipKey), mouseX, mouseY)
         } else if (isOverPokemonFilterButton(mouseX.toDouble(), mouseY.toDouble())) {
-            val filterData = menu.getPokemonFilterData()
             val tooltipLines = mutableListOf<Component>()
 
-            if (filterData != null) {
-                if (menu.isPokemonFilterEnabled()) {
-                    tooltipLines.add(Component.translatable("gui.simpletms.machine.pokemon_filter.active", filterData.displayName))
+            if (menu.hasPokemonFilter()) {
+                val pokemonName = menu.getPokemonDisplayName() ?: "Unknown"
+                val learnableCount = menu.getPokemonLearnableCount()
+                val isEnabled = menu.isPokemonFilterEnabled()
+
+                tooltipLines.add(Component.translatable("gui.simpletms.filter.pokemon", pokemonName))
+                tooltipLines.add(Component.translatable("gui.simpletms.filter.pokemon.learnable", learnableCount))
+
+                if (isEnabled) {
+                    tooltipLines.add(Component.translatable("gui.simpletms.filter.pokemon.enabled"))
                 } else {
-                    tooltipLines.add(Component.translatable("gui.simpletms.machine.pokemon_filter.inactive", filterData.displayName))
+                    tooltipLines.add(Component.translatable("gui.simpletms.filter.pokemon.disabled"))
                 }
             } else {
-                tooltipLines.add(Component.translatable("gui.simpletms.machine.pokemon_filter.none"))
+                tooltipLines.add(Component.translatable("gui.simpletms.filter.pokemon.none"))
             }
-            tooltipLines.add(Component.translatable("gui.simpletms.machine.pokemon_filter.shift_hint"))
-            guiGraphics.renderTooltip(font, tooltipLines, java.util.Optional.empty(), mouseX, mouseY)
+
+            tooltipLines.add(Component.translatable("gui.simpletms.filter.pokemon.shift_hint"))
+            guiGraphics.renderComponentTooltip(font, tooltipLines, mouseX, mouseY)
         } else if (!searchBox.isMouseOver(mouseX.toDouble(), mouseY.toDouble())) {
             // Render move item tooltip (without "Stored: x" line)
             renderMoveTooltip(guiGraphics, mouseX, mouseY)

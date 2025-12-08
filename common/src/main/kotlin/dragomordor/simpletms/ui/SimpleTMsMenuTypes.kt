@@ -38,6 +38,7 @@ object SimpleTMsMenuTypes {
             // Read Pokémon filter data
             val hasPokemon = buf.readBoolean()
             val pokemonFilterData: PokemonFilterData?
+            val autoEnableFilter: Boolean
 
             if (hasPokemon) {
                 val speciesId = buf.readUtf()
@@ -52,12 +53,15 @@ object SimpleTMsMenuTypes {
                 }
 
                 pokemonFilterData = PokemonFilterData(speciesId, formName, displayName, learnableMoves)
+
+                // Read whether this was a fresh selection (auto-enable filter) or loaded (don't auto-enable)
+                autoEnableFilter = buf.readBoolean()
             } else {
                 pokemonFilterData = null
+                autoEnableFilter = false
             }
 
-            // MoveCaseMenu(containerId, inventory, isTR, storedMoves, serverPokemon, clientPokemonData)
-            MoveCaseMenu(containerId, inventory, isTR, storedMoves, null, pokemonFilterData)
+            MoveCaseMenu(containerId, inventory, isTR, storedMoves, null, pokemonFilterData, autoEnableFilter)
         }
     }
 
@@ -66,6 +70,7 @@ object SimpleTMsMenuTypes {
      * Uses extended menu to pass:
      * - Block position (to find the block entity)
      * - Stored moves data (TM and TR counts per move)
+     * - Optional Pokémon filter data (from party selection)
      */
     val TM_MACHINE_MENU: RegistrySupplier<MenuType<TMMachineMenu>> = MENUS.register("tm_machine_menu") {
         MenuRegistry.ofExtended { containerId, inventory, buf ->
@@ -81,11 +86,27 @@ object SimpleTMsMenuTypes {
                 storedMoves[moveName] = TMMachineBlockEntity.StoredMoveData(tmCount, trCount)
             }
 
+            // Read optional Pokémon filter data
+            val hasFilter = buf.readBoolean()
+            val pokemonFilterData: PokemonFilterData? = if (hasFilter) {
+                val speciesId = buf.readUtf()
+                val formName = buf.readUtf()
+                val displayName = buf.readUtf()
+                val learnableCount = buf.readVarInt()
+                val learnableMoves = mutableSetOf<String>()
+                repeat(learnableCount) {
+                    learnableMoves.add(buf.readUtf())
+                }
+                PokemonFilterData(speciesId, formName, displayName, learnableMoves)
+            } else {
+                null
+            }
+
             // Try to get the block entity from the client world
             val level = inventory.player.level()
             val blockEntity = level.getBlockEntity(blockPos) as? TMMachineBlockEntity
 
-            TMMachineMenu(containerId, inventory, blockEntity, storedMoves)
+            TMMachineMenu(containerId, inventory, blockEntity, storedMoves, pokemonFilterData)
         }
     }
 

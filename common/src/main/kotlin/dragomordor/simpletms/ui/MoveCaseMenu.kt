@@ -116,7 +116,10 @@ class MoveCaseMenu(
         }
 
         // Handle Pokémon filter initialization
-        // Priority: 1) Fresh selection from server, 2) Client param (only if no persisted data), 3) Persisted from ClientFilterStorage
+        // Priority:
+        // 1) Fresh selection from server (serverPokemon != null) - always use and enable
+        // 2) Fresh selection via packet (clientPokemonData != null && autoEnableFilter) - use and enable
+        // 3) Persisted from ClientFilterStorage (already loaded above)
         if (serverPokemon != null) {
             // Fresh selection from clicking on a Pokémon - create new filter data and enable
             pokemonFilterData = PokemonFilterData(
@@ -125,20 +128,21 @@ class MoveCaseMenu(
                 serverPokemon.species.translatedName.string,
                 MoveCaseItem.getLearnableMoves(serverPokemon, isTR)
             )
-            if (autoEnableFilter) {
-                pokemonFilterEnabled = true
-            }
+            pokemonFilterEnabled = true
             saveFilterState() // Persist the new Pokémon selection
-        } else if (clientPokemonData != null && pokemonFilterData == null) {
-            // Client data from network, but ONLY use if we don't already have persisted data
-            // This handles fresh menu opens but doesn't override persisted state
+        } else if (clientPokemonData != null && autoEnableFilter) {
+            // Fresh selection from party selection - use new data and enable filter
+            // This overrides any persisted data because it's a fresh selection
             pokemonFilterData = clientPokemonData
-            if (autoEnableFilter) {
-                pokemonFilterEnabled = true
-            }
+            pokemonFilterEnabled = true
+            saveFilterState()
+        } else if (clientPokemonData != null && pokemonFilterData == null) {
+            // Client data from reopening menu with saved pokemon, but no persisted data yet
+            // Don't auto-enable since autoEnableFilter is false
+            pokemonFilterData = clientPokemonData
             saveFilterState()
         }
-        // If we already have pokemonFilterData from loadFilterState(), keep it with its persisted enabled state
+        // If we already have pokemonFilterData from loadFilterState() and no fresh selection, keep it
 
         // Apply initial filter
         updateFilteredMoves()

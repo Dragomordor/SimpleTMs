@@ -45,7 +45,8 @@ class TMMachineMenu(
     containerId: Int,
     private val playerInventory: Inventory,
     val blockEntity: TMMachineBlockEntity?,
-    initialStoredMoves: Map<String, TMMachineBlockEntity.StoredMoveData> = emptyMap()
+    initialStoredMoves: Map<String, TMMachineBlockEntity.StoredMoveData> = emptyMap(),
+    initialPokemonFilter: PokemonFilterData? = null
 ) : AbstractContainerMenu(SimpleTMsMenuTypes.TM_MACHINE_MENU.get(), containerId) {
 
     val player: Player = playerInventory.player
@@ -141,6 +142,17 @@ class TMMachineMenu(
             loadFilterState()
         }
 
+        // Apply initial Pokémon filter from menu packet (if provided)
+        // This is a fresh selection from party selection, so enable it
+        if (initialPokemonFilter != null) {
+            pokemonFilterData = initialPokemonFilter
+            isPokemonFilterEnabled = true
+            // Save immediately so it persists
+            if (player.level().isClientSide) {
+                saveFilterState()
+            }
+        }
+
         // Initial filter
         rebuildFilteredMoves()
     }
@@ -216,18 +228,16 @@ class TMMachineMenu(
     // Filtering (Per-Player, Client-Side)
     // ========================================
 
-    fun getSearchQuery(): String = searchQuery
-
     fun setSearchQuery(query: String) {
-        if (searchQuery != query) {
-            searchQuery = query
-            isDirty = true
-            scrollRow = 0
-            saveFilterState()
-        }
+        val normalizedQuery = query.lowercase().trim()
+        if (normalizedQuery == searchQuery) return
+        searchQuery = normalizedQuery
+        isDirty = true
+        scrollRow = 0
+        saveFilterState()
     }
 
-    fun getTypeFilter(): MoveTypeFilter = typeFilter
+    fun getSearchQuery(): String = searchQuery
 
     fun cycleTypeFilter() {
         typeFilter = when (typeFilter) {
@@ -240,16 +250,7 @@ class TMMachineMenu(
         saveFilterState()
     }
 
-    fun setTypeFilter(filter: MoveTypeFilter) {
-        if (typeFilter != filter) {
-            typeFilter = filter
-            isDirty = true
-            scrollRow = 0
-            saveFilterState()
-        }
-    }
-
-    fun getOwnershipFilter(): OwnershipFilter = ownershipFilter
+    fun getTypeFilter(): MoveTypeFilter = typeFilter
 
     fun cycleOwnershipFilter() {
         ownershipFilter = when (ownershipFilter) {
@@ -262,22 +263,24 @@ class TMMachineMenu(
         saveFilterState()
     }
 
-    fun setOwnershipFilter(filter: OwnershipFilter) {
-        if (ownershipFilter != filter) {
-            ownershipFilter = filter
-            isDirty = true
-            scrollRow = 0
-            saveFilterState()
-        }
-    }
+    fun getOwnershipFilter(): OwnershipFilter = ownershipFilter
 
     // ========================================
     // Pokémon Filter
     // ========================================
 
-    fun getPokemonFilterData(): PokemonFilterData? = pokemonFilterData
+    fun hasPokemonFilter(): Boolean = pokemonFilterData != null
 
-    fun isPokemonFilterEnabled(): Boolean = isPokemonFilterEnabled
+    fun isPokemonFilterEnabled(): Boolean = isPokemonFilterEnabled && pokemonFilterData != null
+
+    fun togglePokemonFilter() {
+        if (pokemonFilterData != null) {
+            isPokemonFilterEnabled = !isPokemonFilterEnabled
+            isDirty = true
+            scrollRow = 0
+            saveFilterState()
+        }
+    }
 
     fun setPokemonFilter(data: PokemonFilterData) {
         pokemonFilterData = data
@@ -291,17 +294,15 @@ class TMMachineMenu(
         pokemonFilterData = null
         isPokemonFilterEnabled = false
         isDirty = true
+        scrollRow = 0
         saveFilterState()
     }
 
-    fun togglePokemonFilter() {
-        if (pokemonFilterData != null) {
-            isPokemonFilterEnabled = !isPokemonFilterEnabled
-            isDirty = true
-            scrollRow = 0
-            saveFilterState()
-        }
-    }
+    fun getPokemonDisplayName(): String? = pokemonFilterData?.displayName
+
+    fun getPokemonLearnableCount(): Int = pokemonFilterData?.learnableMoves?.size ?: 0
+
+    fun getPokemonFilterData(): PokemonFilterData? = pokemonFilterData
 
     // ========================================
     // Scroll
@@ -310,8 +311,9 @@ class TMMachineMenu(
     fun getScrollRow(): Int = scrollRow
 
     fun getMaxScrollRow(): Int {
-        val itemCount = getDisplayItemCount()
-        val totalRows = (itemCount + COLUMNS - 1) / COLUMNS
+        val filtered = getFilteredMoves()
+        val effectiveColumns = getEffectiveColumns()
+        val totalRows = (filtered.size + effectiveColumns - 1) / effectiveColumns
         return maxOf(0, totalRows - VISIBLE_ROWS)
     }
 
@@ -324,47 +326,66 @@ class TMMachineMenu(
     }
 
     /**
-     * Get effective number of columns based on type filter.
-     * Always 9 columns now - in ALL mode we show items flat, not side by side.
+     * Get effective columns based on type filter.
+     * In ALL mode, we show TM and TR side by side, so effective columns is COLUMNS/2.
      */
-    fun getEffectiveColumns(): Int = COLUMNS
-
-    /**
-     * Get total display item count for ALL mode (TMs + TRs separately)
-     */
-    fun getDisplayItemCount(): Int {
-        val ownershipFilter = this.ownershipFilter
-        val showGhosts = ownershipFilter == OwnershipFilter.ALL || ownershipFilter == OwnershipFilter.MISSING_ONLY
-
-        return if (typeFilter == MoveTypeFilter.ALL) {
-            getFilteredMoves().sumOf { entry ->
-                var count = 0
-                if (entry.isValidTM && (entry.tmCount > 0 || showGhosts)) count++
-                if (entry.isValidTR && (entry.trCount > 0 || showGhosts)) count++
-                count
-            }
-        } else {
-            getFilteredMoves().size
-        }
+    fun getEffectiveColumns(): Int {
+        return if (typeFilter == MoveTypeFilter.ALL) COLUMNS / 2 else COLUMNS
     }
 
     // ========================================
-    // Filtered Moves List
+    // Filtered Moves
     // ========================================
 
     fun getFilteredMoves(): List<FilteredMoveEntry> {
         if (isDirty) {
-            rebuildFilteredMoves()
+            filteredMoves = rebuildFilteredMoves()
             isDirty = false
         }
         return filteredMoves
     }
 
-    private fun rebuildFilteredMoves() {
-        val query = searchQuery.lowercase().trim()
-        val pokemonMoves = if (isPokemonFilterEnabled) pokemonFilterData?.learnableMoves else null
+    private fun matchesSearch(moveName: String, query: String): Boolean {
+        if (query.isEmpty()) return true
 
-        filteredMoves = allMoves.mapNotNull { moveName ->
+        val tagQueries = mutableListOf<String>()
+        val nameQueries = mutableListOf<String>()
+
+        query.split(" ").filter { it.isNotEmpty() }.forEach { part ->
+            if (part.startsWith("#") && part.length > 1) {
+                tagQueries.add(part.substring(1).lowercase())
+            } else {
+                nameQueries.add(part.lowercase())
+            }
+        }
+
+        // Check name queries
+        val displayName = moveName.replace("_", " ")
+        for (nameQuery in nameQueries) {
+            if (!displayName.contains(nameQuery) && !moveName.contains(nameQuery)) {
+                return false
+            }
+        }
+
+        // Check tag queries (type matching)
+        if (tagQueries.isNotEmpty()) {
+            val move = Moves.getByName(moveName) ?: return false
+            val moveType = move.elementalType.name.lowercase()
+            for (tagQuery in tagQueries) {
+                if (!moveType.startsWith(tagQuery)) {
+                    return false
+                }
+            }
+        }
+
+        return true
+    }
+
+    private fun rebuildFilteredMoves(): List<FilteredMoveEntry> {
+        return allMoves.mapNotNull { moveName ->
+            // Search filter
+            if (!matchesSearch(moveName, searchQuery)) return@mapNotNull null
+
             val isValidTM = SimpleTMsItems.ALL_MOVE_NAMES_WITH_TM_ITEMS.contains(moveName)
             val isValidTR = SimpleTMsItems.ALL_MOVE_NAMES_WITH_TR_ITEMS.contains(moveName)
 
@@ -372,28 +393,16 @@ class TMMachineMenu(
             when (typeFilter) {
                 MoveTypeFilter.TM_ONLY -> if (!isValidTM) return@mapNotNull null
                 MoveTypeFilter.TR_ONLY -> if (!isValidTR) return@mapNotNull null
-                MoveTypeFilter.ALL -> if (!isValidTM && !isValidTR) return@mapNotNull null
+                MoveTypeFilter.ALL -> { /* No type filter */ }
             }
 
-            // Search filter
-            if (query.isNotEmpty()) {
-                val moveTemplate = Moves.getByName(moveName)
-                val displayName = moveTemplate?.displayName?.string?.lowercase() ?: moveName
-                val typeName = moveTemplate?.elementalType?.name?.lowercase() ?: ""
-
-                val matchesSearch = when {
-                    query.startsWith("#") -> {
-                        val typeQuery = query.substring(1)
-                        typeName.contains(typeQuery)
-                    }
-                    else -> displayName.contains(query) || moveName.contains(query)
-                }
-                if (!matchesSearch) return@mapNotNull null
+            // Pokémon learnset filter
+            val canLearn = if (isPokemonFilterEnabled && pokemonFilterData != null) {
+                pokemonFilterData!!.learnableMoves.contains(moveName)
+            } else {
+                true
             }
-
-            // Pokémon filter
-            val canLearn = pokemonMoves?.contains(moveName) ?: true
-            if (isPokemonFilterEnabled && pokemonMoves != null && !canLearn) {
+            if (isPokemonFilterEnabled && pokemonFilterData != null && !canLearn) {
                 return@mapNotNull null
             }
 
