@@ -1,0 +1,41 @@
+{
+    "type": "minecraft:chest",
+    "pools": [
+        {
+            "rolls": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+            },
+            "entries": [
+                {
+                    "type": "minecraft:tag",
+                    "name": "simpletms:tr_items",
+                    "expand": true
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "minecraft:random_chance",
+                    "chance": 0.25
+                }
+            ]
+        },
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "minecraft:tag",
+                    "name": "simpletms:tm_items",
+                    "expand": true
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "minecraft:random_chance",
+                    "chance": 0.06
+                }
+            ]
+        }
+    ]
+}

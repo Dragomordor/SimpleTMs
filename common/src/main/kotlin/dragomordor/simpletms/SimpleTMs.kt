@@ -2,10 +2,15 @@ package dragomordor.simpletms
 
 import com.cobblemon.mod.common.config.constraint.IntConstraint
 import com.mojang.logging.LogUtils.getLogger
+import dragomordor.simpletms.block.SimpleTMsBlockItems
+import dragomordor.simpletms.block.SimpleTMsBlocks
+import dragomordor.simpletms.block.entity.SimpleTMsBlockEntities
 import dragomordor.simpletms.config.DoubleConstraint
 import dragomordor.simpletms.config.SimpleTMsConfig
 import dragomordor.simpletms.events.MoveLearnItemDropEventListeners
 import dragomordor.simpletms.events.CobblemonPokemonSpeciesListener
+import dragomordor.simpletms.network.SimpleTMsNetwork
+import dragomordor.simpletms.ui.SimpleTMsMenuTypes
 import net.fabricmc.loader.api.FabricLoader
 import org.slf4j.Logger
 import java.io.File
@@ -30,10 +35,21 @@ object SimpleTMs {
 
     fun init() {
         LOGGER.info("Using SimpleTMs ($VERSION)")
+        // Register items
         SimpleTMsItems.registerModItems()
+        // Register blocks (must be before block items and block entities)
+        SimpleTMsBlocks.register()
+        // Register block items (after blocks)
+        SimpleTMsBlockItems.register()
+        // Register block entities (after blocks)
+        SimpleTMsBlockEntities.register()
+        // Register menu types (before screens, shared between client/server)
+        SimpleTMsMenuTypes.register()
         // Event listeners
         MoveLearnItemDropEventListeners.registerListeners()
         CobblemonPokemonSpeciesListener.registerListeners()
+        // Network
+        SimpleTMsNetwork.register()
     }
 
 
@@ -106,4 +122,3 @@ object SimpleTMs {
     }
 
 }
-

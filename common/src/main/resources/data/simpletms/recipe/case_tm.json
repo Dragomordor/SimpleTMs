@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CxC",
+    "LtL",
+    "CxC"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:diamond"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "t": {
+      "tag": "simpletms:tm_items"
+    }
+  },
+  "result": {
+    "id": "simpletms:case_tm",
+    "count": 1
+  }
+}

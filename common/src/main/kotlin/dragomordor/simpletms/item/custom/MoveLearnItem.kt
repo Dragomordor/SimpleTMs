@@ -37,8 +37,8 @@ import java.awt.Color
 
 
 class MoveLearnItem(
-    private val moveName: String,
-    private val isTR: Boolean,
+    internal val moveName: String,
+    internal val isTR: Boolean,
     private val isCustomMove: Boolean,
     settings: Properties
 ) : SimpleTMsItem(settings), PokemonSelectingItemNonBattle {

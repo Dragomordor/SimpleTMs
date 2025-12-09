@@ -7,6 +7,7 @@ import dev.architectury.registry.registries.RegistrySupplier
 import dragomordor.simpletms.SimpleTMs.LOGGER
 import dragomordor.simpletms.SimpleTMs.MOD_ID
 import dragomordor.simpletms.item.custom.BlankTmItem
+import dragomordor.simpletms.item.custom.MoveCaseItem
 import dragomordor.simpletms.item.custom.MoveLearnItem
 import dragomordor.simpletms.util.MoveLearnItemDefinition
 import dragomordor.simpletms.util.simpletmsResource
@@ -71,9 +72,19 @@ object SimpleTMsItems {
     val BLANK_TM = registerBlankTmItem("tm_blank", false)
     val BLANK_TR = registerBlankTmItem("tr_blank", true)
 
+
+    // TM and TR cases
+    val MOVE_TM_CASE = registerMoveCaseItem("case_tm", false)
+    val MOVE_TR_CASE = registerMoveCaseItem("case_tr", true)
+
     // ------------------------------------------------------------
     // Register Item Functions
     // ------------------------------------------------------------
+
+    private fun registerMoveCaseItem(name: String, isTRcase: Boolean): RegistrySupplier<MoveCaseItem> {
+        val settings: Properties = Properties().stacksTo(1)
+        return ITEMS.register(name) { MoveCaseItem(isTRcase, settings) }
+    }
 
     private fun registerBlankTmItem(name: String, isTR: Boolean): RegistrySupplier<BlankTmItem> {
         val item : RegistrySupplier<BlankTmItem>

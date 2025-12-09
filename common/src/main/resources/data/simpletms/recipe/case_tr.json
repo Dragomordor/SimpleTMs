@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CxC",
+    "LtL",
+    "CxC"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:iron_ingot"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "t": {
+      "tag": "simpletms:tr_items"
+    }
+  },
+  "result": {
+    "id": "simpletms:case_tr",
+    "count": 1
+  }
+}

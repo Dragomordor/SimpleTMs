@@ -1,4 +1,4 @@
-{ 
+{
     "simpletms.success.learned": "%1$sは%2$sを覚えました！",
     "simpletms.error.not_learnable.not_valid_move": "無効な技です -- その技は存在しません！",
     "simpletms.error.not_learnable.already_knows_move": "%1$sはすでに%2$sを覚えています",
@@ -40,10 +40,49 @@
 
     "itemGroup.simpletms.tm_items": "わざマシン",
     "itemGroup.simpletms.tr_items": "わざレコード",
+    "itemGroup.simpletms.custom_tm_items": "わざマシン - カスタム",
+    "itemGroup.simpletms.custom_tr_items": "わざレコード - カスタム",
 
     "item.simpletms.tm_blank": "空のわざマシン",
     "item.simpletms.tr_blank": "空のわざレコード",
 
-    "simpletms.item.tr_move": "わざマシン: %1$s",
-    "simpletms.item.tm_move": "わざレコード: %1$s"
+    "simpletms.item.tr_move": "わざレコード: %1$s",
+    "simpletms.item.tm_move": "わざマシン: %1$s",
+
+    "item.simpletms.case_tm": "わざマシンケース",
+    "item.simpletms.case_tr": "わざレコードケース",
+    "container.simpletms.tm_case": "わざマシンケース",
+    "container.simpletms.tr_case": "わざレコードケース",
+    "gui.simpletms.search": "検索",
+    "gui.simpletms.search.hint": "検索...",
+    "gui.simpletms.filter.all": "フィルター: すべて",
+    "gui.simpletms.filter.owned": "フィルター: 所持のみ",
+    "gui.simpletms.filter.missing": "フィルター: 未所持のみ",
+    "tooltip.simpletms.case.storage": "所持: %d/%d (%d%%)",
+    "tooltip.simpletms.case.capacity": "容量: %d",
+    "tooltip.simpletms.case.complete": "完了！",
+    "tooltip.simpletms.case.shift_hint": "Shift+使用でポケモンフィルターを選択",
+    "gui.simpletms.filter.pokemon": "フィルター: %s",
+    "gui.simpletms.filter.pokemon.learnable": "%d個の技を覚えられる",
+    "gui.simpletms.filter.pokemon.enabled": "クリックでフィルターを無効化",
+    "gui.simpletms.filter.pokemon.disabled": "クリックでフィルターを有効化",
+    "gui.simpletms.filter.pokemon.none": "ポケモンフィルターなし",
+    "gui.simpletms.filter.pokemon.shift_hint": "Shift+クリックでポケモンを選択",
+
+    "block.simpletms.machine_tm": "わざマシンマシーン",
+    "container.simpletms.tm_machine": "わざマシンマシーン",
+    "gui.simpletms.machine.filter.all": "すべて表示 (TMとTR)",
+    "gui.simpletms.machine.filter.tm": "わざマシンのみ表示",
+    "gui.simpletms.machine.filter.tr": "わざレコードのみ表示",
+    "gui.simpletms.machine.ownership.all": "すべての技を表示",
+    "gui.simpletms.machine.ownership.owned": "所持のみ表示",
+    "gui.simpletms.machine.ownership.missing": "未所持のみ表示",
+    "gui.simpletms.machine.pokemon_filter.none": "ポケモンフィルターなし",
+    "gui.simpletms.machine.pokemon_filter.active": "フィルタリング中: %s",
+    "gui.simpletms.machine.pokemon_filter.inactive": "フィルター無効: %s",
+    "gui.simpletms.machine.pokemon_filter.shift_hint": "Shift+クリックでポケモンを選択",
+    "gui.simpletms.machine.stored": "所持: %d",
+    "gui.simpletms.machine.tm_count": "わざマシン: %d",
+    "gui.simpletms.machine.tr_count": "わざレコード: %d",
+    "itemGroup.simpletms.tm_storage_items": "わざマシン/わざレコード保管アイテム"
 }

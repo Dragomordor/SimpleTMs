@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "simpletms:case_tm"
+    },
+    {
+      "item": "simpletms:case_tr"
+    },
+    {
+      "item": "cobblemon:pc"
+    }
+  ],
+  "result": {
+    "id": "simpletms:machine_tm",
+    "count": 1
+  }
+}
