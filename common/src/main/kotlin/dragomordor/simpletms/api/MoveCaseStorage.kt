@@ -15,14 +15,14 @@ import java.util.UUID
 /**
  * SavedData class that stores all players' TM and TR case contents.
  *
- * TMs are stored as a set (only 1 per move, since they have durability).
+ * TMs are stored with damage values (only 1 per move, since they have durability).
  * TRs are stored with quantities (up to stack size per move).
  * Also stores the last selected Pokémon for filtering (per case type).
  */
 class MoveCaseStorage private constructor() : SavedData() {
 
-    // TMs: player UUID -> Set of move names (1 per move max)
-    private val tmStorage: MutableMap<UUID, MutableSet<String>> = mutableMapOf()
+    // TMs: player UUID -> Map of move name -> damage value (0 = full durability)
+    private val tmStorage: MutableMap<UUID, MutableMap<String, Int>> = mutableMapOf()
 
     // TRs: player UUID -> Map of move name -> quantity
     private val trStorage: MutableMap<UUID, MutableMap<String, Int>> = mutableMapOf()
@@ -44,27 +44,38 @@ class MoveCaseStorage private constructor() : SavedData() {
     )
 
     // ========================================
-    // TM Storage Methods (unchanged - still 1 per move)
+    // TM Storage Methods (now stores damage value)
     // ========================================
 
     fun getStoredTMs(playerUUID: UUID): Set<String> {
-        return tmStorage[playerUUID]?.toSet() ?: emptySet()
+        return tmStorage[playerUUID]?.keys?.toSet() ?: emptySet()
     }
 
     fun hasTM(playerUUID: UUID, moveName: String): Boolean {
-        return tmStorage[playerUUID]?.contains(moveName) ?: false
+        return tmStorage[playerUUID]?.containsKey(moveName) ?: false
     }
 
-    fun addTM(playerUUID: UUID, moveName: String): Boolean {
-        val playerTMs = tmStorage.getOrPut(playerUUID) { mutableSetOf() }
-        val added = playerTMs.add(moveName)
-        if (added) setDirty()
-        return added
+    /**
+     * Get the damage value of a stored TM (0 = full durability)
+     */
+    fun getTMDamage(playerUUID: UUID, moveName: String): Int {
+        return tmStorage[playerUUID]?.get(moveName) ?: 0
+    }
+
+    /**
+     * Add a TM with its damage value
+     */
+    fun addTM(playerUUID: UUID, moveName: String, damage: Int = 0): Boolean {
+        val playerTMs = tmStorage.getOrPut(playerUUID) { mutableMapOf() }
+        if (playerTMs.containsKey(moveName)) return false
+        playerTMs[moveName] = damage
+        setDirty()
+        return true
     }
 
     fun removeTM(playerUUID: UUID, moveName: String): Boolean {
         val playerTMs = tmStorage[playerUUID] ?: return false
-        val removed = playerTMs.remove(moveName)
+        val removed = playerTMs.remove(moveName) != null
         if (removed) setDirty()
         return removed
     }
@@ -181,14 +192,22 @@ class MoveCaseStorage private constructor() : SavedData() {
 
     /**
      * Add a move to a player's storage
+     * @param damage For TMs, the damage value to store (ignored for TRs)
      * @return The number actually added
      */
-    fun addMove(playerUUID: UUID, moveName: String, isTR: Boolean, amount: Int = 1): Int {
+    fun addMove(playerUUID: UUID, moveName: String, isTR: Boolean, amount: Int = 1, damage: Int = 0): Int {
         return if (isTR) {
             addTR(playerUUID, moveName, amount)
         } else {
-            if (addTM(playerUUID, moveName)) 1 else 0
+            if (addTM(playerUUID, moveName, damage)) 1 else 0
         }
+    }
+
+    /**
+     * Get the damage value of a stored TM (returns 0 for TRs or if not found)
+     */
+    fun getMoveDamage(playerUUID: UUID, moveName: String, isTR: Boolean): Int {
+        return if (isTR) 0 else getTMDamage(playerUUID, moveName)
     }
 
     /**
@@ -239,14 +258,14 @@ class MoveCaseStorage private constructor() : SavedData() {
     // ========================================
 
     override fun save(tag: CompoundTag, registries: HolderLookup.Provider): CompoundTag {
-        // Save TM storage (set of move names)
+        // Save TM storage (map of move name -> damage value)
         val tmCompound = CompoundTag()
-        for ((uuid, moves) in tmStorage) {
-            val moveList = ListTag()
-            for (moveName in moves) {
-                moveList.add(StringTag.valueOf(moveName))
+        for ((uuid, moveMap) in tmStorage) {
+            val playerCompound = CompoundTag()
+            for ((moveName, damage) in moveMap) {
+                playerCompound.putInt(moveName, damage)
             }
-            tmCompound.put(uuid.toString(), moveList)
+            tmCompound.put(uuid.toString(), playerCompound)
         }
         tag.put(TM_STORAGE_KEY, tmCompound)
 
@@ -312,18 +331,34 @@ class MoveCaseStorage private constructor() : SavedData() {
         private fun load(tag: CompoundTag): MoveCaseStorage {
             val storage = MoveCaseStorage()
 
-            // Load TM storage
+            // Load TM storage - handle both old format (list) and new format (compound with damage)
             if (tag.contains(TM_STORAGE_KEY, Tag.TAG_COMPOUND.toInt())) {
                 val tmCompound = tag.getCompound(TM_STORAGE_KEY)
                 for (key in tmCompound.allKeys) {
                     try {
                         val uuid = UUID.fromString(key)
-                        val moveList = tmCompound.getList(key, Tag.TAG_STRING.toInt())
-                        val moves = mutableSetOf<String>()
-                        for (i in 0 until moveList.size) {
-                            moves.add(moveList.getString(i))
+                        val playerData = tmCompound.get(key)
+                        val moveMap = mutableMapOf<String, Int>()
+
+                        when (playerData) {
+                            is CompoundTag -> {
+                                // New format: compound with move -> damage value
+                                for (moveName in playerData.allKeys) {
+                                    val damage = playerData.getInt(moveName)
+                                    moveMap[moveName] = damage
+                                }
+                            }
+                            is ListTag -> {
+                                // Old format: list of move names (migrate with damage 0)
+                                for (i in 0 until playerData.size) {
+                                    moveMap[playerData.getString(i)] = 0
+                                }
+                            }
                         }
-                        storage.tmStorage[uuid] = moves
+
+                        if (moveMap.isNotEmpty()) {
+                            storage.tmStorage[uuid] = moveMap
+                        }
                     } catch (e: IllegalArgumentException) {
                         // Invalid UUID, skip
                     }

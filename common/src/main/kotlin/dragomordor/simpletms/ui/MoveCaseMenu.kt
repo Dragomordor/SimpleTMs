@@ -46,7 +46,8 @@ class MoveCaseMenu(
     initialStoredMoves: Map<String, Int> = emptyMap(),
     serverPokemon: Pokemon? = null,
     clientPokemonData: PokemonFilterData? = null,
-    autoEnableFilter: Boolean = true // Only auto-enable when freshly selected
+    autoEnableFilter: Boolean = true, // Only auto-enable when freshly selected
+    initialStoredDamage: Map<String, Int> = emptyMap() // TM damage values
 ) : AbstractContainerMenu(SimpleTMsMenuTypes.MOVE_CASE_MENU.get(), containerId) {
 
     val player: Player = playerInventory.player
@@ -57,6 +58,9 @@ class MoveCaseMenu(
 
     // Client-side cache: move name -> quantity
     private val clientStoredMoves: MutableMap<String, Int> = initialStoredMoves.toMutableMap()
+
+    // Client-side cache: move name -> damage value (TMs only)
+    private val clientStoredDamage: MutableMap<String, Int> = initialStoredDamage.toMutableMap()
 
     companion object {
         const val COLUMNS = 9
@@ -353,6 +357,16 @@ class MoveCaseMenu(
         return clientStoredMoves[moveName] ?: 0
     }
 
+    /**
+     * Get the damage value of a stored TM (0 = full durability, higher = more damaged)
+     * Always returns 0 for TRs since they don't have durability.
+     */
+    fun getMoveDamage(moveName: String): Int {
+        if (isTR) return 0
+        storage?.let { return it.getMoveDamage(playerUUID, moveName, isTR) }
+        return clientStoredDamage[moveName] ?: 0
+    }
+
     fun canAddMore(moveName: String): Boolean {
         return getMoveQuantity(moveName) < maxStackSize
     }
@@ -364,16 +378,20 @@ class MoveCaseMenu(
         return allMoves.sumOf { getMoveQuantity(it) }
     }
 
-    private fun addToStorage(moveName: String, amount: Int = 1): Int {
+    private fun addToStorage(moveName: String, amount: Int = 1, damage: Int = 0): Int {
         val currentQty = getMoveQuantity(moveName)
         val canAdd = (maxStackSize - currentQty).coerceAtLeast(0)
         val toAdd = amount.coerceAtMost(canAdd)
 
         if (toAdd > 0) {
             if (player is ServerPlayer) {
-                storage?.addMove(playerUUID, moveName, isTR, toAdd)
+                storage?.addMove(playerUUID, moveName, isTR, toAdd, damage)
             }
             clientStoredMoves[moveName] = currentQty + toAdd
+            // Also store damage for TMs in client cache
+            if (!isTR && toAdd > 0) {
+                clientStoredDamage[moveName] = damage
+            }
             if (filterMode != FilterMode.ALL) updateFilteredMoves()
         }
         return toAdd
@@ -413,7 +431,9 @@ class MoveCaseMenu(
             val moveName = item.moveName
             val moveIndex = MoveCaseHelper.getSlotIndexForMove(moveName, isTR)
             if (moveIndex >= 0 && canAddMore(moveName)) {
-                val added = addToStorage(moveName, stack.count)
+                // For TMs, capture the damage value
+                val damage = if (!isTR) stack.damageValue else 0
+                val added = addToStorage(moveName, stack.count, damage)
                 if (added > 0) {
                     stack.shrink(added)
                     slot.setChanged()
@@ -439,6 +459,7 @@ class MoveCaseMenu(
         if (!allMoves.contains(moveName)) return false
 
         val storedQty = getMoveQuantity(moveName)
+        val storedDamage = getMoveDamage(moveName)  // Get stored damage for TMs
         val carriedItem = carried
 
         if (isShiftClick) {
@@ -446,6 +467,10 @@ class MoveCaseMenu(
                 val prefix = if (isTR) "tr_" else "tm_"
                 val itemToGive = SimpleTMsItems.getItemStackFromName(prefix + moveName)
                 itemToGive.count = storedQty
+                // Restore damage for TMs
+                if (!isTR) {
+                    itemToGive.damageValue = storedDamage
+                }
 
                 val originalCount = itemToGive.count
                 if (moveItemStackTo(itemToGive, playerInvStart, hotbarEnd, true)) {
@@ -472,6 +497,10 @@ class MoveCaseMenu(
                     val prefix = if (isTR) "tr_" else "tm_"
                     val pickedUp = SimpleTMsItems.getItemStackFromName(prefix + moveName)
                     pickedUp.count = pickupAmount
+                    // Restore damage for TMs
+                    if (!isTR) {
+                        pickedUp.damageValue = storedDamage
+                    }
                     setCarried(pickedUp)
                     return true
                 }
@@ -479,7 +508,9 @@ class MoveCaseMenu(
                 val item = carriedItem.item
                 if (item is MoveLearnItem && item.moveName == moveName && item.isTR == isTR) {
                     if (canAddMore(moveName)) {
-                        val added = addToStorage(moveName, carriedItem.count)
+                        // For TMs, capture the damage value
+                        val damage = if (!isTR) carriedItem.damageValue else 0
+                        val added = addToStorage(moveName, carriedItem.count, damage)
                         if (added > 0) {
                             carriedItem.shrink(added)
                             return true

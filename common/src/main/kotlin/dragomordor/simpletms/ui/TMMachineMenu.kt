@@ -85,6 +85,7 @@ class TMMachineMenu(
         val moveName: String,
         val tmCount: Int,
         val trCount: Int,
+        val tmDamage: Int,  // Damage value for TMs (0 = full durability)
         val isValidTM: Boolean,
         val isValidTR: Boolean,
         val canPokemonLearn: Boolean
@@ -208,6 +209,10 @@ class TMMachineMenu(
 
     fun getTRCount(moveName: String): Int {
         return getMoveData(moveName)?.trCount ?: 0
+    }
+
+    fun getTMDamage(moveName: String): Int {
+        return getMoveData(moveName)?.tmDamage ?: 0
     }
 
     fun hasMove(moveName: String, isTR: Boolean): Boolean {
@@ -426,6 +431,7 @@ class TMMachineMenu(
 
             val tmCount = getTMCount(moveName)
             val trCount = getTRCount(moveName)
+            val tmDamage = getTMDamage(moveName)
 
             // Ownership filter
             when (ownershipFilter) {
@@ -452,6 +458,7 @@ class TMMachineMenu(
                 moveName = moveName,
                 tmCount = tmCount,
                 trCount = trCount,
+                tmDamage = tmDamage,
                 isValidTM = isValidTM,
                 isValidTR = isValidTR,
                 canPokemonLearn = canLearn
@@ -570,21 +577,23 @@ class TMMachineMenu(
         val stack = SimpleTMsItems.getItemStackFromName(prefix + moveName)
         if (stack.isEmpty) return false
 
+        // For TMs, restore the damage value
+        if (!isTR) {
+            stack.damageValue = blockEntity.getTMDamage(moveName)
+        }
+
         if (isShiftClick) {
             // Shift-click: Transfer entire stack to player's inventory
             val withdrawAmount = currentCount.coerceAtMost(stack.maxStackSize)
             stack.count = withdrawAmount
 
-            val countBefore = stack.count
             if (!player.inventory.add(stack)) {
                 // Inventory full or partially full, drop remainder at player's feet
                 if (!stack.isEmpty && stack.count > 0) {
                     player.drop(stack, false)
                 }
             }
-            // Calculate how many were actually taken (added to inv + dropped)
-            // After add(), stack.count contains items that couldn't be added
-            // But we dropped those, so all withdrawAmount items were taken
+            // All withdrawAmount items were taken (added to inv or dropped)
             blockEntity.removeMove(moveName, isTR, withdrawAmount)
         } else {
             // Normal click: Pick up 1 to cursor (carried item)

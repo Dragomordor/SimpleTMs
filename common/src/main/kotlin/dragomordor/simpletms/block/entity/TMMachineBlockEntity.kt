@@ -42,15 +42,17 @@ class TMMachineBlockEntity(
     state: BlockState
 ) : BlockEntity(SimpleTMsBlockEntities.TM_MACHINE.get(), pos, state) {
 
-    // Storage: move name -> StoredMoveData (tmCount, trCount)
+    // Storage: move name -> StoredMoveData (tmCount, trCount, tmDamage)
     private val storedMoves: MutableMap<String, StoredMoveData> = mutableMapOf()
 
     /**
-     * Data class to track both TM and TR quantities for a single move
+     * Data class to track both TM and TR quantities for a single move.
+     * TMs also store their damage value since they have durability.
      */
     data class StoredMoveData(
         var tmCount: Int = 0,
-        var trCount: Int = 0
+        var trCount: Int = 0,
+        var tmDamage: Int = 0  // Damage value of the stored TM (0 = full durability)
     ) {
         fun isEmpty(): Boolean = tmCount <= 0 && trCount <= 0
     }
@@ -89,6 +91,13 @@ class TMMachineBlockEntity(
     }
 
     /**
+     * Get the damage value of a stored TM
+     */
+    fun getTMDamage(moveName: String): Int {
+        return storedMoves[moveName]?.tmDamage ?: 0
+    }
+
+    /**
      * Check if a move is stored (either TM or TR)
      */
     fun hasMove(moveName: String, isTR: Boolean): Boolean {
@@ -106,9 +115,10 @@ class TMMachineBlockEntity(
 
     /**
      * Add a move to storage
+     * @param damage For TMs, the damage value to store (ignored for TRs)
      * @return The number actually added
      */
-    fun addMove(moveName: String, isTR: Boolean, amount: Int = 1): Int {
+    fun addMove(moveName: String, isTR: Boolean, amount: Int = 1, damage: Int = 0): Int {
         val data = storedMoves.getOrPut(moveName) { StoredMoveData() }
         val current = if (isTR) data.trCount else data.tmCount
         val max = if (isTR) maxTRStackSize else 1
@@ -120,6 +130,7 @@ class TMMachineBlockEntity(
                 data.trCount += toAdd
             } else {
                 data.tmCount += toAdd
+                data.tmDamage = damage  // Store the TM's damage value
             }
             setChanged()
             syncToClients()
@@ -188,7 +199,10 @@ class TMMachineBlockEntity(
 
         if (!canAddMore(moveName, isTR)) return stack
 
-        val added = addMove(moveName, isTR, stack.count)
+        // For TMs, capture the damage value before adding
+        val damage = if (!isTR) stack.damageValue else 0
+
+        val added = addMove(moveName, isTR, stack.count, damage)
         if (added > 0) {
             val remaining = stack.copy()
             remaining.shrink(added)
@@ -202,10 +216,11 @@ class TMMachineBlockEntity(
      */
     fun dropContents(level: Level, pos: BlockPos) {
         for ((moveName, data) in storedMoves) {
-            // Drop TMs
+            // Drop TMs (with preserved damage)
             if (data.tmCount > 0) {
                 val tmStack = SimpleTMsItems.getItemStackFromName("tm_$moveName")
                 tmStack.count = data.tmCount
+                tmStack.damageValue = data.tmDamage  // Restore the damage value
                 Containers.dropItemStack(level, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), tmStack)
             }
             // Drop TRs
@@ -267,6 +282,7 @@ class TMMachineBlockEntity(
                 buf.writeUtf(moveName)
                 buf.writeVarInt(data.tmCount)
                 buf.writeVarInt(data.trCount)
+                buf.writeVarInt(data.tmDamage)  // Include TM damage
             }
 
             // Write Pokémon filter data (if any)
@@ -297,6 +313,7 @@ class TMMachineBlockEntity(
             val moveTag = CompoundTag()
             moveTag.putInt("tm", data.tmCount)
             moveTag.putInt("tr", data.trCount)
+            moveTag.putInt("tmDamage", data.tmDamage)  // Save TM damage
             movesTag.put(moveName, moveTag)
         }
         tag.put("stored_moves", movesTag)
@@ -312,8 +329,9 @@ class TMMachineBlockEntity(
                 val moveTag = movesTag.getCompound(moveName)
                 val tmCount = moveTag.getInt("tm")
                 val trCount = moveTag.getInt("tr")
+                val tmDamage = moveTag.getInt("tmDamage")  // Load TM damage (defaults to 0 if not present)
                 if (tmCount > 0 || trCount > 0) {
-                    storedMoves[moveName] = StoredMoveData(tmCount, trCount)
+                    storedMoves[moveName] = StoredMoveData(tmCount, trCount, tmDamage)
                 }
             }
         }

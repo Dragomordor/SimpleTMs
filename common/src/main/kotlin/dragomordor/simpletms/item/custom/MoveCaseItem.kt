@@ -127,17 +127,16 @@ class MoveCaseItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(sett
     // Menu opening
     // ========================================
 
-    /**
-     * Open the menu, optionally with a fresh Pokémon selection that should auto-enable the filter.
-     *
-     * @param player The server player
-     * @param pokemon A live Pokémon reference (from clicking on entity), or null
-     * @param isFreshSelection If true, treat the saved Pokémon in storage as a fresh selection
-     *                         (auto-enable filter). Used when reopening after party selection.
-     */
     private fun openMenu(player: ServerPlayer, pokemon: Pokemon?, isFreshSelection: Boolean = false) {
         val storage = MoveCaseStorage.get(player)
         val storedMoves = storage.getStoredQuantities(player.uuid, isTR)
+
+        // Get damage values for TMs
+        val storedDamage = if (!isTR) {
+            storedMoves.keys.associateWith { moveName -> storage.getMoveDamage(player.uuid, moveName, false) }
+        } else {
+            emptyMap()
+        }
 
         // Determine which Pokémon to use for filtering
         val filterPokemon: Pokemon? = pokemon
@@ -187,7 +186,9 @@ class MoveCaseItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(sett
                             savedPokemonInfo.displayName,
                             savedPokemonInfo.learnableMoves
                         )
-                    } else null
+                    } else null,
+                    autoEnableFilter = filterPokemon != null || isFreshSelection,
+                    initialStoredDamage = storedDamage
                 )
             }
         }
@@ -195,11 +196,15 @@ class MoveCaseItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(sett
         MenuRegistry.openExtendedMenu(player, menuProvider) { buf ->
             buf.writeBoolean(isTR)
 
-            // Write stored moves with quantities
+            // Write stored moves with quantities and damage
             buf.writeVarInt(storedMoves.size)
             for ((moveName, quantity) in storedMoves) {
                 buf.writeUtf(moveName)
                 buf.writeVarInt(quantity)
+                // Write damage value for TMs (TRs don't have damage)
+                if (!isTR) {
+                    buf.writeVarInt(storedDamage[moveName] ?: 0)
+                }
             }
 
             // Write Pokémon filter data (either from new selection or saved)
@@ -231,18 +236,9 @@ class MoveCaseItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(sett
                 }
 
                 // Write whether this was a fresh selection (auto-enable filter) or loaded (don't auto-enable)
-                // Fresh selection = live pokemon OR isFreshSelection flag is set
-                buf.writeBoolean(filterPokemon != null || isFreshSelection)
+                buf.writeBoolean(filterPokemon != null)
             }
         }
-    }
-
-    /**
-     * Open the menu after a fresh Pokémon selection from party selection.
-     * This will auto-enable the filter for the saved Pokémon.
-     */
-    fun openMenuWithFreshSelection(player: ServerPlayer) {
-        openMenu(player, null, isFreshSelection = true)
     }
 
     override fun appendHoverText(
@@ -396,5 +392,13 @@ class MoveCaseItem(val isTR: Boolean, settings: Properties) : SimpleTMsItem(sett
 
             return learnableMoves
         }
+    }
+
+    /**
+     * Open the menu with a fresh selection flag.
+     * Called from network handler after party selection.
+     */
+    fun openMenuWithFreshSelection(player: ServerPlayer) {
+        openMenu(player, null, isFreshSelection = true)
     }
 }

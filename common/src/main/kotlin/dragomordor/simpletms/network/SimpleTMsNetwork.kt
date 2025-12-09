@@ -176,6 +176,7 @@ object SimpleTMsNetwork {
                         buf.writeUtf(moveName)
                         buf.writeVarInt(data.tmCount)
                         buf.writeVarInt(data.trCount)
+                        buf.writeVarInt(data.tmDamage)  // Include TM damage
                     }
                 },
                 { buf ->
@@ -185,7 +186,8 @@ object SimpleTMsNetwork {
                         val moveName = buf.readUtf()
                         val tmCount = buf.readVarInt()
                         val trCount = buf.readVarInt()
-                        moves[moveName] = TMMachineBlockEntity.StoredMoveData(tmCount, trCount)
+                        val tmDamage = buf.readVarInt()  // Read TM damage
+                        moves[moveName] = TMMachineBlockEntity.StoredMoveData(tmCount, trCount, tmDamage)
                     }
                     MachineSyncPacket(moves)
                 }

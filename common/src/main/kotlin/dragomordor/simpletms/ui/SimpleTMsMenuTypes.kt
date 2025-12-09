@@ -19,20 +19,26 @@ object SimpleTMsMenuTypes {
      * Menu type for the TM/TR Case.
      * Uses extended menu to pass:
      * - isTR flag
-     * - stored moves with quantities
+     * - stored moves with quantities (and damage for TMs)
      * - optional Pokémon filter data
      */
     val MOVE_CASE_MENU: RegistrySupplier<MenuType<MoveCaseMenu>> = MENUS.register("move_case_menu") {
         MenuRegistry.ofExtended { containerId, inventory, buf ->
             val isTR = buf.readBoolean()
 
-            // Read stored moves with quantities
+            // Read stored moves with quantities (and damage for TMs)
             val storedMovesCount = buf.readVarInt()
             val storedMoves = mutableMapOf<String, Int>()
+            val storedDamage = mutableMapOf<String, Int>()
             repeat(storedMovesCount) {
                 val moveName = buf.readUtf()
                 val quantity = buf.readVarInt()
                 storedMoves[moveName] = quantity
+                // Read damage value for TMs
+                if (!isTR) {
+                    val damage = buf.readVarInt()
+                    storedDamage[moveName] = damage
+                }
             }
 
             // Read Pokémon filter data
@@ -61,7 +67,7 @@ object SimpleTMsMenuTypes {
                 autoEnableFilter = false
             }
 
-            MoveCaseMenu(containerId, inventory, isTR, storedMoves, null, pokemonFilterData, autoEnableFilter)
+            MoveCaseMenu(containerId, inventory, isTR, storedMoves, null, pokemonFilterData, autoEnableFilter, storedDamage)
         }
     }
 
@@ -69,7 +75,7 @@ object SimpleTMsMenuTypes {
      * Menu type for the TM Machine block.
      * Uses extended menu to pass:
      * - Block position (to find the block entity)
-     * - Stored moves data (TM and TR counts per move)
+     * - Stored moves data (TM and TR counts per move, plus TM damage)
      * - Optional Pokémon filter data (from party selection)
      */
     val TM_MACHINE_MENU: RegistrySupplier<MenuType<TMMachineMenu>> = MENUS.register("tm_machine_menu") {
@@ -83,7 +89,8 @@ object SimpleTMsMenuTypes {
                 val moveName = buf.readUtf()
                 val tmCount = buf.readVarInt()
                 val trCount = buf.readVarInt()
-                storedMoves[moveName] = TMMachineBlockEntity.StoredMoveData(tmCount, trCount)
+                val tmDamage = buf.readVarInt()  // Read TM damage
+                storedMoves[moveName] = TMMachineBlockEntity.StoredMoveData(tmCount, trCount, tmDamage)
             }
 
             // Read optional Pokémon filter data

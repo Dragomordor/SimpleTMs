@@ -225,6 +225,14 @@ class MoveCaseScreen(
                 val quantity = menu.getMoveQuantity(moveName)
                 val itemStack = getItemStackForMove(moveName)
 
+                // Set damage for TMs
+                if (!menu.isTR) {
+                    val damage = menu.getMoveDamage(moveName)
+                    if (damage > 0) {
+                        itemStack.damageValue = damage
+                    }
+                }
+
                 val slotX = x + CASE_SLOTS_X + col * SLOT_SIZE + 1
                 val slotY = y + CASE_SLOTS_Y + row * SLOT_SIZE + 1
 
@@ -251,7 +259,10 @@ class MoveCaseScreen(
         // Render the item first
         guiGraphics.renderItem(stack, x, y)
 
-        // Then render the count on top (only if > 1)
+        // Render item decorations (including durability bar)
+        guiGraphics.renderItemDecorations(font, stack, x, y, if (count > 1) count.toString() else "")
+
+        // If count > 1, render our custom count on top (the decoration might not show it properly for virtual slots)
         if (count > 1) {
             guiGraphics.pose().pushPose()
             guiGraphics.pose().translate(0f, 0f, 200f) // Ensure count is on top

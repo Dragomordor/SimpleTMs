@@ -284,11 +284,11 @@ class TMMachineScreen(
             for (entry in filteredMoves) {
                 // Add TM if valid and (has count OR showing ghosts)
                 if (entry.isValidTM && (entry.tmCount > 0 || showGhosts)) {
-                    displayItems.add(DisplayItem(entry.moveName, false, entry.tmCount))
+                    displayItems.add(DisplayItem(entry.moveName, false, entry.tmCount, entry.tmDamage))
                 }
                 // Add TR if valid and (has count OR showing ghosts)
                 if (entry.isValidTR && (entry.trCount > 0 || showGhosts)) {
-                    displayItems.add(DisplayItem(entry.moveName, true, entry.trCount))
+                    displayItems.add(DisplayItem(entry.moveName, true, entry.trCount, 0))
                 }
             }
 
@@ -307,6 +307,11 @@ class TMMachineScreen(
 
                 val prefix = if (item.isTR) "tr_" else "tm_"
                 val itemStack = SimpleTMsItems.getItemStackFromName(prefix + item.moveName)
+
+                // Set damage for TMs
+                if (!item.isTR && item.damage > 0) {
+                    itemStack.damageValue = item.damage
+                }
 
                 if (item.count > 0) {
                     renderItemWithCount(guiGraphics, itemStack, slotX, slotY, item.count)
@@ -342,7 +347,7 @@ class TMMachineScreen(
     /**
      * Helper data class for flat display list in ALL mode
      */
-    private data class DisplayItem(val moveName: String, val isTR: Boolean, val count: Int)
+    private data class DisplayItem(val moveName: String, val isTR: Boolean, val count: Int, val damage: Int = 0)
 
     /**
      * Get the display item at a given visible slot position in ALL mode
@@ -377,7 +382,10 @@ class TMMachineScreen(
         // Render the item first
         guiGraphics.renderItem(stack, x, y)
 
-        // Then render the count on top (only if > 1)
+        // Render item decorations (including durability bar)
+        guiGraphics.renderItemDecorations(font, stack, x, y, if (count > 1) count.toString() else "")
+
+        // If count > 1, render our custom count on top (the decoration might not show it properly for virtual slots)
         if (count > 1) {
             guiGraphics.pose().pushPose()
             guiGraphics.pose().translate(0f, 0f, 200f) // Ensure count is on top
@@ -399,6 +407,10 @@ class TMMachineScreen(
         return when (typeFilter) {
             MoveTypeFilter.TM_ONLY -> {
                 val stack = SimpleTMsItems.getItemStackFromName("tm_${entry.moveName}")
+                // Set damage for TMs
+                if (entry.tmDamage > 0) {
+                    stack.damageValue = entry.tmDamage
+                }
                 stack to entry.tmCount
             }
             MoveTypeFilter.TR_ONLY -> {
@@ -409,6 +421,9 @@ class TMMachineScreen(
                 // This shouldn't be called in ALL mode, but handle it anyway
                 val prefix = if (entry.isValidTM) "tm_" else "tr_"
                 val stack = SimpleTMsItems.getItemStackFromName(prefix + entry.moveName)
+                if (entry.isValidTM && entry.tmDamage > 0) {
+                    stack.damageValue = entry.tmDamage
+                }
                 val count = entry.tmCount + entry.trCount
                 stack to count
             }
