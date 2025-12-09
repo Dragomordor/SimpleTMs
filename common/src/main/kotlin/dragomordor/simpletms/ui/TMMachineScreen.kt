@@ -626,6 +626,10 @@ class TMMachineScreen(
                     val displayItem = getDisplayItemAtSlot(row, col)
                     if (displayItem != null && displayItem.count > 0) {
                         SimpleTMsNetwork.sendMachineSlotClick(displayItem.moveName, displayItem.isTR, isShiftClick)
+                        // Update client cache immediately for responsive UI
+                        // Shift-click withdraws entire stack, normal click withdraws 1
+                        val withdrawAmount = if (isShiftClick) displayItem.count else 1
+                        menu.updateClientCacheForWithdrawal(displayItem.moveName, displayItem.isTR, withdrawAmount)
                         return true
                     }
                 } else {
@@ -645,9 +649,13 @@ class TMMachineScreen(
                                 else -> entry.tmCount <= 0 // Left-click = TM if available, else TR
                             }
 
-                            val hasItem = if (clickTR) entry.trCount > 0 else entry.tmCount > 0
-                            if (hasItem) {
+                            val currentCount = if (clickTR) entry.trCount else entry.tmCount
+                            if (currentCount > 0) {
                                 SimpleTMsNetwork.sendMachineSlotClick(entry.moveName, clickTR, isShiftClick)
+                                // Update client cache immediately for responsive UI
+                                // Shift-click withdraws entire stack, normal click withdraws 1
+                                val withdrawAmount = if (isShiftClick) currentCount else 1
+                                menu.updateClientCacheForWithdrawal(entry.moveName, clickTR, withdrawAmount)
                                 return true
                             }
                         }

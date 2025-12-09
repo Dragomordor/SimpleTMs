@@ -4,6 +4,7 @@ import dragomordor.simpletms.SimpleTMs.MOD_ID
 import dragomordor.simpletms.SimpleTMs
 import dragomordor.simpletms.item.group.SimpleTMsItemGroups
 import dragomordor.simpletms.loot.LootInjector
+import dragomordor.simpletms.network.SimpleTMsNetwork
 import net.minecraft.core.registries.Registries
 import net.minecraft.world.item.CreativeModeTab
 import net.neoforged.api.distmarker.Dist
@@ -26,10 +27,16 @@ object SimpleTMs {
             addListener(::onLootTableLoad)
         }
         registerItemGroups()
+
+        // Register S2C packet types for dedicated server
+        // (On client, registerClient() handles this)
+        if (FMLEnvironment.dist == Dist.DEDICATED_SERVER) {
+            SimpleTMsNetwork.registerServer()
+        }
+
         if (FMLEnvironment.dist == Dist.CLIENT) {
             SimpleTMsClient.init()
         }
-
     }
 
     // ------------------------------------------------------------

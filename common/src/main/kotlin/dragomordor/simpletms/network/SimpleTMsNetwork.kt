@@ -290,7 +290,13 @@ object SimpleTMsNetwork {
     // ========================================
 
     /**
-     * Register C2S packets - call from common init (runs on both sides, server needs these)
+     * Register C2S packets AND S2C packet types (server-side only for S2C).
+     * Call from common init (runs on both sides).
+     *
+     * C2S packets: Server needs to receive these.
+     * S2C packets: Server needs to know the type/codec to SEND these.
+     *              On dedicated server, we register with registerS2CPayloadType.
+     *              On client (including integrated server), registerClient() handles it via registerReceiver.
      */
     fun register() {
         // C2S: Client -> Server packets (server receives these)
@@ -338,7 +344,33 @@ object SimpleTMsNetwork {
     }
 
     /**
-     * Register S2C packets - call from CLIENT init only
+     * Register S2C packet types for dedicated server.
+     * Call this ONLY on dedicated server (not on client).
+     * This allows the server to send these packets without a receiver.
+     */
+    fun registerServer() {
+        // S2C: Register packet types so dedicated server can SEND them
+        // On client/integrated server, registerClient() handles this via registerReceiver
+        NetworkManager.registerS2CPayloadType(
+            PokemonFilterDataPacket.TYPE,
+            PokemonFilterDataPacket.CODEC
+        )
+
+        NetworkManager.registerS2CPayloadType(
+            MachineSyncPacket.TYPE,
+            MachineSyncPacket.CODEC
+        )
+
+        NetworkManager.registerS2CPayloadType(
+            CasePokemonFilterPacket.TYPE,
+            CasePokemonFilterPacket.CODEC
+        )
+    }
+
+    /**
+     * Register S2C packet handlers - call from CLIENT init only.
+     * The client needs to register handlers to RECEIVE these packets.
+     * This also registers the packet types, so don't call registerServer() on client.
      */
     fun registerClient() {
         // S2C: Server -> Client packets (client receives these)
@@ -666,7 +698,9 @@ object SimpleTMsNetwork {
         level.players().forEach { player ->
             if (player is ServerPlayer) {
                 val menu = player.containerMenu as? TMMachineMenu ?: return@forEach
-                if (menu.blockEntity == blockEntity) {
+                // Compare by block position instead of object reference for reliability on dedicated servers
+                val menuBlockEntity = menu.blockEntity ?: return@forEach
+                if (menuBlockEntity.blockPos == pos && menuBlockEntity.level == level) {
                     syncMachineToPlayer(player, blockEntity)
                 }
             }

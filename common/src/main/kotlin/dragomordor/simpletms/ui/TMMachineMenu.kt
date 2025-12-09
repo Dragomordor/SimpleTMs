@@ -224,6 +224,24 @@ class TMMachineMenu(
         isDirty = true
     }
 
+    /**
+     * Update client-side cache immediately when withdrawing (for responsive UI).
+     * Called on the client side when a slot is clicked, before the server processes it.
+     * This provides immediate visual feedback while the server sync packet is in flight.
+     */
+    fun updateClientCacheForWithdrawal(moveName: String, isTR: Boolean, amount: Int = 1) {
+        val data = clientStoredMoves[moveName] ?: return
+        if (isTR) {
+            data.trCount = (data.trCount - amount).coerceAtLeast(0)
+        } else {
+            data.tmCount = (data.tmCount - amount).coerceAtLeast(0)
+        }
+        if (data.isEmpty()) {
+            clientStoredMoves.remove(moveName)
+        }
+        isDirty = true
+    }
+
     // ========================================
     // Filtering (Per-Player, Client-Side)
     // ========================================
@@ -544,8 +562,8 @@ class TMMachineMenu(
         if (player !is ServerPlayer) return false
         val blockEntity = this.blockEntity ?: return false
 
-        val hasItem = if (isTR) getTRCount(moveName) > 0 else getTMCount(moveName) > 0
-        if (!hasItem) return false
+        val currentCount = if (isTR) getTRCount(moveName) else getTMCount(moveName)
+        if (currentCount <= 0) return false
 
         // Create the item stack
         val prefix = if (isTR) "tr_" else "tm_"
@@ -553,30 +571,40 @@ class TMMachineMenu(
         if (stack.isEmpty) return false
 
         if (isShiftClick) {
-            // Shift-click: Transfer directly to player's inventory
+            // Shift-click: Transfer entire stack to player's inventory
+            val withdrawAmount = currentCount.coerceAtMost(stack.maxStackSize)
+            stack.count = withdrawAmount
+
+            val countBefore = stack.count
             if (!player.inventory.add(stack)) {
-                // Inventory full, drop at player's feet
-                player.drop(stack, false)
+                // Inventory full or partially full, drop remainder at player's feet
+                if (!stack.isEmpty && stack.count > 0) {
+                    player.drop(stack, false)
+                }
             }
+            // Calculate how many were actually taken (added to inv + dropped)
+            // After add(), stack.count contains items that couldn't be added
+            // But we dropped those, so all withdrawAmount items were taken
+            blockEntity.removeMove(moveName, isTR, withdrawAmount)
         } else {
-            // Normal click: Pick up to cursor (carried item)
+            // Normal click: Pick up 1 to cursor (carried item)
             val currentCarried = carried
             if (currentCarried.isEmpty) {
                 // Cursor is empty, pick up the item
                 setCarried(stack)
+                blockEntity.removeMove(moveName, isTR, 1)
             } else if (ItemStack.isSameItemSameComponents(currentCarried, stack) &&
                 currentCarried.count < currentCarried.maxStackSize) {
                 // Same item type on cursor, add to it if possible
                 currentCarried.grow(1)
                 setCarried(currentCarried)
+                blockEntity.removeMove(moveName, isTR, 1)
             } else {
                 // Different item on cursor or cursor stack is full, can't pick up
                 return false
             }
         }
 
-        // Remove from storage
-        blockEntity.removeMove(moveName, isTR, 1)
         isDirty = true
         return true
     }
@@ -604,9 +632,33 @@ class TMMachineMenu(
 
         // If it's a TM/TR item, try to deposit into machine
         if (item is MoveLearnItem && blockEntity != null) {
-            val remaining = blockEntity.tryInsert(stack)
-            if (remaining.count < originalStack.count) {
-                slot.set(remaining)
+            val moveName = item.moveName
+            val isTR = item.isTR
+
+            // Check if we can add more
+            val currentData = clientStoredMoves[moveName] ?: TMMachineBlockEntity.StoredMoveData()
+            val currentCount = if (isTR) currentData.trCount else currentData.tmCount
+            val maxCount = if (isTR) blockEntity.maxTRStackSize else 1
+            val canAdd = (maxCount - currentCount).coerceAtLeast(0)
+            val toAdd = stack.count.coerceAtMost(canAdd)
+
+            if (toAdd > 0) {
+                // On server side, update the block entity (which will also sync to other viewers)
+                if (!player.level().isClientSide) {
+                    blockEntity.tryInsert(stack.copyWithCount(toAdd))
+                }
+
+                // Update client cache immediately on BOTH client and server
+                // This ensures the UI updates instantly without waiting for sync packet
+                val newData = clientStoredMoves.getOrPut(moveName) { TMMachineBlockEntity.StoredMoveData() }
+                if (isTR) {
+                    newData.trCount += toAdd
+                } else {
+                    newData.tmCount += toAdd
+                }
+
+                stack.shrink(toAdd)
+                slot.setChanged()
                 isDirty = true
                 return originalStack
             }
