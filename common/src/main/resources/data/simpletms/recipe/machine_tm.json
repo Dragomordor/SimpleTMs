@@ -3,7 +3,10 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "simpletms:tm_tr_case"
+      "item": "simpletms:case_tm"
+    },
+    {
+      "item": "simpletms:case_tr"
     },
     {
       "item": "cobblemon:pc"

@@ -2,9 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
-    " x ",
-    "LCL",
-    " x "
+    "CxC",
+    "LtL",
+    "CxC"
   ],
   "key": {
     "x": {
@@ -15,6 +15,9 @@
     },
     "C": {
       "item": "minecraft:chest"
+    },
+    "t": {
+      "tag": "simpletms:tm_items"
     }
   },
   "result": {

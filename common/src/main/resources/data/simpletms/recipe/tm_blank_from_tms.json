@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "simpletms:tm_items"
+    },
+    {
+      "tag": "simpletms:tm_items"
+    },
+    {
+      "tag": "simpletms:tm_items"
+    },
+    {
+      "tag": "simpletms:tm_items"
+    }
+  ],
+  "result": {
+    "id": "simpletms:tm_blank",
+    "count": 1
+  }
+}
