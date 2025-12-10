@@ -644,26 +644,18 @@ class TMMachineMenu(
             val moveName = item.moveName
             val isTR = item.isTR
 
-            // Check if we can add more
-            val currentData = clientStoredMoves[moveName] ?: TMMachineBlockEntity.StoredMoveData()
-            val currentCount = if (isTR) currentData.trCount else currentData.tmCount
+            // Check if we can add more - use block entity for server, client cache for client
+            val currentCount = if (isTR) getTRCount(moveName) else getTMCount(moveName)
             val maxCount = if (isTR) blockEntity.maxTRStackSize else 1
             val canAdd = (maxCount - currentCount).coerceAtLeast(0)
             val toAdd = stack.count.coerceAtMost(canAdd)
 
             if (toAdd > 0) {
-                // On server side, update the block entity (which will also sync to other viewers)
+                // Only server side processes the actual insertion
+                // Client will be updated via sync packet from blockEntity.tryInsert -> syncToClients
                 if (!player.level().isClientSide) {
-                    blockEntity.tryInsert(stack.copyWithCount(toAdd))
-                }
-
-                // Update client cache immediately on BOTH client and server
-                // This ensures the UI updates instantly without waiting for sync packet
-                val newData = clientStoredMoves.getOrPut(moveName) { TMMachineBlockEntity.StoredMoveData() }
-                if (isTR) {
-                    newData.trCount += toAdd
-                } else {
-                    newData.tmCount += toAdd
+                    val damage = if (!isTR) stack.damageValue else 0
+                    blockEntity.addMove(moveName, isTR, toAdd, damage)
                 }
 
                 stack.shrink(toAdd)

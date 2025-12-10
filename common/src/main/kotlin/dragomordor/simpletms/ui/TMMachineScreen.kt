@@ -33,7 +33,7 @@ class TMMachineScreen(
 
     companion object {
         private val TEXTURE = ResourceLocation.withDefaultNamespace("textures/gui/container/generic_54.png")
-        private const val GHOST_ALPHA = 0.35f
+        private const val GHOST_ALPHA = 0.25f
         private const val SCROLLBAR_X = 174
         private const val SCROLLBAR_Y = 18
         private const val SCROLLBAR_WIDTH = 6
@@ -641,10 +641,7 @@ class TMMachineScreen(
                     val displayItem = getDisplayItemAtSlot(row, col)
                     if (displayItem != null && displayItem.count > 0) {
                         SimpleTMsNetwork.sendMachineSlotClick(displayItem.moveName, displayItem.isTR, isShiftClick)
-                        // Update client cache immediately for responsive UI
-                        // Shift-click withdraws entire stack, normal click withdraws 1
-                        val withdrawAmount = if (isShiftClick) displayItem.count else 1
-                        menu.updateClientCacheForWithdrawal(displayItem.moveName, displayItem.isTR, withdrawAmount)
+                        // Server will process and sync the update
                         return true
                     }
                 } else {
@@ -667,10 +664,7 @@ class TMMachineScreen(
                             val currentCount = if (clickTR) entry.trCount else entry.tmCount
                             if (currentCount > 0) {
                                 SimpleTMsNetwork.sendMachineSlotClick(entry.moveName, clickTR, isShiftClick)
-                                // Update client cache immediately for responsive UI
-                                // Shift-click withdraws entire stack, normal click withdraws 1
-                                val withdrawAmount = if (isShiftClick) currentCount else 1
-                                menu.updateClientCacheForWithdrawal(entry.moveName, clickTR, withdrawAmount)
+                                // Server will process and sync the update
                                 return true
                             }
                         }

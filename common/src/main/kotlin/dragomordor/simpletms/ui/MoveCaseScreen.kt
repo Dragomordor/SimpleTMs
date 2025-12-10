@@ -23,7 +23,7 @@ class MoveCaseScreen(
 
     companion object {
         private val TEXTURE = ResourceLocation.withDefaultNamespace("textures/gui/container/generic_54.png")
-        private const val GHOST_ALPHA = 0.35f
+        private const val GHOST_ALPHA = 0.25f
         private const val SCROLLBAR_X = 174
         private const val SCROLLBAR_Y = 18
         private const val SCROLLBAR_WIDTH = 6
