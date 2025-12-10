@@ -1,11 +1,13 @@
 package dragomordor.simpletms.ui
 
+import com.cobblemon.mod.common.api.moves.MoveTemplate
 import com.cobblemon.mod.common.api.moves.Moves
 import com.cobblemon.mod.common.pokemon.Pokemon
 import dragomordor.simpletms.SimpleTMsItems
 import dragomordor.simpletms.block.entity.TMMachineBlockEntity
 import dragomordor.simpletms.item.custom.MoveLearnItem
 import dragomordor.simpletms.util.MoveHelper
+import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -382,26 +384,86 @@ class TMMachineMenu(
             }
         }
 
-        // Check name queries
-        val displayName = moveName.replace("_", " ")
-        for (nameQuery in nameQueries) {
-            if (!displayName.contains(nameQuery) && !moveName.contains(nameQuery)) {
-                return false
+        // Check name queries against both internal name and localized display name
+        if (nameQueries.isNotEmpty()) {
+            val internalName = moveName.lowercase()
+            val displayName = getDisplayNameForMove(moveName).lowercase()
+
+            for (nameQuery in nameQueries) {
+                if (!internalName.contains(nameQuery) && !displayName.contains(nameQuery)) {
+                    return false
+                }
             }
         }
 
-        // Check tag queries (type matching)
+        // Check tag queries (type and category matching)
         if (tagQueries.isNotEmpty()) {
             val move = Moves.getByName(moveName) ?: return false
-            val moveType = move.elementalType.name.lowercase()
             for (tagQuery in tagQueries) {
-                if (!moveType.startsWith(tagQuery)) {
+                if (!matchesTag(move, tagQuery)) {
                     return false
                 }
             }
         }
 
         return true
+    }
+
+    /**
+     * Check if a move matches a tag query (type or category).
+     * Supports both internal names and localized tag names.
+     */
+    private fun matchesTag(moveTemplate: MoveTemplate, tagQuery: String): Boolean {
+        val typeName = moveTemplate.elementalType.name.lowercase()
+        val categoryName = moveTemplate.damageCategory.name.lowercase()
+
+        // Check against internal type name
+        if (typeName.contains(tagQuery)) return true
+
+        // Check against internal category name
+        if (categoryName.contains(tagQuery)) return true
+
+        // Check against localized type name
+        val localizedType = getLocalizedTagName("type.$typeName")
+        if (localizedType.contains(tagQuery)) return true
+
+        // Check against localized category name
+        val localizedCategory = getLocalizedTagName("category.$categoryName")
+        if (localizedCategory.contains(tagQuery)) return true
+
+        return false
+    }
+
+    /**
+     * Get the localized name for a search tag.
+     * Uses translation keys like "simpletms.search.type.fire" or "simpletms.search.category.physical"
+     */
+    private fun getLocalizedTagName(tagKey: String): String {
+        val translationKey = "simpletms.search.$tagKey"
+        val component = Component.translatable(translationKey)
+        val translated = component.string
+        // If translation doesn't exist, it returns the key itself - in that case return empty
+        return if (translated == translationKey) "" else translated.lowercase()
+    }
+
+    /**
+     * Get the localized display name for a move.
+     * Uses the TM item's hover name which is properly translated.
+     */
+    private fun getDisplayNameForMove(moveName: String): String {
+        // Try TM first, fall back to TR
+        var itemStack = SimpleTMsItems.getItemStackFromName("tm_$moveName")
+        if (itemStack.isEmpty) {
+            itemStack = SimpleTMsItems.getItemStackFromName("tr_$moveName")
+        }
+        return if (!itemStack.isEmpty) {
+            // Extract just the move name from "TM: Move Name" format
+            val fullName = itemStack.hoverName.string
+            // Remove "TM: " or "TR: " prefix if present
+            fullName.removePrefix("TM: ").removePrefix("TR: ")
+        } else {
+            moveName.replace("_", " ")
+        }
     }
 
     private fun rebuildFilteredMoves(): List<FilteredMoveEntry> {

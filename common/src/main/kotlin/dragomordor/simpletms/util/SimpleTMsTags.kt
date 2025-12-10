@@ -81,6 +81,11 @@ object SimpleTMsTags {
     @JvmField val CATEGORY_SPECIAL_TM = create("category_special_tm")
     @JvmField val CATEGORY_SPECIAL_TR = create("category_special_tr")
 
+    // ------------------------------------------------------------------------
+    // tm_tr case items
+    @JvmField val TM_TR_CASE_ITEMS = create("tm_tr_case")
+
+
     // Helper function to create a tag key
     private fun create(path: String) = TagKey.create(Registries.ITEM, simpletmsResource(path))
 

@@ -469,7 +469,23 @@ class TMMachineScreen(
     }
 
     override fun renderLabels(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int) {
-        guiGraphics.drawString(font, title, titleLabelX, titleLabelY, 0x404040, false)
+        // Calculate available width for title (from titleLabelX to first button minus padding)
+        val maxTitleWidth = 71 - titleLabelX - 4  // 4 pixels padding before button
+        val titleWidth = font.width(title)
+
+        if (titleWidth <= maxTitleWidth) {
+            // Title fits, render normally
+            guiGraphics.drawString(font, title, titleLabelX, titleLabelY, 0x404040, false)
+        } else {
+            // Title too long, scale it down
+            val scale = maxTitleWidth.toFloat() / titleWidth.toFloat()
+            guiGraphics.pose().pushPose()
+            guiGraphics.pose().translate(titleLabelX.toFloat(), titleLabelY.toFloat(), 0f)
+            guiGraphics.pose().scale(scale, scale, 1f)
+            guiGraphics.drawString(font, title, 0, 0, 0x404040, false)
+            guiGraphics.pose().popPose()
+        }
+
         guiGraphics.drawString(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, 0x404040, false)
     }
 

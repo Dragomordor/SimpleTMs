@@ -252,10 +252,20 @@ class MoveCaseMenu(
         return false
     }
 
+    /**
+     * Get the localized display name for a move.
+     * Uses the item's hover name which is properly translated.
+     */
     private fun getDisplayNameForMove(moveName: String): String {
         val prefix = if (isTR) "tr_" else "tm_"
         val itemStack = SimpleTMsItems.getItemStackFromName(prefix + moveName)
-        return if (!itemStack.isEmpty) itemStack.hoverName.string else moveName
+        return if (!itemStack.isEmpty) {
+            // Extract just the move name from "TM: Move Name" or "TR: Move Name" format
+            val fullName = itemStack.hoverName.string
+            fullName.removePrefix("TM: ").removePrefix("TR: ")
+        } else {
+            moveName.replace("_", " ")
+        }
     }
 
     fun getFilteredMoves(): List<String> = filteredMoves
