@@ -22,15 +22,45 @@ object LootInjector {
 
     // Vanilla loot tables
     private val vanillaInjections = hashSetOf(
+        BuiltInLootTables.VILLAGE_DESERT_HOUSE,
+        BuiltInLootTables.VILLAGE_PLAINS_HOUSE,
+        BuiltInLootTables.VILLAGE_SAVANNA_HOUSE,
+        BuiltInLootTables.VILLAGE_SNOWY_HOUSE,
+        BuiltInLootTables.VILLAGE_TAIGA_HOUSE,
+        BuiltInLootTables.VILLAGE_TEMPLE,
         BuiltInLootTables.ABANDONED_MINESHAFT,
         BuiltInLootTables.ANCIENT_CITY,
-        // ... rest of your vanilla tables
+        BuiltInLootTables.BASTION_BRIDGE,
+        BuiltInLootTables.BASTION_OTHER,
+        BuiltInLootTables.BASTION_TREASURE,
+        BuiltInLootTables.DESERT_PYRAMID,
+        BuiltInLootTables.END_CITY_TREASURE,
+        BuiltInLootTables.IGLOO_CHEST,
+        BuiltInLootTables.JUNGLE_TEMPLE,
+        BuiltInLootTables.NETHER_BRIDGE,
+        BuiltInLootTables.PILLAGER_OUTPOST,
+        BuiltInLootTables.RUINED_PORTAL,
+        BuiltInLootTables.SHIPWRECK_TREASURE,
+        BuiltInLootTables.SIMPLE_DUNGEON,
+        BuiltInLootTables.SPAWN_BONUS_CHEST,
+        BuiltInLootTables.STRONGHOLD_CORRIDOR,
+        BuiltInLootTables.STRONGHOLD_CROSSING,
+        BuiltInLootTables.STRONGHOLD_LIBRARY,
+        BuiltInLootTables.UNDERWATER_RUIN_BIG,
+        BuiltInLootTables.UNDERWATER_RUIN_SMALL,
+        BuiltInLootTables.WOODLAND_MANSION,
+        // Other loot tables here
     )
 
     // Modded loot tables (Cobblemon, etc.)
     private val moddedInjections = hashSetOf(
         // Cobblemon loot tables
         moddedLootTable("cobblemon", "villages/village_pokecenters"),
+        moddedLootTable("cobblemon", "shipwreck_coves/fishing_boats/fishing_boat"),
+        moddedLootTable("cobblemon", "shipwreck_coves/gilded_chests/big_treasure"),
+        moddedLootTable("cobblemon", "shipwreck_coves/gilded_chests/lesser_treasure"),
+        moddedLootTable("cobblemon", "ruins/gilded_chests/ruins"),
+
         // Cobblemon Additions (bca) loot tables
         moddedLootTable("bca", "general/attic"),
         moddedLootTable("bca", "general/bedroom"),
@@ -46,6 +76,7 @@ object LootInjector {
         moddedLootTable("pokeloot", "blocks/greatball_loot"),
         moddedLootTable("pokeloot", "blocks/ultraball_loot"),
         moddedLootTable("pokeloot", "blocks/masterball_loot"),
+
         // Add more modded tables as needed
         // moddedLootTable("othermod", "loot_table_path"),
     )
